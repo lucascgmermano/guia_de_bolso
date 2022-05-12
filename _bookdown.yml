@@ -1,0 +1,7 @@
+output_dir: "docs"
+book_filename: "guia_bolso_R"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Capítulo "
+
