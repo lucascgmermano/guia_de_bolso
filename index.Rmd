@@ -1,18 +1,17 @@
 --- 
-title: "A Minimal Book Example"
-author: "John Doe"
+title: "Comandos básicos do R: Guia de bolso"
+author: "Lucas Germano"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
+url: https://lucascgmermano.github.io/guia_de_bolso/
 # cover-image: path to the social sharing image like images/cover.jpg
 description: |
-  This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
+  Este livro resumo anotações de comandos e argumentos muito úteis no R, com o objetivo de
+  como auxiliar na execução te tarefas diárias básicas.
 link-citations: yes
-github-repo: rstudio/bookdown-demo
+github-repo: https://github.com/lucascgmermano/guia_de_bolso.git
 ---
 
 # About
