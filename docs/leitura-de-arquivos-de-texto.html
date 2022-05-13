@@ -4,12 +4,12 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Parts | Comandos básicos do R: Guia de bolso</title>
+  <title>1 Leitura de arquivos de texto | Comandos básicos do R: Guia de bolso</title>
   <meta name="description" content="<p>Este livro resumo anotações de comandos e argumentos muito úteis no R, com o objetivo de
 como auxiliar na execução te tarefas diárias básicas.</p>" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Parts | Comandos básicos do R: Guia de bolso" />
+  <meta property="og:title" content="1 Leitura de arquivos de texto | Comandos básicos do R: Guia de bolso" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="<p>Este livro resumo anotações de comandos e argumentos muito úteis no R, com o objetivo de
@@ -17,7 +17,7 @@ como auxiliar na execução te tarefas diárias básicas.</p>" />
   <meta name="github-repo" content="https://github.com/lucascgmermano/guia_de_bolso.git" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Parts | Comandos básicos do R: Guia de bolso" />
+  <meta name="twitter:title" content="1 Leitura de arquivos de texto | Comandos básicos do R: Guia de bolso" />
   
   <meta name="twitter:description" content="<p>Este livro resumo anotações de comandos e argumentos muito úteis no R, com o objetivo de
 como auxiliar na execução te tarefas diárias básicas.</p>" />
@@ -33,8 +33,8 @@ como auxiliar na execução te tarefas diárias básicas.</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="cross.html"/>
-<link rel="next" href="footnotes-and-citations.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="cross.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -211,21 +211,109 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="parts" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">3</span> Parts<a href="parts.html#parts" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file.</p>
-<p>Add a numbered part: <code># (PART) Act one {-}</code> (followed by <code># A chapter</code>)</p>
-<p>Add an unnumbered part: <code># (PART\*) Act one {-}</code> (followed by <code># A chapter</code>)</p>
-<p>Add an appendix as a special kind of un-numbered part: <code># (APPENDIX) Other stuff {-}</code> (followed by <code># A chapter</code>). Chapters in an appendix are prepended with letters instead of numbers.</p>
+<div id="leitura-de-arquivos-de-texto" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">1</span> Leitura de arquivos de texto<a href="leitura-de-arquivos-de-texto.html#leitura-de-arquivos-de-texto" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="definição-de-diretório-de-trabalho" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Definição de diretório de trabalho<a href="leitura-de-arquivos-de-texto.html#definição-de-diretório-de-trabalho" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="leitura-de-arquivos-de-texto.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;dados/&#39;</span>)         <span class="co"># ou</span></span>
+<span id="cb1-2"><a href="leitura-de-arquivos-de-texto.html#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="leitura-de-arquivos-de-texto.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Ctrl + Shift + h      # ou</span></span>
+<span id="cb1-4"><a href="leitura-de-arquivos-de-texto.html#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="leitura-de-arquivos-de-texto.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># file.choose()         # Abre janela de navegação. Ao selecionar o arquivo, ele retorna o caminho (diretório)</span></span>
+<span id="cb1-6"><a href="leitura-de-arquivos-de-texto.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="leitura-de-arquivos-de-texto.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Se inserir aspas &#39; &#39; e inserir em Tab entre elas, abrirá navegação.</span></span></code></pre></div>
+</div>
+<div id="arquivos-.csv" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Arquivos .csv<a href="leitura-de-arquivos-de-texto.html#arquivos-.csv" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>.csv = Arquivos separados por vírgula (,)
+.csv2 = Arquivos separados por ponto e vírgula (;)
+Os argumentos das funções são os mesmos, por isso o exemplo será dado somente para .csv2 (mais usado)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="leitura-de-arquivos-de-texto.html#cb2-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>)</span>
+<span id="cb2-2"><a href="leitura-de-arquivos-de-texto.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">5</span>)          <span class="co"># Exibir as 5 primeiras linhas dos dados.</span></span></code></pre></div>
+<pre><code>##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana
+## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1
+## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3
+## 3 3 2020-01-29  352380      Itobi 30 a 39     1      0    1   0 2020   1      5
+## 4 4 2020-01-30  353050     Mococa 70 a 79     1      0    0   1 2020   1      5
+## 5 5 2020-02-02  353080 Mogi Mirim 40 a 49     1      0    0   1 2020   2      5
+##      pop
+## 1 150713
+## 2 150713
+## 3   7830
+## 4  68788
+## 5  92715</code></pre>
+<p><strong>Argumentos principais</strong></p>
+<p>Os argumentos são os mesmos da função read.table( ).</p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argumento</th>
+<th>Definição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>file</td>
+<td>Nome do arquivo que será lido, contendo o caminho do diretório.</td>
+</tr>
+<tr class="even">
+<td>header</td>
+<td>Logical. Indica se o arquivo contém os nomes das colunas na primeira linha</td>
+</tr>
+<tr class="odd">
+<td>sep</td>
+<td>Tipo de separador de campo. Default é = “;”</td>
+</tr>
+<tr class="even">
+<td>dec</td>
+<td>Tipo de separador de decimal. Default é = “.”</td>
+</tr>
+<tr class="odd">
+<td>nrows</td>
+<td>Integer. Número máximo de linhas a serem lidas.</td>
+</tr>
+<tr class="even">
+<td>skip</td>
+<td>Integer. Número de linhas que serão puladas antes de iniciar a leitura dos dados.</td>
+</tr>
+<tr class="odd">
+<td>fill</td>
+<td>Logical. Se TRUE, caso as linhas tenham comprimento desigual, seão adicionados campos em branco.</td>
+</tr>
+<tr class="even">
+<td>blank.lines.skip</td>
+<td>Logical. Se TRUE linhas vazias serão ignoradas.</td>
+</tr>
+<tr class="odd">
+<td>stringsAsFactors</td>
+<td>Logical. Se TRUE os vetores character serão convertidos para factors.</td>
+</tr>
+<tr class="even">
+<td>fileEncoding</td>
+<td>Character string. Define o encoding que será usado. Ex. fileEnconding = “UTF-8” ou “Latin-1.”</td>
+</tr>
+<tr class="odd">
+<td>skipNul</td>
+<td>Logical. Se TRUE os nulos (NA) devem ser ignorados.</td>
+</tr>
+</tbody>
+</table>
+<p>Pode-se ler também arquivos da internet, ex:<br />
+read.csv2(file = ‘<a href="https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv" class="uri">https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv</a>’)</p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="cross.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="footnotes-and-citations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cross.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -256,7 +344,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/03-parts.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-leitura_arquivos.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -5,8 +5,8 @@
 \documentclass[
 ]{book}
 \title{Comandos básicos do R: Guia de bolso}
-\author{Lucas Germano}
-\date{2022-05-12}
+\author{Lucas C. Germano}
+\date{2022-05-13}
 
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
@@ -41,7 +41,7 @@
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
   pdftitle={Comandos básicos do R: Guia de bolso},
-  pdfauthor={Lucas Germano},
+  pdfauthor={Lucas C. Germano},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
@@ -143,69 +143,92 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{about}{%
-\chapter{About}\label{about}}
+\hypertarget{sobre-este-livro}{%
+\chapter*{Sobre este livro}\label{sobre-este-livro}}
+\addcontentsline{toc}{chapter}{Sobre este livro}
 
-This is a \emph{sample} book written in \textbf{Markdown}. You can use anything that Pandoc's Markdown supports; for example, a math equation \(a^2 + b^2 = c^2\).
+Sejam bem-vindos!\\
+O objetivo deste livro é disponibilizar para consulta anotações de códigos R de forma prática e rápida. Não há explicações aprofundadas nem se pretende esgotar as possibilidades do conteúdo apresentado, assim, esta documentação deve ser utilizada somente como um guia rápido, pois não passa de um conjunto de rascunhos apreendidos no dia-a-dia da manipulação de dados e na apresentação de resultados. O conteúdo poderá ser baixado nos formatos \texttt{.pdf} ou \texttt{epub}, mas a proposta é que o conteúdo seja dinâmico, com atualizações semanais. A estrutura de construção está disponível no \href{https://github.com/lucascgmermano/guia_de_bolso.git}{GitHub}.\\
+Críticas, sugestões ou contribuições de código e conteúdo podem ser enviadas para \url{lucascgermano@gmail.com}. Ficarei muito feliz, qualquer que seja o motivo do contato.
 
-\hypertarget{usage}{%
-\section{Usage}\label{usage}}
+\hypertarget{leitura-de-arquivos-de-texto}{%
+\chapter{Leitura de arquivos de texto}\label{leitura-de-arquivos-de-texto}}
 
-Each \textbf{bookdown} chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter \emph{must} start with a first-level heading: \texttt{\#\ A\ good\ chapter}, and can contain one (and only one) first-level heading.
-
-Use second-level and higher headings within chapters like: \texttt{\#\#\ A\ short\ section} or \texttt{\#\#\#\ An\ even\ shorter\ section}.
-
-The \texttt{index.Rmd} file is required, and is also your first book chapter. It will be the homepage when you render the book.
-
-\hypertarget{render-book}{%
-\section{Render book}\label{render-book}}
-
-You can render the HTML version of this example book without changing anything:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\item
-  Find the \textbf{Build} pane in the RStudio IDE, and
-\item
-  Click on \textbf{Build Book}, then select your output format, or select ``All formats'' if you'd like to use multiple formats from the same book source files.
-\end{enumerate}
-
-Or build the book from the R console:
+\hypertarget{definiuxe7uxe3o-de-diretuxf3rio-de-trabalho}{%
+\section{Definição de diretório de trabalho}\label{definiuxe7uxe3o-de-diretuxf3rio-de-trabalho}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{bookdown}\SpecialCharTok{::}\FunctionTok{render\_book}\NormalTok{()}
+\FunctionTok{setwd}\NormalTok{(}\StringTok{\textquotesingle{}dados/\textquotesingle{}}\NormalTok{)         }\CommentTok{\# ou}
+
+\CommentTok{\# Ctrl + Shift + h      \# ou}
+
+\CommentTok{\# file.choose()         \# Abre janela de navegação. Ao selecionar o arquivo, ele retorna o caminho (diretório)}
+
+\CommentTok{\# Se inserir aspas \textquotesingle{} \textquotesingle{} e inserir em Tab entre elas, abrirá navegação.}
 \end{Highlighting}
 \end{Shaded}
 
-To render this example to PDF as a \texttt{bookdown::pdf\_book}, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): \url{https://yihui.org/tinytex/}.
+\hypertarget{arquivos-.csv}{%
+\section{Arquivos .csv}\label{arquivos-.csv}}
 
-\hypertarget{preview-book}{%
-\section{Preview book}\label{preview-book}}
-
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in ``Preview book'', or from the R console:
+.csv = Arquivos separados por vírgula (,)
+.csv2 = Arquivos separados por ponto e vírgula (;)
+Os argumentos das funções são os mesmos, por isso o exemplo será dado somente para .csv2 (mais usado)
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{bookdown}\SpecialCharTok{::}\FunctionTok{serve\_book}\NormalTok{()}
+\NormalTok{dados }\OtherTok{\textless{}{-}} \FunctionTok{read.csv2}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/dados.csv\textquotesingle{}}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(dados, }\DecValTok{5}\NormalTok{)          }\CommentTok{\# Exibir as 5 primeiras linhas dos dados.}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{hello-bookdown}{%
-\chapter{Hello bookdown}\label{hello-bookdown}}
+\begin{verbatim}
+##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana
+## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1
+## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3
+## 3 3 2020-01-29  352380      Itobi 30 a 39     1      0    1   0 2020   1      5
+## 4 4 2020-01-30  353050     Mococa 70 a 79     1      0    0   1 2020   1      5
+## 5 5 2020-02-02  353080 Mogi Mirim 40 a 49     1      0    0   1 2020   2      5
+##      pop
+## 1 150713
+## 2 150713
+## 3   7830
+## 4  68788
+## 5  92715
+\end{verbatim}
 
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (\texttt{\#}) per .Rmd file.
+\textbf{Argumentos principais}
 
-\hypertarget{a-section}{%
-\section{A section}\label{a-section}}
+Os argumentos são os mesmos da função read.table( ).
 
-All chapter sections start with a second-level (\texttt{\#\#}) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.50}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.50}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Argumento
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definição
+\end{minipage} \\
+\midrule
+\endhead
+file & Nome do arquivo que será lido, contendo o caminho do diretório. \\
+header & Logical. Indica se o arquivo contém os nomes das colunas na primeira linha \\
+sep & Tipo de separador de campo. Default é = ``;''. \\
+dec & Tipo de separador de decimal. Default é = ``.''. \\
+nrows & Integer. Número máximo de linhas a serem lidas. \\
+skip & Integer. Número de linhas que serão puladas antes de iniciar a leitura dos dados. \\
+fill & Logical. Se TRUE, caso as linhas tenham comprimento desigual, seão adicionados campos em branco. \\
+blank.lines.skip & Logical. Se TRUE linhas vazias serão ignoradas. \\
+stringsAsFactors & Logical. Se TRUE os vetores character serão convertidos para factors. \\
+fileEncoding & Character string. Define o encoding que será usado. Ex. fileEnconding = ``UTF-8'' ou ``Latin-1''. \\
+skipNul & Logical. Se TRUE os nulos (NA) devem ser ignorados. \\
+\bottomrule
+\end{longtable}
 
-\hypertarget{an-unnumbered-section}{%
-\subsection*{An unnumbered section}\label{an-unnumbered-section}}
-\addcontentsline{toc}{subsection}{An unnumbered section}
-
-Chapters and sections are numbered by default. To un-number a heading, add a \texttt{\{.unnumbered\}} or the shorter \texttt{\{-\}} at the end of the heading, like in this section.
+Pode-se ler também arquivos da internet, ex:\\
+read.csv2(file = `\url{https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv}')
 
 \hypertarget{cross}{%
 \chapter{Cross-references}\label{cross}}
