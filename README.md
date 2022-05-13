@@ -1,13 +1,9 @@
-Welcome! 
+Sejam bem-vindos!  
 
-This is a minimal example of a book based on R Markdown and **bookdown** (https://github.com/rstudio/bookdown). 
+O objetivo deste livro é disponibilizar para consulta anotações de códigos R de forma prática e rápida. As explicações não serão  aprofundadas, tampouco se pretende esgotar as possibilidades do conteúdo apresentado, de modo que esta documentação deve ser utilizada somente como um guia rápido, pois consiste em um conjunto de rascunhos assimilados no dia-a-dia da manipulação de dados e na apresentação de resultados.  
 
-This template provides a skeleton file structure that you can edit to create your book. 
+O conteúdo poderá ser baixado nos formatos `.pdf` ou `epub`, mas a proposta é que o conteúdo seja dinâmico, com atualizações semanais. 
+A estrutura de construção está disponível no [GitHub](https://github.com/lucascgmermano/guia_de_bolso.git).  
+Críticas, sugestões ou contribuições de código e conteúdo podem ser enviadas para [lucascgermano@gmail.com](lucascgermano@gmail.com). 
 
-The contents inside the .Rmd files provide some pointers to help you get started, but feel free to also delete the content in each file and start fresh.
-
-Additional resources:
-
-The **bookdown** book: https://bookdown.org/yihui/bookdown/
-
-The **bookdown** package reference site: https://pkgs.rstudio.com/bookdown
+Ficarei muito feliz, qualquer que seja o motivo do contato. 
