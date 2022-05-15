@@ -6,7 +6,7 @@
 ]{book}
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{2022-05-13}
+\date{2022-05-14}
 
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
@@ -157,23 +157,34 @@ Críticas, sugestões ou contribuições de código e conteúdo podem ser enviad
 \hypertarget{definiuxe7uxe3o-de-diretuxf3rio-de-trabalho}{%
 \section{Definição de diretório de trabalho}\label{definiuxe7uxe3o-de-diretuxf3rio-de-trabalho}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{setwd}\NormalTok{(}\StringTok{\textquotesingle{}dados/\textquotesingle{}}\NormalTok{)         }\CommentTok{\# ou}
-
-\CommentTok{\# Ctrl + Shift + h      \# ou}
-
-\CommentTok{\# file.choose()         \# Abre janela de navegação. Ao selecionar o arquivo, ele retorna o caminho (diretório)}
-
-\CommentTok{\# Se inserir aspas \textquotesingle{} \textquotesingle{} e inserir em Tab entre elas, abrirá navegação.}
-\end{Highlighting}
-\end{Shaded}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.47}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.53}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Comando
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definição
+\end{minipage} \\
+\midrule
+\endhead
+setwd() & Define diretório de trabalho. \\
+Ctrl + Shift + h & Abre janela de navegação para definir diretório. \\
+file.choose() & Abre janela de navegação e ao selecionar o arquivo, ele retorna o caminho (diretório). Pode-se usar também dentro do comando, como em read.csv2(file = file.choose()). \\
+No RStudio: Session \textgreater{} Setting Working Directory & Equivalente a Ctrl + Shift + h \\
+Inserir aspas ' ' + Tab entre elas & Navegação que pode servir para explorar caminhos. \\
+\bottomrule
+\end{longtable}
 
 \hypertarget{arquivos-.csv}{%
 \section{Arquivos .csv}\label{arquivos-.csv}}
 
-.csv = Arquivos separados por vírgula (,)
+\hypertarget{read.csv2}{%
+\subsection{read.csv2()}\label{read.csv2}}
+
+.csv = Arquivos separados por vírgula (,)\\
 .csv2 = Arquivos separados por ponto e vírgula (;)
+
 Os argumentos das funções são os mesmos, por isso o exemplo será dado somente para .csv2 (mais usado)
 
 \begin{Shaded}
@@ -200,7 +211,7 @@ Os argumentos das funções são os mesmos, por isso o exemplo será dado soment
 
 \textbf{Argumentos principais}
 
-Os argumentos são os mesmos da função read.table( ).
+Os argumentos são os mesmos da função read.table().
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.50}}
@@ -221,14 +232,177 @@ nrows & Integer. Número máximo de linhas a serem lidas. \\
 skip & Integer. Número de linhas que serão puladas antes de iniciar a leitura dos dados. \\
 fill & Logical. Se TRUE, caso as linhas tenham comprimento desigual, seão adicionados campos em branco. \\
 blank.lines.skip & Logical. Se TRUE linhas vazias serão ignoradas. \\
-stringsAsFactors & Logical. Se TRUE os vetores character serão convertidos para factors. \\
-fileEncoding & Character string. Define o encoding que será usado. Ex. fileEnconding = ``UTF-8'' ou ``Latin-1''. \\
-skipNul & Logical. Se TRUE os nulos (NA) devem ser ignorados. \\
+stringsAsFactors & Logical. Se TRUE os vetores character serão convertidos para factors. Se houver distorção dos caracteres, utilizar FALSE para serem mantidos os caracteres originais, sem conversão. \\
+fileEncoding & Character string. Define o encoding que será usado. Ex. fileEnconding = ``UTF-8'' ou ``Latin-1'' ou ``ISO-8859-1''. \\
+skipNull & Logical. Se TRUE os nulos (NA) devem ser ignorados. \\
+colClasses & character. Um vetor de classes referentes as colunas. Valores possíveis são NA (default, quando type.convert é usado), ``NULL'' (quando a coluna é pulada), um vetor atomico de classes (logical, integer, numeric, complex, character, raw), or ``factor'', ``Date'' or ``POSIXct''. \\
 \bottomrule
 \end{longtable}
 
-Pode-se ler também arquivos da internet, ex:\\
-read.csv2(file = `\url{https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv}')
+\hypertarget{readrread_csv2}{%
+\subsection{readr::read\_csv2()}\label{readrread_csv2}}
+
+\textbf{Exemplo 1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_csv2}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/dados.csv\textquotesingle{}}\NormalTok{,  }\CommentTok{\# Caminho e arquivo}
+                          \AttributeTok{col\_select =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\SpecialCharTok{:}\DecValTok{7}\NormalTok{),     }\CommentTok{\# Seleção de colunas de forma numérica (é incompativel com col\_names)}
+                          \AttributeTok{guess\_max =} \DecValTok{1000}\NormalTok{,          }\CommentTok{\# Máximo de linhas utilizadas para adivinhar classes}
+                          \AttributeTok{skip\_empty\_rows =} \ConstantTok{TRUE}\NormalTok{)    }\CommentTok{\# Pular linhas vazias}
+\FunctionTok{head}\NormalTok{(dados, }\DecValTok{5}\NormalTok{)                                       }\CommentTok{\# Exibir as 5 primeiras linhas dos dados.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 5
+##   data       muni       faixa   casos obitos
+##   <date>     <chr>      <chr>   <dbl>  <dbl>
+## 1 2020-01-01 Mogi Guaçu 30 a 39     1      0
+## 2 2020-01-20 Mogi Guaçu 50 a 59     1      0
+## 3 2020-01-29 Itobi      30 a 39     1      0
+## 4 2020-01-30 Mococa     70 a 79     1      0
+## 5 2020-02-02 Mogi Mirim 40 a 49     1      0
+\end{verbatim}
+
+\textbf{Exemplo 2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_csv2}\NormalTok{(}\StringTok{\textquotesingle{}dados/dados.csv\textquotesingle{}}\NormalTok{,                    }\CommentTok{\# Caminho e arquivo}
+                          \AttributeTok{guess\_max =} \DecValTok{1000}\NormalTok{,                     }\CommentTok{\# Máximo de linhas utilizadas para adivinhar classes}
+                          \AttributeTok{skip\_empty\_rows =} \ConstantTok{TRUE}\NormalTok{,               }\CommentTok{\# Pular linhas vazias}
+                          \AttributeTok{skip =} \DecValTok{1}\NormalTok{,                             }\CommentTok{\# Pular primeira linha}
+                          \AttributeTok{col\_names =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}e\textquotesingle{}}\NormalTok{),   }\CommentTok{\# Definir nomes das colunas}
+                          \AttributeTok{col\_select =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}e\textquotesingle{}}\NormalTok{))  }\CommentTok{\# Selecionar colunas}
+\FunctionTok{head}\NormalTok{(dados, }\DecValTok{5}\NormalTok{)                                                  }\CommentTok{\# Exibir as 5 primeiras linhas dos dados.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 5
+##       a b               c d          e      
+##   <dbl> <date>      <dbl> <chr>      <chr>  
+## 1     1 2020-01-01 353070 Mogi Guaçu 30 a 39
+## 2     2 2020-01-20 353070 Mogi Guaçu 50 a 59
+## 3     3 2020-01-29 352380 Itobi      30 a 39
+## 4     4 2020-01-30 353050 Mococa     70 a 79
+## 5     5 2020-02-02 353080 Mogi Mirim 40 a 49
+\end{verbatim}
+
+\textbf{Argumentos principais}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.50}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.50}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Argumento
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definição
+\end{minipage} \\
+\midrule
+\endhead
+file & Nome do arquivo que será lido, contendo o caminho do diretório (admite http). Arquivos terminados em .gz, .bz2, .xz, ou .zip serão automaticamente descomprimidos. \\
+col\_names & TRUE ou FALSE ou um vetor tipo caracter com nomes das colunas. Se TRUE, a primeira linha será usada para nomear as colunas. Se FALSE, nomes das colunas serão gerados automaticamente (X1, X2, X3 etc). Se col\_names for um vetor com nomes, os valores serão usados como nomes das colunas, mas a primeira linha será considerada no banco (nomes errados), assim, pode-se usar o argumento renomeando as colunas, mas fazendo a leitura sem considerar a primeira linha, com {[}-1,{]} ou skip = 1. Colunas sem nome (NA) receberão nomes fictícios. \\
+col\_types & Se for NULL, todos as classes de coluna serão imputadas a partir do máximo de linhas lidas (guess\_max) intercaladas por todo o arquivo. Se a imputação falhar, você precisará aumentar o guess\_max ou fornecer os tipos corretos você mesmo. As especificações de coluna criadas por list() ou cols() devem conter uma especificação de coluna para cada coluna. Se você quiser ler apenas um subconjunto das colunas, use cols\_only(). Para compactar um vetor com as classes, usar as letras c = character, i = integer, n = number, d = double, l = logical, f = factor, D = date, T = date time, t = time, ? = guess, \_ or - = skip; Por padrão, a leitura de um arquivo sem uma especificação de coluna imprimirá uma mensagem mostrando o que o leitor adivinhou. Para remover esta mensagem, defina show\_col\_types = FALSE ou defina 'options(readr.show\_col\_types = FALSE). \\
+col\_select & Colunas a serem incluídas nos resultados, equivale a dplyr::select() para se referir às colunas pelo nome. Use c() ou list() para usar mais de uma expressão de seleção. Embora esse uso seja menos comum, col\_select também aceita um índice de coluna numérica. \\
+locale & A localidade controla os padrões que variam de lugar para lugar. A localidade padrão é centrada nos EUA (como R), mas você pode usar locale() para criar sua própria localidade que controla coisas como o fuso horário padrão, codificação, marca decimal, marca grande e nomes de dia/mês. \\
+na & Vetor de caracteres de strings para interpretar como valores ausentes. Defina esta opção como character() para indicar que não há valores ausentes. \\
+trim\_ws & Os espaços em branco à esquerda e à direita (espaços e tabulações ASCII) devem ser cortados de cada campo antes de analisá-lo? \\
+skip & Número de linhas para pular antes de ler os dados. \\
+n\_max & Número máximo de linhas a ler. \\
+guess\_max & Número máximo de linhas a serem usadas para adivinhar os tipos de coluna. \\
+show\_col\_types & Se FALSE, não mostre os tipos de coluna adivinhados. Se TRUE sempre mostra os tipos de coluna, mesmo que sejam fornecidos. Se NULL (o padrão) mostrar apenas os tipos de coluna se eles não forem fornecidos explicitamente pelo argumento col\_types. \\
+skip\_empty\_rows & As linhas em branco devem ser ignoradas completamente? ou seja, se esta opção for TRUE, as linhas em branco não serão representadas. Se for FALSE, eles serão representados por valores NA em todas as colunas. \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{data.tablefread}{%
+\subsection{data.table::fread()}\label{data.tablefread}}
+
+Vantagem de realizar a leitura de arquivos de grande extensão de forma rápida. Além disso, tem boa identificação de separador, encoding e tipos de classe.
+
+\textbf{Exemplo 1}
+
+\textbf{Argumentos principais}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.50}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.50}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Argumento
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definição
+\end{minipage} \\
+\midrule
+\endhead
+file & Nome do arquivo no diretório de trabalho, caminho para o arquivo ou um URL começando \url{http://}, \url{file://}, etc. Arquivos compactados `.gz' e `.bz2' são suportados se o pacote R.utils estiver instalado. \\
+sep & O separador entre colunas. O padrão é o caractere no conjunto {[},\t |;:{]}. \\
+nrows & Número máximo de linhas a serem lidas. \\
+header & Logical. Primeria linha é o nome das colunas. \\
+na.strings & Para ler NA, como NA, defina na.strings=``NA''. Para ler ,, como string em branco ``\,``, defina na.strings=NULL. \\
+stringsAsFactors & Converter todas as colunas de caracteres em fatores? \\
+skip & skip\textgreater0 ignora as primeiras linhas. skip=``string'' procura por ``string'' no arquivo (por exemplo, uma substring da linha de nomes de coluna) e começa nessa linha (inspirada em read.xls no pacote gdata). \\
+select & Um vetor de nomes de colunas ou números para manter e eliminar as demais. Pode especificar também tipos da mesma forma que colClasses; ou seja, um vetor de pares colname=type, ou uma lista de pares type=col(s). Em todas as formas de seleção, a ordem em que as colunas são especificadas determina a ordem das colunas no resultado. \\
+drop & Vetor de nomes de colunas ou números a serem descartados, mantenha o resto. \\
+colClasses & Pode receber um vetor nomeado especificando tipos para um subconjunto das colunas por nome. O padrão NULL significa que os tipos são inferidos dos dados no arquivo. Suporta uma lista nomeada de vetores de nomes de colunas ou números onde os nomes das listas são os nomes das classes (procurar exemplos na internet). \\
+dec & Separador de decimal como em read.csv2. \\
+col.names & Inserir um vetor de nomes para as colunas se quiser substituir os originais. \\
+\bottomrule
+\end{longtable}
+
+check.names
+default is FALSE. If TRUE then the names of the variables in the data.table are checked to ensure that they are syntactically valid variable names. If necessary they are adjusted (by make.names) so that they are, and also to ensure that there are no duplicates.
+
+encoding\\
+default is ``unknown''. Other possible options are ``UTF-8'' and ``Latin-1''. Note: it is not used to re-encode the input, rather enables handling of encoded strings in their native encoding.
+
+quote\\
+By default (``"''), if a field starts with a double quote, fread handles embedded quotes robustly as explained under Details. If it fails, then another attempt is made to read the field as is, i.e., as if quotes are disabled. By setting quote=``\,``, the field is always read as if quotes are disabled. It is not expected to ever need to pass anything other than "" to quote; i.e., to turn it off.
+
+strip.white
+default is TRUE. Strips leading and trailing whitespaces of unquoted fields. If FALSE, only header trailing spaces are removed.
+
+fill\\
+logical (default is FALSE). If TRUE then in case the rows have unequal length, blank fields are implicitly filled.
+
+blank.lines.skip\\
+logical, default is FALSE. If TRUE blank lines in the input are ignored.
+
+key
+Character vector of one or more column names which is passed to setkey. It may be a single comma separated string such as key=``x,y,z'', or a vector of names such as key=c(``x'',``y'',``z''). Only valid when argument data.table=TRUE. Where applicable, this should refer to column names given in col.names.
+
+index\\
+Character vector or list of character vectors of one or more column names which is passed to setindexv. As with key, comma-separated notation like index=``x,y,z'' is accepted for convenience. Only valid when argument data.table=TRUE. Where applicable, this should refer to column names given in col.names.
+
+showProgress\\
+TRUE displays progress on the console if the ETA is greater than 3 seconds. It is produced in fread's C code where the very nice (but R level) txtProgressBar and tkProgressBar are not easily available.
+
+data.table\\
+TRUE returns a data.table. FALSE returns a data.frame. The default for this argument can be changed with options(datatable.fread.datatable=FALSE).
+
+nThread
+The number of threads to use. Experiment to see what works best for your data on your hardware.
+
+logical01\\
+If TRUE a column containing only 0s and 1s will be read as logical, otherwise as integer.
+
+keepLeadingZeros\\
+If TRUE a column containing numeric data with leading zeros will be read as character, otherwise leading zeros will be removed and converted to numeric.
+
+yaml\\
+If TRUE, fread will attempt to parse (using yaml.load) the top of the input as YAML, and further to glean parameters relevant to improving the performance of fread on the data itself. The entire YAML section is returned as parsed into a list in the yaml\_metadata attribute. See Details.
+
+autostart\\
+Deprecated and ignored with warning. Please use skip instead.
+
+tmpdir\\
+Directory to use as the tmpdir argument for any tempfile calls, e.g.~when the input is a URL or a shell command. The default is tempdir() which can be controlled by setting TMPDIR before starting the R session; see base::tempdir.
+
+tz\\
+Relevant to datetime values which have no Z or UTC-offset at the end, i.e.~unmarked datetime, as written by utils::write.csv. The default tz=``UTC'' reads unmarked datetime as UTC POSIXct efficiently. tz=``\,'' reads unmarked datetime as type character (slowly) so that as.POSIXct can interpret (slowly) the character datetimes in local timezone; e.g.~by using ``POSIXct'' in colClasses=. Note that fwrite() by default writes datetime in UTC including the final Z and therefore fwrite's output will be read by fread consistently and quickly without needing to use tz= or colClasses=. If the TZ environment variable is set to ``UTC'' (or ``\,'' on non-Windows where unset vs '\,````' is significant) then the R session's timezone is already UTC and tz='''' will result in unmarked datetimes being read as UTC POSIXct. For more information, please see the news items from v1.13.0 and v1.14.0.
 
 \hypertarget{cross}{%
 \chapter{Cross-references}\label{cross}}

@@ -4,6 +4,9 @@ eq:binom
 leitura-de-arquivos-de-texto
 definição-de-diretório-de-trabalho
 arquivos-.csv
+read.csv2
+readrread_csv2
+data.tablefread
 cross
 chapters-and-sub-chapters
 captioned-figures-and-tables
