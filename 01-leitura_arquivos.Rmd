@@ -89,15 +89,25 @@ guess_max	| Número máximo de linhas a serem usadas para adivinhar os tipos de 
 show_col_types | Se FALSE, não mostre os tipos de coluna adivinhados. Se TRUE sempre mostra os tipos de coluna, mesmo que sejam fornecidos. Se NULL (o padrão) mostrar apenas os tipos de coluna se eles não forem fornecidos explicitamente pelo argumento col_types.
 skip_empty_rows	| As linhas em branco devem ser ignoradas completamente? ou seja, se esta opção for TRUE, as linhas em branco não serão representadas. Se for FALSE, eles serão representados por valores NA em todas as colunas.
 
+<Br>
+
 ### data.table::fread()
 
-Vantagem de realizar a leitura de arquivos de grande extensão de forma rápida. Além disso, tem boa identificação de separador,  encoding e tipos de classe.
+Tem a vantagem de realizar a leitura de arquivos grandes de forma rápida. Além disso, tem boa capacidade de identificar automaticamente o separador,  encoding e tipos de classes. O resultado padrão é um objeto data.table, mas pode-se mudar para data.frame.
 
 <Br>
 
 **Exemplo 1**
 ```{r fread}
-
+dados <- data.table::fread(file = 'dados/dados.csv',            # Caminho do arquivo
+                           select = c("data","muni","casos"),   # Seleciona colunas
+                           colClasses = c(data = "Date",        # Define classes
+                                          muni = "character",
+                                          casos = "integer"),
+                           col.names = c("data.in.sin",         # Renomeia colunas
+                                         "municipio", 
+                                         "num_casos")) 
+head(dados, 5)
 ```
 
 <Br>
@@ -115,58 +125,15 @@ stringsAsFactors | Converter todas as colunas de caracteres em fatores?
 skip | skip>0 ignora as primeiras linhas. skip="string" procura por "string" no arquivo (por exemplo, uma substring da linha de nomes de coluna) e começa nessa linha (inspirada em read.xls no pacote gdata).
 select | Um vetor de nomes de colunas ou números para manter e eliminar as demais. Pode especificar também tipos da mesma forma que colClasses; ou seja, um vetor de pares colname=type, ou uma lista de pares type=col(s). Em todas as formas de seleção, a ordem em que as colunas são especificadas determina a ordem das colunas no resultado.
 drop | Vetor de nomes de colunas ou números a serem descartados, mantenha o resto.
-colClasses | Pode receber um vetor nomeado especificando tipos para um subconjunto das colunas por nome. O padrão NULL significa que os tipos são inferidos dos dados no arquivo. Suporta uma lista nomeada de vetores de nomes de colunas ou números onde os nomes das listas são os nomes das classes (procurar exemplos na internet). 
+colClasses | Pode receber um vetor ou lista nomeado especificando tipos para um subconjunto das colunas por nome. O padrão NULL significa que os tipos são inferidos automaticamente. Ex1 - colClasses = c("Date", "character","integer"), neste caso as classes vão compor as classes das colunas na ordem posta. Ex2 - colClasses = c("data" = "Date", "idade" = "integer"), nesse caso estou indicando as classes somente de algumas variaveis. Funciona também no read.csv2.
 dec | Separador de decimal como em read.csv2.
-col.names | Inserir um vetor de nomes para as colunas se quiser substituir os originais.
+col.names | Inserir um vetor de nomes para as colunas se quiser substituir os originais. Se houver alguma coluna original sem título (NA), ela será renomeada automaticamente com "V"+ o numero que corresponde no banco (V1,V2,V3).
+encoding | Default is "unknown". Outras possíveis opções são "UTF-8" e "Latin-1". Porém, não é usado para recodificar, em vez disso, permite o manuseio de strings codificadas em sua codificação nativa.
+strip.white	| O padrão é TRUE. Retira espaços em branco à esquerda e à direita de campos não citados. Se FALSE, apenas os espaços à direita do cabeçalho serão removidos.
+fill | Logical, o padrão é FALSE. Se TRUE, caso as linhas tenham comprimento desigual, os campos em branco serão preenchidos implicitamente.
+blank.lines.skip | Logical, o padrão é FALSE. Se TRUE, as linhas em branco serão ignoradas.
+showProgress | TRUE exibe o progresso no console se o ETA for maior que 3 segundos.
+data.table | TRUE retorna um data.table (default). FALSE retorna um data.frame. O default para este argumento pode ser modificado com opcões(datatable.fread.datatable=FALSE).
+nThread	| Número de threads a serem usados. Experimente para ver o que funciona melhor para seus dados em seu hardware.
+KeepLeadingZeros | Se for TRUE, dados numéricos com zeros à esquerda seão lidos como caracterer, caso contrário, os zeros à esquerda serão removidos e convertidos em numéricos.
 
-###############################################################################
-check.names	
-default is FALSE. If TRUE then the names of the variables in the data.table are checked to ensure that they are syntactically valid variable names. If necessary they are adjusted (by make.names) so that they are, and also to ensure that there are no duplicates.
-
-encoding	
-default is "unknown". Other possible options are "UTF-8" and "Latin-1". Note: it is not used to re-encode the input, rather enables handling of encoded strings in their native encoding.
-
-quote	
-By default ("\""), if a field starts with a double quote, fread handles embedded quotes robustly as explained under Details. If it fails, then another attempt is made to read the field as is, i.e., as if quotes are disabled. By setting quote="", the field is always read as if quotes are disabled. It is not expected to ever need to pass anything other than \"\" to quote; i.e., to turn it off.
-
-strip.white	
-default is TRUE. Strips leading and trailing whitespaces of unquoted fields. If FALSE, only header trailing spaces are removed.
-
-fill	
-logical (default is FALSE). If TRUE then in case the rows have unequal length, blank fields are implicitly filled.
-
-blank.lines.skip	
-logical, default is FALSE. If TRUE blank lines in the input are ignored.
-
-key	
-Character vector of one or more column names which is passed to setkey. It may be a single comma separated string such as key="x,y,z", or a vector of names such as key=c("x","y","z"). Only valid when argument data.table=TRUE. Where applicable, this should refer to column names given in col.names.
-
-index	
-Character vector or list of character vectors of one or more column names which is passed to setindexv. As with key, comma-separated notation like index="x,y,z" is accepted for convenience. Only valid when argument data.table=TRUE. Where applicable, this should refer to column names given in col.names.
-
-showProgress	
-TRUE displays progress on the console if the ETA is greater than 3 seconds. It is produced in fread's C code where the very nice (but R level) txtProgressBar and tkProgressBar are not easily available.
-
-data.table	
-TRUE returns a data.table. FALSE returns a data.frame. The default for this argument can be changed with options(datatable.fread.datatable=FALSE).
-
-nThread	
-The number of threads to use. Experiment to see what works best for your data on your hardware.
-
-logical01	
-If TRUE a column containing only 0s and 1s will be read as logical, otherwise as integer.
-
-keepLeadingZeros	
-If TRUE a column containing numeric data with leading zeros will be read as character, otherwise leading zeros will be removed and converted to numeric.
-
-yaml	
-If TRUE, fread will attempt to parse (using yaml.load) the top of the input as YAML, and further to glean parameters relevant to improving the performance of fread on the data itself. The entire YAML section is returned as parsed into a list in the yaml_metadata attribute. See Details.
-
-autostart	
-Deprecated and ignored with warning. Please use skip instead.
-
-tmpdir	
-Directory to use as the tmpdir argument for any tempfile calls, e.g. when the input is a URL or a shell command. The default is tempdir() which can be controlled by setting TMPDIR before starting the R session; see base::tempdir.
-
-tz	
-Relevant to datetime values which have no Z or UTC-offset at the end, i.e. unmarked datetime, as written by utils::write.csv. The default tz="UTC" reads unmarked datetime as UTC POSIXct efficiently. tz="" reads unmarked datetime as type character (slowly) so that as.POSIXct can interpret (slowly) the character datetimes in local timezone; e.g. by using "POSIXct" in colClasses=. Note that fwrite() by default writes datetime in UTC including the final Z and therefore fwrite's output will be read by fread consistently and quickly without needing to use tz= or colClasses=. If the TZ environment variable is set to "UTC" (or "" on non-Windows where unset vs ‘""' is significant) then the R session’s timezone is already UTC and tz="" will result in unmarked datetimes being read as UTC POSIXct. For more information, please see the news items from v1.13.0 and v1.14.0.

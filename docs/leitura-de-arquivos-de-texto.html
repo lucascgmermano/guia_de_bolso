@@ -26,7 +26,7 @@ como auxiliar na execução te tarefas diárias básicas.</p>" />
 <meta name="author" content="Lucas C. Germano" />
 
 
-<meta name="date" content="2022-05-14" />
+<meta name="date" content="2022-05-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -264,18 +264,12 @@ div.csl-indent {
 <p>Os argumentos das funções são os mesmos, por isso o exemplo será dado somente para .csv2 (mais usado)</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="leitura-de-arquivos-de-texto.html#cb1-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>)</span>
 <span id="cb1-2"><a href="leitura-de-arquivos-de-texto.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">5</span>)          <span class="co"># Exibir as 5 primeiras linhas dos dados.</span></span></code></pre></div>
-<pre><code>##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana
-## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1
-## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3
-## 3 3 2020-01-29  352380      Itobi 30 a 39     1      0    1   0 2020   1      5
-## 4 4 2020-01-30  353050     Mococa 70 a 79     1      0    0   1 2020   1      5
-## 5 5 2020-02-02  353080 Mogi Mirim 40 a 49     1      0    0   1 2020   2      5
-##      pop
-## 1 150713
-## 2 150713
-## 3   7830
-## 4  68788
-## 5  92715</code></pre>
+<pre><code>##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana    pop
+## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1 150713
+## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3 150713
+## 3 3 2020-01-29  352380      Itobi 30 a 39     1      0    1   0 2020   1      5   7830
+## 4 4 2020-01-30  353050     Mococa 70 a 79     1      0    0   1 2020   1      5  68788
+## 5 5 2020-02-02  353080 Mogi Mirim 40 a 49     1      0    0   1 2020   2      5  92715</code></pre>
 <p><Br></p>
 <p><strong>Argumentos principais</strong></p>
 <p>Os argumentos são os mesmos da função read.table().</p>
@@ -440,12 +434,28 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
+<p><Br></p>
 </div>
 <div id="data.tablefread" class="section level3 hasAnchor" number="1.2.3">
 <h3><span class="header-section-number">1.2.3</span> data.table::fread()<a href="leitura-de-arquivos-de-texto.html#data.tablefread" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Vantagem de realizar a leitura de arquivos de grande extensão de forma rápida. Além disso, tem boa identificação de separador, encoding e tipos de classe.</p>
+<p>Tem a vantagem de realizar a leitura de arquivos grandes de forma rápida. Além disso, tem boa capacidade de identificar automaticamente o separador, encoding e tipos de classes. O resultado padrão é um objeto data.table, mas pode-se mudar para data.frame.</p>
 <p><Br></p>
 <p><strong>Exemplo 1</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="leitura-de-arquivos-de-texto.html#cb7-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>,            <span class="co"># Caminho do arquivo</span></span>
+<span id="cb7-2"><a href="leitura-de-arquivos-de-texto.html#cb7-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">select =</span> <span class="fu">c</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;muni&quot;</span>,<span class="st">&quot;casos&quot;</span>),   <span class="co"># Seleciona colunas</span></span>
+<span id="cb7-3"><a href="leitura-de-arquivos-de-texto.html#cb7-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="at">data =</span> <span class="st">&quot;Date&quot;</span>,        <span class="co"># Define classes</span></span>
+<span id="cb7-4"><a href="leitura-de-arquivos-de-texto.html#cb7-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">muni =</span> <span class="st">&quot;character&quot;</span>,</span>
+<span id="cb7-5"><a href="leitura-de-arquivos-de-texto.html#cb7-5" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">casos =</span> <span class="st">&quot;integer&quot;</span>),</span>
+<span id="cb7-6"><a href="leitura-de-arquivos-de-texto.html#cb7-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;data.in.sin&quot;</span>,         <span class="co"># Renomeia colunas</span></span>
+<span id="cb7-7"><a href="leitura-de-arquivos-de-texto.html#cb7-7" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;municipio&quot;</span>, </span>
+<span id="cb7-8"><a href="leitura-de-arquivos-de-texto.html#cb7-8" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;num_casos&quot;</span>)) </span>
+<span id="cb7-9"><a href="leitura-de-arquivos-de-texto.html#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>##    data.in.sin  municipio num_casos
+## 1:  2020-01-01 Mogi Guaçu         1
+## 2:  2020-01-20 Mogi Guaçu         1
+## 3:  2020-01-29      Itobi         1
+## 4:  2020-01-30     Mococa         1
+## 5:  2020-02-02 Mogi Mirim         1</code></pre>
 <p><Br></p>
 <p><strong>Argumentos principais</strong></p>
 <table>
@@ -498,7 +508,7 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td>colClasses</td>
-<td>Pode receber um vetor nomeado especificando tipos para um subconjunto das colunas por nome. O padrão NULL significa que os tipos são inferidos dos dados no arquivo. Suporta uma lista nomeada de vetores de nomes de colunas ou números onde os nomes das listas são os nomes das classes (procurar exemplos na internet).</td>
+<td>Pode receber um vetor ou lista nomeado especificando tipos para um subconjunto das colunas por nome. O padrão NULL significa que os tipos são inferidos automaticamente. Ex1 - colClasses = c(“Date,” “character,”“integer”), neste caso as classes vão compor as classes das colunas na ordem posta. Ex2 - colClasses = c(“data” = “Date,” “idade” = “integer”), nesse caso estou indicando as classes somente de algumas variaveis. Funciona também no read.csv2.</td>
 </tr>
 <tr class="odd">
 <td>dec</td>
@@ -506,48 +516,43 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td>col.names</td>
-<td>Inserir um vetor de nomes para as colunas se quiser substituir os originais.</td>
+<td>Inserir um vetor de nomes para as colunas se quiser substituir os originais. Se houver alguma coluna original sem título (NA), ela será renomeada automaticamente com “V”+ o numero que corresponde no banco (V1,V2,V3).</td>
+</tr>
+<tr class="odd">
+<td>encoding</td>
+<td>Default is “unknown.” Outras possíveis opções são “UTF-8” e “Latin-1.” Porém, não é usado para recodificar, em vez disso, permite o manuseio de strings codificadas em sua codificação nativa.</td>
+</tr>
+<tr class="even">
+<td>strip.white</td>
+<td>O padrão é TRUE. Retira espaços em branco à esquerda e à direita de campos não citados. Se FALSE, apenas os espaços à direita do cabeçalho serão removidos.</td>
+</tr>
+<tr class="odd">
+<td>fill</td>
+<td>Logical, o padrão é FALSE. Se TRUE, caso as linhas tenham comprimento desigual, os campos em branco serão preenchidos implicitamente.</td>
+</tr>
+<tr class="even">
+<td>blank.lines.skip</td>
+<td>Logical, o padrão é FALSE. Se TRUE, as linhas em branco serão ignoradas.</td>
+</tr>
+<tr class="odd">
+<td>showProgress</td>
+<td>TRUE exibe o progresso no console se o ETA for maior que 3 segundos.</td>
+</tr>
+<tr class="even">
+<td>data.table</td>
+<td>TRUE retorna um data.table (default). FALSE retorna um data.frame. O default para este argumento pode ser modificado com opcões(datatable.fread.datatable=FALSE).</td>
+</tr>
+<tr class="odd">
+<td>nThread</td>
+<td>Número de threads a serem usados. Experimente para ver o que funciona melhor para seus dados em seu hardware.</td>
+</tr>
+<tr class="even">
+<td>KeepLeadingZeros</td>
+<td>Se for TRUE, dados numéricos com zeros à esquerda seão lidos como caracterer, caso contrário, os zeros à esquerda serão removidos e convertidos em numéricos.</td>
 </tr>
 </tbody>
 </table>
-<div id="section" class="section level79" number="1.2.3.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.1">
-<p class="heading"><span class="header-section-number">1.2.3.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.1</span> </p>
-<p>check.names
-default is FALSE. If TRUE then the names of the variables in the data.table are checked to ensure that they are syntactically valid variable names. If necessary they are adjusted (by make.names) so that they are, and also to ensure that there are no duplicates.</p>
-<p>encoding<br />
-default is “unknown.” Other possible options are “UTF-8” and “Latin-1.” Note: it is not used to re-encode the input, rather enables handling of encoded strings in their native encoding.</p>
-<p>quote<br />
-By default (“"”), if a field starts with a double quote, fread handles embedded quotes robustly as explained under Details. If it fails, then another attempt is made to read the field as is, i.e., as if quotes are disabled. By setting quote=““, the field is always read as if quotes are disabled. It is not expected to ever need to pass anything other than "" to quote; i.e., to turn it off.</p>
-<p>strip.white
-default is TRUE. Strips leading and trailing whitespaces of unquoted fields. If FALSE, only header trailing spaces are removed.</p>
-<p>fill<br />
-logical (default is FALSE). If TRUE then in case the rows have unequal length, blank fields are implicitly filled.</p>
-<p>blank.lines.skip<br />
-logical, default is FALSE. If TRUE blank lines in the input are ignored.</p>
-<p>key
-Character vector of one or more column names which is passed to setkey. It may be a single comma separated string such as key=“x,y,z,” or a vector of names such as key=c(“x,”“y,”“z”). Only valid when argument data.table=TRUE. Where applicable, this should refer to column names given in col.names.</p>
-<p>index<br />
-Character vector or list of character vectors of one or more column names which is passed to setindexv. As with key, comma-separated notation like index=“x,y,z” is accepted for convenience. Only valid when argument data.table=TRUE. Where applicable, this should refer to column names given in col.names.</p>
-<p>showProgress<br />
-TRUE displays progress on the console if the ETA is greater than 3 seconds. It is produced in fread’s C code where the very nice (but R level) txtProgressBar and tkProgressBar are not easily available.</p>
-<p>data.table<br />
-TRUE returns a data.table. FALSE returns a data.frame. The default for this argument can be changed with options(datatable.fread.datatable=FALSE).</p>
-<p>nThread
-The number of threads to use. Experiment to see what works best for your data on your hardware.</p>
-<p>logical01<br />
-If TRUE a column containing only 0s and 1s will be read as logical, otherwise as integer.</p>
-<p>keepLeadingZeros<br />
-If TRUE a column containing numeric data with leading zeros will be read as character, otherwise leading zeros will be removed and converted to numeric.</p>
-<p>yaml<br />
-If TRUE, fread will attempt to parse (using yaml.load) the top of the input as YAML, and further to glean parameters relevant to improving the performance of fread on the data itself. The entire YAML section is returned as parsed into a list in the yaml_metadata attribute. See Details.</p>
-<p>autostart<br />
-Deprecated and ignored with warning. Please use skip instead.</p>
-<p>tmpdir<br />
-Directory to use as the tmpdir argument for any tempfile calls, e.g. when the input is a URL or a shell command. The default is tempdir() which can be controlled by setting TMPDIR before starting the R session; see base::tempdir.</p>
-<p>tz<br />
-Relevant to datetime values which have no Z or UTC-offset at the end, i.e. unmarked datetime, as written by utils::write.csv. The default tz=“UTC” reads unmarked datetime as UTC POSIXct efficiently. tz=“” reads unmarked datetime as type character (slowly) so that as.POSIXct can interpret (slowly) the character datetimes in local timezone; e.g. by using “POSIXct” in colClasses=. Note that fwrite() by default writes datetime in UTC including the final Z and therefore fwrite’s output will be read by fread consistently and quickly without needing to use tz= or colClasses=. If the TZ environment variable is set to “UTC” (or “” on non-Windows where unset vs ’““’ is significant) then the R session’s timezone is already UTC and tz=”” will result in unmarked datetimes being read as UTC POSIXct. For more information, please see the news items from v1.13.0 and v1.14.0.</p>
 
-</div>
 </div>
 </div>
 </div>
@@ -611,20 +616,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
