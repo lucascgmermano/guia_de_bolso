@@ -222,8 +222,8 @@ div.csl-indent {
 <h2><span class="header-section-number">1.1</span> Definição de diretório de trabalho<a href="leitura-de-arquivos-de-texto.html#definição-de-diretório-de-trabalho" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
 <colgroup>
-<col width="46%" />
-<col width="53%" />
+<col width="22%" />
+<col width="77%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -264,19 +264,25 @@ div.csl-indent {
 <p>Os argumentos das funções são os mesmos, por isso o exemplo será dado somente para .csv2 (mais usado)</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="leitura-de-arquivos-de-texto.html#cb1-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>)</span>
 <span id="cb1-2"><a href="leitura-de-arquivos-de-texto.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">5</span>)          <span class="co"># Exibir as 5 primeiras linhas dos dados.</span></span></code></pre></div>
-<pre><code>##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana    pop
-## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1 150713
-## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3 150713
-## 3 3 2020-01-29  352380      Itobi 30 a 39     1      0    1   0 2020   1      5   7830
-## 4 4 2020-01-30  353050     Mococa 70 a 79     1      0    0   1 2020   1      5  68788
-## 5 5 2020-02-02  353080 Mogi Mirim 40 a 49     1      0    0   1 2020   2      5  92715</code></pre>
+<pre><code>##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana
+## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1
+## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3
+## 3 3 2020-01-29  352380      Itobi 30 a 39     1      0    1   0 2020   1      5
+## 4 4 2020-01-30  353050     Mococa 70 a 79     1      0    0   1 2020   1      5
+## 5 5 2020-02-02  353080 Mogi Mirim 40 a 49     1      0    0   1 2020   2      5
+##      pop
+## 1 150713
+## 2 150713
+## 3   7830
+## 4  68788
+## 5  92715</code></pre>
 <p><Br></p>
 <p><strong>Argumentos principais</strong></p>
 <p>Os argumentos são os mesmos da função read.table().</p>
 <table>
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col width="6%" />
+<col width="93%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -295,11 +301,11 @@ div.csl-indent {
 </tr>
 <tr class="odd">
 <td>sep</td>
-<td>Tipo de separador de campo. Default é = “;”</td>
+<td>Tipo de separador de campo. Default é = “;”.</td>
 </tr>
 <tr class="even">
 <td>dec</td>
-<td>Tipo de separador de decimal. Default é = “.”</td>
+<td>Tipo de separador de decimal. Default é = “.”.</td>
 </tr>
 <tr class="odd">
 <td>nrows</td>
@@ -323,7 +329,7 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td>fileEncoding</td>
-<td>Character string. Define o encoding que será usado. Ex. fileEnconding = “UTF-8” ou “Latin-1” ou “ISO-8859-1.”</td>
+<td>Character string. Define o encoding que será usado. Ex. fileEnconding = “UTF-8” ou “Latin-1” ou “ISO-8859-1”.</td>
 </tr>
 <tr class="odd">
 <td>skipNull</td>
@@ -331,7 +337,7 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td>colClasses</td>
-<td>character. Um vetor de classes referentes as colunas. Valores possíveis são NA (default, quando type.convert é usado), “NULL” (quando a coluna é pulada), um vetor atomico de classes (logical, integer, numeric, complex, character, raw), or “factor,” “Date” or “POSIXct.”</td>
+<td>character. Um vetor de classes referentes as colunas. Valores possíveis são NA (default, quando type.convert é usado), “NULL” (quando a coluna é pulada), um vetor atomico de classes (logical, integer, numeric, complex, character, raw), or “factor”, “Date” or “POSIXct”.</td>
 </tr>
 </tbody>
 </table>
@@ -374,8 +380,8 @@ div.csl-indent {
 <p><strong>Argumentos principais</strong></p>
 <table>
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col width="1%" />
+<col width="98%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -460,8 +466,8 @@ div.csl-indent {
 <p><strong>Argumentos principais</strong></p>
 <table>
 <colgroup>
-<col width="50%" />
-<col width="50%" />
+<col width="3%" />
+<col width="96%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -488,7 +494,7 @@ div.csl-indent {
 </tr>
 <tr class="odd">
 <td>na.strings</td>
-<td>Para ler NA, como NA, defina na.strings=“NA.” Para ler ,, como string em branco ““, defina na.strings=NULL.</td>
+<td>Para ler NA, como NA, defina na.strings=“NA”. Para ler ,, como string em branco ““, defina na.strings=NULL.</td>
 </tr>
 <tr class="even">
 <td>stringsAsFactors</td>
@@ -508,7 +514,7 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td>colClasses</td>
-<td>Pode receber um vetor ou lista nomeado especificando tipos para um subconjunto das colunas por nome. O padrão NULL significa que os tipos são inferidos automaticamente. Ex1 - colClasses = c(“Date,” “character,”“integer”), neste caso as classes vão compor as classes das colunas na ordem posta. Ex2 - colClasses = c(“data” = “Date,” “idade” = “integer”), nesse caso estou indicando as classes somente de algumas variaveis. Funciona também no read.csv2.</td>
+<td>Pode receber um vetor ou lista nomeado especificando tipos para um subconjunto das colunas por nome. O padrão NULL significa que os tipos são inferidos automaticamente. Ex1 - colClasses = c(“Date”, “character”,“integer”), neste caso as classes vão compor as classes das colunas na ordem posta. Ex2 - colClasses = c(“data” = “Date”, “idade” = “integer”), nesse caso estou indicando as classes somente de algumas variaveis. Funciona também no read.csv2.</td>
 </tr>
 <tr class="odd">
 <td>dec</td>
@@ -520,7 +526,7 @@ div.csl-indent {
 </tr>
 <tr class="odd">
 <td>encoding</td>
-<td>Default is “unknown.” Outras possíveis opções são “UTF-8” e “Latin-1.” Porém, não é usado para recodificar, em vez disso, permite o manuseio de strings codificadas em sua codificação nativa.</td>
+<td>Default is “unknown”. Outras possíveis opções são “UTF-8” e “Latin-1”. Porém, não é usado para recodificar, em vez disso, permite o manuseio de strings codificadas em sua codificação nativa.</td>
 </tr>
 <tr class="even">
 <td>strip.white</td>
@@ -616,6 +622,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
