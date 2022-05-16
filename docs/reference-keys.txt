@@ -8,6 +8,7 @@ read.csv2
 readrread_csv2
 data.tablefread
 readodsread_ods
+readxlread_excel
 cross
 chapters-and-sub-chapters
 captioned-figures-and-tables

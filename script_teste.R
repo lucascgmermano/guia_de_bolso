@@ -27,3 +27,8 @@ install.packages("TinyTeX")
 # options(tinytex.verbose = TRUE)
 # ```
 
+readxl::read_excel(path = "dados/planilha_xlsx.xlsx",
+                   sheet = 1,
+                   col_names = c('vel','dist'),
+                   col_types = c("numeric","numeric"),
+                   range = "A3:B19")

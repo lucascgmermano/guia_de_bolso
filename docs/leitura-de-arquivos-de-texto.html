@@ -26,7 +26,7 @@ como auxiliar na execução te tarefas diárias básicas.</p>" />
 <meta name="author" content="Lucas C. Germano" />
 
 
-<meta name="date" content="2022-05-15" />
+<meta name="date" content="2022-05-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -171,6 +171,7 @@ div.csl-indent {
 <li class="chapter" data-level="1.2.2" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#readrread_csv2"><i class="fa fa-check"></i><b>1.2.2</b> readr::read_csv2()</a></li>
 <li class="chapter" data-level="1.2.3" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#data.tablefread"><i class="fa fa-check"></i><b>1.2.3</b> data.table::fread()</a></li>
 <li class="chapter" data-level="1.2.4" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#readodsread_ods"><i class="fa fa-check"></i><b>1.2.4</b> readODS::read_ods()</a></li>
+<li class="chapter" data-level="1.2.5" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#readxlread_excel"><i class="fa fa-check"></i><b>1.2.5</b> readxl::read_excel()</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>2</b> Cross-references</a>
@@ -260,8 +261,8 @@ div.csl-indent {
 <h2><span class="header-section-number">1.2</span> Arquivos .csv<a href="leitura-de-arquivos-de-texto.html#arquivos-.csv" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="read.csv2" class="section level3 hasAnchor" number="1.2.1">
 <h3><span class="header-section-number">1.2.1</span> read.csv2()<a href="leitura-de-arquivos-de-texto.html#read.csv2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>.csv = Arquivos separados por vírgula (,)<br />
-.csv2 = Arquivos separados por ponto e vírgula (;)</p>
+<p>csv = Arquivos separados por vírgula (,)<br />
+csv2 = Arquivos separados por ponto e vírgula (;)</p>
 <p>Os argumentos das funções são os mesmos, por isso o exemplo será dado somente para .csv2 (mais usado)</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="leitura-de-arquivos-de-texto.html#cb1-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>)</span>
 <span id="cb1-2"><a href="leitura-de-arquivos-de-texto.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">5</span>)          <span class="co"># Exibir as 5 primeiras linhas dos dados.</span></span></code></pre></div>
@@ -479,11 +480,11 @@ div.csl-indent {
 <tbody>
 <tr class="odd">
 <td>file</td>
-<td>Nome do arquivo no diretório de trabalho, caminho para o arquivo ou um URL começando <a href="http://" class="uri">http://</a>, <a href="file://" class="uri">file://</a>, etc. Arquivos compactados ‘.gz’ e ‘.bz2’ são suportados se o pacote R.utils estiver instalado.</td>
+<td>Nome do arquivo no diretório de trabalho, caminho para o arquivo ou um URL começando http:, etc. Arquivos compactados ‘.gz’ e ‘.bz2’ são suportados se o pacote R.utils estiver instalado.</td>
 </tr>
 <tr class="even">
 <td>sep</td>
-<td>O separador entre colunas. O padrão é o caractere no conjunto [,\\|;:].</td>
+<td>O separador entre colunas.</td>
 </tr>
 <tr class="odd">
 <td>nrows</td>
@@ -503,7 +504,7 @@ div.csl-indent {
 </tr>
 <tr class="odd">
 <td>skip</td>
-<td>skip&gt;0 ignora as primeiras linhas. skip=“string” procura por “string” no arquivo (por exemplo, uma substring da linha de nomes de coluna) e começa nessa linha (inspirada em read.xls no pacote gdata).</td>
+<td>skip &gt;0 ignora as primeiras linhas. skip=“string” procura por “string” no arquivo (por exemplo, uma substring da linha de nomes de coluna) e começa nessa linha (inspirada em read.xls no pacote gdata).</td>
 </tr>
 <tr class="even">
 <td>select</td>
@@ -617,11 +618,72 @@ div.csl-indent {
 </tr>
 <tr class="odd">
 <td>row_names</td>
-<td>Indica se o arquivo contém os nomes das linhas na primeira coluna</td>
+<td>Indica se o arquivo contém os nomes das linhas na primeira coluna.</td>
 </tr>
 <tr class="even">
 <td>strings_as_factors</td>
 <td>Logical. Se variáveis tipo character serão convertidas a fatores.</td>
+</tr>
+</tbody>
+</table>
+<p><Br></p>
+</div>
+<div id="readxlread_excel" class="section level3 hasAnchor" number="1.2.5">
+<h3><span class="header-section-number">1.2.5</span> readxl::read_excel()<a href="leitura-de-arquivos-de-texto.html#readxlread_excel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Leitura de arquivos extensão .xls e xlsx.</p>
+<p><Br></p>
+<p><strong>Exemplo 1</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="leitura-de-arquivos-de-texto.html#cb11-1" aria-hidden="true" tabindex="-1"></a>   dados <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">&quot;dados/planilha_xlsx.xlsx&quot;</span>,</span>
+<span id="cb11-2"><a href="leitura-de-arquivos-de-texto.html#cb11-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="dv">1</span>,</span>
+<span id="cb11-3"><a href="leitura-de-arquivos-de-texto.html#cb11-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&#39;vel&#39;</span>,<span class="st">&#39;dist&#39;</span>),</span>
+<span id="cb11-4"><a href="leitura-de-arquivos-de-texto.html#cb11-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">col_types =</span> <span class="fu">c</span>(<span class="st">&quot;numeric&quot;</span>,<span class="st">&quot;numeric&quot;</span>),</span>
+<span id="cb11-5"><a href="leitura-de-arquivos-de-texto.html#cb11-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">range =</span> <span class="st">&quot;A3:B19&quot;</span>)</span>
+<span id="cb11-6"><a href="leitura-de-arquivos-de-texto.html#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(dados, <span class="dv">5</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 5 × 2
+##     vel  dist
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1    72   360
+## 2    68   410
+## 3    NA   255
+## 4    76   239
+## 5    88   209</code></pre>
+<p><Br></p>
+<p><strong>Argumentos principais</strong></p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argumento</th>
+<th>Definição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>path</td>
+<td>Caminho para o arquivo xls/xlsx.</td>
+</tr>
+<tr class="even">
+<td>sheet</td>
+<td>Planilha a ser lida. Aceita o nome da planilha ou o número correspondente. Default é a primeira planilha.</td>
+</tr>
+<tr class="odd">
+<td>col_names</td>
+<td>Se TRUE a primeira linha será usada para nomear as colunas. FALSE o número das colunas será uma sequência automática de X1 a Xn, ou um vetor de nomes para cada coluna.</td>
+</tr>
+<tr class="even">
+<td>col_types</td>
+<td>Se NULL os tipos de classes serão adivinhados, senão inserir um vetor indicando as classes “blank”, “numeric”, “date” or “text”.</td>
+</tr>
+<tr class="odd">
+<td>na</td>
+<td>Valores ausentes. Por default o readxl converte celulas em branco para valores ausentes. Pode-se inserir um valor padrão caso se deseje cobrir os valores ausentes.</td>
+</tr>
+<tr class="even">
+<td>skip</td>
+<td>Número de linhas para pular antes de iniciar a leitura dos dados.</td>
 </tr>
 </tbody>
 </table>
@@ -689,20 +751,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

@@ -127,28 +127,28 @@ head(dados, 5)
 
 **Argumentos principais**
 
-| Argumento        | Definição|
-|------------------------------------|------------------------------------|
-| file             | Nome do arquivo no diretório de trabalho, caminho para o arquivo ou um URL começando <http://>, <file://>, etc. Arquivos compactados '.gz' e '.bz2' são suportados se o pacote R.utils estiver instalado.|
-| sep              | O separador entre colunas. O padrão é o caractere no conjunto [,\t \\\\\\\|;:].|
-| nrows            | Número máximo de linhas a serem lidas.|
-| header           | Logical. Primeria linha é o nome das colunas.|
-| na.strings       | Para ler NA, como NA, defina na.strings="NA". Para ler ,, como string em branco "", defina na.strings=NULL.|
-| stringsAsFactors | Converter todas as colunas de caracteres em fatores?|
-| skip             | skip\>0 ignora as primeiras linhas. skip="string" procura por "string" no arquivo (por exemplo, uma substring da linha de nomes de coluna) e começa nessa linha (inspirada em read.xls no pacote gdata).|
-| select           | Um vetor de nomes de colunas ou números para manter e eliminar as demais. Pode especificar também tipos da mesma forma que colClasses; ou seja, um vetor de pares colname=type, ou uma lista de pares type=col(s). Em todas as formas de seleção, a ordem em que as colunas são especificadas determina a ordem das colunas no resultado.|
-| drop             | Vetor de nomes de colunas ou números a serem descartados, mantenha o resto.|
-| colClasses       | Pode receber um vetor ou lista nomeado especificando tipos para um subconjunto das colunas por nome. O padrão NULL significa que os tipos são inferidos automaticamente. Ex1 - colClasses = c("Date", "character","integer"), neste caso as classes vão compor as classes das colunas na ordem posta. Ex2 - colClasses = c("data" = "Date", "idade" = "integer"), nesse caso estou indicando as classes somente de algumas variaveis. Funciona também no read.csv2. |
-| dec              | Separador de decimal como em read.csv2.|
-| col.names        | Inserir um vetor de nomes para as colunas se quiser substituir os originais. Se houver alguma coluna original sem título (NA), ela será renomeada automaticamente com "V"+ o numero que corresponde no banco (V1,V2,V3).|
-| encoding         | Default is "unknown". Outras possíveis opções são "UTF-8" e "Latin-1". Porém, não é usado para recodificar, em vez disso, permite o manuseio de strings codificadas em sua codificação nativa.|
-| strip.white      | O padrão é TRUE. Retira espaços em branco à esquerda e à direita de campos não citados. Se FALSE, apenas os espaços à direita do cabeçalho serão removidos.|
-| fill             | Logical, o padrão é FALSE. Se TRUE, caso as linhas tenham comprimento desigual, os campos em branco serão preenchidos implicitamente.|
-| blank.lines.skip | Logical, o padrão é FALSE. Se TRUE, as linhas em branco serão ignoradas.|
-| showProgress     | TRUE exibe o progresso no console se o ETA for maior que 3 segundos.|
-| data.table       | TRUE retorna um data.table (default). FALSE retorna um data.frame. O default para este argumento pode ser modificado com opcões(datatable.fread.datatable=FALSE).|
-| nThread          | Número de threads a serem usados. Experimente para ver o que funciona melhor para seus dados em seu hardware.|
-| KeepLeadingZeros | Se for TRUE, dados numéricos com zeros à esquerda seão lidos como caracterer, caso contrário, os zeros à esquerda serão removidos e convertidos em numéricos.|
+Argumento|Definição
+---------|---------
+file | Nome do arquivo no diretório de trabalho, caminho para o arquivo ou um URL começando http:, etc. Arquivos compactados '.gz' e '.bz2' são suportados se o pacote R.utils estiver instalado.
+sep | O separador entre colunas. 
+nrows | Número máximo de linhas a serem lidas.
+header | Logical. Primeria linha é o nome das colunas.
+na.strings | Para ler NA, como NA, defina na.strings="NA". Para ler ,, como string em branco "", defina na.strings=NULL.
+stringsAsFactors | Converter todas as colunas de caracteres em fatores?
+skip | skip >0 ignora as primeiras linhas. skip="string" procura por "string" no arquivo (por exemplo, uma substring da linha de nomes de coluna) e começa nessa linha (inspirada em read.xls no pacote gdata).
+select | Um vetor de nomes de colunas ou números para manter e eliminar as demais. Pode especificar também tipos da mesma forma que colClasses; ou seja, um vetor de pares colname=type, ou uma lista de pares type=col(s). Em todas as formas de seleção, a ordem em que as colunas são especificadas determina a ordem das colunas no resultado.
+drop | Vetor de nomes de colunas ou números a serem descartados, mantenha o resto.
+colClasses | Pode receber um vetor ou lista nomeado especificando tipos para um subconjunto das colunas por nome. O padrão NULL significa que os tipos são inferidos automaticamente. Ex1 - colClasses = c("Date", "character","integer"), neste caso as classes vão compor as classes das colunas na ordem posta. Ex2 - colClasses = c("data" = "Date", "idade" = "integer"), nesse caso estou indicando as classes somente de algumas variaveis. Funciona também no read.csv2.
+dec | Separador de decimal como em read.csv2.
+col.names | Inserir um vetor de nomes para as colunas se quiser substituir os originais. Se houver alguma coluna original sem título (NA), ela será renomeada automaticamente com "V"+ o numero que corresponde no banco (V1,V2,V3).
+encoding | Default is "unknown". Outras possíveis opções são "UTF-8" e "Latin-1". Porém, não é usado para recodificar, em vez disso, permite o manuseio de strings codificadas em sua codificação nativa.
+strip.white | O padrão é TRUE. Retira espaços em branco à esquerda e à direita de campos não citados. Se FALSE, apenas os espaços à direita do cabeçalho serão removidos.
+fill | Logical, o padrão é FALSE. Se TRUE, caso as linhas tenham comprimento desigual, os campos em branco serão preenchidos implicitamente.
+blank.lines.skip | Logical, o padrão é FALSE. Se TRUE, as linhas em branco serão ignoradas.
+showProgress | TRUE exibe o progresso no console se o ETA for maior que 3 segundos.
+data.table | TRUE retorna um data.table (default). FALSE retorna um data.frame. O default para este argumento pode ser modificado com opcões(datatable.fread.datatable=FALSE).
+nThread | Número de threads a serem usados. Experimente para ver o que funciona melhor para seus dados em seu hardware.
+KeepLeadingZeros | Se for TRUE, dados numéricos com zeros à esquerda seão lidos como caracterer, caso contrário, os zeros à esquerda serão removidos e convertidos em numéricos.
 
 <Br>
 
@@ -169,44 +169,48 @@ head(dados)
 
 **Argumentos principais**
 
-| Argumento          | Definição |
-|--------------------|-----------|
-| path               | Caminho do arquivo ods.|
-| sheet              | Planilha que será lida. Default e 1. Pode ser o nome da planilha (ex. "semana1") ou um número correspondente a planilha.| 
-| col_names          | Indica se a primeira linha contem os nomes das colunas. |
-| skip               | Número de linhas a pular antes de iniciar a leitura dos dados. |
-| formula_as_formula | Exibir fórmulas como fórmulas "SUM(A1:A3)" ou como valores "3"... ou "8".. |
-| range              | Seleção de retângulo usando intervalo de células semelhante ao Excel, como intervalo = "D12:F15" ou intervalo = "R1C12:R6C15". O processamento de intervalo de células é tratado pelo pacote cellranger. |
-| row_names          | Indica se o arquivo contém os nomes das linhas na primeira coluna |
-| strings_as_factors | Logical. Se variáveis tipo character serão  convertidas a fatores.|
+Argumento|Definição 
+---------|---------
+path               | Caminho do arquivo ods.
+sheet              | Planilha que será lida. Default e 1. Pode ser o nome da planilha (ex. "semana1") ou um número correspondente a planilha. 
+col_names          | Indica se a primeira linha contem os nomes das colunas.
+skip               | Número de linhas a pular antes de iniciar a leitura dos dados.
+formula_as_formula | Exibir fórmulas como fórmulas "SUM(A1:A3)" ou como valores "3" ou "8". 
+range              | Seleção de retângulo usando intervalo de células semelhante ao Excel, como intervalo = "D12:F15" ou intervalo = "R1C12:R6C15". O processamento de intervalo de células é tratado pelo pacote cellranger.
+row_names          | Indica se o arquivo contém os nomes das linhas na primeira coluna.
+strings_as_factors | Logical. Se variáveis tipo character serão  convertidas a fatores.
   
   <Br>
     
 ### readxl::read_excel()
 
-    Leitura de arquivos extensão .xls e xlsx.
+Leitura de arquivos extensão .xls e xlsx.
+
+<Br>
 
 **Exemplo 1**
-    ```{r read_excel}
-    read_excel(path = "/dados/planilha_excel.xlsx", 
-              sheet = 1, 
-              col_names = TRUE, 
-              col_types = NULL, 
-              na = "", 
-              skip = 0)
-    ```
-    
-    <Br>
+
+```{r read_excel}
+   dados <- readxl::read_excel(path = "dados/planilha_xlsx.xlsx",
+                   sheet = 1,
+                   col_names = c('vel','dist'),
+                   col_types = c("numeric","numeric"),
+                   range = "A3:B19")
+    head(dados, 5)
+```
+
+<Br>
       
 **Argumentos principais**
-    |Argumento|Definição|
-    |---------|---------|
-    |path     | Caminho para o arquivo xls/xlsx. |
-    |sheet    | Planilha a ser lida. Aceita o nome da planilha ou o número correspondente. Default é a primeira planilha.|
-    |col_names| Se TRUE a primeira linha será usada para nomear as colunas. FALSE o número das colunas será uma sequência automática de X1 a Xn, ou um vetor de nomes para cada coluna.|
-    |col_types| Se NULL os tipos de classes serão adivinhados, senão inserir um vetor indicando as classes "blank", "numeric", "date" or "text".|
-    |na       | Valores ausentes. Por default o readxl converte celulas em branco para valores ausentes. Pode-se inserir um valor padrão caso se deseje cobrir os valores ausentes.|
-    |skip     | Número de linhas para pular antes de iniciar a leitura dos dados.|
+
+Argumento|Definição
+---------|---------
+path     | Caminho para o arquivo xls/xlsx. 
+sheet    | Planilha a ser lida. Aceita o nome da planilha ou o número correspondente. Default é a primeira planilha.
+col_names| Se TRUE a primeira linha será usada para nomear as colunas. FALSE o número das colunas será uma sequência automática de X1 a Xn, ou um vetor de nomes para cada coluna.
+col_types| Se NULL os tipos de classes serão adivinhados, senão inserir um vetor indicando as classes "blank", "numeric", "date" or "text".
+na       | Valores ausentes. Por default o readxl converte celulas em branco para valores ausentes. Pode-se inserir um valor padrão caso se deseje cobrir os valores ausentes.
+skip     | Número de linhas para pular antes de iniciar a leitura dos dados.
     
     
     

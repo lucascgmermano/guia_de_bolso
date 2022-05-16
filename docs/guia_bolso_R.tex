@@ -117,7 +117,7 @@
 
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{2022-05-15}
+\date{2022-05-16}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -158,8 +158,8 @@ Críticas, sugestões ou contribuições de código e conteúdo podem ser enviad
 \section{Definição de diretório de trabalho}\label{definiuxe7uxe3o-de-diretuxf3rio-de-trabalho}}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.2294}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.7706}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4722}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5278}}@{}}
 \toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 Comando
@@ -182,8 +182,8 @@ Inserir aspas ' ' + Tab entre elas & Navegação que pode servir para explorar c
 \hypertarget{read.csv2}{%
 \subsection{read.csv2()}\label{read.csv2}}
 
-.csv = Arquivos separados por vírgula (,)\\
-.csv2 = Arquivos separados por ponto e vírgula (;)
+csv = Arquivos separados por vírgula (,)\\
+csv2 = Arquivos separados por ponto e vírgula (;)
 
 Os argumentos das funções são os mesmos, por isso o exemplo será dado somente para .csv2 (mais usado)
 
@@ -214,8 +214,8 @@ Os argumentos das funções são os mesmos, por isso o exemplo será dado soment
 Os argumentos são os mesmos da função read.table().
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.0623}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.9377}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
 \toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
@@ -235,7 +235,7 @@ blank.lines.skip & Logical. Se TRUE linhas vazias serão ignoradas. \\
 stringsAsFactors & Logical. Se TRUE os vetores character serão convertidos para factors. Se houver distorção dos caracteres, utilizar FALSE para serem mantidos os caracteres originais, sem conversão. \\
 fileEncoding & Character string. Define o encoding que será usado. Ex. fileEnconding = ``UTF-8'' ou ``Latin-1'' ou ``ISO-8859-1''. \\
 skipNull & Logical. Se TRUE os nulos (NA) devem ser ignorados. \\
-colClasses & character. Um vetor de classes referentes as colunas. Valores possíveis são NA (default, quando type.convert é usado), ``NULL'' (quando a coluna é pulada), um vetor atomico de classes (logical, integer, numeric, complex, character, raw), or ``factor'', ``Date'' or ``POSIXct''. \\
+colClasses & character. Um vetor de classes referentes as colunas. Valores possíveis são NA (default, quando type.convert é usado), ``NULL'' (quando a coluna é pulada), um vetor atomico de classes(logical, integer, numeric, complex, character, raw), or ``factor'', ``Date'' or ``POSIXct''. \\
 \bottomrule
 \end{longtable}
 
@@ -293,8 +293,8 @@ colClasses & character. Um vetor de classes referentes as colunas. Valores poss�
 \textbf{Argumentos principais}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.0195}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.9805}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
 \toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
@@ -351,8 +351,8 @@ Tem a vantagem de realizar a leitura de arquivos grandes de forma rápida. Além
 \textbf{Argumentos principais}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.0382}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.9618}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
 \toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
@@ -361,13 +361,13 @@ Definição
 \end{minipage} \\
 \midrule
 \endhead
-file & Nome do arquivo no diretório de trabalho, caminho para o arquivo ou um URL começando \url{http://}, \url{file://}, etc. Arquivos compactados `.gz' e `.bz2' são suportados se o pacote R.utils estiver instalado. \\
-sep & O separador entre colunas. O padrão é o caractere no conjunto {[},\t |;:{]}. \\
+file & Nome do arquivo no diretório de trabalho, caminho para o arquivo ou um URL começando http:, etc. Arquivos compactados `.gz' e `.bz2' são suportados se o pacote R.utils estiver instalado. \\
+sep & O separador entre colunas. \\
 nrows & Número máximo de linhas a serem lidas. \\
 header & Logical. Primeria linha é o nome das colunas. \\
 na.strings & Para ler NA, como NA, defina na.strings=``NA''. Para ler ,, como string em branco ``\,``, defina na.strings=NULL. \\
 stringsAsFactors & Converter todas as colunas de caracteres em fatores? \\
-skip & skip\textgreater0 ignora as primeiras linhas. skip=``string'' procura por ``string'' no arquivo (por exemplo, uma substring da linha de nomes de coluna) e começa nessa linha (inspirada em read.xls no pacote gdata). \\
+skip & skip \textgreater0 ignora as primeiras linhas. skip=``string'' procura por ``string'' no arquivo (por exemplo, uma substring da linha de nomes de coluna) e começa nessa linha (inspirada em read.xls no pacote gdata). \\
 select & Um vetor de nomes de colunas ou números para manter e eliminar as demais. Pode especificar também tipos da mesma forma que colClasses; ou seja, um vetor de pares colname=type, ou uma lista de pares type=col(s). Em todas as formas de seleção, a ordem em que as colunas são especificadas determina a ordem das colunas no resultado. \\
 drop & Vetor de nomes de colunas ou números a serem descartados, mantenha o resto. \\
 colClasses & Pode receber um vetor ou lista nomeado especificando tipos para um subconjunto das colunas por nome. O padrão NULL significa que os tipos são inferidos automaticamente. Ex1 - colClasses = c(``Date'', ``character'',``integer''), neste caso as classes vão compor as classes das colunas na ordem posta. Ex2 - colClasses = c(``data'' = ``Date'', ``idade'' = ``integer''), nesse caso estou indicando as classes somente de algumas variaveis. Funciona também no read.csv2. \\
@@ -381,6 +381,108 @@ showProgress & TRUE exibe o progresso no console se o ETA for maior que 3 segund
 data.table & TRUE retorna um data.table (default). FALSE retorna um data.frame. O default para este argumento pode ser modificado com opcões(datatable.fread.datatable=FALSE). \\
 nThread & Número de threads a serem usados. Experimente para ver o que funciona melhor para seus dados em seu hardware. \\
 KeepLeadingZeros & Se for TRUE, dados numéricos com zeros à esquerda seão lidos como caracterer, caso contrário, os zeros à esquerda serão removidos e convertidos em numéricos. \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{readodsread_ods}{%
+\subsection{readODS::read\_ods()}\label{readodsread_ods}}
+
+Leitura de arquivos no formato .ods do Libre Office, em que le uma planilha individual e retorna um data.frame.
+
+\textbf{Exemplo 1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ readODS}\SpecialCharTok{::}\FunctionTok{read\_ods}\NormalTok{(}\AttributeTok{path =} \StringTok{\textquotesingle{}dados/planilha\_ods.ods\textquotesingle{}}\NormalTok{,  }\CommentTok{\# Caminho do arquivo}
+                           \AttributeTok{col\_names =} \ConstantTok{FALSE}\NormalTok{,                }\CommentTok{\# Primeira linha contém nomes das colunas}
+                           \AttributeTok{sheet =} \DecValTok{1}\NormalTok{,                        }\CommentTok{\# Seleção da planilha}
+                           \AttributeTok{range =} \StringTok{"A7:B14"}\NormalTok{)                 }\CommentTok{\# Intervalo para leitura}
+\FunctionTok{head}\NormalTok{(dados)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     A   B
+## 1 113 381
+## 2  29 112
+## 3  23  25
+## 4  29 152
+## 5  87  NA
+## 6  40  27
+\end{verbatim}
+
+\textbf{Argumentos principais}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Argumento
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definição
+\end{minipage} \\
+\midrule
+\endhead
+path & Caminho do arquivo ods. \\
+sheet & Planilha que será lida. Default e 1. Pode ser o nome da planilha (ex. ``semana1'') ou um número correspondente a planilha. \\
+col\_names & Indica se a primeira linha contem os nomes das colunas. \\
+skip & Número de linhas a pular antes de iniciar a leitura dos dados. \\
+formula\_as\_formula & Exibir fórmulas como fórmulas ``SUM(A1:A3)'' ou como valores ``3''\ldots{} ou ``8''.. \\
+range & Seleção de retângulo usando intervalo de células semelhante ao Excel, como intervalo = ``D12:F15'' ou intervalo = ``R1C12:R6C15''. O processamento de intervalo de células é tratado pelo pacote cellranger. \\
+row\_names & Indica se o arquivo contém os nomes das linhas na primeira coluna. \\
+strings\_as\_factors & Logical. Se variáveis tipo character serão convertidas a fatores. \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{readxlread_excel}{%
+\subsection{readxl::read\_excel()}\label{readxlread_excel}}
+
+Leitura de arquivos extensão .xls e xlsx.
+
+\textbf{Exemplo 1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{   dados }\OtherTok{\textless{}{-}}\NormalTok{ readxl}\SpecialCharTok{::}\FunctionTok{read\_excel}\NormalTok{(}\AttributeTok{path =} \StringTok{"dados/planilha\_xlsx.xlsx"}\NormalTok{,}
+                   \AttributeTok{sheet =} \DecValTok{1}\NormalTok{,}
+                   \AttributeTok{col\_names =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}vel\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}dist\textquotesingle{}}\NormalTok{),}
+                   \AttributeTok{col\_types =} \FunctionTok{c}\NormalTok{(}\StringTok{"numeric"}\NormalTok{,}\StringTok{"numeric"}\NormalTok{),}
+                   \AttributeTok{range =} \StringTok{"A3:B19"}\NormalTok{)}
+    \FunctionTok{head}\NormalTok{(dados, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 5 x 2
+##     vel  dist
+##   <dbl> <dbl>
+## 1    72   360
+## 2    68   410
+## 3    NA   255
+## 4    76   239
+## 5    88   209
+\end{verbatim}
+
+\textbf{Argumentos principais}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Argumento
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definição
+\end{minipage} \\
+\midrule
+\endhead
+path & Caminho para o arquivo xls/xlsx. \\
+sheet & Planilha a ser lida. Aceita o nome da planilha ou o número correspondente. Default é a primeira planilha. \\
+col\_names & Se TRUE a primeira linha será usada para nomear as colunas. FALSE o número das colunas será uma sequência automática de X1 a Xn, ou um vetor de nomes para cada coluna. \\
+col\_types & Se NULL os tipos de classes serão adivinhados, senão inserir um vetor indicando as classes ``blank'', ``numeric'', ``date'' or ``text''. \\
+na & Valores ausentes. Por default o readxl converte celulas em branco para valores ausentes. Pode-se inserir um valor padrão caso se deseje cobrir os valores ausentes. \\
+skip & Número de linhas para pular antes de iniciar a leitura dos dados. \\
 \bottomrule
 \end{longtable}
 
