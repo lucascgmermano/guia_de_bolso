@@ -1,11 +1,30 @@
 ---
-output:
-  pdf_document: default
-  html_document: default
+title: "Comandos básicos do R: Guia de bolso"
+author: "Lucas C. Germano"
+date: "2022-05-15"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+url: https://lucascgmermano.github.io/guia_de_bolso/
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  Este livro resumo anotações de comandos e argumentos muito úteis no R, com o objetivo de
+  como auxiliar na execução te tarefas diárias básicas.
+link-citations: yes
+github-repo: https://github.com/lucascgmermano/guia_de_bolso.git
 ---
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-```
+
+# Sobre este livro {.unnumbered}
+
+Sejam bem-vindos!\
+O objetivo deste livro é disponibilizar para consulta anotações de códigos R de forma prática e rápida. Não há explicações aprofundadas nem se pretende esgotar as possibilidades do conteúdo apresentado, assim, esta documentação deve ser utilizada somente como um guia rápido, pois não passa de um conjunto de rascunhos apreendidos no dia-a-dia da manipulação de dados e na apresentação de resultados. O conteúdo poderá ser baixado nos formatos `.pdf` ou `epub`, mas a proposta é que o conteúdo seja dinâmico, com atualizações semanais. A estrutura de construção está disponível no [GitHub](https://github.com/lucascgmermano/guia_de_bolso.git).\
+Críticas, sugestões ou contribuições de código e conteúdo podem ser enviadas para [lucascgermano\@gmail.com](lucascgermano@gmail.com). Ficarei muito feliz, qualquer que seja o motivo do contato.
+
+<!--chapter:end:index.Rmd-->
+
+
+
+
 
 # Leitura de arquivos de texto
 
@@ -28,9 +47,25 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 Os argumentos das funções são os mesmos, por isso o exemplo será dado somente para .csv2 (mais usado)
 
-```{r .csv2}
+
+```r
 dados <- read.csv2(file = 'dados/dados.csv')
 head(dados, 5)          # Exibir as 5 primeiras linhas dos dados.
+```
+
+```
+##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana
+## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1
+## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3
+## 3 3 2020-01-29  352380      Itobi 30 a 39     1      0    1   0 2020   1      5
+## 4 4 2020-01-30  353050     Mococa 70 a 79     1      0    0   1 2020   1      5
+## 5 5 2020-02-02  353080 Mogi Mirim 40 a 49     1      0    0   1 2020   2      5
+##      pop
+## 1 150713
+## 2 150713
+## 3   7830
+## 4  68788
+## 5  92715
 ```
 
 <Br>
@@ -60,7 +95,8 @@ Os argumentos são os mesmos da função read.table().
 
 **Exemplo 1**
 
-```{r exemplo1_csv2}
+
+```r
 dados <- readr::read_csv2(file = 'dados/dados.csv',  # Caminho e arquivo
                           col_select = c(2,4:7),     # Seleção de colunas de forma numérica (é incompativel com col_names)
                           guess_max = 1000,          # Máximo de linhas utilizadas para adivinhar classes
@@ -68,11 +104,23 @@ dados <- readr::read_csv2(file = 'dados/dados.csv',  # Caminho e arquivo
 head(dados, 5)                                       # Exibir as 5 primeiras linhas dos dados.
 ```
 
+```
+## # A tibble: 5 x 5
+##   data       muni       faixa   casos obitos
+##   <date>     <chr>      <chr>   <dbl>  <dbl>
+## 1 2020-01-01 Mogi Guaçu 30 a 39     1      0
+## 2 2020-01-20 Mogi Guaçu 50 a 59     1      0
+## 3 2020-01-29 Itobi      30 a 39     1      0
+## 4 2020-01-30 Mococa     70 a 79     1      0
+## 5 2020-02-02 Mogi Mirim 40 a 49     1      0
+```
+
 <Br>
 
 **Exemplo 2**
 
-```{r exemplo2_csv2}
+
+```r
 dados <- readr::read_csv2('dados/dados.csv',                    # Caminho e arquivo
                           guess_max = 1000,                     # Máximo de linhas utilizadas para adivinhar classes
                           skip_empty_rows = TRUE,               # Pular linhas vazias
@@ -80,6 +128,17 @@ dados <- readr::read_csv2('dados/dados.csv',                    # Caminho e arqu
                           col_names = c('a','b','c','d','e'),   # Definir nomes das colunas
                           col_select = c('a','b','c','d','e'))  # Selecionar colunas
 head(dados, 5)                                                  # Exibir as 5 primeiras linhas dos dados.
+```
+
+```
+## # A tibble: 5 x 5
+##       a b               c d          e      
+##   <dbl> <date>      <dbl> <chr>      <chr>  
+## 1     1 2020-01-01 353070 Mogi Guaçu 30 a 39
+## 2     2 2020-01-20 353070 Mogi Guaçu 50 a 59
+## 3     3 2020-01-29 352380 Itobi      30 a 39
+## 4     4 2020-01-30 353050 Mococa     70 a 79
+## 5     5 2020-02-02 353080 Mogi Mirim 40 a 49
 ```
 
 <Br>
@@ -111,7 +170,8 @@ Tem a vantagem de realizar a leitura de arquivos grandes de forma rápida. Além
 
 **Exemplo 1**
 
-```{r fread}
+
+```r
 dados <- data.table::fread(file = 'dados/dados.csv',            # Caminho do arquivo
                            select = c("data","muni","casos"),   # Seleciona colunas
                            colClasses = c(data = "Date",        # Define classes
@@ -121,6 +181,15 @@ dados <- data.table::fread(file = 'dados/dados.csv',            # Caminho do arq
                                          "municipio", 
                                          "num_casos")) 
 head(dados, 5)
+```
+
+```
+##    data.in.sin  municipio num_casos
+## 1:  2020-01-01 Mogi Guaçu         1
+## 2:  2020-01-20 Mogi Guaçu         1
+## 3:  2020-01-29      Itobi         1
+## 4:  2020-01-30     Mococa         1
+## 5:  2020-02-02 Mogi Mirim         1
 ```
 
 <Br>
@@ -157,12 +226,23 @@ head(dados, 5)
 Leitura de arquivos no formato .ods do Libre Office, em que le uma planilha individual e retorna um data.frame.
 
 **Exemplo 1**
-```{r read_ods}
+
+```r
 dados <- readODS::read_ods(path = 'dados/planilha_ods.ods',  # Caminho do arquivo
                            col_names = FALSE,                # Primeira linha contém nomes das colunas
                            sheet = 1,                        # Seleção da planilha
                            range = "A7:B14")                 # Intervalo para leitura
 head(dados)
+```
+
+```
+##     A   B
+## 1 113 381
+## 2  29 112
+## 3  23  25
+## 4  29 152
+## 5  87  NA
+## 6  40  27
 ```
 
 <Br>
@@ -179,4 +259,183 @@ head(dados)
 | range | Seleção de retângulo usando intervalo de células semelhante ao Excel, como intervalo = "D12:F15" ou intervalo = "R1C12:R6C15". O processamento de intervalo de células é tratado pelo pacote cellranger. |
 | row_names | Indica se o arquivo contém os nomes das linhas na primeira coluna |
 | strings_as_factors | Logical. Se variáveis tipo character serão  convertidas a fatores.
+
+
+<!--chapter:end:01-leitura_arquivos.Rmd-->
+
+# Cross-references {#cross}
+
+Cross-references make it easier for your readers to find and link to elements in your book.
+
+## Chapters and sub-chapters
+
+There are two steps to cross-reference any heading:
+
+1. Label the heading: `# Hello world {#nice-label}`. 
+    - Leave the label off if you like the automated heading generated based on your heading title: for example, `# Hello world` = `# Hello world {#hello-world}`.
+    - To label an un-numbered heading, use: `# Hello world {-#nice-label}` or `{# Hello world .unnumbered}`.
+
+1. Next, reference the labeled heading anywhere in the text using `\@ref(nice-label)`; for example, please see Chapter \@ref(cross). 
+    - If you prefer text as the link instead of a numbered reference use: [any text you want can go here](#cross).
+
+## Captioned figures and tables
+
+Figures and tables *with captions* can also be cross-referenced from elsewhere in your book using `\@ref(fig:chunk-label)` and `\@ref(tab:chunk-label)`, respectively.
+
+See Figure \@ref(fig:nice-fig).
+
+
+```r
+par(mar = c(4, 4, .1, .1))
+plot(pressure, type = 'b', pch = 19)
+```
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.8\linewidth]{02-cross-refs_files/figure-latex/nice-fig-1} 
+
+}
+
+\caption{Here is a nice figure!}(\#fig:nice-fig)
+\end{figure}
+
+Don't miss Table \@ref(tab:nice-tab).
+
+
+```r
+knitr::kable(
+  head(pressure, 10), caption = 'Here is a nice table!',
+  booktabs = TRUE
+)
+```
+
+\begin{table}
+
+\caption{(\#tab:nice-tab)Here is a nice table!}
+\centering
+\begin{tabular}[t]{rr}
+\toprule
+temperature & pressure\\
+\midrule
+0 & 0.0002\\
+20 & 0.0012\\
+40 & 0.0060\\
+60 & 0.0300\\
+80 & 0.0900\\
+\addlinespace
+100 & 0.2700\\
+120 & 0.7500\\
+140 & 1.8500\\
+160 & 4.2000\\
+180 & 8.8000\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+<!--chapter:end:02-cross-refs.Rmd-->
+
+# Parts
+
+You can add parts to organize one or more book chapters together. Parts can be inserted at the top of an .Rmd file, before the first-level chapter heading in that same file. 
+
+Add a numbered part: `# (PART) Act one {-}` (followed by `# A chapter`)
+
+Add an unnumbered part: `# (PART\*) Act one {-}` (followed by `# A chapter`)
+
+Add an appendix as a special kind of un-numbered part: `# (APPENDIX) Other stuff {-}` (followed by `# A chapter`). Chapters in an appendix are prepended with letters instead of numbers.
+
+
+
+
+<!--chapter:end:03-parts.Rmd-->
+
+# Footnotes and citations 
+
+## Footnotes
+
+Footnotes are put inside the square brackets after a caret `^[]`. Like this one ^[This is a footnote.]. 
+
+## Citations
+
+Reference items in your bibliography file(s) using `@key`.
+
+For example, we are using the **bookdown** package [@R-bookdown] (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and **knitr** [@xie2015] (this citation was added manually in an external file book.bib). 
+Note that the `.bib` files need to be listed in the index.Rmd with the YAML `bibliography` key.
+
+
+The RStudio Visual Markdown Editor can also make it easier to insert citations: <https://rstudio.github.io/visual-markdown-editing/#/citations>
+
+<!--chapter:end:04-citations.Rmd-->
+
+# Blocks
+
+## Equations
+
+Here is an equation.
+
+\begin{equation} 
+  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
+  (\#eq:binom)
+\end{equation} 
+
+You may refer to using `\@ref(eq:binom)`, like see Equation \@ref(eq:binom).
+
+
+## Theorems and proofs
+
+Labeled theorems can be referenced in text using `\@ref(thm:tri)`, for example, check out this smart theorem \@ref(thm:tri).
+
+::: {.theorem #tri}
+For a right triangle, if $c$ denotes the *length* of the hypotenuse
+and $a$ and $b$ denote the lengths of the **other** two sides, we have
+$$a^2 + b^2 = c^2$$
+:::
+
+Read more here <https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html>.
+
+## Callout blocks
+
+
+The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html
+
+<!--chapter:end:05-blocks.Rmd-->
+
+# Sharing your book
+
+## Publishing
+
+HTML books can be published online, see: https://bookdown.org/yihui/bookdown/publishing.html
+
+## 404 pages
+
+By default, users will be directed to a 404 page if they try to access a webpage that cannot be found. If you'd like to customize your 404 page instead of using the default, you may add either a `_404.Rmd` or `_404.md` file to your project root and use code and/or Markdown syntax.
+
+## Metadata for sharing
+
+Bookdown HTML books will provide HTML metadata for social sharing on platforms like Twitter, Facebook, and LinkedIn, using information you provide in the `index.Rmd` YAML. To setup, set the `url` for your book and the path to your `cover-image` file. Your book's `title` and `description` are also used.
+
+
+
+This `gitbook` uses the same social sharing data across all chapters in your book- all links shared will look the same.
+
+Specify your book's source repository on GitHub using the `edit` key under the configuration options in the `_output.yml` file, which allows users to suggest an edit by linking to a chapter's source file. 
+
+Read more about the features of this output format here:
+
+https://pkgs.rstudio.com/bookdown/reference/gitbook.html
+
+Or use:
+
+
+```r
+?bookdown::gitbook
+```
+
+
+
+<!--chapter:end:06-share.Rmd-->
+
+
+
+<!--chapter:end:07-references.Rmd-->
 

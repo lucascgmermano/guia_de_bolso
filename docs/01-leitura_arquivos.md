@@ -1,11 +1,6 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-```
+
+
+
 
 # Leitura de arquivos de texto
 
@@ -28,9 +23,25 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 Os argumentos das funções são os mesmos, por isso o exemplo será dado somente para .csv2 (mais usado)
 
-```{r .csv2}
+
+```r
 dados <- read.csv2(file = 'dados/dados.csv')
 head(dados, 5)          # Exibir as 5 primeiras linhas dos dados.
+```
+
+```
+##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana
+## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1
+## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3
+## 3 3 2020-01-29  352380      Itobi 30 a 39     1      0    1   0 2020   1      5
+## 4 4 2020-01-30  353050     Mococa 70 a 79     1      0    0   1 2020   1      5
+## 5 5 2020-02-02  353080 Mogi Mirim 40 a 49     1      0    0   1 2020   2      5
+##      pop
+## 1 150713
+## 2 150713
+## 3   7830
+## 4  68788
+## 5  92715
 ```
 
 <Br>
@@ -60,7 +71,8 @@ Os argumentos são os mesmos da função read.table().
 
 **Exemplo 1**
 
-```{r exemplo1_csv2}
+
+```r
 dados <- readr::read_csv2(file = 'dados/dados.csv',  # Caminho e arquivo
                           col_select = c(2,4:7),     # Seleção de colunas de forma numérica (é incompativel com col_names)
                           guess_max = 1000,          # Máximo de linhas utilizadas para adivinhar classes
@@ -68,11 +80,23 @@ dados <- readr::read_csv2(file = 'dados/dados.csv',  # Caminho e arquivo
 head(dados, 5)                                       # Exibir as 5 primeiras linhas dos dados.
 ```
 
+```
+## # A tibble: 5 x 5
+##   data       muni       faixa   casos obitos
+##   <date>     <chr>      <chr>   <dbl>  <dbl>
+## 1 2020-01-01 Mogi Guaçu 30 a 39     1      0
+## 2 2020-01-20 Mogi Guaçu 50 a 59     1      0
+## 3 2020-01-29 Itobi      30 a 39     1      0
+## 4 2020-01-30 Mococa     70 a 79     1      0
+## 5 2020-02-02 Mogi Mirim 40 a 49     1      0
+```
+
 <Br>
 
 **Exemplo 2**
 
-```{r exemplo2_csv2}
+
+```r
 dados <- readr::read_csv2('dados/dados.csv',                    # Caminho e arquivo
                           guess_max = 1000,                     # Máximo de linhas utilizadas para adivinhar classes
                           skip_empty_rows = TRUE,               # Pular linhas vazias
@@ -80,6 +104,17 @@ dados <- readr::read_csv2('dados/dados.csv',                    # Caminho e arqu
                           col_names = c('a','b','c','d','e'),   # Definir nomes das colunas
                           col_select = c('a','b','c','d','e'))  # Selecionar colunas
 head(dados, 5)                                                  # Exibir as 5 primeiras linhas dos dados.
+```
+
+```
+## # A tibble: 5 x 5
+##       a b               c d          e      
+##   <dbl> <date>      <dbl> <chr>      <chr>  
+## 1     1 2020-01-01 353070 Mogi Guaçu 30 a 39
+## 2     2 2020-01-20 353070 Mogi Guaçu 50 a 59
+## 3     3 2020-01-29 352380 Itobi      30 a 39
+## 4     4 2020-01-30 353050 Mococa     70 a 79
+## 5     5 2020-02-02 353080 Mogi Mirim 40 a 49
 ```
 
 <Br>
@@ -111,7 +146,8 @@ Tem a vantagem de realizar a leitura de arquivos grandes de forma rápida. Além
 
 **Exemplo 1**
 
-```{r fread}
+
+```r
 dados <- data.table::fread(file = 'dados/dados.csv',            # Caminho do arquivo
                            select = c("data","muni","casos"),   # Seleciona colunas
                            colClasses = c(data = "Date",        # Define classes
@@ -121,6 +157,15 @@ dados <- data.table::fread(file = 'dados/dados.csv',            # Caminho do arq
                                          "municipio", 
                                          "num_casos")) 
 head(dados, 5)
+```
+
+```
+##    data.in.sin  municipio num_casos
+## 1:  2020-01-01 Mogi Guaçu         1
+## 2:  2020-01-20 Mogi Guaçu         1
+## 3:  2020-01-29      Itobi         1
+## 4:  2020-01-30     Mococa         1
+## 5:  2020-02-02 Mogi Mirim         1
 ```
 
 <Br>
@@ -157,12 +202,23 @@ head(dados, 5)
 Leitura de arquivos no formato .ods do Libre Office, em que le uma planilha individual e retorna um data.frame.
 
 **Exemplo 1**
-```{r read_ods}
+
+```r
 dados <- readODS::read_ods(path = 'dados/planilha_ods.ods',  # Caminho do arquivo
                            col_names = FALSE,                # Primeira linha contém nomes das colunas
                            sheet = 1,                        # Seleção da planilha
                            range = "A7:B14")                 # Intervalo para leitura
 head(dados)
+```
+
+```
+##     A   B
+## 1 113 381
+## 2  29 112
+## 3  23  25
+## 4  29 152
+## 5  87  NA
+## 6  40  27
 ```
 
 <Br>

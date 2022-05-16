@@ -3,19 +3,27 @@ bookdown::serve_book() # Ativar
 servr::daemon_stop(1)  # Desativar
 
 ############################### Exemplos teste #################################
-dados <- data.table::fread('dados/dados.csv', 
-                           select = c("data","muni","casos"),
-                           colClasses = c(data = "Date", muni = "character", casos = "integer"),
-                           col.names = c("data.in.sin", "municipio", "num_casos")); head(dados, 5)
+dados <- rio::import('https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv')
+sapply(X = dados, class)
 
-dados <- data.table::fread(file = 'dados/dados.csv', header = F); dados
+install.packages('readODS')
+dados <- readODS::read_ods(path = 'dados/planilha_ods.ods',
+                  sheet = 1,
+                  col_names = T,
+                  na = 5000
+                  )
 
-classes <- sapply(dados, class)
-class(dados$data)
+class(dados$distancia)
+tinytex::reinstall_tinytex()
 
-dados <- read.csv2(file = 'dados/dados.csv')
+install.packages('tinytex', dependencies = T)
+install.packages('xelatex')
+update.packages(ask = FALSE, checkBuilt = TRUE)
+tinytex::tlmgr_update()
+tinytex::reinstall_tinytex()
+options(tinytex.verbose = TRUE)
+install.packages("TinyTeX")
+# ```{r, include=FALSE}
+# options(tinytex.verbose = TRUE)
+# ```
 
-'data', 'muni', 'faixa','casos'
-example('fread')
-class(dados$yy)
-?fread

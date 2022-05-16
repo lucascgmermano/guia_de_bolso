@@ -7,6 +7,7 @@ arquivos-.csv
 read.csv2
 readrread_csv2
 data.tablefread
+readodsread_ods
 cross
 chapters-and-sub-chapters
 captioned-figures-and-tables
