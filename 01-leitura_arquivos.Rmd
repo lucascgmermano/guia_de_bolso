@@ -23,8 +23,8 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 ### read.csv2()
 
-.csv = Arquivos separados por vírgula (,)\
-.csv2 = Arquivos separados por ponto e vírgula (;)
+csv = Arquivos separados por vírgula (,)\
+csv2 = Arquivos separados por ponto e vírgula (;)
 
 Os argumentos das funções são os mesmos, por isso o exemplo será dado somente para .csv2 (mais usado)
 
@@ -169,14 +169,45 @@ head(dados)
 
 **Argumentos principais**
 
-| Argumento | Definição |
-|-----------|-----------|
-| path | Caminho do arquivo ods.|
-| sheet | Planilha que será lida. Default e 1. Pode ser o nome da planilha (ex. "semana1") ou um número correspondente a planilha.| 
-| col_names | Indica se a primeira linha contem os nomes das colunas. |
-| skip | Número de linhas a pular antes de iniciar a leitura dos dados. |
+| Argumento          | Definição |
+|--------------------|-----------|
+| path               | Caminho do arquivo ods.|
+| sheet              | Planilha que será lida. Default e 1. Pode ser o nome da planilha (ex. "semana1") ou um número correspondente a planilha.| 
+| col_names          | Indica se a primeira linha contem os nomes das colunas. |
+| skip               | Número de linhas a pular antes de iniciar a leitura dos dados. |
 | formula_as_formula | Exibir fórmulas como fórmulas "SUM(A1:A3)" ou como valores "3"... ou "8".. |
-| range | Seleção de retângulo usando intervalo de células semelhante ao Excel, como intervalo = "D12:F15" ou intervalo = "R1C12:R6C15". O processamento de intervalo de células é tratado pelo pacote cellranger. |
-| row_names | Indica se o arquivo contém os nomes das linhas na primeira coluna |
-| strings_as_factors | Logical. Se variáveis tipo character serão  convertidas a fatores.
+| range              | Seleção de retângulo usando intervalo de células semelhante ao Excel, como intervalo = "D12:F15" ou intervalo = "R1C12:R6C15". O processamento de intervalo de células é tratado pelo pacote cellranger. |
+| row_names          | Indica se o arquivo contém os nomes das linhas na primeira coluna |
+| strings_as_factors | Logical. Se variáveis tipo character serão  convertidas a fatores.|
+  
+  <Br>
+    
+### readxl::read_excel()
 
+    Leitura de arquivos extensão .xls e xlsx.
+
+**Exemplo 1**
+    ```{r read_excel}
+    read_excel(path = "/dados/planilha_excel.xlsx", 
+              sheet = 1, 
+              col_names = TRUE, 
+              col_types = NULL, 
+              na = "", 
+              skip = 0)
+    ```
+    
+    <Br>
+      
+**Argumentos principais**
+    |Argumento|Definição|
+    |---------|---------|
+    |path     | Caminho para o arquivo xls/xlsx. |
+    |sheet    | Planilha a ser lida. Aceita o nome da planilha ou o número correspondente. Default é a primeira planilha.|
+    |col_names| Se TRUE a primeira linha será usada para nomear as colunas. FALSE o número das colunas será uma sequência automática de X1 a Xn, ou um vetor de nomes para cada coluna.|
+    |col_types| Se NULL os tipos de classes serão adivinhados, senão inserir um vetor indicando as classes "blank", "numeric", "date" or "text".|
+    |na       | Valores ausentes. Por default o readxl converte celulas em branco para valores ausentes. Pode-se inserir um valor padrão caso se deseje cobrir os valores ausentes.|
+    |skip     | Número de linhas para pular antes de iniciar a leitura dos dados.|
+    
+    
+    
+    
