@@ -164,8 +164,8 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Sobre este livro</a></li>
 <li class="chapter" data-level="1" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html"><i class="fa fa-check"></i><b>1</b> Leitura de arquivos de texto</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#definição-de-diretório-de-trabalho"><i class="fa fa-check"></i><b>1.1</b> Definição de diretório de trabalho</a></li>
-<li class="chapter" data-level="1.2" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#arquivos-.csv"><i class="fa fa-check"></i><b>1.2</b> Arquivos .csv</a>
+<li class="chapter" data-level="1.1" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#diretório-de-trabalho"><i class="fa fa-check"></i><b>1.1</b> Diretório de trabalho</a></li>
+<li class="chapter" data-level="1.2" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#arquivos"><i class="fa fa-check"></i><b>1.2</b> Arquivos</a>
 <ul>
 <li class="chapter" data-level="1.2.1" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#read.csv2"><i class="fa fa-check"></i><b>1.2.1</b> read.csv2()</a></li>
 <li class="chapter" data-level="1.2.2" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#readrread_csv2"><i class="fa fa-check"></i><b>1.2.2</b> readr::read_csv2()</a></li>
@@ -220,12 +220,12 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="leitura-de-arquivos-de-texto" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">1</span> Leitura de arquivos de texto<a href="leitura-de-arquivos-de-texto.html#leitura-de-arquivos-de-texto" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="definição-de-diretório-de-trabalho" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Definição de diretório de trabalho<a href="leitura-de-arquivos-de-texto.html#definição-de-diretório-de-trabalho" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="diretório-de-trabalho" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Diretório de trabalho<a href="leitura-de-arquivos-de-texto.html#diretório-de-trabalho" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <table>
 <colgroup>
-<col width="47%" />
-<col width="52%" />
+<col width="44%" />
+<col width="55%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -239,6 +239,14 @@ div.csl-indent {
 <td>Define diretório de trabalho.</td>
 </tr>
 <tr class="even">
+<td>getwd()</td>
+<td>Identifica diretório ativo.</td>
+</tr>
+<tr class="odd">
+<td>dir()</td>
+<td>Retorna todo o conteúdo do diretório ativo.</td>
+</tr>
+<tr class="even">
 <td>Ctrl + Shift + h</td>
 <td>Abre janela de navegação para definir diretório.</td>
 </tr>
@@ -247,25 +255,58 @@ div.csl-indent {
 <td>Abre janela de navegação e ao selecionar o arquivo, ele retorna o caminho (diretório). Pode-se usar também dentro do comando, como em read.csv2(file = file.choose()).</td>
 </tr>
 <tr class="even">
-<td>No RStudio: Session &gt; Setting Working Directory</td>
+<td>No RStudio: Ir em Session, Setting Working Directory</td>
 <td>Equivalente a Ctrl + Shift + h</td>
 </tr>
 <tr class="odd">
 <td>Inserir aspas ’ ’ + Tab entre elas</td>
 <td>Navegação que pode servir para explorar caminhos.</td>
 </tr>
+<tr class="even">
+<td>dir.create()</td>
+<td>Cria uma pasta de trabalho.</td>
+</tr>
+<tr class="odd">
+<td>unlink()</td>
+<td>Deleta uma pasta, ex. unlink(“some_directory”, recursive = TRUE).</td>
+</tr>
+<tr class="even">
+<td>file.create()</td>
+<td>Cria um arquivo no diretório ex. file.create(“text_file.txt”) (docx, csv, etc).</td>
+</tr>
+<tr class="odd">
+<td>file.copy()</td>
+<td>Copia um arquivo. Ex. file.copy(from = “source_file.txt”, to = “destination_folder”).</td>
+</tr>
+<tr class="even">
+<td>file.remove()</td>
+<td>Deleta um arquivo, ex. file.remove(“csv_file.csv”). Pode-se usar também unlink(‘csv_file.csv’).</td>
+</tr>
+<tr class="odd">
+<td>list.files()</td>
+<td>Lista os arquivos presentes no diretório.</td>
+</tr>
 </tbody>
 </table>
+<p><Br></p>
+<p><strong>Exemplo - list.files()</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="leitura-de-arquivos-de-texto.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&#39;dados/&#39;</span>,      <span class="co"># Caminho do arquivo</span></span>
+<span id="cb1-2"><a href="leitura-de-arquivos-de-texto.html#cb1-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">pattern =</span> <span class="st">&#39;.ods&#39;</span>,     <span class="co"># Formato especificado</span></span>
+<span id="cb1-3"><a href="leitura-de-arquivos-de-texto.html#cb1-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">full.names =</span> <span class="cn">FALSE</span>,   <span class="co"># Somente nome</span></span>
+<span id="cb1-4"><a href="leitura-de-arquivos-de-texto.html#cb1-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">recursive =</span> <span class="cn">TRUE</span>,     <span class="co"># Pesquisa em subpastas</span></span>
+<span id="cb1-5"><a href="leitura-de-arquivos-de-texto.html#cb1-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">ignore.case =</span> <span class="cn">FALSE</span>)  <span class="co"># Ignora tamanhos das letras</span></span></code></pre></div>
+<pre><code>## [1] &quot;planilha_ods.ods&quot;</code></pre>
+<p><Br></p>
 </div>
-<div id="arquivos-.csv" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Arquivos .csv<a href="leitura-de-arquivos-de-texto.html#arquivos-.csv" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="arquivos" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Arquivos<a href="leitura-de-arquivos-de-texto.html#arquivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="read.csv2" class="section level3 hasAnchor" number="1.2.1">
 <h3><span class="header-section-number">1.2.1</span> read.csv2()<a href="leitura-de-arquivos-de-texto.html#read.csv2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>csv = Arquivos separados por vírgula (,)<br />
-csv2 = Arquivos separados por ponto e vírgula (;)</p>
+<p>read.csv = Arquivos separados por vírgula.<br />
+read.csv2 = Arquivos separados por ponto e vírgula.</p>
 <p>Os argumentos das funções são os mesmos, por isso o exemplo será dado somente para .csv2 (mais usado)</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="leitura-de-arquivos-de-texto.html#cb1-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>)</span>
-<span id="cb1-2"><a href="leitura-de-arquivos-de-texto.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">5</span>)          <span class="co"># Exibir as 5 primeiras linhas dos dados.</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="leitura-de-arquivos-de-texto.html#cb3-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>)</span>
+<span id="cb3-2"><a href="leitura-de-arquivos-de-texto.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">5</span>)          <span class="co"># Exibir as 5 primeiras linhas dos dados.</span></span></code></pre></div>
 <pre><code>##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana
 ## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1
 ## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3
@@ -299,7 +340,7 @@ csv2 = Arquivos separados por ponto e vírgula (;)</p>
 </tr>
 <tr class="even">
 <td>header</td>
-<td>Logical. Indica se o arquivo contém os nomes das colunas na primeira linha</td>
+<td>Logical. Indica se o arquivo contém os nomes das colunas na primeira linha.</td>
 </tr>
 <tr class="odd">
 <td>sep</td>
@@ -327,7 +368,7 @@ csv2 = Arquivos separados por ponto e vírgula (;)</p>
 </tr>
 <tr class="odd">
 <td>stringsAsFactors</td>
-<td>Logical. Se TRUE os vetores character serão convertidos para factors. Se houver distorção dos caracteres, utilizar FALSE para serem mantidos os caracteres originais, sem conversão.</td>
+<td>Logical. Se TRUE os vetores character serão convertidos para factors. Se houver distorção dos caracteres, utilizar FALSE para sem conversão.</td>
 </tr>
 <tr class="even">
 <td>fileEncoding</td>
@@ -348,11 +389,11 @@ csv2 = Arquivos separados por ponto e vírgula (;)</p>
 <div id="readrread_csv2" class="section level3 hasAnchor" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> readr::read_csv2()<a href="leitura-de-arquivos-de-texto.html#readrread_csv2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Exemplo 1</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="leitura-de-arquivos-de-texto.html#cb3-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>,  <span class="co"># Caminho e arquivo</span></span>
-<span id="cb3-2"><a href="leitura-de-arquivos-de-texto.html#cb3-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">col_select =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">7</span>),     <span class="co"># Seleção de colunas de forma numérica (é incompativel com col_names)</span></span>
-<span id="cb3-3"><a href="leitura-de-arquivos-de-texto.html#cb3-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">guess_max =</span> <span class="dv">1000</span>,          <span class="co"># Máximo de linhas utilizadas para adivinhar classes</span></span>
-<span id="cb3-4"><a href="leitura-de-arquivos-de-texto.html#cb3-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">skip_empty_rows =</span> <span class="cn">TRUE</span>)    <span class="co"># Pular linhas vazias</span></span>
-<span id="cb3-5"><a href="leitura-de-arquivos-de-texto.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">5</span>)                                       <span class="co"># Exibir as 5 primeiras linhas dos dados.</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="leitura-de-arquivos-de-texto.html#cb5-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>,  <span class="co"># Caminho e arquivo</span></span>
+<span id="cb5-2"><a href="leitura-de-arquivos-de-texto.html#cb5-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">col_select =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">7</span>),     <span class="co"># Seleção de colunas</span></span>
+<span id="cb5-3"><a href="leitura-de-arquivos-de-texto.html#cb5-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">guess_max =</span> <span class="dv">1000</span>,          <span class="co"># Máximo de linhas utilizadas para adivinhar classes</span></span>
+<span id="cb5-4"><a href="leitura-de-arquivos-de-texto.html#cb5-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">skip_empty_rows =</span> <span class="cn">TRUE</span>)    <span class="co"># Pular linhas vazias</span></span>
+<span id="cb5-5"><a href="leitura-de-arquivos-de-texto.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">5</span>)                                       </span></code></pre></div>
 <pre><code>## # A tibble: 5 × 5
 ##   data       muni       faixa   casos obitos
 ##   &lt;date&gt;     &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;
@@ -363,13 +404,14 @@ csv2 = Arquivos separados por ponto e vírgula (;)</p>
 ## 5 2020-02-02 Mogi Mirim 40 a 49     1      0</code></pre>
 <p><Br></p>
 <p><strong>Exemplo 2</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="leitura-de-arquivos-de-texto.html#cb5-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv2</span>(<span class="st">&#39;dados/dados.csv&#39;</span>,                    <span class="co"># Caminho e arquivo</span></span>
-<span id="cb5-2"><a href="leitura-de-arquivos-de-texto.html#cb5-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">guess_max =</span> <span class="dv">1000</span>,                     <span class="co"># Máximo de linhas utilizadas para adivinhar classes</span></span>
-<span id="cb5-3"><a href="leitura-de-arquivos-de-texto.html#cb5-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">skip_empty_rows =</span> <span class="cn">TRUE</span>,               <span class="co"># Pular linhas vazias</span></span>
-<span id="cb5-4"><a href="leitura-de-arquivos-de-texto.html#cb5-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">skip =</span> <span class="dv">1</span>,                             <span class="co"># Pular primeira linha</span></span>
-<span id="cb5-5"><a href="leitura-de-arquivos-de-texto.html#cb5-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>,<span class="st">&#39;e&#39;</span>),   <span class="co"># Definir nomes das colunas</span></span>
-<span id="cb5-6"><a href="leitura-de-arquivos-de-texto.html#cb5-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>,<span class="st">&#39;e&#39;</span>))  <span class="co"># Selecionar colunas</span></span>
-<span id="cb5-7"><a href="leitura-de-arquivos-de-texto.html#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">5</span>)                                                  <span class="co"># Exibir as 5 primeiras linhas dos dados.</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="leitura-de-arquivos-de-texto.html#cb7-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv2</span>(</span>
+<span id="cb7-2"><a href="leitura-de-arquivos-de-texto.html#cb7-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>,   <span class="co"># Caminho e arquivo</span></span>
+<span id="cb7-3"><a href="leitura-de-arquivos-de-texto.html#cb7-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">guess_max =</span> <span class="dv">1000</span>,           <span class="co"># Linhas utilizadas para classes</span></span>
+<span id="cb7-4"><a href="leitura-de-arquivos-de-texto.html#cb7-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">skip_empty_rows =</span> <span class="cn">TRUE</span>,     <span class="co"># Pular linhas vazias</span></span>
+<span id="cb7-5"><a href="leitura-de-arquivos-de-texto.html#cb7-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">skip =</span> <span class="dv">1</span>,                   <span class="co"># Pular primeira linha</span></span>
+<span id="cb7-6"><a href="leitura-de-arquivos-de-texto.html#cb7-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>,<span class="st">&#39;e&#39;</span>),   <span class="co"># Definir nomes das colunas</span></span>
+<span id="cb7-7"><a href="leitura-de-arquivos-de-texto.html#cb7-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>,<span class="st">&#39;e&#39;</span>))  <span class="co"># Selecionar colunas</span></span>
+<span id="cb7-8"><a href="leitura-de-arquivos-de-texto.html#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 5
 ##       a b               c d          e      
 ##   &lt;dbl&gt; &lt;date&gt;      &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  
@@ -402,7 +444,7 @@ csv2 = Arquivos separados por ponto e vírgula (;)</p>
 </tr>
 <tr class="odd">
 <td>col_types</td>
-<td>Se for NULL, todos as classes de coluna serão imputadas a partir do máximo de linhas lidas (guess_max) intercaladas por todo o arquivo. Se a imputação falhar, você precisará aumentar o guess_max ou fornecer os tipos corretos você mesmo. As especificações de coluna criadas por list() ou cols() devem conter uma especificação de coluna para cada coluna. Se você quiser ler apenas um subconjunto das colunas, use cols_only(). Para compactar um vetor com as classes, usar as letras c = character, i = integer, n = number, d = double, l = logical, f = factor, D = date, T = date time, t = time, ? = guess, _ or - = skip; Por padrão, a leitura de um arquivo sem uma especificação de coluna imprimirá uma mensagem mostrando o que o leitor adivinhou. Para remover esta mensagem, defina show_col_types = FALSE ou defina ’options(readr.show_col_types = FALSE).</td>
+<td>Se for NULL, todos as classes de coluna serão imputadas a partir do máximo de linhas lidas (guess_max) intercaladas por todo o arquivo. Se a imputação falhar, você precisará aumentar o guess_max ou fornecer os tipos corretos você mesmo. As especificações de coluna criadas por list() ou cols() devem conter uma especificação de coluna para cada coluna. Se você quiser ler apenas um subconjunto das colunas, use cols_only(). Para compactar um vetor com as classes, usar as letras c = character, i = integer, n = number, d = double, l = logical, f = factor, D = date, T = date time, t = time, ? = guess. Por padrão, a definição de classe é automática.</td>
 </tr>
 <tr class="even">
 <td>col_select</td>
@@ -410,7 +452,7 @@ csv2 = Arquivos separados por ponto e vírgula (;)</p>
 </tr>
 <tr class="odd">
 <td>locale</td>
-<td>A localidade controla os padrões que variam de lugar para lugar. A localidade padrão é centrada nos EUA (como R), mas você pode usar locale() para criar sua própria localidade que controla coisas como o fuso horário padrão, codificação, marca decimal, marca grande e nomes de dia/mês.</td>
+<td>A localidade controla os padrões que variam de lugar para lugar. A localidade padrão é centrada nos EUA (como R), mas você pode usar locale() para criar sua própria localidade que controla coisas como o fuso horário padrão, codificação, marca decimal, marca grande e nomes de dia e mês.</td>
 </tr>
 <tr class="even">
 <td>na</td>
@@ -449,15 +491,15 @@ csv2 = Arquivos separados por ponto e vírgula (;)</p>
 <p>Tem a vantagem de realizar a leitura de arquivos grandes de forma rápida. Além disso, tem boa capacidade de identificar automaticamente o separador, encoding e tipos de classes. O resultado padrão é um objeto data.table, mas pode-se mudar para data.frame.</p>
 <p><Br></p>
 <p><strong>Exemplo 1</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="leitura-de-arquivos-de-texto.html#cb7-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>,            <span class="co"># Caminho do arquivo</span></span>
-<span id="cb7-2"><a href="leitura-de-arquivos-de-texto.html#cb7-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">select =</span> <span class="fu">c</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;muni&quot;</span>,<span class="st">&quot;casos&quot;</span>),   <span class="co"># Seleciona colunas</span></span>
-<span id="cb7-3"><a href="leitura-de-arquivos-de-texto.html#cb7-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="at">data =</span> <span class="st">&quot;Date&quot;</span>,        <span class="co"># Define classes</span></span>
-<span id="cb7-4"><a href="leitura-de-arquivos-de-texto.html#cb7-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">muni =</span> <span class="st">&quot;character&quot;</span>,</span>
-<span id="cb7-5"><a href="leitura-de-arquivos-de-texto.html#cb7-5" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">casos =</span> <span class="st">&quot;integer&quot;</span>),</span>
-<span id="cb7-6"><a href="leitura-de-arquivos-de-texto.html#cb7-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;data.in.sin&quot;</span>,         <span class="co"># Renomeia colunas</span></span>
-<span id="cb7-7"><a href="leitura-de-arquivos-de-texto.html#cb7-7" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;municipio&quot;</span>, </span>
-<span id="cb7-8"><a href="leitura-de-arquivos-de-texto.html#cb7-8" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;num_casos&quot;</span>)) </span>
-<span id="cb7-9"><a href="leitura-de-arquivos-de-texto.html#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="leitura-de-arquivos-de-texto.html#cb9-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>,            <span class="co"># Caminho do arquivo</span></span>
+<span id="cb9-2"><a href="leitura-de-arquivos-de-texto.html#cb9-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">select =</span> <span class="fu">c</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;muni&quot;</span>,<span class="st">&quot;casos&quot;</span>),   <span class="co"># Seleciona colunas</span></span>
+<span id="cb9-3"><a href="leitura-de-arquivos-de-texto.html#cb9-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="at">data =</span> <span class="st">&quot;Date&quot;</span>,        <span class="co"># Define classes</span></span>
+<span id="cb9-4"><a href="leitura-de-arquivos-de-texto.html#cb9-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">muni =</span> <span class="st">&quot;character&quot;</span>,</span>
+<span id="cb9-5"><a href="leitura-de-arquivos-de-texto.html#cb9-5" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">casos =</span> <span class="st">&quot;integer&quot;</span>),</span>
+<span id="cb9-6"><a href="leitura-de-arquivos-de-texto.html#cb9-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;data.in.sin&quot;</span>,         <span class="co"># Renomeia colunas</span></span>
+<span id="cb9-7"><a href="leitura-de-arquivos-de-texto.html#cb9-7" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;municipio&quot;</span>, </span>
+<span id="cb9-8"><a href="leitura-de-arquivos-de-texto.html#cb9-8" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">&quot;num_casos&quot;</span>)) </span>
+<span id="cb9-9"><a href="leitura-de-arquivos-de-texto.html#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>##    data.in.sin  municipio num_casos
 ## 1:  2020-01-01 Mogi Guaçu         1
 ## 2:  2020-01-20 Mogi Guaçu         1
@@ -566,11 +608,11 @@ csv2 = Arquivos separados por ponto e vírgula (;)</p>
 <h3><span class="header-section-number">1.2.4</span> readODS::read_ods()<a href="leitura-de-arquivos-de-texto.html#readodsread_ods" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Leitura de arquivos no formato .ods do Libre Office, em que le uma planilha individual e retorna um data.frame.</p>
 <p><strong>Exemplo 1</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="leitura-de-arquivos-de-texto.html#cb9-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> readODS<span class="sc">::</span><span class="fu">read_ods</span>(<span class="at">path =</span> <span class="st">&#39;dados/planilha_ods.ods&#39;</span>,  <span class="co"># Caminho do arquivo</span></span>
-<span id="cb9-2"><a href="leitura-de-arquivos-de-texto.html#cb9-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">col_names =</span> <span class="cn">FALSE</span>,                <span class="co"># Primeira linha contém nomes das colunas</span></span>
-<span id="cb9-3"><a href="leitura-de-arquivos-de-texto.html#cb9-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">sheet =</span> <span class="dv">1</span>,                        <span class="co"># Seleção da planilha</span></span>
-<span id="cb9-4"><a href="leitura-de-arquivos-de-texto.html#cb9-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">range =</span> <span class="st">&quot;A7:B14&quot;</span>)                 <span class="co"># Intervalo para leitura</span></span>
-<span id="cb9-5"><a href="leitura-de-arquivos-de-texto.html#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="leitura-de-arquivos-de-texto.html#cb11-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> readODS<span class="sc">::</span><span class="fu">read_ods</span>(<span class="at">path =</span> <span class="st">&#39;dados/planilha_ods.ods&#39;</span>,  <span class="co"># Caminho do arquivo</span></span>
+<span id="cb11-2"><a href="leitura-de-arquivos-de-texto.html#cb11-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">col_names =</span> <span class="cn">FALSE</span>,                <span class="co"># Primeira linha contém nomes das colunas</span></span>
+<span id="cb11-3"><a href="leitura-de-arquivos-de-texto.html#cb11-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">sheet =</span> <span class="dv">1</span>,                        <span class="co"># Seleção da planilha</span></span>
+<span id="cb11-4"><a href="leitura-de-arquivos-de-texto.html#cb11-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">range =</span> <span class="st">&quot;A7:B14&quot;</span>)                 <span class="co"># Intervalo para leitura</span></span>
+<span id="cb11-5"><a href="leitura-de-arquivos-de-texto.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados)</span></code></pre></div>
 <pre><code>##     A   B
 ## 1 113 381
 ## 2  29 112
@@ -610,7 +652,7 @@ csv2 = Arquivos separados por ponto e vírgula (;)</p>
 </tr>
 <tr class="odd">
 <td>formula_as_formula</td>
-<td>Exibir fórmulas como fórmulas “SUM(A1:A3)” ou como valores “3”… ou “8”..</td>
+<td>Exibir fórmulas como fórmulas “SUM(A1:A3)” ou como valores “3” ou “8”.</td>
 </tr>
 <tr class="even">
 <td>range</td>
@@ -633,12 +675,12 @@ csv2 = Arquivos separados por ponto e vírgula (;)</p>
 <p>Leitura de arquivos extensão .xls e xlsx.</p>
 <p><Br></p>
 <p><strong>Exemplo 1</strong></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="leitura-de-arquivos-de-texto.html#cb11-1" aria-hidden="true" tabindex="-1"></a>   dados <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">&quot;dados/planilha_xlsx.xlsx&quot;</span>,</span>
-<span id="cb11-2"><a href="leitura-de-arquivos-de-texto.html#cb11-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="dv">1</span>,</span>
-<span id="cb11-3"><a href="leitura-de-arquivos-de-texto.html#cb11-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&#39;vel&#39;</span>,<span class="st">&#39;dist&#39;</span>),</span>
-<span id="cb11-4"><a href="leitura-de-arquivos-de-texto.html#cb11-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">col_types =</span> <span class="fu">c</span>(<span class="st">&quot;numeric&quot;</span>,<span class="st">&quot;numeric&quot;</span>),</span>
-<span id="cb11-5"><a href="leitura-de-arquivos-de-texto.html#cb11-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">range =</span> <span class="st">&quot;A3:B19&quot;</span>)</span>
-<span id="cb11-6"><a href="leitura-de-arquivos-de-texto.html#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(dados, <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="leitura-de-arquivos-de-texto.html#cb13-1" aria-hidden="true" tabindex="-1"></a>   dados <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">&quot;dados/planilha_xlsx.xlsx&quot;</span>,</span>
+<span id="cb13-2"><a href="leitura-de-arquivos-de-texto.html#cb13-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="dv">1</span>,</span>
+<span id="cb13-3"><a href="leitura-de-arquivos-de-texto.html#cb13-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&#39;vel&#39;</span>,<span class="st">&#39;dist&#39;</span>),</span>
+<span id="cb13-4"><a href="leitura-de-arquivos-de-texto.html#cb13-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">col_types =</span> <span class="fu">c</span>(<span class="st">&quot;numeric&quot;</span>,<span class="st">&quot;numeric&quot;</span>),</span>
+<span id="cb13-5"><a href="leitura-de-arquivos-de-texto.html#cb13-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">range =</span> <span class="st">&quot;A3:B19&quot;</span>)</span>
+<span id="cb13-6"><a href="leitura-de-arquivos-de-texto.html#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(dados, <span class="dv">5</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 2
 ##     vel  dist
 ##   &lt;dbl&gt; &lt;dbl&gt;
@@ -751,6 +793,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

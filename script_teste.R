@@ -32,3 +32,18 @@ readxl::read_excel(path = "dados/planilha_xlsx.xlsx",
                    col_names = c('vel','dist'),
                    col_types = c("numeric","numeric"),
                    range = "A3:B19")
+
+dir.create('teste')
+dir.exists(paths = dir())
+dirname(path = 'teste/')
+remove(... = 'teste/')
+
+
+file.create("new_text_file.txt")
+file.create("new_word_file.docx")
+file.create("new_csv_file.csv")
+
+file.remove("new_csv_file.csv")
+unlink("teste/", recursive = TRUE)
+unlink('new_csv_file.csv')
+dir()

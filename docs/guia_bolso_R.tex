@@ -154,12 +154,12 @@ Críticas, sugestões ou contribuições de código e conteúdo podem ser enviad
 \hypertarget{leitura-de-arquivos-de-texto}{%
 \chapter{Leitura de arquivos de texto}\label{leitura-de-arquivos-de-texto}}
 
-\hypertarget{definiuxe7uxe3o-de-diretuxf3rio-de-trabalho}{%
-\section{Definição de diretório de trabalho}\label{definiuxe7uxe3o-de-diretuxf3rio-de-trabalho}}
+\hypertarget{diretuxf3rio-de-trabalho}{%
+\section{Diretório de trabalho}\label{diretuxf3rio-de-trabalho}}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4722}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5278}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4444}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5556}}@{}}
 \toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 Comando
@@ -169,21 +169,45 @@ Definição
 \midrule
 \endhead
 setwd() & Define diretório de trabalho. \\
+getwd() & Identifica diretório ativo. \\
+dir() & Retorna todo o conteúdo do diretório ativo. \\
 Ctrl + Shift + h & Abre janela de navegação para definir diretório. \\
 file.choose() & Abre janela de navegação e ao selecionar o arquivo, ele retorna o caminho (diretório). Pode-se usar também dentro do comando, como em read.csv2(file = file.choose()). \\
-No RStudio: Session \textgreater{} Setting Working Directory & Equivalente a Ctrl + Shift + h \\
+No RStudio: Ir em Session, Setting Working Directory & Equivalente a Ctrl + Shift + h \\
 Inserir aspas ' ' + Tab entre elas & Navegação que pode servir para explorar caminhos. \\
+dir.create() & Cria uma pasta de trabalho. \\
+unlink() & Deleta uma pasta, ex. unlink(``some\_directory'', recursive = TRUE). \\
+file.create() & Cria um arquivo no diretório ex. file.create(``text\_file.txt'') (docx, csv, etc). \\
+file.copy() & Copia um arquivo. Ex. file.copy(from = ``source\_file.txt'', to = ``destination\_folder''). \\
+file.remove() & Deleta um arquivo, ex. file.remove(``csv\_file.csv''). Pode-se usar também unlink(`csv\_file.csv'). \\
+list.files() & Lista os arquivos presentes no diretório. \\
 \bottomrule
 \end{longtable}
 
-\hypertarget{arquivos-.csv}{%
-\section{Arquivos .csv}\label{arquivos-.csv}}
+\textbf{Exemplo - list.files()}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{list.files}\NormalTok{(}\AttributeTok{path =} \StringTok{\textquotesingle{}dados/\textquotesingle{}}\NormalTok{,      }\CommentTok{\# Caminho do arquivo}
+           \AttributeTok{pattern =} \StringTok{\textquotesingle{}.ods\textquotesingle{}}\NormalTok{,     }\CommentTok{\# Formato especificado}
+           \AttributeTok{full.names =} \ConstantTok{FALSE}\NormalTok{,   }\CommentTok{\# Somente nome}
+           \AttributeTok{recursive =} \ConstantTok{TRUE}\NormalTok{,     }\CommentTok{\# Pesquisa em subpastas}
+           \AttributeTok{ignore.case =} \ConstantTok{FALSE}\NormalTok{)  }\CommentTok{\# Ignora tamanhos das letras}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "planilha_ods.ods"
+\end{verbatim}
+
+\hypertarget{arquivos}{%
+\section{Arquivos}\label{arquivos}}
 
 \hypertarget{read.csv2}{%
 \subsection{read.csv2()}\label{read.csv2}}
 
-csv = Arquivos separados por vírgula (,)\\
-csv2 = Arquivos separados por ponto e vírgula (;)
+read.csv = Arquivos separados por vírgula.\\
+read.csv2 = Arquivos separados por ponto e vírgula.
 
 Os argumentos das funções são os mesmos, por isso o exemplo será dado somente para .csv2 (mais usado)
 
@@ -225,14 +249,14 @@ Definição
 \midrule
 \endhead
 file & Nome do arquivo que será lido, contendo o caminho do diretório. \\
-header & Logical. Indica se o arquivo contém os nomes das colunas na primeira linha \\
+header & Logical. Indica se o arquivo contém os nomes das colunas na primeira linha. \\
 sep & Tipo de separador de campo. Default é = ``;''. \\
 dec & Tipo de separador de decimal. Default é = ``.''. \\
 nrows & Integer. Número máximo de linhas a serem lidas. \\
 skip & Integer. Número de linhas que serão puladas antes de iniciar a leitura dos dados. \\
 fill & Logical. Se TRUE, caso as linhas tenham comprimento desigual, seão adicionados campos em branco. \\
 blank.lines.skip & Logical. Se TRUE linhas vazias serão ignoradas. \\
-stringsAsFactors & Logical. Se TRUE os vetores character serão convertidos para factors. Se houver distorção dos caracteres, utilizar FALSE para serem mantidos os caracteres originais, sem conversão. \\
+stringsAsFactors & Logical. Se TRUE os vetores character serão convertidos para factors. Se houver distorção dos caracteres, utilizar FALSE para sem conversão. \\
 fileEncoding & Character string. Define o encoding que será usado. Ex. fileEnconding = ``UTF-8'' ou ``Latin-1'' ou ``ISO-8859-1''. \\
 skipNull & Logical. Se TRUE os nulos (NA) devem ser ignorados. \\
 colClasses & character. Um vetor de classes referentes as colunas. Valores possíveis são NA (default, quando type.convert é usado), ``NULL'' (quando a coluna é pulada), um vetor atomico de classes(logical, integer, numeric, complex, character, raw), or ``factor'', ``Date'' or ``POSIXct''. \\
@@ -247,10 +271,10 @@ colClasses & character. Um vetor de classes referentes as colunas. Valores poss�
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_csv2}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/dados.csv\textquotesingle{}}\NormalTok{,  }\CommentTok{\# Caminho e arquivo}
-                          \AttributeTok{col\_select =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\SpecialCharTok{:}\DecValTok{7}\NormalTok{),     }\CommentTok{\# Seleção de colunas de forma numérica (é incompativel com col\_names)}
+                          \AttributeTok{col\_select =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\SpecialCharTok{:}\DecValTok{7}\NormalTok{),     }\CommentTok{\# Seleção de colunas}
                           \AttributeTok{guess\_max =} \DecValTok{1000}\NormalTok{,          }\CommentTok{\# Máximo de linhas utilizadas para adivinhar classes}
                           \AttributeTok{skip\_empty\_rows =} \ConstantTok{TRUE}\NormalTok{)    }\CommentTok{\# Pular linhas vazias}
-\FunctionTok{head}\NormalTok{(dados, }\DecValTok{5}\NormalTok{)                                       }\CommentTok{\# Exibir as 5 primeiras linhas dos dados.}
+\FunctionTok{head}\NormalTok{(dados, }\DecValTok{5}\NormalTok{)                                       }
 \end{Highlighting}
 \end{Shaded}
 
@@ -269,13 +293,14 @@ colClasses & character. Um vetor de classes referentes as colunas. Valores poss�
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_csv2}\NormalTok{(}\StringTok{\textquotesingle{}dados/dados.csv\textquotesingle{}}\NormalTok{,                    }\CommentTok{\# Caminho e arquivo}
-                          \AttributeTok{guess\_max =} \DecValTok{1000}\NormalTok{,                     }\CommentTok{\# Máximo de linhas utilizadas para adivinhar classes}
-                          \AttributeTok{skip\_empty\_rows =} \ConstantTok{TRUE}\NormalTok{,               }\CommentTok{\# Pular linhas vazias}
-                          \AttributeTok{skip =} \DecValTok{1}\NormalTok{,                             }\CommentTok{\# Pular primeira linha}
-                          \AttributeTok{col\_names =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}e\textquotesingle{}}\NormalTok{),   }\CommentTok{\# Definir nomes das colunas}
-                          \AttributeTok{col\_select =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}e\textquotesingle{}}\NormalTok{))  }\CommentTok{\# Selecionar colunas}
-\FunctionTok{head}\NormalTok{(dados, }\DecValTok{5}\NormalTok{)                                                  }\CommentTok{\# Exibir as 5 primeiras linhas dos dados.}
+\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_csv2}\NormalTok{(}
+              \AttributeTok{file =} \StringTok{\textquotesingle{}dados/dados.csv\textquotesingle{}}\NormalTok{,   }\CommentTok{\# Caminho e arquivo}
+              \AttributeTok{guess\_max =} \DecValTok{1000}\NormalTok{,           }\CommentTok{\# Linhas utilizadas para classes}
+              \AttributeTok{skip\_empty\_rows =} \ConstantTok{TRUE}\NormalTok{,     }\CommentTok{\# Pular linhas vazias}
+              \AttributeTok{skip =} \DecValTok{1}\NormalTok{,                   }\CommentTok{\# Pular primeira linha}
+              \AttributeTok{col\_names =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}e\textquotesingle{}}\NormalTok{),   }\CommentTok{\# Definir nomes das colunas}
+              \AttributeTok{col\_select =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}e\textquotesingle{}}\NormalTok{))  }\CommentTok{\# Selecionar colunas}
+\FunctionTok{head}\NormalTok{(dados, }\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -305,9 +330,9 @@ Definição
 \endhead
 file & Nome do arquivo que será lido, contendo o caminho do diretório (admite http). Arquivos terminados em .gz, .bz2, .xz, ou .zip serão automaticamente descomprimidos. \\
 col\_names & TRUE ou FALSE ou um vetor tipo caracter com nomes das colunas. Se TRUE, a primeira linha será usada para nomear as colunas. Se FALSE, nomes das colunas serão gerados automaticamente (X1, X2, X3 etc). Se col\_names for um vetor com nomes, os valores serão usados como nomes das colunas, mas a primeira linha será considerada no banco (nomes errados), assim, pode-se usar o argumento renomeando as colunas, mas fazendo a leitura sem considerar a primeira linha, com {[}-1,{]} ou skip = 1. Colunas sem nome (NA) receberão nomes fictícios. \\
-col\_types & Se for NULL, todos as classes de coluna serão imputadas a partir do máximo de linhas lidas (guess\_max) intercaladas por todo o arquivo. Se a imputação falhar, você precisará aumentar o guess\_max ou fornecer os tipos corretos você mesmo. As especificações de coluna criadas por list() ou cols() devem conter uma especificação de coluna para cada coluna. Se você quiser ler apenas um subconjunto das colunas, use cols\_only(). Para compactar um vetor com as classes, usar as letras c = character, i = integer, n = number, d = double, l = logical, f = factor, D = date, T = date time, t = time, ? = guess, \_ or - = skip; Por padrão, a leitura de um arquivo sem uma especificação de coluna imprimirá uma mensagem mostrando o que o leitor adivinhou. Para remover esta mensagem, defina show\_col\_types = FALSE ou defina 'options(readr.show\_col\_types = FALSE). \\
+col\_types & Se for NULL, todos as classes de coluna serão imputadas a partir do máximo de linhas lidas (guess\_max) intercaladas por todo o arquivo. Se a imputação falhar, você precisará aumentar o guess\_max ou fornecer os tipos corretos você mesmo. As especificações de coluna criadas por list() ou cols() devem conter uma especificação de coluna para cada coluna. Se você quiser ler apenas um subconjunto das colunas, use cols\_only(). Para compactar um vetor com as classes, usar as letras c = character, i = integer, n = number, d = double, l = logical, f = factor, D = date, T = date time, t = time, ? = guess. Por padrão, a definição de classe é automática. \\
 col\_select & Colunas a serem incluídas nos resultados, equivale a dplyr::select() para se referir às colunas pelo nome. Use c() ou list() para usar mais de uma expressão de seleção. Embora esse uso seja menos comum, col\_select também aceita um índice de coluna numérica. \\
-locale & A localidade controla os padrões que variam de lugar para lugar. A localidade padrão é centrada nos EUA (como R), mas você pode usar locale() para criar sua própria localidade que controla coisas como o fuso horário padrão, codificação, marca decimal, marca grande e nomes de dia/mês. \\
+locale & A localidade controla os padrões que variam de lugar para lugar. A localidade padrão é centrada nos EUA (como R), mas você pode usar locale() para criar sua própria localidade que controla coisas como o fuso horário padrão, codificação, marca decimal, marca grande e nomes de dia e mês. \\
 na & Vetor de caracteres de strings para interpretar como valores ausentes. Defina esta opção como character() para indicar que não há valores ausentes. \\
 trim\_ws & Os espaços em branco à esquerda e à direita (espaços e tabulações ASCII) devem ser cortados de cada campo antes de analisá-lo? \\
 skip & Número de linhas para pular antes de ler os dados. \\
@@ -428,7 +453,7 @@ path & Caminho do arquivo ods. \\
 sheet & Planilha que será lida. Default e 1. Pode ser o nome da planilha (ex. ``semana1'') ou um número correspondente a planilha. \\
 col\_names & Indica se a primeira linha contem os nomes das colunas. \\
 skip & Número de linhas a pular antes de iniciar a leitura dos dados. \\
-formula\_as\_formula & Exibir fórmulas como fórmulas ``SUM(A1:A3)'' ou como valores ``3''\ldots{} ou ``8''.. \\
+formula\_as\_formula & Exibir fórmulas como fórmulas ``SUM(A1:A3)'' ou como valores ``3'' ou ``8''. \\
 range & Seleção de retângulo usando intervalo de células semelhante ao Excel, como intervalo = ``D12:F15'' ou intervalo = ``R1C12:R6C15''. O processamento de intervalo de células é tratado pelo pacote cellranger. \\
 row\_names & Indica se o arquivo contém os nomes das linhas na primeira coluna. \\
 strings\_as\_factors & Logical. Se variáveis tipo character serão convertidas a fatores. \\

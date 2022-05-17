@@ -2,8 +2,8 @@ fig:nice-fig
 tab:nice-tab
 eq:binom
 leitura-de-arquivos-de-texto
-definição-de-diretório-de-trabalho
-arquivos-.csv
+diretório-de-trabalho
+arquivos
 read.csv2
 readrread_csv2
 data.tablefread
