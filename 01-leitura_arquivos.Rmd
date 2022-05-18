@@ -230,11 +230,59 @@ Argumento|Definição
 ---------|---------
 path | Caminho para o arquivo xls/xlsx. 
 sheet | Planilha a ser lida. Aceita o nome da planilha ou o número correspondente. Default é a primeira planilha.
+reange | Intervalo de células para leitura, ex. "B3:D87" ou "Orçamento!B2:G14". 
 col_names| Se TRUE a primeira linha será usada para nomear as colunas. FALSE o número das colunas será uma sequência automática de X1 a Xn, ou um vetor de nomes para cada coluna.
 col_types| Se NULL os tipos de classes serão adivinhados, senão inserir um vetor indicando as classes "blank", "numeric", "date" or "text".
 na | Valores ausentes. Por default o readxl converte celulas em branco para valores ausentes. Pode-se inserir um valor padrão caso se deseje cobrir os valores ausentes.
 skip | Número de linhas para pular antes de iniciar a leitura dos dados.
-    
-    
-    
-    
+n_max | Número máximo de linhas a serem lidas.
+guess_max | Máximo de linhas utilizados para adivinhar classes das colunas.
+
+<Br>
+
+### foreign::read.dbf()
+
+A função le arquivos .dbf como dataframe, convertendo por default campos character em factor. Tem apenas dois argumentos, o file (caminho) e o as.is (se FALSE não converte os campos em factor). Por não ser muito usado, o desenvolvedor já alerta que nem todos os arquivos poderão ser lidos normalmente.
+
+<Br>
+
+**Exemplo**
+```{r read.dbf}
+dados <- foreign::read.dbf(file = 'dados/planilha_dbf.dbf')
+head(dados, 5)
+```
+
+<Br>
+
+### Arquivos da web
+
+Pode-se usar o endereço do apresentado no navegador ou contido nas propriedades (clicar com botão direito). O endereço deverá ser inserido entre aspas nos argumentos `file` ou `path` da maioria das funções de leitura, como no exemplo abaixo:
+
+*read.csv2(file = 'https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv')*  
+
+Ou atribuir o link à um objeto e usa-lo na função.  
+*link <- 'https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv'*
+
+É possível também baixar o arquivo (inclusive imagens) por meio da seguinte função:  
+*download.file(url = 'https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv',* 
+              *destfile = 'dados/baixado_web.csv')*
+
+### Encodings  
+
+Se houver distorção de caracteres especiais, considerar como possibilidades para resolver o problema utilizar  o argumento correspondente a stringsAsFactors = F. Esse comando faz com que os caracteres permaneçam como caracteres, ao invés de serem convertidos para factor, e encoding = "UTF-8" ou encoding = "ISO-8859-1" para reconhecer os caracteres especiais. O argumento fileEncoding = "UTF-8" também pode ser necessário.
+
+**Descobrir o encoding**  
+
+Verifica somente de um vetor
+```{r stri_enc_detect}
+stringi::stri_enc_detect(str = cars$speed[1])
+```
+
+**Converter encoding**
+```{r iconv}
+iconv(x = cars$speed[1:3], # Dataframe ou vetor
+      from = "UTF-8",      # Encoding anterior
+      to = "ISO-8859-1")   # Novo encoding
+```
+
+Pode-se também utilizar a função `Encoding(x = dados$speed) <- "UTF-8"`

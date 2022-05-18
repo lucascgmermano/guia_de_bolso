@@ -9,6 +9,9 @@ readrread_csv2
 data.tablefread
 readodsread_ods
 readxlread_excel
+foreignread.dbf
+arquivos-da-web
+encodings
 cross
 chapters-and-sub-chapters
 captioned-figures-and-tables

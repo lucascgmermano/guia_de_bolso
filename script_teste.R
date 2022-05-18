@@ -47,3 +47,29 @@ file.remove("new_csv_file.csv")
 unlink("teste/", recursive = TRUE)
 unlink('new_csv_file.csv')
 dir()
+
+
+altura <- round(runif(n = 100, min = 130, max = 220),0)
+peso <- round(runif(n = 100, min = 40, max = 280),0)
+df <- data.frame(peso, altura)
+foreign::write.dbf(dataframe = df, file = 'dados/planilha_dbf.dbf')
+
+dados <- foreign::read.dbf('dados/planilha_dbf.dbf')
+
+iconv(x = ,
+      from = ,
+      to = )
+
+stringi::stri_enc_detect(str = )
+
+remotes::install_github("cienciadedatos/dados")
+
+stringi::stri_enc_detect(str = dados::pinguins$especie[1])
+
+iconv(x = cars, 
+      from = "UTF-8", to = "ISO-8859-1")
+
+iconvlist()
+
+Encoding(x = c(dados::pinguins$especie, dados::pinguins$ilha))
+example("Encoding"1)

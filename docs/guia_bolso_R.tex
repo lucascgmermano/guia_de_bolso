@@ -117,7 +117,7 @@
 
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{2022-05-16}
+\date{2022-05-17}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -504,12 +504,89 @@ Definição
 \endhead
 path & Caminho para o arquivo xls/xlsx. \\
 sheet & Planilha a ser lida. Aceita o nome da planilha ou o número correspondente. Default é a primeira planilha. \\
+reange & Intervalo de células para leitura, ex. ``B3:D87'' ou ``Orçamento!B2:G14''. \\
 col\_names & Se TRUE a primeira linha será usada para nomear as colunas. FALSE o número das colunas será uma sequência automática de X1 a Xn, ou um vetor de nomes para cada coluna. \\
 col\_types & Se NULL os tipos de classes serão adivinhados, senão inserir um vetor indicando as classes ``blank'', ``numeric'', ``date'' or ``text''. \\
 na & Valores ausentes. Por default o readxl converte celulas em branco para valores ausentes. Pode-se inserir um valor padrão caso se deseje cobrir os valores ausentes. \\
 skip & Número de linhas para pular antes de iniciar a leitura dos dados. \\
+n\_max & Número máximo de linhas a serem lidas. \\
+guess\_max & Máximo de linhas utilizados para adivinhar classes das colunas. \\
 \bottomrule
 \end{longtable}
+
+\hypertarget{foreignread.dbf}{%
+\subsection{foreign::read.dbf()}\label{foreignread.dbf}}
+
+A função le arquivos .dbf como dataframe, convertendo por default campos character em factor. Tem apenas dois argumentos, o file (caminho) e o as.is (se FALSE não converte os campos em factor). Por não ser muito usado, o desenvolvedor já alerta que nem todos os arquivos poderão ser lidos normalmente.
+
+\textbf{Exemplo}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ foreign}\SpecialCharTok{::}\FunctionTok{read.dbf}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/planilha\_dbf.dbf\textquotesingle{}}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(dados, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   peso altura
+## 1  222    160
+## 2  132    164
+## 3  137    169
+## 4   63    209
+## 5  223    166
+\end{verbatim}
+
+\hypertarget{arquivos-da-web}{%
+\subsection{Arquivos da web}\label{arquivos-da-web}}
+
+Pode-se usar o endereço do apresentado no navegador ou contido nas propriedades (clicar com botão direito). O endereço deverá ser inserido entre aspas nos argumentos \texttt{file} ou \texttt{path} da maioria das funções de leitura, como no exemplo abaixo:
+
+\emph{read.csv2(file = `\url{https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv}')}
+
+Ou atribuir o link à um objeto e usa-lo na função.\\
+\emph{link \textless- `\url{https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv}'}
+
+É possível também baixar o arquivo (inclusive imagens) por meio da seguinte função:\\
+\emph{download.file(url = `\url{https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv}',}
+\emph{destfile = `dados/baixado\_web.csv')}
+
+\hypertarget{encodings}{%
+\subsection{Encodings}\label{encodings}}
+
+Se houver distorção de caracteres especiais, considerar como possibilidades para resolver o problema utilizar o argumento correspondente a stringsAsFactors = F. Esse comando faz com que os caracteres permaneçam como caracteres, ao invés de serem convertidos para factor, e encoding = ``UTF-8'' ou encoding = ``ISO-8859-1'' para reconhecer os caracteres especiais. O argumento fileEncoding = ``UTF-8'' também pode ser necessário.
+
+\textbf{Descobrir o encoding}
+
+Verifica somente de um vetor
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{stringi}\SpecialCharTok{::}\FunctionTok{stri\_enc\_detect}\NormalTok{(}\AttributeTok{str =}\NormalTok{ cars}\SpecialCharTok{$}\NormalTok{speed[}\DecValTok{1}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+##   Encoding Language Confidence
+## 1    UTF-8                0.15
+\end{verbatim}
+
+\textbf{Converter encoding}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{iconv}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cars}\SpecialCharTok{$}\NormalTok{speed[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{], }\CommentTok{\# Dataframe ou vetor}
+      \AttributeTok{from =} \StringTok{"UTF{-}8"}\NormalTok{,      }\CommentTok{\# Encoding anterior}
+      \AttributeTok{to =} \StringTok{"ISO{-}8859{-}1"}\NormalTok{)   }\CommentTok{\# Novo encoding}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "4" "4" "7"
+\end{verbatim}
+
+Pode-se também utilizar a função \texttt{Encoding(x\ =\ dados\$speed)\ \textless{}-\ "UTF-8"}
 
 \hypertarget{cross}{%
 \chapter{Cross-references}\label{cross}}
