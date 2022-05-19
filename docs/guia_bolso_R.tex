@@ -117,7 +117,7 @@
 
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{2022-05-17}
+\date{2022-05-19}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -203,8 +203,8 @@ list.files() & Lista os arquivos presentes no diretório. \\
 \hypertarget{arquivos}{%
 \section{Arquivos}\label{arquivos}}
 
-\hypertarget{read.csv2}{%
-\subsection{read.csv2()}\label{read.csv2}}
+\hypertarget{utilsread.csv2}{%
+\subsection{utils::read.csv2()}\label{utilsread.csv2}}
 
 read.csv = Arquivos separados por vírgula.\\
 read.csv2 = Arquivos separados por ponto e vírgula.
@@ -551,8 +551,8 @@ Ou atribuir o link à um objeto e usa-lo na função.\\
 \emph{download.file(url = `\url{https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv}',}
 \emph{destfile = `dados/baixado\_web.csv')}
 
-\hypertarget{encodings}{%
-\subsection{Encodings}\label{encodings}}
+\hypertarget{encoding}{%
+\subsection{Encoding}\label{encoding}}
 
 Se houver distorção de caracteres especiais, considerar como possibilidades para resolver o problema utilizar o argumento correspondente a stringsAsFactors = F. Esse comando faz com que os caracteres permaneçam como caracteres, ao invés de serem convertidos para factor, e encoding = ``UTF-8'' ou encoding = ``ISO-8859-1'' para reconhecer os caracteres especiais. O argumento fileEncoding = ``UTF-8'' também pode ser necessário.
 
@@ -576,9 +576,9 @@ Verifica somente de um vetor
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{iconv}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cars}\SpecialCharTok{$}\NormalTok{speed[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{], }\CommentTok{\# Dataframe ou vetor}
-      \AttributeTok{from =} \StringTok{"UTF{-}8"}\NormalTok{,      }\CommentTok{\# Encoding anterior}
-      \AttributeTok{to =} \StringTok{"ISO{-}8859{-}1"}\NormalTok{)   }\CommentTok{\# Novo encoding}
+\NormalTok{base}\SpecialCharTok{::}\FunctionTok{iconv}\NormalTok{(}\AttributeTok{x =}\NormalTok{ cars}\SpecialCharTok{$}\NormalTok{speed[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{], }\CommentTok{\# Dataframe ou vetor}
+      \AttributeTok{from =} \StringTok{"UTF{-}8"}\NormalTok{,            }\CommentTok{\# Encoding anterior}
+      \AttributeTok{to =} \StringTok{"ISO{-}8859{-}1"}\NormalTok{)         }\CommentTok{\# Novo encoding}
 \end{Highlighting}
 \end{Shaded}
 
@@ -586,7 +586,18 @@ Verifica somente de um vetor
 ## [1] "4" "4" "7"
 \end{verbatim}
 
-Pode-se também utilizar a função \texttt{Encoding(x\ =\ dados\$speed)\ \textless{}-\ "UTF-8"}
+Pode-se também utilizar a função \texttt{base::enc2utf8} para transformar uma codificação em UTF-8, porém, deve ser sempre aplicado a um vetor (ou coluna do banco) de dados do tipo character, se for preciso, transformar antes com a função \texttt{as.character}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(iris}\SpecialCharTok{$}\NormalTok{Species)}
+\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{enc2utf8}\NormalTok{(dados)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Encoding via Import Dataset}\\
+É possível controlar o encoding pelos argumentos da função escolhida para leitura do arquivo, ou então pela leitura realizada pela interface gráfica do RStudio. Entrar no menu ``File'', ``Import Dataset'', ``From text (base)\ldots{}'' , após isso será aberta uma janela, onde o campo encoding permite selecionar uma codificação entre centenas. Veja figura abaixo:
+\includegraphics{ilustracoes/import_dataset.png}
 
 \hypertarget{cross}{%
 \chapter{Cross-references}\label{cross}}
