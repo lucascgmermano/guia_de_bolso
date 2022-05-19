@@ -43,7 +43,7 @@ list.files(path = 'dados/',      # Caminho do arquivo
 
 ## Arquivos  
 
-### read.csv2()
+### utils::read.csv2()
 
 read.csv = Arquivos separados por vírgula.  
 read.csv2 = Arquivos separados por ponto e vírgula.
@@ -267,7 +267,7 @@ Ou atribuir o link à um objeto e usa-lo na função.
 *download.file(url = 'https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv',* 
               *destfile = 'dados/baixado_web.csv')*
 
-### Encodings  
+### Encoding  
 
 Se houver distorção de caracteres especiais, considerar como possibilidades para resolver o problema utilizar  o argumento correspondente a stringsAsFactors = F. Esse comando faz com que os caracteres permaneçam como caracteres, ao invés de serem convertidos para factor, e encoding = "UTF-8" ou encoding = "ISO-8859-1" para reconhecer os caracteres especiais. O argumento fileEncoding = "UTF-8" também pode ser necessário.
 
@@ -280,9 +280,17 @@ stringi::stri_enc_detect(str = cars$speed[1])
 
 **Converter encoding**
 ```{r iconv}
-iconv(x = cars$speed[1:3], # Dataframe ou vetor
-      from = "UTF-8",      # Encoding anterior
-      to = "ISO-8859-1")   # Novo encoding
+base::iconv(x = cars$speed[1:3], # Dataframe ou vetor
+      from = "UTF-8",            # Encoding anterior
+      to = "ISO-8859-1")         # Novo encoding
 ```
 
-Pode-se também utilizar a função `Encoding(x = dados$speed) <- "UTF-8"`
+Pode-se também utilizar a função `base::enc2utf8` para transformar uma codificação em UTF-8, porém, deve ser sempre aplicado a um vetor (ou coluna do banco) de dados do tipo character, se for preciso, transformar antes com a função `as.character`
+```{r enc2utf8}
+dados <- as.character(iris$Species)
+dados <- base::enc2utf8(dados)
+```
+
+**Encoding via Import Dataset**  
+É possível controlar o encoding pelos argumentos da função escolhida para leitura do arquivo, ou então pela leitura realizada pela interface gráfica do RStudio. Entrar no menu "File", "Import Dataset", "From text (base)..." , após isso será aberta uma janela, onde o campo encoding permite selecionar uma codificação entre centenas. Veja figura abaixo:
+![import_dataset](ilustracoes/import_dataset.png)
