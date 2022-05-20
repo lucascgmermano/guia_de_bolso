@@ -315,7 +315,7 @@ write.csv2(x = iris,                # Dados ativos
            col.names = TRUE,        # Nomes das colunas  
            fileEncoding = "UTF-8")  # Encoding
 
-read.csv2('dados/iris.csv')
+read.csv2('dados/iris.csv', nrows = 4)
 ```
 
 <Br>
@@ -336,5 +336,38 @@ fileEncoding | String. Declara a codificação a ser usada para que possam ser r
 <Br>
 
 ### writexl::write_xlsx()    
-Salvar arquivo de dados como Excel, formato .xlsx.
+Salvar arquivo de dados como Excel, formato .xlsx.  
 
+**Exemplo 1**  
+```{r write_xlsx1} 
+writexl::write_xlsx(x = iris,
+                    path = 'dados/iris.xlsx',
+                    col_names = TRUE,
+                    format_headers = TRUE)
+readxl::read_excel('dados/iris.xlsx', n_max = 4)
+```
+
+**Exemplo 2**  
+```{r write_xlsx2}
+writexl::write_xlsx(path = "dados/conjuntodadosnativos.xlsx",
+           x = list(sheet1=iris, sheet2=cars, sheet3=mtcars))
+
+readxl::read_excel(path = 'dados/conjuntodadosnativos.xlsx',
+                   sheet = 3, 
+                   n_max = 4)
+```
+
+<Br>
+
+**Argumentos principais**  
+
+Argumento|Definição
+---------|---------
+x	| Data frame ou lista de data frames que serão salvos em planilhas (sheets).
+path | Nome do arquuivo criado.
+col_names	| Se TRUE, primera linha traz os nomes das colunas.
+format_headers | Inserir nomes das colunas.
+
+<Br>
+
+### data.table::fwrite()

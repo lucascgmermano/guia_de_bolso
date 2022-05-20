@@ -49,4 +49,6 @@ base::Encoding(dados$ilha) <- "UTF-8"
 dados$ilha <- base::enc2utf8(dados$ilha)
 dados$ilha <- as.character(dados$ilha)
 
+install.packages('writexl')
 
+writexl::write_xlsx()
