@@ -305,14 +305,13 @@ dados <- base::enc2utf8(dados)
 
 ### utils::write.csv2()  
 
-É possível salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula.
+É possível salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula. Um ponto negativo é que essa função, ao salvar o arquivo, cria uma coluna com nomes das linhas (em números).
 
 **Exemplo**  
 
 ```{r write.csv2}
 write.csv2(x = iris,                # Dados ativos
            file = 'dados/iris.csv', # Caminho e nome do arquivo
-           col.names = TRUE,        # Nomes das colunas  
            fileEncoding = "UTF-8")  # Encoding
 
 read.csv2('dados/iris.csv', nrows = 4)
@@ -334,6 +333,65 @@ row.names | Logical. Cria coluna com nomes para linhas.
 fileEncoding | String. Declara a codificação a ser usada para que possam ser recodificados à medida que são gravados.   
 
 <Br>
+
+### readr::write_csv2()  
+
+É semelhante à função anterior, mas executa a tarefa duas vezes mais rápido, com a vantagem de não criar uma coluna com nomes das linhas.  
+
+**Exemplo**  
+```{r write_csv2}
+readr::write_csv2(x = iris, file = 'dados/iris.csv')
+read.csv2(file = 'dados/iris.csv', nrows = 4)
+```
+
+<Br>
+
+**Argumentos principais**
+Argumento|Definição
+---------|---------
+x	
+A data frame or tibble to write to disk.
+
+file	
+File or connection to write to.
+
+delim	
+Delimiter used to separate values. Defaults to " " for write_delim(), "," for write_excel_csv() and ";" for write_excel_csv2(). Must be a single character.
+
+na	
+String used for missing values. Defaults to NA. Missing values will never be quoted; strings with the same value as na will always be quoted.
+
+append	
+If FALSE, will overwrite existing file. If TRUE, will append to existing file. In both cases, if the file does not exist a new file is created.
+
+col_names	
+If FALSE, column names will not be included at the top of the file. If TRUE, column names will be included. If not specified, col_names will take the opposite value given to append.
+
+quote	
+How to handle fields which contain characters that need to be quoted.
+
+needed - Only quote fields which need them.
+
+all - Quote all fields.
+
+none - Never quote fields.
+
+escape	
+The type of escape to use when quotes are in the data.
+
+double - quotes are escaped by doubling them.
+
+backslash - quotes are escaped by a preceding backslash.
+
+none - quotes are not escaped.
+
+eol	
+
+num_threads	
+Number of threads to use when reading and materializing vectors. If your data contains newlines within fields the parser will automatically be forced to use a single thread only.
+
+progress	
+Display a progress bar? By default it will only display in an interactive session and not while knitting a document. The display is updated every 50,000 values and will only display if estimated reading time is 5 seconds or more. The automatic progress bar can be disabled by setting option readr.show_progress to FALSE.
 
 ### writexl::write_xlsx()    
 Salvar arquivo de dados como Excel, formato .xlsx.  

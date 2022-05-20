@@ -18,20 +18,15 @@ file.create("new_csv_file.csv")
 file.remove("teste.txt")
 unlink("teste/", recursive = TRUE)
 unlink('new_csv_file.csv')
-dir()
+iconv(x = ,
+      from = ,
+      to = )
 
 
 altura <- round(runif(n = 100, min = 130, max = 220),0)
 peso <- round(runif(n = 100, min = 40, max = 280),0)
 df <- data.frame(peso, altura)
 
-iconv(x = ,
-      from = ,
-      to = )
-
-stringi::stri_enc_detect(str = )
-
-remotes::install_github("cienciadedatos/dados")
 
 stringi::stri_enc_detect(str = dados::pinguins$especie[1])
 
@@ -55,3 +50,5 @@ writexl::write_xlsx()
 data.table::fwrite(x = iris, file = 'dados/iris_fwrite.csv', sep = ';')
 data.table::fread('dados/iris_fwrite.csv', nrows = 4)
 read.csv2('dados/iris.csv', nrows = 4)
+dados <- readr::write_csv2(x = iris, file = 'dados/iris.csv')
+read.csv2(file = 'dados/iris.csv', nrows = 4)

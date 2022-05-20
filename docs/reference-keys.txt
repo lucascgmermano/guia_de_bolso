@@ -14,6 +14,7 @@ arquivos-da-web
 encoding
 escrita-de-arquivos
 utilswrite.csv2
+readrwrite_csv2
 writexlwrite_xlsx
 data.tablefwrite
 cross
