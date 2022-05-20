@@ -165,7 +165,7 @@ div.csl-indent {
 <li class="chapter" data-level="1" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html"><i class="fa fa-check"></i><b>1</b> Leitura de arquivos de texto</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#diretório-de-trabalho"><i class="fa fa-check"></i><b>1.1</b> Diretório de trabalho</a></li>
-<li class="chapter" data-level="1.2" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#arquivos"><i class="fa fa-check"></i><b>1.2</b> Arquivos</a>
+<li class="chapter" data-level="1.2" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#leitura-de-arquivos"><i class="fa fa-check"></i><b>1.2</b> Leitura de arquivos</a>
 <ul>
 <li class="chapter" data-level="1.2.1" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#utilsread.csv2"><i class="fa fa-check"></i><b>1.2.1</b> utils::read.csv2()</a></li>
 <li class="chapter" data-level="1.2.2" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#readrread_csv2"><i class="fa fa-check"></i><b>1.2.2</b> readr::read_csv2()</a></li>
@@ -175,6 +175,11 @@ div.csl-indent {
 <li class="chapter" data-level="1.2.6" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#foreignread.dbf"><i class="fa fa-check"></i><b>1.2.6</b> foreign::read.dbf()</a></li>
 <li class="chapter" data-level="1.2.7" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#arquivos-da-web"><i class="fa fa-check"></i><b>1.2.7</b> Arquivos da web</a></li>
 <li class="chapter" data-level="1.2.8" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#encoding"><i class="fa fa-check"></i><b>1.2.8</b> Encoding</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#escrita-de-arquivos"><i class="fa fa-check"></i><b>1.3</b> Escrita de arquivos</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#utilswrite.csv2"><i class="fa fa-check"></i><b>1.3.1</b> utils::write.csv2()</a></li>
+<li class="chapter" data-level="1.3.2" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#writexlwrite_xlsx"><i class="fa fa-check"></i><b>1.3.2</b> writexl::write_xlsx()</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>2</b> Cross-references</a>
@@ -225,6 +230,7 @@ div.csl-indent {
 <h1><span class="header-section-number">1</span> Leitura de arquivos de texto<a href="leitura-de-arquivos-de-texto.html#leitura-de-arquivos-de-texto" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="diretório-de-trabalho" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Diretório de trabalho<a href="leitura-de-arquivos-de-texto.html#diretório-de-trabalho" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Abaixo são transcritos alguns comandos e métodos para se definir e conhecer o diretório de trabalho, bem como manipular criação e exclusão de pastas e arquivos.</p>
 <table>
 <colgroup>
 <col width="44%" />
@@ -301,8 +307,8 @@ div.csl-indent {
 <pre><code>## [1] &quot;planilha_ods.ods&quot;</code></pre>
 <p><Br></p>
 </div>
-<div id="arquivos" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Arquivos<a href="leitura-de-arquivos-de-texto.html#arquivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="leitura-de-arquivos" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Leitura de arquivos<a href="leitura-de-arquivos-de-texto.html#leitura-de-arquivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="utilsread.csv2" class="section level3 hasAnchor" number="1.2.1">
 <h3><span class="header-section-number">1.2.1</span> utils::read.csv2()<a href="leitura-de-arquivos-de-texto.html#utilsread.csv2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>read.csv = Arquivos separados por vírgula.<br />
@@ -310,18 +316,12 @@ read.csv2 = Arquivos separados por ponto e vírgula.</p>
 <p>Os argumentos das funções são os mesmos, por isso o exemplo será dado somente para .csv2 (mais usado)</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="leitura-de-arquivos-de-texto.html#cb3-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>)</span>
 <span id="cb3-2"><a href="leitura-de-arquivos-de-texto.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">5</span>)          <span class="co"># Exibir as 5 primeiras linhas dos dados.</span></span></code></pre></div>
-<pre><code>##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana
-## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1
-## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3
-## 3 3 2020-01-29  352380      Itobi 30 a 39     1      0    1   0 2020   1      5
-## 4 4 2020-01-30  353050     Mococa 70 a 79     1      0    0   1 2020   1      5
-## 5 5 2020-02-02  353080 Mogi Mirim 40 a 49     1      0    0   1 2020   2      5
-##      pop
-## 1 150713
-## 2 150713
-## 3   7830
-## 4  68788
-## 5  92715</code></pre>
+<pre><code>##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana    pop
+## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1 150713
+## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3 150713
+## 3 3 2020-01-29  352380      Itobi 30 a 39     1      0    1   0 2020   1      5   7830
+## 4 4 2020-01-30  353050     Mococa 70 a 79     1      0    0   1 2020   1      5  68788
+## 5 5 2020-02-02  353080 Mogi Mirim 40 a 49     1      0    0   1 2020   2      5  92715</code></pre>
 <p><Br></p>
 <p><strong>Argumentos principais</strong></p>
 <p>Os argumentos são os mesmos da função read.table().</p>
@@ -770,6 +770,7 @@ read.csv2 = Arquivos separados por ponto e vírgula.</p>
 <p>É possível também baixar o arquivo (inclusive imagens) por meio da seguinte função:<br />
 <em>download.file(url = ‘<a href="https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv" class="uri">https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv</a>’,</em>
 <em>destfile = ‘dados/baixado_web.csv’)</em></p>
+<p><Br></p>
 </div>
 <div id="encoding" class="section level3 hasAnchor" number="1.2.8">
 <h3><span class="header-section-number">1.2.8</span> Encoding<a href="leitura-de-arquivos-de-texto.html#encoding" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -785,12 +786,224 @@ read.csv2 = Arquivos separados por ponto e vírgula.</p>
 <span id="cb19-2"><a href="leitura-de-arquivos-de-texto.html#cb19-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">from =</span> <span class="st">&quot;UTF-8&quot;</span>,            <span class="co"># Encoding anterior</span></span>
 <span id="cb19-3"><a href="leitura-de-arquivos-de-texto.html#cb19-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">to =</span> <span class="st">&quot;ISO-8859-1&quot;</span>)         <span class="co"># Novo encoding</span></span></code></pre></div>
 <pre><code>## [1] &quot;4&quot; &quot;4&quot; &quot;7&quot;</code></pre>
-<p>Pode-se também utilizar a função <code>base::enc2utf8</code> para transformar uma codificação em UTF-8, porém, deve ser sempre aplicado a um vetor (ou coluna do banco) de dados do tipo character, se for preciso, transformar antes com a função <code>as.character</code></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="leitura-de-arquivos-de-texto.html#cb21-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">as.character</span>(iris<span class="sc">$</span>Species)</span>
+<p>Pode-se também utilizar a função <code>base::enc2utf8</code> para transformar uma codificação em UTF-8, porém, deve ser sempre aplicado a um vetor (ou coluna do banco) de dados do tipo character, se for preciso, transformar antes com a função <code>base::as.character</code></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="leitura-de-arquivos-de-texto.html#cb21-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.character</span>(iris<span class="sc">$</span>Species)</span>
 <span id="cb21-2"><a href="leitura-de-arquivos-de-texto.html#cb21-2" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">enc2utf8</span>(dados)</span></code></pre></div>
 <p><strong>Encoding via Import Dataset</strong><br />
 É possível controlar o encoding pelos argumentos da função escolhida para leitura do arquivo, ou então pela leitura realizada pela interface gráfica do RStudio. Entrar no menu “File”, “Import Dataset”, “From text (base)…” , após isso será aberta uma janela, onde o campo encoding permite selecionar uma codificação entre centenas. Veja figura abaixo:
 <img src="ilustracoes/import_dataset.png" alt="import_dataset" /></p>
+<p><Br></p>
+</div>
+</div>
+<div id="escrita-de-arquivos" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Escrita de arquivos<a href="leitura-de-arquivos-de-texto.html#escrita-de-arquivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="utilswrite.csv2" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> utils::write.csv2()<a href="leitura-de-arquivos-de-texto.html#utilswrite.csv2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>É possível salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula.</p>
+<p><strong>Exemplo</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="leitura-de-arquivos-de-texto.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv2</span>(<span class="at">x =</span> iris,                <span class="co"># Dados ativos</span></span>
+<span id="cb22-2"><a href="leitura-de-arquivos-de-texto.html#cb22-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">file =</span> <span class="st">&#39;dados/iris.csv&#39;</span>, <span class="co"># Caminho e nome do arquivo</span></span>
+<span id="cb22-3"><a href="leitura-de-arquivos-de-texto.html#cb22-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">col.names =</span> <span class="cn">TRUE</span>,        <span class="co"># Nomes das colunas  </span></span>
+<span id="cb22-4"><a href="leitura-de-arquivos-de-texto.html#cb22-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">fileEncoding =</span> <span class="st">&quot;UTF-8&quot;</span>)  <span class="co"># Encoding</span></span>
+<span id="cb22-5"><a href="leitura-de-arquivos-de-texto.html#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="leitura-de-arquivos-de-texto.html#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv2</span>(<span class="st">&#39;dados/iris.csv&#39;</span>)</span></code></pre></div>
+<pre><code>##       X ...1 Sepal.Length Sepal.Width Petal.Length Petal.Width    Species
+## 1     1    1           51          35           14         0.2     setosa
+## 2     2    2           49           3           14         0.2     setosa
+## 3     3    3           47          32           13         0.2     setosa
+## 4     4    4           46          31           15         0.2     setosa
+## 5     5    5            5          36           14         0.2     setosa
+## 6     6    6           54          39           17         0.4     setosa
+## 7     7    7           46          34           14         0.3     setosa
+## 8     8    8            5          34           15         0.2     setosa
+## 9     9    9           44          29           14         0.2     setosa
+## 10   10   10           49          31           15         0.1     setosa
+## 11   11   11           54          37           15         0.2     setosa
+## 12   12   12           48          34           16         0.2     setosa
+## 13   13   13           48           3           14         0.1     setosa
+## 14   14   14           43           3           11         0.1     setosa
+## 15   15   15           58           4           12         0.2     setosa
+## 16   16   16           57          44           15         0.4     setosa
+## 17   17   17           54          39           13         0.4     setosa
+## 18   18   18           51          35           14         0.3     setosa
+## 19   19   19           57          38           17         0.3     setosa
+## 20   20   20           51          38           15         0.3     setosa
+## 21   21   21           54          34           17         0.2     setosa
+## 22   22   22           51          37           15         0.4     setosa
+## 23   23   23           46          36            1         0.2     setosa
+## 24   24   24           51          33           17         0.5     setosa
+## 25   25   25           48          34           19         0.2     setosa
+## 26   26   26            5           3           16         0.2     setosa
+## 27   27   27            5          34           16         0.4     setosa
+## 28   28   28           52          35           15         0.2     setosa
+## 29   29   29           52          34           14         0.2     setosa
+## 30   30   30           47          32           16         0.2     setosa
+## 31   31   31           48          31           16         0.2     setosa
+## 32   32   32           54          34           15         0.4     setosa
+## 33   33   33           52          41           15         0.1     setosa
+## 34   34   34           55          42           14         0.2     setosa
+## 35   35   35           49          31           15         0.2     setosa
+## 36   36   36            5          32           12         0.2     setosa
+## 37   37   37           55          35           13         0.2     setosa
+## 38   38   38           49          36           14         0.1     setosa
+## 39   39   39           44           3           13         0.2     setosa
+## 40   40   40           51          34           15         0.2     setosa
+## 41   41   41            5          35           13         0.3     setosa
+## 42   42   42           45          23           13         0.3     setosa
+## 43   43   43           44          32           13         0.2     setosa
+## 44   44   44            5          35           16         0.6     setosa
+## 45   45   45           51          38           19         0.4     setosa
+## 46   46   46           48           3           14         0.3     setosa
+## 47   47   47           51          38           16         0.2     setosa
+## 48   48   48           46          32           14         0.2     setosa
+## 49   49   49           53          37           15         0.2     setosa
+## 50   50   50            5          33           14         0.2     setosa
+## 51   51   51            7          32           47         1.4 versicolor
+## 52   52   52           64          32           45         1.5 versicolor
+## 53   53   53           69          31           49         1.5 versicolor
+## 54   54   54           55          23            4         1.3 versicolor
+## 55   55   55           65          28           46         1.5 versicolor
+## 56   56   56           57          28           45         1.3 versicolor
+## 57   57   57           63          33           47         1.6 versicolor
+## 58   58   58           49          24           33         1.0 versicolor
+## 59   59   59           66          29           46         1.3 versicolor
+## 60   60   60           52          27           39         1.4 versicolor
+## 61   61   61            5           2           35         1.0 versicolor
+## 62   62   62           59           3           42         1.5 versicolor
+## 63   63   63            6          22            4         1.0 versicolor
+## 64   64   64           61          29           47         1.4 versicolor
+## 65   65   65           56          29           36         1.3 versicolor
+## 66   66   66           67          31           44         1.4 versicolor
+## 67   67   67           56           3           45         1.5 versicolor
+## 68   68   68           58          27           41         1.0 versicolor
+## 69   69   69           62          22           45         1.5 versicolor
+## 70   70   70           56          25           39         1.1 versicolor
+## 71   71   71           59          32           48         1.8 versicolor
+## 72   72   72           61          28            4         1.3 versicolor
+## 73   73   73           63          25           49         1.5 versicolor
+## 74   74   74           61          28           47         1.2 versicolor
+## 75   75   75           64          29           43         1.3 versicolor
+## 76   76   76           66           3           44         1.4 versicolor
+## 77   77   77           68          28           48         1.4 versicolor
+## 78   78   78           67           3            5         1.7 versicolor
+## 79   79   79            6          29           45         1.5 versicolor
+## 80   80   80           57          26           35         1.0 versicolor
+## 81   81   81           55          24           38         1.1 versicolor
+## 82   82   82           55          24           37         1.0 versicolor
+## 83   83   83           58          27           39         1.2 versicolor
+## 84   84   84            6          27           51         1.6 versicolor
+## 85   85   85           54           3           45         1.5 versicolor
+## 86   86   86            6          34           45         1.6 versicolor
+## 87   87   87           67          31           47         1.5 versicolor
+## 88   88   88           63          23           44         1.3 versicolor
+## 89   89   89           56           3           41         1.3 versicolor
+## 90   90   90           55          25            4         1.3 versicolor
+## 91   91   91           55          26           44         1.2 versicolor
+## 92   92   92           61           3           46         1.4 versicolor
+## 93   93   93           58          26            4         1.2 versicolor
+## 94   94   94            5          23           33         1.0 versicolor
+## 95   95   95           56          27           42         1.3 versicolor
+## 96   96   96           57           3           42         1.2 versicolor
+## 97   97   97           57          29           42         1.3 versicolor
+## 98   98   98           62          29           43         1.3 versicolor
+## 99   99   99           51          25            3         1.1 versicolor
+## 100 100  100           57          28           41         1.3 versicolor
+## 101 101  101           63          33            6         2.5  virginica
+## 102 102  102           58          27           51         1.9  virginica
+## 103 103  103           71           3           59         2.1  virginica
+## 104 104  104           63          29           56         1.8  virginica
+## 105 105  105           65           3           58         2.2  virginica
+## 106 106  106           76           3           66         2.1  virginica
+## 107 107  107           49          25           45         1.7  virginica
+## 108 108  108           73          29           63         1.8  virginica
+## 109 109  109           67          25           58         1.8  virginica
+## 110 110  110           72          36           61         2.5  virginica
+## 111 111  111           65          32           51         2.0  virginica
+## 112 112  112           64          27           53         1.9  virginica
+## 113 113  113           68           3           55         2.1  virginica
+## 114 114  114           57          25            5         2.0  virginica
+## 115 115  115           58          28           51         2.4  virginica
+## 116 116  116           64          32           53         2.3  virginica
+## 117 117  117           65           3           55         1.8  virginica
+## 118 118  118           77          38           67         2.2  virginica
+## 119 119  119           77          26           69         2.3  virginica
+## 120 120  120            6          22            5         1.5  virginica
+## 121 121  121           69          32           57         2.3  virginica
+## 122 122  122           56          28           49         2.0  virginica
+## 123 123  123           77          28           67         2.0  virginica
+## 124 124  124           63          27           49         1.8  virginica
+## 125 125  125           67          33           57         2.1  virginica
+## 126 126  126           72          32            6         1.8  virginica
+## 127 127  127           62          28           48         1.8  virginica
+## 128 128  128           61           3           49         1.8  virginica
+## 129 129  129           64          28           56         2.1  virginica
+## 130 130  130           72           3           58         1.6  virginica
+## 131 131  131           74          28           61         1.9  virginica
+## 132 132  132           79          38           64         2.0  virginica
+## 133 133  133           64          28           56         2.2  virginica
+## 134 134  134           63          28           51         1.5  virginica
+## 135 135  135           61          26           56         1.4  virginica
+## 136 136  136           77           3           61         2.3  virginica
+## 137 137  137           63          34           56         2.4  virginica
+## 138 138  138           64          31           55         1.8  virginica
+## 139 139  139            6           3           48         1.8  virginica
+## 140 140  140           69          31           54         2.1  virginica
+## 141 141  141           67          31           56         2.4  virginica
+## 142 142  142           69          31           51         2.3  virginica
+##  [ reached &#39;max&#39; / getOption(&quot;max.print&quot;) -- omitted 8 rows ]</code></pre>
+<p><Br></p>
+<p><strong>Argumentos principais</strong></p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argumento</th>
+<th>Definição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x</td>
+<td>Objeto a ser escrito, prefereincialmente uma matriz ou data.frame.</td>
+</tr>
+<tr class="even">
+<td>file</td>
+<td>Nome do arquivo criado (pode conter o caminho) utilizando aspas ” “.</td>
+</tr>
+<tr class="odd">
+<td>append</td>
+<td>Logical. Se TRUE os dados serão adicionados à última linha de um arquivo já existente, que deve ter o nome descrito em file, se FALSE qualquer arquivo com o nome descrito será sobrescrito.</td>
+</tr>
+<tr class="even">
+<td>na</td>
+<td>String usada para valores ausentes nos dados.</td>
+</tr>
+<tr class="odd">
+<td>dec</td>
+<td>String para definir divisor de decimal, ex. dec = “.”.</td>
+</tr>
+<tr class="even">
+<td>col.names</td>
+<td>Logical. Indica se os nomes das colunas de x devem ser escritos junto com x, ou um vetor de caracteres dos nomes das colunas a serem escritos.</td>
+</tr>
+<tr class="odd">
+<td>row.names</td>
+<td>Logical. Cria coluna com nomes para linhas.</td>
+</tr>
+<tr class="even">
+<td>fileEncoding</td>
+<td>String. Declara a codificação a ser usada para que possam ser recodificados à medida que são gravados.</td>
+</tr>
+</tbody>
+</table>
+<p><Br></p>
+</div>
+<div id="writexlwrite_xlsx" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> writexl::write_xlsx()<a href="leitura-de-arquivos-de-texto.html#writexlwrite_xlsx" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Salvar arquivo de dados como Excel, formato .xlsx.</p>
 
 </div>
 </div>
@@ -855,20 +1068,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

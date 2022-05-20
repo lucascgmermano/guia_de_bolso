@@ -1,6 +1,7 @@
 fig:nice-fig
 tab:nice-tab
 eq:binom
+thm:tri
 leitura-de-arquivos-de-texto
 diretório-de-trabalho
 arquivos
@@ -27,3 +28,7 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
+leitura-de-arquivos
+escrita-de-arquivos
+utilswrite.csv2
+writexlwrite_xlsx

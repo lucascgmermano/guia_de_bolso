@@ -9,7 +9,9 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 
 # Leitura de arquivos de texto
 
-## Diretório de trabalho
+## Diretório de trabalho  
+
+Abaixo são transcritos alguns comandos e métodos para se definir e conhecer o diretório de trabalho, bem como manipular criação e exclusão de pastas e arquivos.  
 
 Comando | Definição
 --------|----------
@@ -41,7 +43,7 @@ list.files(path = 'dados/',      # Caminho do arquivo
 
 <Br>
 
-## Arquivos  
+## Leitura de arquivos  
 
 ### utils::read.csv2()
 
@@ -267,6 +269,8 @@ Ou atribuir o link à um objeto e usa-lo na função.
 *download.file(url = 'https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv',* 
               *destfile = 'dados/baixado_web.csv')*
 
+<Br>
+
 ### Encoding  
 
 Se houver distorção de caracteres especiais, considerar como possibilidades para resolver o problema utilizar  o argumento correspondente a stringsAsFactors = F. Esse comando faz com que os caracteres permaneçam como caracteres, ao invés de serem convertidos para factor, e encoding = "UTF-8" ou encoding = "ISO-8859-1" para reconhecer os caracteres especiais. O argumento fileEncoding = "UTF-8" também pode ser necessário.
@@ -285,12 +289,52 @@ base::iconv(x = cars$speed[1:3], # Dataframe ou vetor
       to = "ISO-8859-1")         # Novo encoding
 ```
 
-Pode-se também utilizar a função `base::enc2utf8` para transformar uma codificação em UTF-8, porém, deve ser sempre aplicado a um vetor (ou coluna do banco) de dados do tipo character, se for preciso, transformar antes com a função `as.character`
+Pode-se também utilizar a função `base::enc2utf8` para transformar uma codificação em UTF-8, porém, deve ser sempre aplicado a um vetor (ou coluna do banco) de dados do tipo character, se for preciso, transformar antes com a função `base::as.character`
 ```{r enc2utf8}
-dados <- as.character(iris$Species)
+dados <- base::as.character(iris$Species)
 dados <- base::enc2utf8(dados)
 ```
 
 **Encoding via Import Dataset**  
 É possível controlar o encoding pelos argumentos da função escolhida para leitura do arquivo, ou então pela leitura realizada pela interface gráfica do RStudio. Entrar no menu "File", "Import Dataset", "From text (base)..." , após isso será aberta uma janela, onde o campo encoding permite selecionar uma codificação entre centenas. Veja figura abaixo:
 ![import_dataset](ilustracoes/import_dataset.png)
+
+<Br>
+
+## Escrita de arquivos  
+
+### utils::write.csv2()  
+
+É possível salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula.
+
+**Exemplo**  
+
+```{r write.csv2}
+write.csv2(x = iris,                # Dados ativos
+           file = 'dados/iris.csv', # Caminho e nome do arquivo
+           col.names = TRUE,        # Nomes das colunas  
+           fileEncoding = "UTF-8")  # Encoding
+
+read.csv2('dados/iris.csv')
+```
+
+<Br>
+
+**Argumentos principais**  
+
+Argumento|Definição
+---------|---------
+x	| Objeto a ser escrito, prefereincialmente uma matriz ou data.frame.
+file | Nome do arquivo criado (pode conter o caminho) utilizando aspas " ".
+append | Logical. Se TRUE os dados serão adicionados à última linha de um arquivo já existente, que deve ter o nome descrito em file, se FALSE qualquer arquivo com o nome descrito será sobrescrito.
+na | String usada para valores ausentes nos dados.
+dec | String para definir divisor de decimal, ex. dec = ".".
+col.names | Logical. Indica se os nomes das colunas de x devem ser escritos junto com x, ou um vetor de caracteres dos nomes das colunas a serem escritos.
+row.names | Logical. Cria coluna com nomes para linhas.
+fileEncoding | String. Declara a codificação a ser usada para que possam ser recodificados à medida que são gravados.   
+
+<Br>
+
+### writexl::write_xlsx()    
+Salvar arquivo de dados como Excel, formato .xlsx.
+
