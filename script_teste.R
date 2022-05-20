@@ -52,3 +52,6 @@ dados$ilha <- as.character(dados$ilha)
 install.packages('writexl')
 
 writexl::write_xlsx()
+data.table::fwrite(x = iris, file = 'dados/iris_fwrite.csv', sep = ';')
+data.table::fread('dados/iris_fwrite.csv', nrows = 4)
+read.csv2('dados/iris.csv', nrows = 4)

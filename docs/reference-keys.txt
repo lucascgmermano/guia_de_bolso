@@ -15,6 +15,7 @@ encoding
 escrita-de-arquivos
 utilswrite.csv2
 writexlwrite_xlsx
+data.tablefwrite
 cross
 chapters-and-sub-chapters
 captioned-figures-and-tables
@@ -30,4 +31,3 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
-data.tablefwrite
