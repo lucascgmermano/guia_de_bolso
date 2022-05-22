@@ -52,3 +52,15 @@ data.table::fread('dados/iris_fwrite.csv', nrows = 4)
 read.csv2('dados/iris.csv', nrows = 4)
 dados <- readr::write_csv2(x = iris, file = 'dados/iris.csv')
 read.csv2(file = 'dados/iris.csv', nrows = 4)
+
+data.table::fwrite(x = dados::pixar_avalicao_publico,
+                   file = 'dados/cars.csv',
+                   sep = ';', dateTimeAs = "squash")
+
+dados <- data.table::fread(file = 'dados/dados.csv', nrows = 20)
+data.table::fwrite(x = dados, 
+                   file = 'dados/dados20max.csv',
+                   append = TRUE, 
+                   sep = ';',
+                   showProgress = TRUE)
+

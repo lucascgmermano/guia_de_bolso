@@ -117,7 +117,7 @@
 
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{2022-05-20}
+\date{2022-05-22}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -794,6 +794,48 @@ format\_headers & Inserir nomes das colunas. \\
 
 \hypertarget{data.tablefwrite}{%
 \subsection{data.table::fwrite()}\label{data.tablefwrite}}
+
+Salvar arquivos de texto (csv, csv2, tab, etc), semelhante ao write.table() do pacote utils, só que mais rápido.
+
+\textbf{Exemplo}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/dados.csv\textquotesingle{}}\NormalTok{, }\AttributeTok{nrows =} \DecValTok{20}\NormalTok{)}
+\NormalTok{data.table}\SpecialCharTok{::}\FunctionTok{fwrite}\NormalTok{(}\AttributeTok{x =}\NormalTok{ dados,                     }\CommentTok{\# Objeto a ser escrito}
+                   \AttributeTok{file =} \StringTok{\textquotesingle{}dados/dados20max.csv\textquotesingle{}}\NormalTok{, }\CommentTok{\# Nome e caminho (arquivo ja exite)}
+                   \AttributeTok{append =} \ConstantTok{TRUE}\NormalTok{,                 }\CommentTok{\# Salva na ultima linha do arquivo ja existente}
+                   \AttributeTok{sep =} \StringTok{\textquotesingle{};\textquotesingle{}}\NormalTok{,                     }\CommentTok{\# Separados de colunas}
+                   \AttributeTok{showProgress =} \ConstantTok{TRUE}\NormalTok{)           }\CommentTok{\# Mostrar progresso}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Argumentos principais}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Argumento
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definição
+\end{minipage} \\
+\midrule
+\endhead
+x & Objeto a salvar. Deve estar como data.frame ou data.table. \\
+file & Nome do arquivo. \\
+append & Se TRUE , o arquivo é salvo em acrescimo à última linha de um arquivo existente, sem incluir os nomes das colunas. \\
+sep & Separador de colunas. Default é ``,''. \\
+na & Um string a ser usada para valores ausentes. O padrão é uma string em branco ``\,``. \\
+dec & Separador de decimal, default é ``.''. \\
+row.names & Nome das linhas. Usar somente se for data.frame, porque é incompatível com data.table.. \\
+col.names & Primeira linha como nomes das colunas. \\
+logical01 & Os valores lógicos devem ser escritos como 1 e 0 em vez de ``TRUE'' e ``FALSE''? \\
+showProgress & Exibir um medidor de progresso no console. Ignorado quando file == ``\,``. \\
+compress & Se compress = ``auto'' e se o arquivo termina em .gz, o formato de saída é gzipado csv. Se compress = ``none'', o formato de saída é sempre csv. Se compress = ``gzip'', o formato é csv compactado com gzip. A saída para o console nunca é compactada com gzip mesmo se compress = ``gzip''. Por padrão, compress = ``auto''. \\
+\bottomrule
+\end{longtable}
 
 \hypertarget{cross}{%
 \chapter{Cross-references}\label{cross}}

@@ -26,7 +26,7 @@ como auxiliar na execução te tarefas diárias básicas.</p>" />
 <meta name="author" content="Lucas C. Germano" />
 
 
-<meta name="date" content="2022-05-20" />
+<meta name="date" content="2022-05-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -978,6 +978,74 @@ Display a progress bar? By default it will only display in an interactive sessio
 </div>
 <div id="data.tablefwrite" class="section level3 hasAnchor" number="1.3.4">
 <h3><span class="header-section-number">1.3.4</span> data.table::fwrite()<a href="leitura-de-arquivos-de-texto.html#data.tablefwrite" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Salvar arquivos de texto (csv, csv2, tab, etc), semelhante ao write.table() do pacote utils, só que mais rápido.</p>
+<p><strong>Exemplo</strong></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="leitura-de-arquivos-de-texto.html#cb30-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>, <span class="at">nrows =</span> <span class="dv">20</span>)</span>
+<span id="cb30-2"><a href="leitura-de-arquivos-de-texto.html#cb30-2" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fwrite</span>(<span class="at">x =</span> dados,                     <span class="co"># Objeto a ser escrito</span></span>
+<span id="cb30-3"><a href="leitura-de-arquivos-de-texto.html#cb30-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">file =</span> <span class="st">&#39;dados/dados20max.csv&#39;</span>, <span class="co"># Nome e caminho (arquivo ja exite)</span></span>
+<span id="cb30-4"><a href="leitura-de-arquivos-de-texto.html#cb30-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">append =</span> <span class="cn">TRUE</span>,                 <span class="co"># Salva na ultima linha do arquivo ja existente</span></span>
+<span id="cb30-5"><a href="leitura-de-arquivos-de-texto.html#cb30-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sep =</span> <span class="st">&#39;;&#39;</span>,                     <span class="co"># Separados de colunas</span></span>
+<span id="cb30-6"><a href="leitura-de-arquivos-de-texto.html#cb30-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">showProgress =</span> <span class="cn">TRUE</span>)           <span class="co"># Mostrar progresso</span></span></code></pre></div>
+<p><Br></p>
+<p><strong>Argumentos principais</strong></p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argumento</th>
+<th>Definição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x</td>
+<td>Objeto a salvar. Deve estar como data.frame ou data.table.</td>
+</tr>
+<tr class="even">
+<td>file</td>
+<td>Nome do arquivo.</td>
+</tr>
+<tr class="odd">
+<td>append</td>
+<td>Se TRUE , o arquivo é salvo em acrescimo à última linha de um arquivo existente, sem incluir os nomes das colunas.</td>
+</tr>
+<tr class="even">
+<td>sep</td>
+<td>Separador de colunas. Default é “,”.</td>
+</tr>
+<tr class="odd">
+<td>na</td>
+<td>Um string a ser usada para valores ausentes. O padrão é uma string em branco ““.</td>
+</tr>
+<tr class="even">
+<td>dec</td>
+<td>Separador de decimal, default é “.”.</td>
+</tr>
+<tr class="odd">
+<td>row.names</td>
+<td>Nome das linhas. Usar somente se for data.frame, porque é incompatível com data.table..</td>
+</tr>
+<tr class="even">
+<td>col.names</td>
+<td>Primeira linha como nomes das colunas.</td>
+</tr>
+<tr class="odd">
+<td>logical01</td>
+<td>Os valores lógicos devem ser escritos como 1 e 0 em vez de “TRUE” e “FALSE”?</td>
+</tr>
+<tr class="even">
+<td>showProgress</td>
+<td>Exibir um medidor de progresso no console. Ignorado quando file == ““.</td>
+</tr>
+<tr class="odd">
+<td>compress</td>
+<td>Se compress = “auto” e se o arquivo termina em .gz, o formato de saída é gzipado csv. Se compress = “none”, o formato de saída é sempre csv. Se compress = “gzip”, o formato é csv compactado com gzip. A saída para o console nunca é compactada com gzip mesmo se compress = “gzip”. Por padrão, compress = “auto”.</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>
