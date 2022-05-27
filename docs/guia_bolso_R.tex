@@ -117,7 +117,7 @@
 
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{2022-05-22}
+\date{2022-05-26}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -170,19 +170,20 @@ Definição
 \end{minipage} \\
 \midrule
 \endhead
-setwd() & Define diretório de trabalho. \\
-getwd() & Identifica diretório ativo. \\
-dir() & Retorna todo o conteúdo do diretório ativo. \\
+base::setwd() & Define diretório de trabalho. \\
+base::getwd() & Identifica diretório ativo. \\
+base::dir() & Retorna todo o conteúdo do diretório ativo. \\
 Ctrl + Shift + h & Abre janela de navegação para definir diretório. \\
-file.choose() & Abre janela de navegação e ao selecionar o arquivo, ele retorna o caminho (diretório). Pode-se usar também dentro do comando, como em read.csv2(file = file.choose()). \\
+base::file.choose() & Abre janela de navegação e ao selecionar o arquivo, ele retorna o caminho (diretório). Pode-se usar também dentro do comando, como em read.csv2(file = file.choose()). \\
 No RStudio: Ir em Session, Setting Working Directory & Equivalente a Ctrl + Shift + h \\
 Inserir aspas ' ' + Tab entre elas & Navegação que pode servir para explorar caminhos. \\
-dir.create() & Cria uma pasta de trabalho. \\
-unlink() & Deleta uma pasta, ex. unlink(``some\_directory'', recursive = TRUE). \\
-file.create() & Cria um arquivo no diretório ex. file.create(``text\_file.txt'') (docx, csv, etc). \\
-file.copy() & Copia um arquivo. Ex. file.copy(from = ``source\_file.txt'', to = ``destination\_folder''). \\
-file.remove() & Deleta um arquivo, ex. file.remove(``csv\_file.csv''). Pode-se usar também unlink(`csv\_file.csv'). \\
-list.files() & Lista os arquivos presentes no diretório. \\
+base::dir.create() & Cria uma pasta de trabalho. \\
+base::unlink() & Deleta uma pasta, ex. unlink(``some\_directory'', recursive = TRUE). \\
+base::file.create() & Cria um arquivo no diretório ex. file.create(``text\_file.txt'') (docx, csv, etc). \\
+base::file.copy() & Copia um arquivo. Ex. file.copy(from = ``source\_file.txt'', to = ``destination\_folder''). \\
+base::file.remove() & Deleta um arquivo, ex. file.remove(``csv\_file.csv''). Pode-se usar também unlink(`csv\_file.csv'). \\
+base::list.files() & Lista os arquivos presentes no diretório. \\
+here::here() & Cria um caminho relativo para um arquivo no diretório de trabalho, preferencialmente em um projeto, o que facilita ser reproduzido em diversas máquinas, ex. here(`arquivos',`dados.csv'). É similar ao base::file.path(), cuja sintaxe é a mesma. \\
 \bottomrule
 \end{longtable}
 
@@ -538,6 +539,33 @@ A função le arquivos .dbf como dataframe, convertendo por default campos chara
 ## 4   63    209
 ## 5  223    166
 \end{verbatim}
+
+\hypertarget{rioimport}{%
+\subsection{rio::import()}\label{rioimport}}
+
+É um pacote que vem com a iniciativa de simplificar o procedimento de importação de arquivos de dados. É capaz de ler uma vasta lista de extensões de arquivos, vide (documentação){[}\url{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import}{]}.
+
+\textbf{Exemplo}
+
+\textbf{Argumentos principais}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Argumento
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definição
+\end{minipage} \\
+\midrule
+\endhead
+file & Caminho e nome do arquivo. Pode ter extensão .zip ou .tar. \\
+format & Formato do arquivo. A definição é opcional, mas pode ser ``,'', ``;'', '' \\
+setclass & Classe do objeto (opcional). Default é um ``data.frame''. Os valores permitidos incluem ``tbl\_df'', ``tbl'' ou ``tibble'' (se estiver usando dplyr) ou ``data.table'' (se estiver usando data.table). Outros valores são ignorados, de modo que um data.frame é retornado. \\
+which & Controla a importação de arquivos multi-objeto; como regra, import apenas retorna um único quadro de dados (use import\_list para importar vários quadros de dados de um arquivo multi-objeto). Se o arquivo for um diretório compactado, que pode ser uma cadeia de caracteres especificando um nome de arquivo ou um número inteiro especificando qual arquivo (na ordem de classificação de localidade) extrair do diretório compactado. Para planilhas do Excel, isso pode ser usado para especificar um nome ou número de planilha. Para arquivos .Rdata, pode ser um nome de objeto. Para arquivos HTML, identifica qual tabela extrair (da ordem do documento). Ignorado de outra forma. Um valor de cadeia de caracteres será usado como uma expressão regular, de modo que o arquivo extraído seja a primeira correspondência da expressão regular com os nomes de arquivo no arquivo. \\
+\bottomrule
+\end{longtable}
 
 \hypertarget{arquivos-da-web}{%
 \subsection{Arquivos da web}\label{arquivos-da-web}}

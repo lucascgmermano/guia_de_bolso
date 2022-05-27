@@ -26,7 +26,7 @@ como auxiliar na execução te tarefas diárias básicas.</p>" />
 <meta name="author" content="Lucas C. Germano" />
 
 
-<meta name="date" content="2022-05-22" />
+<meta name="date" content="2022-05-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -173,8 +173,9 @@ div.csl-indent {
 <li class="chapter" data-level="1.2.4" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#readodsread_ods"><i class="fa fa-check"></i><b>1.2.4</b> readODS::read_ods()</a></li>
 <li class="chapter" data-level="1.2.5" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#readxlread_excel"><i class="fa fa-check"></i><b>1.2.5</b> readxl::read_excel()</a></li>
 <li class="chapter" data-level="1.2.6" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#foreignread.dbf"><i class="fa fa-check"></i><b>1.2.6</b> foreign::read.dbf()</a></li>
-<li class="chapter" data-level="1.2.7" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#arquivos-da-web"><i class="fa fa-check"></i><b>1.2.7</b> Arquivos da web</a></li>
-<li class="chapter" data-level="1.2.8" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#encoding"><i class="fa fa-check"></i><b>1.2.8</b> Encoding</a></li>
+<li class="chapter" data-level="1.2.7" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#rioimport"><i class="fa fa-check"></i><b>1.2.7</b> rio::import()</a></li>
+<li class="chapter" data-level="1.2.8" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#arquivos-da-web"><i class="fa fa-check"></i><b>1.2.8</b> Arquivos da web</a></li>
+<li class="chapter" data-level="1.2.9" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#encoding"><i class="fa fa-check"></i><b>1.2.9</b> Encoding</a></li>
 </ul></li>
 <li class="chapter" data-level="1.3" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#escrita-de-arquivos"><i class="fa fa-check"></i><b>1.3</b> Escrita de arquivos</a>
 <ul>
@@ -246,15 +247,15 @@ div.csl-indent {
 </thead>
 <tbody>
 <tr class="odd">
-<td>setwd()</td>
+<td>base::setwd()</td>
 <td>Define diretório de trabalho.</td>
 </tr>
 <tr class="even">
-<td>getwd()</td>
+<td>base::getwd()</td>
 <td>Identifica diretório ativo.</td>
 </tr>
 <tr class="odd">
-<td>dir()</td>
+<td>base::dir()</td>
 <td>Retorna todo o conteúdo do diretório ativo.</td>
 </tr>
 <tr class="even">
@@ -262,7 +263,7 @@ div.csl-indent {
 <td>Abre janela de navegação para definir diretório.</td>
 </tr>
 <tr class="odd">
-<td>file.choose()</td>
+<td>base::file.choose()</td>
 <td>Abre janela de navegação e ao selecionar o arquivo, ele retorna o caminho (diretório). Pode-se usar também dentro do comando, como em read.csv2(file = file.choose()).</td>
 </tr>
 <tr class="even">
@@ -274,28 +275,32 @@ div.csl-indent {
 <td>Navegação que pode servir para explorar caminhos.</td>
 </tr>
 <tr class="even">
-<td>dir.create()</td>
+<td>base::dir.create()</td>
 <td>Cria uma pasta de trabalho.</td>
 </tr>
 <tr class="odd">
-<td>unlink()</td>
+<td>base::unlink()</td>
 <td>Deleta uma pasta, ex. unlink(“some_directory”, recursive = TRUE).</td>
 </tr>
 <tr class="even">
-<td>file.create()</td>
+<td>base::file.create()</td>
 <td>Cria um arquivo no diretório ex. file.create(“text_file.txt”) (docx, csv, etc).</td>
 </tr>
 <tr class="odd">
-<td>file.copy()</td>
+<td>base::file.copy()</td>
 <td>Copia um arquivo. Ex. file.copy(from = “source_file.txt”, to = “destination_folder”).</td>
 </tr>
 <tr class="even">
-<td>file.remove()</td>
+<td>base::file.remove()</td>
 <td>Deleta um arquivo, ex. file.remove(“csv_file.csv”). Pode-se usar também unlink(‘csv_file.csv’).</td>
 </tr>
 <tr class="odd">
-<td>list.files()</td>
+<td>base::list.files()</td>
 <td>Lista os arquivos presentes no diretório.</td>
+</tr>
+<tr class="even">
+<td>here::here()</td>
+<td>Cria um caminho relativo para um arquivo no diretório de trabalho, preferencialmente em um projeto, o que facilita ser reproduzido em diversas máquinas, ex. here(‘arquivos’,‘dados.csv’). É similar ao base::file.path(), cuja sintaxe é a mesma.</td>
 </tr>
 </tbody>
 </table>
@@ -769,8 +774,45 @@ read.csv2 = Arquivos separados por ponto e vírgula.</p>
 ## 5  223    166</code></pre>
 <p><Br></p>
 </div>
-<div id="arquivos-da-web" class="section level3 hasAnchor" number="1.2.7">
-<h3><span class="header-section-number">1.2.7</span> Arquivos da web<a href="leitura-de-arquivos-de-texto.html#arquivos-da-web" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="rioimport" class="section level3 hasAnchor" number="1.2.7">
+<h3><span class="header-section-number">1.2.7</span> rio::import()<a href="leitura-de-arquivos-de-texto.html#rioimport" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>É um pacote que vem com a iniciativa de simplificar o procedimento de importação de arquivos de dados. É capaz de ler uma vasta lista de extensões de arquivos, vide (documentação)[<a href="https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import" class="uri">https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import</a>].</p>
+<p><strong>Exemplo</strong></p>
+<p><Br></p>
+<p><strong>Argumentos principais</strong></p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argumento</th>
+<th>Definição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>file</td>
+<td>Caminho e nome do arquivo. Pode ter extensão .zip ou .tar.</td>
+</tr>
+<tr class="even">
+<td>format</td>
+<td>Formato do arquivo. A definição é opcional, mas pode ser “,”, “;”, ”</td>
+</tr>
+<tr class="odd">
+<td>setclass</td>
+<td>Classe do objeto (opcional). Default é um “data.frame”. Os valores permitidos incluem “tbl_df”, “tbl” ou “tibble” (se estiver usando dplyr) ou “data.table” (se estiver usando data.table). Outros valores são ignorados, de modo que um data.frame é retornado.</td>
+</tr>
+<tr class="even">
+<td>which</td>
+<td>Controla a importação de arquivos multi-objeto; como regra, import apenas retorna um único quadro de dados (use import_list para importar vários quadros de dados de um arquivo multi-objeto). Se o arquivo for um diretório compactado, que pode ser uma cadeia de caracteres especificando um nome de arquivo ou um número inteiro especificando qual arquivo (na ordem de classificação de localidade) extrair do diretório compactado. Para planilhas do Excel, isso pode ser usado para especificar um nome ou número de planilha. Para arquivos .Rdata, pode ser um nome de objeto. Para arquivos HTML, identifica qual tabela extrair (da ordem do documento). Ignorado de outra forma. Um valor de cadeia de caracteres será usado como uma expressão regular, de modo que o arquivo extraído seja a primeira correspondência da expressão regular com os nomes de arquivo no arquivo.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="arquivos-da-web" class="section level3 hasAnchor" number="1.2.8">
+<h3><span class="header-section-number">1.2.8</span> Arquivos da web<a href="leitura-de-arquivos-de-texto.html#arquivos-da-web" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Pode-se usar o endereço do apresentado no navegador ou contido nas propriedades (clicar com botão direito). O endereço deverá ser inserido entre aspas nos argumentos <code>file</code> ou <code>path</code> da maioria das funções de leitura, como no exemplo abaixo:</p>
 <p><em>read.csv2(file = ‘<a href="https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv" class="uri">https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv</a>’)</em></p>
 <p>Ou atribuir o link à um objeto e usa-lo na função.<br />
@@ -780,8 +822,8 @@ read.csv2 = Arquivos separados por ponto e vírgula.</p>
 <em>destfile = ‘dados/baixado_web.csv’)</em></p>
 <p><Br></p>
 </div>
-<div id="encoding" class="section level3 hasAnchor" number="1.2.8">
-<h3><span class="header-section-number">1.2.8</span> Encoding<a href="leitura-de-arquivos-de-texto.html#encoding" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="encoding" class="section level3 hasAnchor" number="1.2.9">
+<h3><span class="header-section-number">1.2.9</span> Encoding<a href="leitura-de-arquivos-de-texto.html#encoding" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Se houver distorção de caracteres especiais, considerar como possibilidades para resolver o problema utilizar o argumento correspondente a stringsAsFactors = F. Esse comando faz com que os caracteres permaneçam como caracteres, ao invés de serem convertidos para factor, e encoding = “UTF-8” ou encoding = “ISO-8859-1” para reconhecer os caracteres especiais. O argumento fileEncoding = “UTF-8” também pode ser necessário.</p>
 <p><strong>Descobrir o encoding</strong></p>
 <p>Verifica somente de um vetor</p>

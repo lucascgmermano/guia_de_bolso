@@ -10,6 +10,7 @@ data.tablefread
 readodsread_ods
 readxlread_excel
 foreignread.dbf
+rioimport
 arquivos-da-web
 encoding
 escrita-de-arquivos
