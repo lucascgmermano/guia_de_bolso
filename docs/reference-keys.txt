@@ -18,6 +18,7 @@ utilswrite.csv2
 readrwrite_csv2
 writexlwrite_xlsx
 data.tablefwrite
+rioexport
 cross
 chapters-and-sub-chapters
 captioned-figures-and-tables

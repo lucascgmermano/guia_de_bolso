@@ -26,7 +26,7 @@ como auxiliar na execução te tarefas diárias básicas.</p>" />
 <meta name="author" content="Lucas C. Germano" />
 
 
-<meta name="date" content="2022-05-26" />
+<meta name="date" content="2022-05-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -183,6 +183,7 @@ div.csl-indent {
 <li class="chapter" data-level="1.3.2" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#readrwrite_csv2"><i class="fa fa-check"></i><b>1.3.2</b> readr::write_csv2()</a></li>
 <li class="chapter" data-level="1.3.3" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#writexlwrite_xlsx"><i class="fa fa-check"></i><b>1.3.3</b> writexl::write_xlsx()</a></li>
 <li class="chapter" data-level="1.3.4" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#data.tablefwrite"><i class="fa fa-check"></i><b>1.3.4</b> data.table::fwrite()</a></li>
+<li class="chapter" data-level="1.3.5" data-path="leitura-de-arquivos-de-texto.html"><a href="leitura-de-arquivos-de-texto.html#rioexport"><i class="fa fa-check"></i><b>1.3.5</b> rio::export()</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>2</b> Cross-references</a>
@@ -776,8 +777,14 @@ read.csv2 = Arquivos separados por ponto e vírgula.</p>
 </div>
 <div id="rioimport" class="section level3 hasAnchor" number="1.2.7">
 <h3><span class="header-section-number">1.2.7</span> rio::import()<a href="leitura-de-arquivos-de-texto.html#rioimport" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>É um pacote que vem com a iniciativa de simplificar o procedimento de importação de arquivos de dados. É capaz de ler uma vasta lista de extensões de arquivos, vide (documentação)[<a href="https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import" class="uri">https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import</a>].</p>
+<p>O rio é um pacote que vem com a iniciativa de simplificar o procedimento de importação e exportação de arquivos de dados. Na importação, é capaz de ler uma vasta lista de extensões de arquivos, sem a necessidade de especificar o formato. Ver <a href="https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import">documentação</a>.</p>
 <p><strong>Exemplo</strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="leitura-de-arquivos-de-texto.html#cb17-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> rio<span class="sc">::</span><span class="fu">import</span>(<span class="at">file =</span> <span class="st">&#39;dados/planilha_dbf.dbf&#39;</span>) <span class="co"># Caminho e nome.</span></span>
+<span id="cb17-2"><a href="leitura-de-arquivos-de-texto.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##   peso altura
+## 1  222    160
+## 2  132    164
+## 3  137    169</code></pre>
 <p><Br></p>
 <p><strong>Argumentos principais</strong></p>
 <table>
@@ -827,18 +834,18 @@ read.csv2 = Arquivos separados por ponto e vírgula.</p>
 <p>Se houver distorção de caracteres especiais, considerar como possibilidades para resolver o problema utilizar o argumento correspondente a stringsAsFactors = F. Esse comando faz com que os caracteres permaneçam como caracteres, ao invés de serem convertidos para factor, e encoding = “UTF-8” ou encoding = “ISO-8859-1” para reconhecer os caracteres especiais. O argumento fileEncoding = “UTF-8” também pode ser necessário.</p>
 <p><strong>Descobrir o encoding</strong></p>
 <p>Verifica somente de um vetor</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="leitura-de-arquivos-de-texto.html#cb17-1" aria-hidden="true" tabindex="-1"></a>stringi<span class="sc">::</span><span class="fu">stri_enc_detect</span>(<span class="at">str =</span> cars<span class="sc">$</span>speed[<span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="leitura-de-arquivos-de-texto.html#cb19-1" aria-hidden="true" tabindex="-1"></a>stringi<span class="sc">::</span><span class="fu">stri_enc_detect</span>(<span class="at">str =</span> cars<span class="sc">$</span>speed[<span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## [[1]]
 ##   Encoding Language Confidence
 ## 1    UTF-8                0.15</code></pre>
 <p><strong>Converter encoding</strong></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="leitura-de-arquivos-de-texto.html#cb19-1" aria-hidden="true" tabindex="-1"></a>base<span class="sc">::</span><span class="fu">iconv</span>(<span class="at">x =</span> cars<span class="sc">$</span>speed[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="co"># Dataframe ou vetor</span></span>
-<span id="cb19-2"><a href="leitura-de-arquivos-de-texto.html#cb19-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">from =</span> <span class="st">&quot;UTF-8&quot;</span>,            <span class="co"># Encoding anterior</span></span>
-<span id="cb19-3"><a href="leitura-de-arquivos-de-texto.html#cb19-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">to =</span> <span class="st">&quot;ISO-8859-1&quot;</span>)         <span class="co"># Novo encoding</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="leitura-de-arquivos-de-texto.html#cb21-1" aria-hidden="true" tabindex="-1"></a>base<span class="sc">::</span><span class="fu">iconv</span>(<span class="at">x =</span> cars<span class="sc">$</span>speed[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="co"># Dataframe ou vetor</span></span>
+<span id="cb21-2"><a href="leitura-de-arquivos-de-texto.html#cb21-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">from =</span> <span class="st">&quot;UTF-8&quot;</span>,            <span class="co"># Encoding anterior</span></span>
+<span id="cb21-3"><a href="leitura-de-arquivos-de-texto.html#cb21-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">to =</span> <span class="st">&quot;ISO-8859-1&quot;</span>)         <span class="co"># Novo encoding</span></span></code></pre></div>
 <pre><code>## [1] &quot;4&quot; &quot;4&quot; &quot;7&quot;</code></pre>
 <p>Pode-se também utilizar a função <code>base::enc2utf8</code> para transformar uma codificação em UTF-8, porém, deve ser sempre aplicado a um vetor (ou coluna do banco) de dados do tipo character, se for preciso, transformar antes com a função <code>base::as.character</code></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="leitura-de-arquivos-de-texto.html#cb21-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.character</span>(iris<span class="sc">$</span>Species)</span>
-<span id="cb21-2"><a href="leitura-de-arquivos-de-texto.html#cb21-2" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">enc2utf8</span>(dados)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="leitura-de-arquivos-de-texto.html#cb23-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.character</span>(iris<span class="sc">$</span>Species)</span>
+<span id="cb23-2"><a href="leitura-de-arquivos-de-texto.html#cb23-2" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">enc2utf8</span>(dados)</span></code></pre></div>
 <p><strong>Encoding via Import Dataset</strong><br />
 É possível controlar o encoding pelos argumentos da função escolhida para leitura do arquivo, ou então pela leitura realizada pela interface gráfica do RStudio. Entrar no menu “File”, “Import Dataset”, “From text (base)…” , após isso será aberta uma janela, onde o campo encoding permite selecionar uma codificação entre centenas. Veja figura abaixo:
 <img src="ilustracoes/import_dataset.png" alt="import_dataset" /></p>
@@ -851,11 +858,11 @@ read.csv2 = Arquivos separados por ponto e vírgula.</p>
 <h3><span class="header-section-number">1.3.1</span> utils::write.csv2()<a href="leitura-de-arquivos-de-texto.html#utilswrite.csv2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>É possível salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula. Um ponto negativo é que essa função, ao salvar o arquivo, cria uma coluna com nomes das linhas (em números).</p>
 <p><strong>Exemplo</strong></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="leitura-de-arquivos-de-texto.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv2</span>(<span class="at">x =</span> iris,                <span class="co"># Dados ativos</span></span>
-<span id="cb22-2"><a href="leitura-de-arquivos-de-texto.html#cb22-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">file =</span> <span class="st">&#39;dados/iris.csv&#39;</span>, <span class="co"># Caminho e nome do arquivo</span></span>
-<span id="cb22-3"><a href="leitura-de-arquivos-de-texto.html#cb22-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">fileEncoding =</span> <span class="st">&quot;UTF-8&quot;</span>)  <span class="co"># Encoding</span></span>
-<span id="cb22-4"><a href="leitura-de-arquivos-de-texto.html#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="leitura-de-arquivos-de-texto.html#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv2</span>(<span class="st">&#39;dados/iris.csv&#39;</span>, <span class="at">nrows =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="leitura-de-arquivos-de-texto.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv2</span>(<span class="at">x =</span> iris,                <span class="co"># Dados ativos</span></span>
+<span id="cb24-2"><a href="leitura-de-arquivos-de-texto.html#cb24-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">file =</span> <span class="st">&#39;dados/iris.csv&#39;</span>, <span class="co"># Caminho e nome do arquivo</span></span>
+<span id="cb24-3"><a href="leitura-de-arquivos-de-texto.html#cb24-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">fileEncoding =</span> <span class="st">&quot;UTF-8&quot;</span>)  <span class="co"># Encoding</span></span>
+<span id="cb24-4"><a href="leitura-de-arquivos-de-texto.html#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="leitura-de-arquivos-de-texto.html#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv2</span>(<span class="st">&#39;dados/iris.csv&#39;</span>, <span class="at">nrows =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##   X Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1 1          5.1         3.5          1.4         0.2  setosa
 ## 2 2          4.9         3.0          1.4         0.2  setosa
@@ -915,8 +922,8 @@ read.csv2 = Arquivos separados por ponto e vírgula.</p>
 <h3><span class="header-section-number">1.3.2</span> readr::write_csv2()<a href="leitura-de-arquivos-de-texto.html#readrwrite_csv2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>É semelhante à função anterior, mas executa a tarefa duas vezes mais rápido, com a vantagem de não criar uma coluna com nomes das linhas.</p>
 <p><strong>Exemplo</strong></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="leitura-de-arquivos-de-texto.html#cb24-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv2</span>(<span class="at">x =</span> iris, <span class="at">file =</span> <span class="st">&#39;dados/iris.csv&#39;</span>)</span>
-<span id="cb24-2"><a href="leitura-de-arquivos-de-texto.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/iris.csv&#39;</span>, <span class="at">nrows =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="leitura-de-arquivos-de-texto.html#cb26-1" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv2</span>(<span class="at">x =</span> iris, <span class="at">file =</span> <span class="st">&#39;dados/iris.csv&#39;</span>)</span>
+<span id="cb26-2"><a href="leitura-de-arquivos-de-texto.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/iris.csv&#39;</span>, <span class="at">nrows =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
 ## 2          4.9         3.0          1.4         0.2  setosa
@@ -958,11 +965,11 @@ Display a progress bar? By default it will only display in an interactive sessio
 <h3><span class="header-section-number">1.3.3</span> writexl::write_xlsx()<a href="leitura-de-arquivos-de-texto.html#writexlwrite_xlsx" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Salvar arquivo de dados como Excel, formato .xlsx.</p>
 <p><strong>Exemplo 1</strong></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="leitura-de-arquivos-de-texto.html#cb26-1" aria-hidden="true" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(<span class="at">x =</span> iris,</span>
-<span id="cb26-2"><a href="leitura-de-arquivos-de-texto.html#cb26-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">path =</span> <span class="st">&#39;dados/iris.xlsx&#39;</span>,</span>
-<span id="cb26-3"><a href="leitura-de-arquivos-de-texto.html#cb26-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">col_names =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb26-4"><a href="leitura-de-arquivos-de-texto.html#cb26-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">format_headers =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb26-5"><a href="leitura-de-arquivos-de-texto.html#cb26-5" aria-hidden="true" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&#39;dados/iris.xlsx&#39;</span>, <span class="at">n_max =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="leitura-de-arquivos-de-texto.html#cb28-1" aria-hidden="true" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(<span class="at">x =</span> iris,</span>
+<span id="cb28-2"><a href="leitura-de-arquivos-de-texto.html#cb28-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">path =</span> <span class="st">&#39;dados/iris.xlsx&#39;</span>,</span>
+<span id="cb28-3"><a href="leitura-de-arquivos-de-texto.html#cb28-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">col_names =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb28-4"><a href="leitura-de-arquivos-de-texto.html#cb28-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">format_headers =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb28-5"><a href="leitura-de-arquivos-de-texto.html#cb28-5" aria-hidden="true" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&#39;dados/iris.xlsx&#39;</span>, <span class="at">n_max =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  
@@ -971,12 +978,12 @@ Display a progress bar? By default it will only display in an interactive sessio
 ## 3          4.7         3.2          1.3         0.2 setosa 
 ## 4          4.6         3.1          1.5         0.2 setosa</code></pre>
 <p><strong>Exemplo 2</strong></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="leitura-de-arquivos-de-texto.html#cb28-1" aria-hidden="true" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(<span class="at">path =</span> <span class="st">&quot;dados/conjuntodadosnativos.xlsx&quot;</span>,</span>
-<span id="cb28-2"><a href="leitura-de-arquivos-de-texto.html#cb28-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="fu">list</span>(<span class="at">sheet1=</span>iris, <span class="at">sheet2=</span>cars, <span class="at">sheet3=</span>mtcars))</span>
-<span id="cb28-3"><a href="leitura-de-arquivos-de-texto.html#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="leitura-de-arquivos-de-texto.html#cb28-4" aria-hidden="true" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">&#39;dados/conjuntodadosnativos.xlsx&#39;</span>,</span>
-<span id="cb28-5"><a href="leitura-de-arquivos-de-texto.html#cb28-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="dv">3</span>, </span>
-<span id="cb28-6"><a href="leitura-de-arquivos-de-texto.html#cb28-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">n_max =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="leitura-de-arquivos-de-texto.html#cb30-1" aria-hidden="true" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(<span class="at">path =</span> <span class="st">&quot;dados/conjuntodadosnativos.xlsx&quot;</span>,</span>
+<span id="cb30-2"><a href="leitura-de-arquivos-de-texto.html#cb30-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="fu">list</span>(<span class="at">sheet1=</span>iris, <span class="at">sheet2=</span>cars, <span class="at">sheet3=</span>mtcars))</span>
+<span id="cb30-3"><a href="leitura-de-arquivos-de-texto.html#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="leitura-de-arquivos-de-texto.html#cb30-4" aria-hidden="true" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">&#39;dados/conjuntodadosnativos.xlsx&#39;</span>,</span>
+<span id="cb30-5"><a href="leitura-de-arquivos-de-texto.html#cb30-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="dv">3</span>, </span>
+<span id="cb30-6"><a href="leitura-de-arquivos-de-texto.html#cb30-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">n_max =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 4 × 11
 ##     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -1022,12 +1029,12 @@ Display a progress bar? By default it will only display in an interactive sessio
 <h3><span class="header-section-number">1.3.4</span> data.table::fwrite()<a href="leitura-de-arquivos-de-texto.html#data.tablefwrite" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Salvar arquivos de texto (csv, csv2, tab, etc), semelhante ao write.table() do pacote utils, só que mais rápido.</p>
 <p><strong>Exemplo</strong></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="leitura-de-arquivos-de-texto.html#cb30-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>, <span class="at">nrows =</span> <span class="dv">20</span>)</span>
-<span id="cb30-2"><a href="leitura-de-arquivos-de-texto.html#cb30-2" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fwrite</span>(<span class="at">x =</span> dados,                     <span class="co"># Objeto a ser escrito</span></span>
-<span id="cb30-3"><a href="leitura-de-arquivos-de-texto.html#cb30-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">file =</span> <span class="st">&#39;dados/dados20max.csv&#39;</span>, <span class="co"># Nome e caminho (arquivo ja exite)</span></span>
-<span id="cb30-4"><a href="leitura-de-arquivos-de-texto.html#cb30-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">append =</span> <span class="cn">TRUE</span>,                 <span class="co"># Salva na ultima linha do arquivo ja existente</span></span>
-<span id="cb30-5"><a href="leitura-de-arquivos-de-texto.html#cb30-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sep =</span> <span class="st">&#39;;&#39;</span>,                     <span class="co"># Separados de colunas</span></span>
-<span id="cb30-6"><a href="leitura-de-arquivos-de-texto.html#cb30-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">showProgress =</span> <span class="cn">TRUE</span>)           <span class="co"># Mostrar progresso</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="leitura-de-arquivos-de-texto.html#cb32-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>, <span class="at">nrows =</span> <span class="dv">20</span>)</span>
+<span id="cb32-2"><a href="leitura-de-arquivos-de-texto.html#cb32-2" aria-hidden="true" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fwrite</span>(<span class="at">x =</span> dados,                     <span class="co"># Objeto a ser escrito</span></span>
+<span id="cb32-3"><a href="leitura-de-arquivos-de-texto.html#cb32-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">file =</span> <span class="st">&#39;dados/dados20max.csv&#39;</span>, <span class="co"># Nome e caminho (arquivo ja exite)</span></span>
+<span id="cb32-4"><a href="leitura-de-arquivos-de-texto.html#cb32-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">append =</span> <span class="cn">TRUE</span>,                 <span class="co"># Salva na ultima linha do arquivo ja existente</span></span>
+<span id="cb32-5"><a href="leitura-de-arquivos-de-texto.html#cb32-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sep =</span> <span class="st">&#39;;&#39;</span>,                     <span class="co"># Separados de colunas</span></span>
+<span id="cb32-6"><a href="leitura-de-arquivos-de-texto.html#cb32-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">showProgress =</span> <span class="cn">TRUE</span>)           <span class="co"># Mostrar progresso</span></span></code></pre></div>
 <p><Br></p>
 <p><strong>Argumentos principais</strong></p>
 <table>
@@ -1085,6 +1092,41 @@ Display a progress bar? By default it will only display in an interactive sessio
 <tr class="odd">
 <td>compress</td>
 <td>Se compress = “auto” e se o arquivo termina em .gz, o formato de saída é gzipado csv. Se compress = “none”, o formato de saída é sempre csv. Se compress = “gzip”, o formato é csv compactado com gzip. A saída para o console nunca é compactada com gzip mesmo se compress = “gzip”. Por padrão, compress = “auto”.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="rioexport" class="section level3 hasAnchor" number="1.3.5">
+<h3><span class="header-section-number">1.3.5</span> rio::export()<a href="leitura-de-arquivos-de-texto.html#rioexport" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gravar um data frame nos formatos habituais de texto. Para exportar uma lista de arquivos, usar o rio::export_list(). Ver <a href="https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/export">documentação</a>.</p>
+<p><strong>Exempĺo</strong></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="leitura-de-arquivos-de-texto.html#cb33-1" aria-hidden="true" tabindex="-1"></a>rio<span class="sc">::</span><span class="fu">export</span>(<span class="at">x =</span> iris,                  <span class="co"># Objeto que será exportado.</span></span>
+<span id="cb33-2"><a href="leitura-de-arquivos-de-texto.html#cb33-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">file =</span> <span class="st">&#39;dados/iris.xlsx&#39;</span>)  <span class="co"># Caminho, nome e extensão.</span></span></code></pre></div>
+<p><Br></p>
+<p><strong>Argumentos principais</strong></p>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argumento</th>
+<th>Definição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>x</td>
+<td>Matriz ou data frame a ser escrita. Exceções são que x pode ser uma lista de dados se o formato de arquivo de saída for uma pasta de Excel .xlsx. Para exportar uma lista de quadros de dados para vários arquivos, use export_list em vez disso.</td>
+</tr>
+<tr class="even">
+<td>file</td>
+<td>Nome do arquivo. Deve especificar file e/ou format.</td>
+</tr>
+<tr class="odd">
+<td>format</td>
+<td>Sequência de caracteres opcional contendo o formato de arquivo, que pode ser usado para substituir o formato inferido a partir de file ou, em vez de especificar file, um arquivo com o nome do símbolo de x e a extensão de arquivo especificada será criado. Os atalhos incluem: “,” ou “;” ou ”</td>
 </tr>
 </tbody>
 </table>

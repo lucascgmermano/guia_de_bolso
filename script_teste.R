@@ -35,3 +35,8 @@ file
 file.path('dados/')
 here::here()
 rio::import(file = 'dados/dados.csv', format = ",")
+
+rio::export_list(x = list(cars,iris,iris3),
+                 file = csv_files2 <- tempfile(fileext = "%s.csv"))
+tempfile(tmpdir = 'dados',fileext = ".csv")
+tempfile(fileext = )

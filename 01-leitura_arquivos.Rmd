@@ -258,11 +258,12 @@ head(dados, 5)
 <Br>
 
 ### rio::import()
-É um pacote que vem com a iniciativa de simplificar o procedimento de importação de arquivos de dados. É capaz de ler uma vasta lista de extensões de arquivos, vide (documentação)[https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import].
+O rio é um pacote que vem com a iniciativa de simplificar o procedimento de importação e exportação de arquivos de dados. Na importação, é capaz de ler uma vasta lista de extensões de arquivos, sem a necessidade de especificar o formato. Ver [documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import).
 
 **Exemplo**  
 ```{r}
-
+dados <- rio::import(file = 'dados/planilha_dbf.dbf') # Caminho e nome.
+head(dados, 3)
 ```
 
 <Br>
@@ -481,3 +482,23 @@ col.names	| Primeira linha como nomes das colunas.
 logical01	| Os valores lógicos devem ser escritos como 1 e 0 em vez de "TRUE" e "FALSE"?
 showProgress | Exibir um medidor de progresso no console. Ignorado quando file == "".
 compress | Se compress = "auto" e se o arquivo termina em .gz, o formato de saída é gzipado csv. Se compress = "none", o formato de saída é sempre csv. Se compress = "gzip", o formato é csv compactado com gzip. A saída para o console nunca é compactada com gzip mesmo se compress = "gzip". Por padrão, compress = "auto".
+
+
+### rio::export()  
+Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gravar um data frame nos formatos habituais de texto. Para exportar uma lista de arquivos, usar o rio::export_list(). Ver [documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/export).  
+
+**Exempĺo**  
+```{r}
+rio::export(x = iris,                  # Objeto que será exportado.
+            file = 'dados/iris.xlsx')  # Caminho, nome e extensão.
+```
+
+<Br>
+
+**Argumentos principais**  
+
+Argumento|Definição
+---------|---------
+x | Matriz ou data frame a ser escrita. Exceções são que x pode ser uma lista de dados se o formato de arquivo de saída for uma pasta de Excel .xlsx. Para exportar uma lista de quadros de dados para vários arquivos, use export_list em vez disso.
+file | Nome do arquivo. Deve especificar file e/ou format.
+format | Sequência de caracteres opcional contendo o formato de arquivo, que pode ser usado para substituir o formato inferido a partir de file ou, em vez de especificar file, um arquivo com o nome do símbolo de x e a extensão de arquivo especificada será criado. Os atalhos incluem: ","  ou ";" ou  "|" .
