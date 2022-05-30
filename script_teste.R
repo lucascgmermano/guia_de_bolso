@@ -9,34 +9,31 @@ sapply(X = dados, class)
 dir.create('ilustracoes')
 dir.exists(paths = dir())
 remove(... = 'teste.txt')
+unlink(x = c('iris2.csv', 'iris3.csv'), recursive = T)
 
 
-file.create("teste.txt")
-file.create("new_word_file.docx")
-file.create("new_csv_file.csv")
+install.packages("googlesheets4")
 
-file.remove("teste.txt")
-unlink("teste/", recursive = TRUE)
-unlink('new_csv_file.csv')
-iconv(x = ,
-      from = ,
-      to = )
+rio::export(x = dados::diamante, file = 'dados/diamantes.xlsx')
+
+library(googlesheets4)
+url <- "https://docs.google.com/spreadsheets/d/18PV-XBQIrzB6Jfdvz5vgDHZPBoqlDxPcGxufOvCk5a0/edit#gid=0"
+
+setwd('../teste')
+write.csv2(x = iris[40:80,], file = 'iris2.csv')
 
 
-altura <- round(runif(n = 100, min = 130, max = 220),0)
-peso <- round(runif(n = 100, min = 40, max = 280),0)
-df <- data.frame(peso, altura)
+with(data = iris, expr = {Species == "versicolor"}) %>% sum()
+head(iris)
 
-read.csv2(file = file.path('dados','dados.csv'))
-read.csv2(file = here::here('dados','dados.csv'))
-here::here('dados','dados.csv')
-base::file.path('dados','dados.csv')  
-file
-file.path('dados/')
-here::here()
-rio::import(file = 'dados/dados.csv', format = ",")
+funcao <- function(x) {
+  read.csv2(x) %>% 
+  dplyr::filter(Species=="versicolor")
+}
 
-rio::export_list(x = list(cars,iris,iris3),
-                 file = csv_files2 <- tempfile(fileext = "%s.csv"))
-tempfile(tmpdir = 'dados',fileext = ".csv")
-tempfile(fileext = )
+arquivos <- list.files()
+dados <- lapply(X = arq, FUN = funcao) 
+
+Reduce(x = dados, f = rbind.data.frame)
+
+rio::import_list(file = arquivos, rbind = TRUE, header=T)[-7]

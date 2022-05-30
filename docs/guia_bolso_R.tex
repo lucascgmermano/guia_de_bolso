@@ -117,7 +117,7 @@
 
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{2022-05-27}
+\date{2022-05-29}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -151,8 +151,10 @@ Sejam bem-vindos!\\
 O objetivo deste livro é disponibilizar para consulta anotações de códigos R de forma prática e rápida. Não há explicações aprofundadas nem se pretende esgotar as possibilidades do conteúdo apresentado, assim, esta documentação deve ser utilizada somente como um guia rápido, pois não passa de um conjunto de rascunhos apreendidos no dia-a-dia da manipulação de dados e na apresentação de resultados. O conteúdo poderá ser baixado nos formatos \texttt{.pdf} ou \texttt{epub}, mas a proposta é que o conteúdo seja dinâmico, com atualizações semanais. A estrutura de construção está disponível no \href{https://github.com/lucascgmermano/guia_de_bolso.git}{GitHub}.\\
 Críticas, sugestões ou contribuições de código e conteúdo podem ser enviadas para \url{lucascgermano@gmail.com}. Ficarei muito feliz, qualquer que seja o motivo do contato.
 
-\hypertarget{leitura-de-arquivos-de-texto}{%
-\chapter{Leitura de arquivos de texto}\label{leitura-de-arquivos-de-texto}}
+\hypertarget{leitura-e-escrita-de-arquivos-de-texto}{%
+\chapter{Leitura e escrita de arquivos de texto}\label{leitura-e-escrita-de-arquivos-de-texto}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{diretuxf3rio-de-trabalho}{%
 \section{Diretório de trabalho}\label{diretuxf3rio-de-trabalho}}
@@ -178,7 +180,7 @@ base::file.choose() & Abre janela de navegação e ao selecionar o arquivo, ele 
 No RStudio: Ir em Session, Setting Working Directory & Equivalente a Ctrl + Shift + h \\
 Inserir aspas ' ' + Tab entre elas & Navegação que pode servir para explorar caminhos. \\
 base::dir.create() & Cria uma pasta de trabalho. \\
-base::unlink() & Deleta uma pasta, ex. unlink(``some\_directory'', recursive = TRUE). \\
+base::unlink() & Deleta uma pasta, ex. unlink(``some\_directory'', recursive = TRUE). Aceita um vetor c() para excluir vários arquivos ou pastas. \\
 base::file.create() & Cria um arquivo no diretório ex. file.create(``text\_file.txt'') (docx, csv, etc). \\
 base::file.copy() & Copia um arquivo. Ex. file.copy(from = ``source\_file.txt'', to = ``destination\_folder''). \\
 base::file.remove() & Deleta um arquivo, ex. file.remove(``csv\_file.csv''). Pode-se usar também unlink(`csv\_file.csv'). \\
@@ -187,7 +189,9 @@ here::here() & Cria um caminho relativo para um arquivo no diretório de trabalh
 \bottomrule
 \end{longtable}
 
-\textbf{Exemplo - list.files()}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Exemplo: list.files()}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -203,21 +207,34 @@ here::here() & Cria um caminho relativo para um arquivo no diretório de trabalh
 ## [1] "planilha_ods.ods"
 \end{verbatim}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \hypertarget{leitura-de-arquivos}{%
 \section{Leitura de arquivos}\label{leitura-de-arquivos}}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{utilsread.csv2}{%
 \subsection{utils::read.csv2()}\label{utilsread.csv2}}
 
-read.csv = Arquivos separados por vírgula.\\
-read.csv2 = Arquivos separados por ponto e vírgula.
+Faz a leitura de um arquivo em formado de tabela e cria um data frame a partir dele, com casos como linhas e variáveis como colunas. É uma função nativa do R, em que read.csv trata de arquivos separados por vírgula, enquanto read.csv2 de arquivos separados por ponto e vírgula. Os argumentos das funções são os mesmos, por isso o .csv2 foi escolhido para o exemplo.
 
-Os argumentos das funções são os mesmos, por isso o exemplo será dado somente para .csv2 (mais usado)
+\begin{quote}
+\href{https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/read.table}{Documentação}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\textbf{Exemplo}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dados }\OtherTok{\textless{}{-}} \FunctionTok{read.csv2}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/dados.csv\textquotesingle{}}\NormalTok{)}
-\FunctionTok{head}\NormalTok{(dados, }\DecValTok{5}\NormalTok{)          }\CommentTok{\# Exibir as 5 primeiras linhas dos dados.}
+\FunctionTok{head}\NormalTok{(dados, }\DecValTok{2}\NormalTok{)          }\CommentTok{\# Exibir as 2 primeiras linhas dos dados.}
 \end{Highlighting}
 \end{Shaded}
 
@@ -225,20 +242,16 @@ Os argumentos das funções são os mesmos, por isso o exemplo será dado soment
 ##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana
 ## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1
 ## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3
-## 3 3 2020-01-29  352380      Itobi 30 a 39     1      0    1   0 2020   1      5
-## 4 4 2020-01-30  353050     Mococa 70 a 79     1      0    0   1 2020   1      5
-## 5 5 2020-02-02  353080 Mogi Mirim 40 a 49     1      0    0   1 2020   2      5
 ##      pop
 ## 1 150713
 ## 2 150713
-## 3   7830
-## 4  68788
-## 5  92715
 \end{verbatim}
 
-\textbf{Argumentos principais}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-Os argumentos são os mesmos da função read.table().
+\begin{quote}
+\textbf{Argumentos principais}
+\end{quote}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
@@ -266,10 +279,30 @@ colClasses & character. Um vetor de classes referentes as colunas. Valores poss�
 \bottomrule
 \end{longtable}
 
+\begin{itemize}
+\tightlist
+\item
+  \emph{Os argumentos são os mesmos da função read.table().}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \hypertarget{readrread_csv2}{%
 \subsection{readr::read\_csv2()}\label{readrread_csv2}}
 
+O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados retangulares (como csv, tsv e fwf). Ele foi projetado para analisar de forma flexível muitos tipos de dados encontrados na natureza. Já está integrado no RStudio para o método de importação via interface gráfica, embora necessite de instalação.
+
+\begin{quote}
+\href{https://www.rdocumentation.org/packages/readr/versions/1.3.1}{Documentação}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Exemplo 1}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -277,20 +310,19 @@ colClasses & character. Um vetor de classes referentes as colunas. Valores poss�
                           \AttributeTok{col\_select =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\SpecialCharTok{:}\DecValTok{7}\NormalTok{),     }\CommentTok{\# Seleção de colunas}
                           \AttributeTok{guess\_max =} \DecValTok{1000}\NormalTok{,          }\CommentTok{\# Máximo de linhas utilizadas para adivinhar classes}
                           \AttributeTok{skip\_empty\_rows =} \ConstantTok{TRUE}\NormalTok{)    }\CommentTok{\# Pular linhas vazias}
-\FunctionTok{head}\NormalTok{(dados, }\DecValTok{5}\NormalTok{)                                       }
+\FunctionTok{head}\NormalTok{(dados, }\DecValTok{2}\NormalTok{)                                       }
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 5 x 5
+## # A tibble: 2 x 5
 ##   data       muni       faixa   casos obitos
 ##   <date>     <chr>      <chr>   <dbl>  <dbl>
 ## 1 2020-01-01 Mogi Guaçu 30 a 39     1      0
 ## 2 2020-01-20 Mogi Guaçu 50 a 59     1      0
-## 3 2020-01-29 Itobi      30 a 39     1      0
-## 4 2020-01-30 Mococa     70 a 79     1      0
-## 5 2020-02-02 Mogi Mirim 40 a 49     1      0
 \end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \textbf{Exemplo 2}
 
@@ -303,20 +335,19 @@ colClasses & character. Um vetor de classes referentes as colunas. Valores poss�
               \AttributeTok{skip =} \DecValTok{1}\NormalTok{,                   }\CommentTok{\# Pular primeira linha}
               \AttributeTok{col\_names =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}e\textquotesingle{}}\NormalTok{),   }\CommentTok{\# Definir nomes das colunas}
               \AttributeTok{col\_select =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}e\textquotesingle{}}\NormalTok{))  }\CommentTok{\# Selecionar colunas}
-\FunctionTok{head}\NormalTok{(dados, }\DecValTok{5}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(dados, }\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 5 x 5
+## # A tibble: 2 x 5
 ##       a b               c d          e      
 ##   <dbl> <date>      <dbl> <chr>      <chr>  
 ## 1     1 2020-01-01 353070 Mogi Guaçu 30 a 39
 ## 2     2 2020-01-20 353070 Mogi Guaçu 50 a 59
-## 3     3 2020-01-29 352380 Itobi      30 a 39
-## 4     4 2020-01-30 353050 Mococa     70 a 79
-## 5     5 2020-02-02 353080 Mogi Mirim 40 a 49
 \end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \textbf{Argumentos principais}
 
@@ -345,6 +376,10 @@ show\_col\_types & Se FALSE, não mostre os tipos de coluna adivinhados. Se TRUE
 skip\_empty\_rows & As linhas em branco devem ser ignoradas completamente? ou seja, se esta opção for TRUE, as linhas em branco não serão representadas. Se for FALSE, eles serão representados por valores NA em todas as colunas. \\
 \bottomrule
 \end{longtable}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{data.tablefread}{%
 \subsection{data.table::fread()}\label{data.tablefread}}
@@ -879,12 +914,24 @@ compress & Se compress = ``auto'' e se o arquivo termina em .gz, o formato de sa
 \bottomrule
 \end{longtable}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \hypertarget{rioexport}{%
 \subsection{rio::export()}\label{rioexport}}
 
-Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gravar um data frame nos formatos habituais de texto. Para exportar uma lista de arquivos, usar o rio::export\_list(). Ver \href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/export}{documentação}.
+Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gravar um data frame nos formatos habituais de texto. Para exportar uma lista de arquivos, usar o rio::export\_list().
 
+\begin{quote}
+\href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/export}{Documentação}.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Exempĺo}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -893,7 +940,11 @@ Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gra
 \end{Highlighting}
 \end{Shaded}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Argumentos principais}
+\end{quote}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
@@ -911,6 +962,9 @@ file & Nome do arquivo. Deve especificar file e/ou format. \\
 format & Sequência de caracteres opcional contendo o formato de arquivo, que pode ser usado para substituir o formato inferido a partir de file ou, em vez de especificar file, um arquivo com o nome do símbolo de x e a extensão de arquivo especificada será criado. Os atalhos incluem: ``,'' ou ``;'' ou '' \\
 \bottomrule
 \end{longtable}
+
+\textbf{\emph{
+}}
 
 \hypertarget{cross}{%
 \chapter{Cross-references}\label{cross}}

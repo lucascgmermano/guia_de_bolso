@@ -7,7 +7,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
-# Leitura de arquivos de texto
+# Leitura e escrita de arquivos de texto
+
+***
 
 ## Diretório de trabalho  
 
@@ -23,16 +25,16 @@ base::file.choose() | Abre janela de navegação e ao selecionar o arquivo, ele 
 No RStudio: Ir em Session,  Setting Working Directory | Equivalente a Ctrl + Shift + h
 Inserir aspas ' ' + Tab entre elas | Navegação que pode servir para explorar caminhos.
 base::dir.create() | Cria uma pasta de trabalho.
-base::unlink() | Deleta uma pasta, ex. unlink("some_directory", recursive = TRUE).
+base::unlink() | Deleta uma pasta, ex. unlink("some_directory", recursive = TRUE). Aceita um vetor c() para excluir vários arquivos ou pastas.
 base::file.create() | Cria um arquivo no diretório ex. file.create("text_file.txt") (docx, csv, etc).
 base::file.copy() | Copia um arquivo. Ex. file.copy(from = "source_file.txt", to = "destination_folder").
 base::file.remove() | Deleta um arquivo, ex. file.remove("csv_file.csv"). Pode-se usar também unlink('csv_file.csv').
 base::list.files() | Lista os arquivos presentes no diretório.
 here::here() | Cria um caminho relativo para um arquivo no diretório de trabalho, preferencialmente em um projeto, o que facilita ser reproduzido em diversas máquinas, ex. here('arquivos','dados.csv'). É similar ao base::file.path(), cuja sintaxe é a mesma.
 
-<Br>
+***
 
-**Exemplo - list.files()**
+**Exemplo: list.files()**
 
 ```{r list.files}
 list.files(path = 'dados/',      # Caminho do arquivo
@@ -44,25 +46,34 @@ list.files(path = 'dados/',      # Caminho do arquivo
 
 <Br>
 
-## Leitura de arquivos  
-
-### utils::read.csv2()
-
-read.csv = Arquivos separados por vírgula.  
-read.csv2 = Arquivos separados por ponto e vírgula.
-
-Os argumentos das funções são os mesmos, por isso o exemplo será dado somente para .csv2 (mais usado)
-
-```{r .csv2}
-dados <- read.csv2(file = 'dados/dados.csv')
-head(dados, 5)          # Exibir as 5 primeiras linhas dos dados.
-```
+***
+***
 
 <Br>
 
-**Argumentos principais**
+## Leitura de arquivos  
 
-Os argumentos são os mesmos da função read.table().
+***
+
+### utils::read.csv2()
+
+Faz a leitura de um arquivo em formado de tabela e cria um data frame a partir dele, com casos como linhas e variáveis como colunas. É uma função nativa do R, em que read.csv trata de arquivos separados por vírgula, enquanto read.csv2 de arquivos separados por ponto e vírgula. Os argumentos das funções são os mesmos, por isso o .csv2 foi escolhido para o exemplo.  
+
+> [Documentação](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/read.table)
+
+***
+
+> **Exemplo**  
+
+```{r .csv2}
+dados <- read.csv2(file = 'dados/dados.csv')
+head(dados, 2)          # Exibir as 2 primeiras linhas dos dados.
+```
+
+
+***
+
+> **Argumentos principais**
 
 Argumento | Definição
 ----------|----------
@@ -78,22 +89,33 @@ stringsAsFactors | Logical. Se TRUE os vetores character serão convertidos para
 fileEncoding | Character string. Define o encoding que será usado. Ex. fileEnconding = "UTF-8" ou "Latin-1" ou "ISO-8859-1".
 skipNull | Logical. Se TRUE os nulos (NA) devem ser ignorados.
 colClasses | character. Um vetor de classes referentes as colunas. Valores possíveis são NA (default, quando type.convert é usado), "NULL" (quando a coluna é pulada), um vetor atomico de classes(logical, integer, numeric, complex, character, raw), or "factor", "Date" or "POSIXct".
+* *Os argumentos são os mesmos da função read.table().*
+
+<Br>
+
+***
+***
 
 <Br>
 
 ### readr::read_csv2()
+O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados retangulares (como csv, tsv e fwf). Ele foi projetado para analisar de forma flexível muitos tipos de dados encontrados na natureza. Já está integrado no RStudio para o método de importação via interface gráfica, embora necessite de instalação.  
 
-**Exemplo 1**
+> [Documentação](https://www.rdocumentation.org/packages/readr/versions/1.3.1)
+
+***
+
+> **Exemplo 1**
 
 ```{r exemplo1_csv2}
 dados <- readr::read_csv2(file = 'dados/dados.csv',  # Caminho e arquivo
                           col_select = c(2,4:7),     # Seleção de colunas
                           guess_max = 1000,          # Máximo de linhas utilizadas para adivinhar classes
                           skip_empty_rows = TRUE)    # Pular linhas vazias
-head(dados, 5)                                       
+head(dados, 2)                                       
 ```
 
-<Br>
+***
 
 **Exemplo 2**
 
@@ -105,10 +127,10 @@ dados <- readr::read_csv2(
               skip = 1,                   # Pular primeira linha
               col_names = c('a','b','c','d','e'),   # Definir nomes das colunas
               col_select = c('a','b','c','d','e'))  # Selecionar colunas
-head(dados, 5)
+head(dados, 2)
 ```
 
-<Br>
+***
 
 **Argumentos principais**
 
@@ -126,6 +148,11 @@ n_max | Número máximo de linhas a ler.
 guess_max | Número máximo de linhas a serem usadas para adivinhar os tipos de coluna.
 show_col_types | Se FALSE, não mostre os tipos de coluna adivinhados. Se TRUE sempre mostra os tipos de coluna, mesmo que sejam fornecidos. Se NULL (o padrão) mostrar apenas os tipos de coluna se eles não forem fornecidos explicitamente pelo argumento col_types.
 skip_empty_rows | As linhas em branco devem ser ignoradas completamente? ou seja, se esta opção for TRUE, as linhas em branco não serão representadas. Se for FALSE, eles serão representados por valores NA em todas as colunas.
+
+<Br>
+
+***
+***
 
 <Br>
 
@@ -483,22 +510,34 @@ logical01	| Os valores lógicos devem ser escritos como 1 e 0 em vez de "TRUE" e
 showProgress | Exibir um medidor de progresso no console. Ignorado quando file == "".
 compress | Se compress = "auto" e se o arquivo termina em .gz, o formato de saída é gzipado csv. Se compress = "none", o formato de saída é sempre csv. Se compress = "gzip", o formato é csv compactado com gzip. A saída para o console nunca é compactada com gzip mesmo se compress = "gzip". Por padrão, compress = "auto".
 
+***
+***
 
 ### rio::export()  
-Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gravar um data frame nos formatos habituais de texto. Para exportar uma lista de arquivos, usar o rio::export_list(). Ver [documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/export).  
+Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gravar um data frame nos formatos habituais de texto. Para exportar uma lista de arquivos, usar o rio::export_list().  
 
-**Exempĺo**  
+> [Documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/export).  
+
+***
+<Br>
+
+> **Exempĺo**  
 ```{r}
 rio::export(x = iris,                  # Objeto que será exportado.
             file = 'dados/iris.xlsx')  # Caminho, nome e extensão.
 ```
 
+***
 <Br>
 
-**Argumentos principais**  
+> **Argumentos principais**  
 
 Argumento|Definição
 ---------|---------
 x | Matriz ou data frame a ser escrita. Exceções são que x pode ser uma lista de dados se o formato de arquivo de saída for uma pasta de Excel .xlsx. Para exportar uma lista de quadros de dados para vários arquivos, use export_list em vez disso.
 file | Nome do arquivo. Deve especificar file e/ou format.
 format | Sequência de caracteres opcional contendo o formato de arquivo, que pode ser usado para substituir o formato inferido a partir de file ou, em vez de especificar file, um arquivo com o nome do símbolo de x e a extensão de arquivo especificada será criado. Os atalhos incluem: ","  ou ";" ou  "|" .
+
+<Br>
+***
+***
