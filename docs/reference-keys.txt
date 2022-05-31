@@ -1,6 +1,7 @@
 fig:nice-fig
 tab:nice-tab
 eq:binom
+thm:tri
 leitura-e-escrita-de-arquivos-de-texto
 diretório-de-trabalho
 leitura-de-arquivos

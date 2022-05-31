@@ -37,3 +37,4 @@ dados <- lapply(X = arq, FUN = funcao)
 Reduce(x = dados, f = rbind.data.frame)
 
 rio::import_list(file = arquivos, rbind = TRUE, header=T)[-7]
+data.table::f
