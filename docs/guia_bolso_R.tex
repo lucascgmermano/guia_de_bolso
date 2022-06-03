@@ -117,7 +117,7 @@
 
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{2022-05-29}
+\date{2022-06-02}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -184,6 +184,7 @@ base::unlink() & Deleta uma pasta, ex. unlink(``some\_directory'', recursive = T
 base::file.create() & Cria um arquivo no diretório ex. file.create(``text\_file.txt'') (docx, csv, etc). \\
 base::file.copy() & Copia um arquivo. Ex. file.copy(from = ``source\_file.txt'', to = ``destination\_folder''). \\
 base::file.remove() & Deleta um arquivo, ex. file.remove(``csv\_file.csv''). Pode-se usar também unlink(`csv\_file.csv'). \\
+base::file.rename() & Renomear um arquivo. \\
 base::list.files() & Lista os arquivos presentes no diretório. \\
 here::here() & Cria um caminho relativo para um arquivo no diretório de trabalho, preferencialmente em um projeto, o que facilita ser reproduzido em diversas máquinas, ex. here(`arquivos',`dados.csv'). É similar ao base::file.path(), cuja sintaxe é a mesma. \\
 \bottomrule
@@ -324,7 +325,9 @@ O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados ret
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
+\begin{quote}
 \textbf{Exemplo 2}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -349,7 +352,9 @@ O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados ret
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
+\begin{quote}
 \textbf{Argumentos principais}
+\end{quote}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
@@ -384,9 +389,17 @@ skip\_empty\_rows & As linhas em branco devem ser ignoradas completamente? ou se
 \hypertarget{data.tablefread}{%
 \subsection{data.table::fread()}\label{data.tablefread}}
 
-Tem a vantagem de realizar a leitura de arquivos grandes de forma rápida. Além disso, tem boa capacidade de identificar automaticamente o separador, encoding e tipos de classes. O resultado padrão é um objeto data.table, mas pode-se mudar para data.frame.
+Similar ao read.table e read.csv, só que mais rápido e conveniente por ler arquivos muito grandes. Todos os controles como sep, colClasses, nrows, encoding são detectados atuomaticamente. O resultado padrão é um objeto data.table, mas pode-se mudar para data.frame.
 
-\textbf{Exemplo 1}
+\begin{quote}
+\href{https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fread}{Documentação}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\textbf{Exemplo}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -398,7 +411,7 @@ Tem a vantagem de realizar a leitura de arquivos grandes de forma rápida. Além
                            \AttributeTok{col.names =} \FunctionTok{c}\NormalTok{(}\StringTok{"data.in.sin"}\NormalTok{,         }\CommentTok{\# Renomeia colunas}
                                          \StringTok{"municipio"}\NormalTok{, }
                                          \StringTok{"num\_casos"}\NormalTok{)) }
-\FunctionTok{head}\NormalTok{(dados, }\DecValTok{5}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(dados, }\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -406,12 +419,13 @@ Tem a vantagem de realizar a leitura de arquivos grandes de forma rápida. Além
 ##    data.in.sin  municipio num_casos
 ## 1:  2020-01-01 Mogi Guaçu         1
 ## 2:  2020-01-20 Mogi Guaçu         1
-## 3:  2020-01-29      Itobi         1
-## 4:  2020-01-30     Mococa         1
-## 5:  2020-02-02 Mogi Mirim         1
 \end{verbatim}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Argumentos principais}
+\end{quote}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
@@ -447,12 +461,21 @@ KeepLeadingZeros & Se for TRUE, dados numéricos com zeros à esquerda seão lid
 \bottomrule
 \end{longtable}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \hypertarget{readodsread_ods}{%
 \subsection{readODS::read\_ods()}\label{readodsread_ods}}
 
-Leitura de arquivos no formato .ods do Libre Office, em que le uma planilha individual e retorna um data.frame.
+Função para leitura de arquivos no formato .ods do Libre Office. A leitura é feita em somente uma planilha e retorna um data.frame.
+\textgreater{} \href{https://www.rdocumentation.org/packages/readODS/versions/1.7.0/topics/read_ods}{Documentação}
 
-\textbf{Exemplo 1}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\textbf{Exemplo}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -460,21 +483,14 @@ Leitura de arquivos no formato .ods do Libre Office, em que le uma planilha indi
                            \AttributeTok{col\_names =} \ConstantTok{FALSE}\NormalTok{,                }\CommentTok{\# Primeira linha contém nomes das colunas}
                            \AttributeTok{sheet =} \DecValTok{1}\NormalTok{,                        }\CommentTok{\# Seleção da planilha}
                            \AttributeTok{range =} \StringTok{"A7:B14"}\NormalTok{)                 }\CommentTok{\# Intervalo para leitura}
-\FunctionTok{head}\NormalTok{(dados)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-##     A   B
-## 1 113 381
-## 2  29 112
-## 3  23  25
-## 4  29 152
-## 5  87  NA
-## 6  40  27
-\end{verbatim}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
+\begin{quote}
 \textbf{Argumentos principais}
+\end{quote}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
@@ -498,12 +514,24 @@ strings\_as\_factors & Logical. Se variáveis tipo character serão convertidas 
 \bottomrule
 \end{longtable}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \hypertarget{readxlread_excel}{%
 \subsection{readxl::read\_excel()}\label{readxlread_excel}}
 
-Leitura de arquivos extensão .xls e xlsx.
+Leitura de arquivos com extensão .xls e xlsx.
 
-\textbf{Exemplo 1}
+\begin{quote}
+\href{https://www.rdocumentation.org/packages/readxl/versions/0.1.1/topics/read_excel}{Documentação}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\textbf{Exemplo}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -512,22 +540,14 @@ Leitura de arquivos extensão .xls e xlsx.
                    \AttributeTok{col\_names =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}vel\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}dist\textquotesingle{}}\NormalTok{),}
                    \AttributeTok{col\_types =} \FunctionTok{c}\NormalTok{(}\StringTok{"numeric"}\NormalTok{,}\StringTok{"numeric"}\NormalTok{),}
                    \AttributeTok{range =} \StringTok{"A3:B19"}\NormalTok{)}
-    \FunctionTok{head}\NormalTok{(dados, }\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-## # A tibble: 5 x 2
-##     vel  dist
-##   <dbl> <dbl>
-## 1    72   360
-## 2    68   410
-## 3    NA   255
-## 4    76   239
-## 5    88   209
-\end{verbatim}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
+\begin{quote}
 \textbf{Argumentos principais}
+\end{quote}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
@@ -552,35 +572,49 @@ guess\_max & Máximo de linhas utilizados para adivinhar classes das colunas. \\
 \bottomrule
 \end{longtable}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \hypertarget{foreignread.dbf}{%
 \subsection{foreign::read.dbf()}\label{foreignread.dbf}}
 
 A função le arquivos .dbf como dataframe, convertendo por default campos character em factor. Tem apenas dois argumentos, o file (caminho) e o as.is (se FALSE não converte os campos em factor). Por não ser muito usado, o desenvolvedor já alerta que nem todos os arquivos poderão ser lidos normalmente.
 
+\begin{quote}
+\href{https://www.rdocumentation.org/packages/foreign/versions/0.8-82/topics/read.dbf}{Documentação}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Exemplo}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ foreign}\SpecialCharTok{::}\FunctionTok{read.dbf}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/planilha\_dbf.dbf\textquotesingle{}}\NormalTok{)}
-\FunctionTok{head}\NormalTok{(dados, }\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-##   peso altura
-## 1  222    160
-## 2  132    164
-## 3  137    169
-## 4   63    209
-## 5  223    166
-\end{verbatim}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{rioimport}{%
 \subsection{rio::import()}\label{rioimport}}
 
-O rio é um pacote que vem com a iniciativa de simplificar o procedimento de importação e exportação de arquivos de dados. Na importação, é capaz de ler uma vasta lista de extensões de arquivos, sem a necessidade de especificar o formato. Ver \href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import}{documentação}.
+O rio é um pacote que vem com a iniciativa de simplificar o procedimento de importação e exportação de arquivos de dados. Na importação, é capaz de ler uma vasta lista de extensões de arquivos, sem a necessidade de especificar o formato.
 
+\begin{quote}
+\href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import}{documentação}.
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Exemplo}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -596,7 +630,11 @@ O rio é um pacote que vem com a iniciativa de simplificar o procedimento de imp
 ## 3  137    169
 \end{verbatim}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Argumentos principais}
+\end{quote}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
@@ -616,6 +654,10 @@ which & Controla a importação de arquivos multi-objeto; como regra, import ape
 \bottomrule
 \end{longtable}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \hypertarget{arquivos-da-web}{%
 \subsection{Arquivos da web}\label{arquivos-da-web}}
 
@@ -630,12 +672,20 @@ Ou atribuir o link à um objeto e usa-lo na função.\\
 \emph{download.file(url = `\url{https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv}',}
 \emph{destfile = `dados/baixado\_web.csv')}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \hypertarget{encoding}{%
 \subsection{Encoding}\label{encoding}}
 
 Se houver distorção de caracteres especiais, considerar como possibilidades para resolver o problema utilizar o argumento correspondente a stringsAsFactors = F. Esse comando faz com que os caracteres permaneçam como caracteres, ao invés de serem convertidos para factor, e encoding = ``UTF-8'' ou encoding = ``ISO-8859-1'' para reconhecer os caracteres especiais. O argumento fileEncoding = ``UTF-8'' também pode ser necessário.
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Descobrir o encoding}
+\end{quote}
 
 Verifica somente de um vetor
 
@@ -651,7 +701,11 @@ Verifica somente de um vetor
 ## 1    UTF-8                0.15
 \end{verbatim}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Converter encoding}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -674,9 +728,17 @@ Pode-se também utilizar a função \texttt{base::enc2utf8} para transformar uma
 \end{Highlighting}
 \end{Shaded}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Encoding via Import Dataset}\\
 É possível controlar o encoding pelos argumentos da função escolhida para leitura do arquivo, ou então pela leitura realizada pela interface gráfica do RStudio. Entrar no menu ``File'', ``Import Dataset'', ``From text (base)\ldots{}'' , após isso será aberta uma janela, onde o campo encoding permite selecionar uma codificação entre centenas. Veja figura abaixo:
 \includegraphics{ilustracoes/import_dataset.png}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{escrita-de-arquivos}{%
 \section{Escrita de arquivos}\label{escrita-de-arquivos}}
@@ -684,9 +746,17 @@ Pode-se também utilizar a função \texttt{base::enc2utf8} para transformar uma
 \hypertarget{utilswrite.csv2}{%
 \subsection{utils::write.csv2()}\label{utilswrite.csv2}}
 
-É possível salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula. Um ponto negativo é que essa função, ao salvar o arquivo, cria uma coluna com nomes das linhas (em números).
+Função para salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula. Um ponto negativo é que essa função, ao salvar o arquivo, cria uma coluna com nomes das linhas (em números).
 
+\begin{quote}
+\href{https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/write.table}{Documentação}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Exemplo}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -706,7 +776,11 @@ Pode-se também utilizar a função \texttt{base::enc2utf8} para transformar uma
 ## 4 4          4.6         3.1          1.5         0.2  setosa
 \end{verbatim}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Argumentos principais}
+\end{quote}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
@@ -730,17 +804,29 @@ fileEncoding & String. Declara a codificação a ser usada para que possam ser r
 \bottomrule
 \end{longtable}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \hypertarget{readrwrite_csv2}{%
 \subsection{readr::write\_csv2()}\label{readrwrite_csv2}}
 
-É semelhante à função anterior, mas executa a tarefa duas vezes mais rápido, com a vantagem de não criar uma coluna com nomes das linhas.
+É semelhante à função anterior, mas executa a tarefa mais rápido, com a vantagem de não criar uma coluna com nomes das linhas.
 
+\begin{quote}
+\href{https://www.rdocumentation.org/packages/readr/versions/1.3.1/topics/write_delim}{Documentação}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Exemplo}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{readr}\SpecialCharTok{::}\FunctionTok{write\_csv2}\NormalTok{(}\AttributeTok{x =}\NormalTok{ iris, }\AttributeTok{file =} \StringTok{\textquotesingle{}dados/iris.csv\textquotesingle{}}\NormalTok{)}
-\FunctionTok{read.csv2}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/iris.csv\textquotesingle{}}\NormalTok{, }\AttributeTok{nrows =} \DecValTok{4}\NormalTok{)}
+\FunctionTok{read.csv2}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/iris.csv\textquotesingle{}}\NormalTok{, }\AttributeTok{nrows =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -748,63 +834,50 @@ fileEncoding & String. Declara a codificação a ser usada para que possam ser r
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
 ## 2          4.9         3.0          1.4         0.2  setosa
-## 3          4.7         3.2          1.3         0.2  setosa
-## 4          4.6         3.1          1.5         0.2  setosa
 \end{verbatim}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Argumentos principais}
-Argumento\textbar Definição
----------\textbar---------
-x\\
-A data frame or tibble to write to disk.
+\end{quote}
 
-file\\
-File or connection to write to.
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule
+\begin{minipage}[b]{\linewidth}\raggedright
+Argumento
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definição
+\end{minipage} \\
+\midrule
+\endhead
+x & Um data frame ou tibble a ser escrito. \\
+file & Caminho, nome do arquivo e extensão. \\
+append & Se FALSE, irá sobrescrever um arquivo existente, caso exista. Se TRUE, será salvo a partir da última linha de um arquivo existente. \\
+col\_names & Default TRUE. Primeira linha como nomes das colunas. Se FALSE, nomes das colunas não serão incluídos. \\
+\bottomrule
+\end{longtable}
 
-delim\\
-Delimiter used to separate values. Defaults to '' '' for write\_delim(), ``,'' for write\_excel\_csv() and ``;'' for write\_excel\_csv2(). Must be a single character.
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
-na\\
-String used for missing values. Defaults to NA. Missing values will never be quoted; strings with the same value as na will always be quoted.
-
-append\\
-If FALSE, will overwrite existing file. If TRUE, will append to existing file. In both cases, if the file does not exist a new file is created.
-
-col\_names\\
-If FALSE, column names will not be included at the top of the file. If TRUE, column names will be included. If not specified, col\_names will take the opposite value given to append.
-
-quote\\
-How to handle fields which contain characters that need to be quoted.
-
-needed - Only quote fields which need them.
-
-all - Quote all fields.
-
-none - Never quote fields.
-
-escape\\
-The type of escape to use when quotes are in the data.
-
-double - quotes are escaped by doubling them.
-
-backslash - quotes are escaped by a preceding backslash.
-
-none - quotes are not escaped.
-
-eol
-
-num\_threads
-Number of threads to use when reading and materializing vectors. If your data contains newlines within fields the parser will automatically be forced to use a single thread only.
-
-progress\\
-Display a progress bar? By default it will only display in an interactive session and not while knitting a document. The display is updated every 50,000 values and will only display if estimated reading time is 5 seconds or more. The automatic progress bar can be disabled by setting option readr.show\_progress to FALSE.
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{writexlwrite_xlsx}{%
 \subsection{writexl::write\_xlsx()}\label{writexlwrite_xlsx}}
 
-Salvar arquivo de dados como Excel, formato .xlsx.
+Grava um dataframe em um arquivo xlsx. Para criar um xlsx com (várias) sheets nomeadas, basta definir x para uma lista nomeada de dataframe.
 
+\begin{quote}
+\href{https://www.rdocumentation.org/packages/writexl/versions/1.4.0/topics/write_xlsx}{Documentação}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Exemplo 1}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -812,21 +885,23 @@ Salvar arquivo de dados como Excel, formato .xlsx.
                     \AttributeTok{path =} \StringTok{\textquotesingle{}dados/iris.xlsx\textquotesingle{}}\NormalTok{,}
                     \AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{,}
                     \AttributeTok{format\_headers =} \ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{readxl}\SpecialCharTok{::}\FunctionTok{read\_excel}\NormalTok{(}\StringTok{\textquotesingle{}dados/iris.xlsx\textquotesingle{}}\NormalTok{, }\AttributeTok{n\_max =} \DecValTok{4}\NormalTok{)}
+\NormalTok{readxl}\SpecialCharTok{::}\FunctionTok{read\_excel}\NormalTok{(}\StringTok{\textquotesingle{}dados/iris.xlsx\textquotesingle{}}\NormalTok{, }\AttributeTok{n\_max =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 4 x 5
+## # A tibble: 2 x 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ##          <dbl>       <dbl>        <dbl>       <dbl> <chr>  
 ## 1          5.1         3.5          1.4         0.2 setosa 
-## 2          4.9         3            1.4         0.2 setosa 
-## 3          4.7         3.2          1.3         0.2 setosa 
-## 4          4.6         3.1          1.5         0.2 setosa
+## 2          4.9         3            1.4         0.2 setosa
 \end{verbatim}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Exemplo 2}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -835,21 +910,23 @@ Salvar arquivo de dados como Excel, formato .xlsx.
 
 \NormalTok{readxl}\SpecialCharTok{::}\FunctionTok{read\_excel}\NormalTok{(}\AttributeTok{path =} \StringTok{\textquotesingle{}dados/conjuntodadosnativos.xlsx\textquotesingle{}}\NormalTok{,}
                    \AttributeTok{sheet =} \DecValTok{3}\NormalTok{, }
-                   \AttributeTok{n\_max =} \DecValTok{4}\NormalTok{)}
+                   \AttributeTok{n\_max =} \DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 4 x 11
+## # A tibble: 2 x 11
 ##     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 ##   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-## 1  21       6   160   110  3.9   2.62  16.5     0     1     4     4
-## 2  21       6   160   110  3.9   2.88  17.0     0     1     4     4
-## 3  22.8     4   108    93  3.85  2.32  18.6     1     1     4     1
-## 4  21.4     6   258   110  3.08  3.22  19.4     1     0     3     1
+## 1    21     6   160   110   3.9  2.62  16.5     0     1     4     4
+## 2    21     6   160   110   3.9  2.88  17.0     0     1     4     4
 \end{verbatim}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Argumentos principais}
+\end{quote}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
@@ -869,12 +946,24 @@ format\_headers & Inserir nomes das colunas. \\
 \bottomrule
 \end{longtable}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \hypertarget{data.tablefwrite}{%
 \subsection{data.table::fwrite()}\label{data.tablefwrite}}
 
-Salvar arquivos de texto (csv, csv2, tab, etc), semelhante ao write.table() do pacote utils, só que mais rápido.
+Função para escrever .csv muito mais rápido (por exemplo, 2 segundos versus 1 minuto) e flexível. Máquinas modernas têm mais de uma CPU, então fwrite as usa; em todos os sistemas operacionais, incluindo Linux, Mac e Windows. Output em csv, csv2, tab, etc.
 
+\begin{quote}
+\href{https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fwrite}{Documentação}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Exemplo}
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -887,7 +976,11 @@ Salvar arquivos de texto (csv, csv2, tab, etc), semelhante ao write.table() do p
 \end{Highlighting}
 \end{Shaded}
 
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
 \textbf{Argumentos principais}
+\end{quote}
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
@@ -963,8 +1056,44 @@ format & Sequência de caracteres opcional contendo o formato de arquivo, que po
 \bottomrule
 \end{longtable}
 
-\textbf{\emph{
-}}
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{leitura-de-muxfaltiplos-arquivos}{%
+\section{Leitura de múltiplos arquivos}\label{leitura-de-muxfaltiplos-arquivos}}
+
+Particularmente tenho maior interesse na possibilidade de ler e agrupar diversos arquivos, assim, o enfoque desse tópico será sobre a leitura com merge.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{baselapply-e-basereduce}{%
+\subsection{base::lapply() e base::Reduce}\label{baselapply-e-basereduce}}
+
+A ideia aqui é fazer a leitura dos arquivos de interesse e juntá-los verticalmente compondo um dataframe final, assim, o método é\\
+dividido em três partes:\\
+1. Listar os arquivos de interesse presentes no diretório.
+2. Fazer leitura múltipla utilizando a função base::lapply e base::read.csv2 (pode ser outra).
+3. Juntar os dataframes com base::Reduce e base::rbind.dataframe.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+Exemplo
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{setwd}\NormalTok{(}\StringTok{\textquotesingle{}arquivos/\textquotesingle{}}\NormalTok{)              }\CommentTok{\# Define a pasta que contem os arquivos}
+\NormalTok{lista }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{list.files}\NormalTok{()     }\CommentTok{\# Captura os arquivos na pasta e atribui à uma lista}
+\NormalTok{arquivos }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{lapply}\NormalTok{(}\AttributeTok{X =}\NormalTok{ lista,   }\CommentTok{\# Lista com os arquivos a serem lidos}
+                         \AttributeTok{FUN =}\NormalTok{ read.csv2)  }\CommentTok{\# Função escolhida para ler}
+\NormalTok{unidos }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{Reduce}\NormalTok{(}\AttributeTok{x =}\NormalTok{ arquivos,       }\CommentTok{\# Lista de dataframes}
+                       \AttributeTok{f =}\NormalTok{ base}\SpecialCharTok{::}\NormalTok{rbind.data.frame)  }\CommentTok{\# Função para empilhar}
+\end{Highlighting}
+\end{Shaded}
+
+O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.
 
 \hypertarget{cross}{%
 \chapter{Cross-references}\label{cross}}

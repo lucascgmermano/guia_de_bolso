@@ -29,6 +29,7 @@ base::unlink() | Deleta uma pasta, ex. unlink("some_directory", recursive = TRUE
 base::file.create() | Cria um arquivo no diretório ex. file.create("text_file.txt") (docx, csv, etc).
 base::file.copy() | Copia um arquivo. Ex. file.copy(from = "source_file.txt", to = "destination_folder").
 base::file.remove() | Deleta um arquivo, ex. file.remove("csv_file.csv"). Pode-se usar também unlink('csv_file.csv').
+base::file.rename() | Renomear um arquivo.
 base::list.files() | Lista os arquivos presentes no diretório.
 here::here() | Cria um caminho relativo para um arquivo no diretório de trabalho, preferencialmente em um projeto, o que facilita ser reproduzido em diversas máquinas, ex. here('arquivos','dados.csv'). É similar ao base::file.path(), cuja sintaxe é a mesma.
 
@@ -599,3 +600,30 @@ format | Sequência de caracteres opcional contendo o formato de arquivo, que po
 ***
 
 <Br>
+
+## Leitura de múltiplos arquivos  
+Particularmente tenho maior interesse na possibilidade de ler e agrupar diversos arquivos, assim, o enfoque desse tópico será sobre a leitura com merge.
+
+***
+
+### base::lapply() e base::Reduce  
+A ideia aqui é fazer a leitura dos arquivos de interesse e juntá-los verticalmente compondo um dataframe final, assim, o método é  
+dividido em três partes:  
+1. Listar os arquivos de interesse presentes no diretório.
+2. Fazer leitura múltipla utilizando a função base::lapply e base::read.csv2 (pode ser outra).
+3. Juntar os dataframes com base::Reduce e base::rbind.dataframe.  
+
+***
+
+> Exemplo
+
+```{r reduce1}
+setwd('arquivos/')              # Define a pasta que contem os arquivos
+lista <- base::list.files()     # Captura os arquivos na pasta e atribui à uma lista
+arquivos <- base::lapply(X = lista,   # Lista com os arquivos a serem lidos
+                         FUN = read.csv2)  # Função escolhida para ler
+unidos <- base::Reduce(x = arquivos,       # Lista de dataframes
+                       f = base::rbind.data.frame)  # Função para empilhar
+```
+O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.
+

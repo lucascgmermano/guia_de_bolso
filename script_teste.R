@@ -38,3 +38,25 @@ Reduce(x = dados, f = rbind.data.frame)
 
 rio::import_list(file = arquivos, rbind = TRUE, header=T)[-7]
 data.table::f
+switch()
+function()
+lapply()
+library(dplyr)
+getwd()
+setwd(dir = '')
+lista <- base::list.files()
+arquivos <- base::lapply(X = lista,
+                         FUN = read.csv2)
+base::Reduce(x = arquivos,
+             f = base::rbind.data.frame)
+
+ler_arq <- function(x){
+  utils::read.csv2(file = x) %>% 
+    dplyr::filter(Species == 'versicolor')
+  
+  
+  lista <- base::list.files(path = 'arquivos/')     # Captura os arquivos na pasta e atribui à uma lista
+  arquivos <- base::lapply(X = lista,   # Lista com os arquivos a serem lidos
+                           FUN = read.csv2)  # Função escolhida para ler
+  unidos <- base::Reduce(x = arquivos,       # Lista de dataframes
+                         f = base::rbind.data.frame)  # Função para empilhar
