@@ -26,7 +26,7 @@ como auxiliar na execução te tarefas diárias básicas.</p>" />
 <meta name="author" content="Lucas C. Germano" />
 
 
-<meta name="date" content="2022-06-02" />
+<meta name="date" content="2022-06-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -188,6 +188,7 @@ div.csl-indent {
 <li class="chapter" data-level="1.4" data-path="leitura-e-escrita-de-arquivos-de-texto.html"><a href="leitura-e-escrita-de-arquivos-de-texto.html#leitura-de-múltiplos-arquivos"><i class="fa fa-check"></i><b>1.4</b> Leitura de múltiplos arquivos</a>
 <ul>
 <li class="chapter" data-level="1.4.1" data-path="leitura-e-escrita-de-arquivos-de-texto.html"><a href="leitura-e-escrita-de-arquivos-de-texto.html#baselapply-e-basereduce"><i class="fa fa-check"></i><b>1.4.1</b> base::lapply() e base::Reduce</a></li>
+<li class="chapter" data-level="1.4.2" data-path="leitura-e-escrita-de-arquivos-de-texto.html"><a href="leitura-e-escrita-de-arquivos-de-texto.html#rioimport_list"><i class="fa fa-check"></i><b>1.4.2</b> rio::import_list()</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>2</b> Cross-references</a>
@@ -1263,6 +1264,10 @@ dividido em três partes:<br />
 1. Listar os arquivos de interesse presentes no diretório.
 2. Fazer leitura múltipla utilizando a função base::lapply e base::read.csv2 (pode ser outra).
 3. Juntar os dataframes com base::Reduce e base::rbind.dataframe.</p>
+<blockquote>
+<p><a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/lapply">Documentação base::lapply</a><br />
+<a href="https://www.rdocumentation.org/packages/purrr/versions/0.2.5/topics/reduce">Documentação base::reduce()</a></p>
+</blockquote>
 <hr />
 <blockquote>
 <p>Exemplo</p>
@@ -1272,8 +1277,31 @@ dividido em três partes:<br />
 <span id="cb31-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb31-3" aria-hidden="true" tabindex="-1"></a>arquivos <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">lapply</span>(<span class="at">X =</span> lista,   <span class="co"># Lista com os arquivos a serem lidos</span></span>
 <span id="cb31-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb31-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">FUN =</span> read.csv2)  <span class="co"># Função escolhida para ler</span></span>
 <span id="cb31-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb31-5" aria-hidden="true" tabindex="-1"></a>unidos <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">Reduce</span>(<span class="at">x =</span> arquivos,       <span class="co"># Lista de dataframes</span></span>
-<span id="cb31-6"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb31-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">f =</span> base<span class="sc">::</span>rbind.data.frame)  <span class="co"># Função para empilhar</span></span></code></pre></div>
-<p>O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.</p>
+<span id="cb31-6"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb31-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">f =</span> base<span class="sc">::</span>rbind.data.frame)  <span class="co"># Função para empilhar</span></span>
+<span id="cb31-7"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;~/Documentos/Estudos R/guia_de_bolso&quot;</span>) <span class="co"># Volta para diretorio inicial</span></span></code></pre></div>
+<p>O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.<br />
+A lista “arquivos” também pode ser aplicada à função data.table::rbindlist(), que terá o mesmo efeito.</p>
+<hr />
+<hr />
+</div>
+<div id="rioimport_list" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> rio::import_list()<a href="leitura-e-escrita-de-arquivos-de-texto.html#rioimport_list" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Importa um alista de data frames de um vetor de nomes ou arquivo multi-objeto (planilha Excel, arquivo .Rdata etc).</p>
+<blockquote>
+<p><a href="https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import_list">Documentação</a></p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>Exemplo</strong></p>
+</blockquote>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;arquivos/&#39;</span>)</span>
+<span id="cb32-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-2" aria-hidden="true" tabindex="-1"></a>lista <span class="ot">&lt;-</span> <span class="fu">list.files</span>()</span>
+<span id="cb32-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-3" aria-hidden="true" tabindex="-1"></a>unidos <span class="ot">&lt;-</span> rio<span class="sc">::</span><span class="fu">import_list</span>(<span class="at">file =</span> lista, <span class="co"># Lista com nomes dos arquivos do diretório</span></span>
+<span id="cb32-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rbind =</span> <span class="cn">TRUE</span>,    <span class="co"># Empilhar. Se FALSE retorna uma lista com os data frames</span></span>
+<span id="cb32-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">header =</span> <span class="cn">TRUE</span>)   <span class="co"># Nomes das colunas</span></span>
+<span id="cb32-6"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;~/Documentos/Estudos R/guia_de_bolso&quot;</span>)</span></code></pre></div>
+<hr />
+<hr />
 
 </div>
 </div>
@@ -1338,20 +1366,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

@@ -579,7 +579,7 @@ Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gra
 
 > **Exempĺo**  
 
-```{r}
+```{r export}
 rio::export(x = iris,                  # Objeto que será exportado.
             file = 'dados/iris.xlsx')  # Caminho, nome e extensão.
 ```
@@ -613,6 +613,9 @@ dividido em três partes:
 2. Fazer leitura múltipla utilizando a função base::lapply e base::read.csv2 (pode ser outra).
 3. Juntar os dataframes com base::Reduce e base::rbind.dataframe.  
 
+> [Documentação base::lapply](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/lapply)  
+> [Documentação base::reduce()](https://www.rdocumentation.org/packages/purrr/versions/0.2.5/topics/reduce)
+
 ***
 
 > Exemplo
@@ -624,6 +627,32 @@ arquivos <- base::lapply(X = lista,   # Lista com os arquivos a serem lidos
                          FUN = read.csv2)  # Função escolhida para ler
 unidos <- base::Reduce(x = arquivos,       # Lista de dataframes
                        f = base::rbind.data.frame)  # Função para empilhar
+setwd("~/Documentos/Estudos R/guia_de_bolso") # Volta para diretorio inicial
 ```
-O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.
+O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.  
+A lista "arquivos" também pode ser aplicada à função data.table::rbindlist(), que terá o mesmo efeito.  
+
+***
+***
+
+### rio::import_list()  
+Importa um alista de data frames de um vetor de nomes ou arquivo multi-objeto (planilha Excel, arquivo .Rdata etc).  
+
+> [Documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import_list)
+
+***
+
+> **Exemplo**
+
+```{r import_list}
+setwd('arquivos/')
+lista <- list.files()
+unidos <- rio::import_list(file = lista, # Lista com nomes dos arquivos do diretório
+                 rbind = TRUE,    # Empilhar. Se FALSE retorna uma lista com os data frames
+                 header = TRUE)   # Nomes das colunas
+setwd("~/Documentos/Estudos R/guia_de_bolso")
+```
+
+***
+***
 

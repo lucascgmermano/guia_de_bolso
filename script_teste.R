@@ -58,5 +58,13 @@ ler_arq <- function(x){
   lista <- base::list.files(path = 'arquivos/')     # Captura os arquivos na pasta e atribui à uma lista
   arquivos <- base::lapply(X = lista,   # Lista com os arquivos a serem lidos
                            FUN = read.csv2)  # Função escolhida para ler
-  unidos <- base::Reduce(x = arquivos,       # Lista de dataframes
-                         f = base::rbind.data.frame)  # Função para empilhar
+  base::Reduce(x = arquivos,       # Lista de dataframes
+                         f = base::merge)  # Função para empilhar
+a <- iris
+b <- iris 
+
+merge(x = a, y = b)
+
+data.table::rbindlist()
+
+rio::import_list()
