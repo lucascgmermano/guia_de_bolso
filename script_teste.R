@@ -67,4 +67,11 @@ merge(x = a, y = b)
 
 data.table::rbindlist()
 
-rio::import_list()
+setwd('arquivos/')
+
+lista <- list.files()
+
+tempfile(fileext = ".csv")
+export()
+
+rio::import_list(file = dir(path = 'arquivos/'), 1)

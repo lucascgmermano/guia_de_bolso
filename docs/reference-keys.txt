@@ -21,6 +21,7 @@ data.tablefwrite
 rioexport
 leitura-de-múltiplos-arquivos
 baselapply-e-basereduce
+rioimport_list
 cross
 chapters-and-sub-chapters
 captioned-figures-and-tables
@@ -36,4 +37,3 @@ sharing-your-book
 publishing
 pages
 metadata-for-sharing
-rioimport_list

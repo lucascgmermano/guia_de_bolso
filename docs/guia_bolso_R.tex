@@ -117,7 +117,7 @@
 
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{2022-06-02}
+\date{2022-06-07}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -1076,6 +1076,11 @@ dividido em três partes:\\
 2. Fazer leitura múltipla utilizando a função base::lapply e base::read.csv2 (pode ser outra).
 3. Juntar os dataframes com base::Reduce e base::rbind.dataframe.
 
+\begin{quote}
+\href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/lapply}{Documentação base::lapply}\\
+\href{https://www.rdocumentation.org/packages/purrr/versions/0.2.5/topics/reduce}{Documentação base::reduce()}
+\end{quote}
+
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
@@ -1090,10 +1095,46 @@ Exemplo
                          \AttributeTok{FUN =}\NormalTok{ read.csv2)  }\CommentTok{\# Função escolhida para ler}
 \NormalTok{unidos }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{Reduce}\NormalTok{(}\AttributeTok{x =}\NormalTok{ arquivos,       }\CommentTok{\# Lista de dataframes}
                        \AttributeTok{f =}\NormalTok{ base}\SpecialCharTok{::}\NormalTok{rbind.data.frame)  }\CommentTok{\# Função para empilhar}
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"\textasciitilde{}/Documentos/Estudos R/guia\_de\_bolso"}\NormalTok{) }\CommentTok{\# Volta para diretorio inicial}
 \end{Highlighting}
 \end{Shaded}
 
-O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.
+O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.\\
+A lista ``arquivos'' também pode ser aplicada à função data.table::rbindlist(), que terá o mesmo efeito.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{rioimport_list}{%
+\subsection{rio::import\_list()}\label{rioimport_list}}
+
+Importa um alista de data frames de um vetor de nomes ou arquivo multi-objeto (planilha Excel, arquivo .Rdata etc).
+
+\begin{quote}
+\href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import_list}{Documentação}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\textbf{Exemplo}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{setwd}\NormalTok{(}\StringTok{\textquotesingle{}arquivos/\textquotesingle{}}\NormalTok{)}
+\NormalTok{lista }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{()}
+\NormalTok{unidos }\OtherTok{\textless{}{-}}\NormalTok{ rio}\SpecialCharTok{::}\FunctionTok{import\_list}\NormalTok{(}\AttributeTok{file =}\NormalTok{ lista, }\CommentTok{\# Lista com nomes dos arquivos do diretório}
+                 \AttributeTok{rbind =} \ConstantTok{TRUE}\NormalTok{,    }\CommentTok{\# Empilhar. Se FALSE retorna uma lista com os data frames}
+                 \AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{)   }\CommentTok{\# Nomes das colunas}
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"\textasciitilde{}/Documentos/Estudos R/guia\_de\_bolso"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{cross}{%
 \chapter{Cross-references}\label{cross}}
