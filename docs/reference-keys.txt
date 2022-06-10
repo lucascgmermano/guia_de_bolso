@@ -22,6 +22,8 @@ rioexport
 leitura-de-múltiplos-arquivos
 baselapply-e-basereduce
 rioimport_list
+escrita-de-múltiplos-arquivos
+rioexport_list
 cross
 chapters-and-sub-chapters
 captioned-figures-and-tables

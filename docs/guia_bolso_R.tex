@@ -117,7 +117,7 @@
 
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{2022-06-07}
+\date{2022-06-09}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -1084,12 +1084,12 @@ dividido em três partes:\\
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
-Exemplo
+\textbf{Exemplo 1}
 \end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{setwd}\NormalTok{(}\StringTok{\textquotesingle{}arquivos/\textquotesingle{}}\NormalTok{)              }\CommentTok{\# Define a pasta que contem os arquivos}
+\FunctionTok{setwd}\NormalTok{(}\StringTok{\textquotesingle{}arquivos/\textquotesingle{}}\NormalTok{)              }\CommentTok{\# Define a pasta que contém os arquivos}
 \NormalTok{lista }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{list.files}\NormalTok{()     }\CommentTok{\# Captura os arquivos na pasta e atribui à uma lista}
 \NormalTok{arquivos }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{lapply}\NormalTok{(}\AttributeTok{X =}\NormalTok{ lista,   }\CommentTok{\# Lista com os arquivos a serem lidos}
                          \AttributeTok{FUN =}\NormalTok{ read.csv2)  }\CommentTok{\# Função escolhida para ler}
@@ -1101,6 +1101,40 @@ Exemplo
 
 O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.\\
 A lista ``arquivos'' também pode ser aplicada à função data.table::rbindlist(), que terá o mesmo efeito.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\textbf{Exemplo 2}
+\end{quote}
+
+Aqui a ideia é realizar a leitura, mas filtrando os arquivos somente com os dados de interesse, ao mesmo tempo, para isso, vamos usar a função base::function(). Os parâmetros serão passados para essa função e ela será aplicada ao lapply.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{setwd}\NormalTok{(}\StringTok{\textquotesingle{}arquivos2/\textquotesingle{}}\NormalTok{)}
+
+\NormalTok{filtro.fun }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x)\{                      }\CommentTok{\# Cria uma função}
+\NormalTok{  data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(}\AttributeTok{file =}\NormalTok{ x) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\StringTok{"Petal.Length"}\NormalTok{,               }\CommentTok{\# Manipulações}
+                  \StringTok{"Petal.Width"}\NormalTok{, }
+                  \StringTok{"Species"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Petal.Length }\SpecialCharTok{\textgreater{}}\NormalTok{ .}\DecValTok{5}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{setNames}\NormalTok{(}\AttributeTok{nm =} \FunctionTok{c}\NormalTok{(}\StringTok{"compr"}\NormalTok{,}\StringTok{"largura"}\NormalTok{,}\StringTok{"especie"}\NormalTok{))}
+\NormalTok{\}}
+
+\NormalTok{lista }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{()}
+\NormalTok{arquivos }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\AttributeTok{X =}\NormalTok{ lista, }\AttributeTok{FUN =}\NormalTok{ filtro.fun)}
+
+\NormalTok{unidos }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{rbindlist}\NormalTok{(}\AttributeTok{l =}\NormalTok{ arquivos)  }\CommentTok{\# Mesmo efeito do Reduce}
+
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"\textasciitilde{}/Documentos/Estudos R/guia\_de\_bolso"}\NormalTok{) }\CommentTok{\# Volta para diretório inicial}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+\href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/function}{Documentação}
+\end{quote}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -1135,6 +1169,40 @@ Importa um alista de data frames de um vetor de nomes ou arquivo multi-objeto (p
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{escrita-de-muxfaltiplos-arquivos}{%
+\section{Escrita de múltiplos arquivos}\label{escrita-de-muxfaltiplos-arquivos}}
+
+\hypertarget{rioexport_list}{%
+\subsection{rio::export\_list()}\label{rioexport_list}}
+
+Exporta uma lista de data frames. A extensão colocada no nome do arquivo já direciona o formato, porém, pode-se usar o argumento sep = ``;'' ou outro para definir o desejado. Os nomes dos arquivos salvos podem ser declarados por um vetor, ex. c(``iris1.csv'',``iris2.csv''), ou usar o recurso \texttt{\%s}, ex. \texttt{\%s.csv} é o mesmo que \texttt{nome\_do\_objeto.csv}.
+
+\begin{quote}
+\href{https://www.rdocumentation.org/packages/rio/versions/0.5.26/topics/export_list}{Documentação}
+\end{quote}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\textbf{Exemplo}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{rio}\SpecialCharTok{::}\FunctionTok{export\_list}\NormalTok{(}\AttributeTok{x =} \FunctionTok{list}\NormalTok{(}\AttributeTok{iris1 =}\NormalTok{ iris[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{30}\NormalTok{,],   }\CommentTok{\# Lista nomeada dos objetos a serem salvos}
+                          \AttributeTok{iris2 =}\NormalTok{ iris[}\DecValTok{60}\SpecialCharTok{:}\DecValTok{80}\NormalTok{,],}
+                          \AttributeTok{iris3 =}\NormalTok{ iris[}\DecValTok{50}\SpecialCharTok{:}\DecValTok{70}\NormalTok{,]),}
+                 \AttributeTok{file =} \StringTok{\textquotesingle{}arquivos2/\%s.csv\textquotesingle{}}\NormalTok{,      }\CommentTok{\# Caminho. Nome do arquivo contido em \%s automaticamente}
+                 \AttributeTok{sep=}\StringTok{";"}\NormalTok{)     }\CommentTok{\# Separador}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+,
 
 \hypertarget{cross}{%
 \chapter{Cross-references}\label{cross}}

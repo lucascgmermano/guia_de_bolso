@@ -5,6 +5,7 @@ output:
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(dplyr)
 ```
 
 # Leitura e escrita de arquivos de texto
@@ -618,10 +619,10 @@ dividido em três partes:
 
 ***
 
-> Exemplo
+> **Exemplo 1**
 
-```{r reduce1}
-setwd('arquivos/')              # Define a pasta que contem os arquivos
+```{r reduce}
+setwd('arquivos/')              # Define a pasta que contém os arquivos
 lista <- base::list.files()     # Captura os arquivos na pasta e atribui à uma lista
 arquivos <- base::lapply(X = lista,   # Lista com os arquivos a serem lidos
                          FUN = read.csv2)  # Função escolhida para ler
@@ -631,6 +632,34 @@ setwd("~/Documentos/Estudos R/guia_de_bolso") # Volta para diretorio inicial
 ```
 O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.  
 A lista "arquivos" também pode ser aplicada à função data.table::rbindlist(), que terá o mesmo efeito.  
+
+***
+
+> **Exemplo 2**  
+
+Aqui a ideia é realizar a leitura, mas filtrando os arquivos somente com os dados de interesse, ao mesmo tempo, para isso, vamos usar a função base::function(). Os parâmetros serão passados para essa função e ela será aplicada ao lapply.
+
+```{r function}
+setwd('arquivos2/')
+
+filtro.fun <- function(x){                      # Cria uma função
+  data.table::fread(file = x) %>% 
+    dplyr::select("Petal.Length",               # Manipulações
+                  "Petal.Width", 
+                  "Species") %>%
+    dplyr::filter(Petal.Length > .5) %>%
+    setNames(nm = c("compr","largura","especie"))
+}
+
+lista <- list.files()
+arquivos <- lapply(X = lista, FUN = filtro.fun)
+
+unidos <- data.table::rbindlist(l = arquivos)  # Mesmo efeito do Reduce
+
+setwd("~/Documentos/Estudos R/guia_de_bolso") # Volta para diretório inicial
+```
+
+> [Documentação](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/function)
 
 ***
 ***
@@ -655,4 +684,30 @@ setwd("~/Documentos/Estudos R/guia_de_bolso")
 
 ***
 ***
+
+## Escrita de múltiplos arquivos  
+
+### rio::export_list()  
+
+Exporta uma lista de data frames. A extensão colocada no nome do arquivo já direciona o formato, porém, pode-se usar o argumento sep = ";" ou outro para definir o desejado. Os nomes dos arquivos salvos podem ser declarados por um vetor, ex. c("iris1.csv","iris2.csv"), ou usar o recurso `%s`, ex. `%s.csv` é o mesmo que `nome_do_objeto.csv`.  
+
+> [Documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.26/topics/export_list)  
+
+***
+
+> **Exemplo**
+
+```{r export_list}
+rio::export_list(x = list(iris1 = iris[1:30,],   # Lista nomeada dos objetos a serem salvos
+                          iris2 = iris[60:80,],
+                          iris3 = iris[50:70,]),
+                 file = 'arquivos2/%s.csv',      # Caminho. Nome do arquivo contido em %s automaticamente
+                 sep=";")     # Separador
+```
+
+***
+***
+
+
+
 
