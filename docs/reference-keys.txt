@@ -21,6 +21,7 @@ data.tablefwrite
 rioexport
 leitura-de-múltiplos-arquivos
 baselapply-e-basereduce
+basefor
 rioimport_list
 escrita-de-múltiplos-arquivos
 rioexport_list

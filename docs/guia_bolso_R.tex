@@ -117,7 +117,7 @@
 
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{2022-06-09}
+\date{2022-06-14}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -1140,6 +1140,45 @@ Aqui a ideia é realizar a leitura, mas filtrando os arquivos somente com os dad
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
+\hypertarget{basefor}{%
+\subsection{base::for()}\label{basefor}}
+
+A função \texttt{for} permite criar um loop de execução de determinada ação, no caso, o loop do exemplo realizará a leitura de vários arquivos que serão atribuidos à uma lista. Com a lista é possível empilhar em um único data frame.\\
+\textgreater{} \href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Control}{Documentação}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{quote}
+\textbf{Exemplo}
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}         \CommentTok{\# Objeto contador}
+\NormalTok{arquivos }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\DecValTok{3}\NormalTok{)) }\CommentTok{\# O objeto que vai receber a leitura individual dos arquivos, deve ser uma lista vazia}
+\NormalTok{lista }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\StringTok{\textquotesingle{}arquivos2/\textquotesingle{}}\NormalTok{) }\CommentTok{\# Lista com os arquivos a serem lidos}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ lista) \{      }\CommentTok{\# Para cada elemento da lista, executar:}
+\NormalTok{  arquivos[[x]] }\OtherTok{\textless{}{-}} \FunctionTok{read.csv2}\NormalTok{(}\AttributeTok{file =} \FunctionTok{file.path}\NormalTok{(}\StringTok{\textquotesingle{}arquivos2\textquotesingle{}}\NormalTok{,i)) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# Cada elemento lido é adicionado a um espaço vazio da lista de arquivos}
+    \FunctionTok{filter}\NormalTok{(Sepal.Length }\SpecialCharTok{\textgreater{}} \FloatTok{5.5}\NormalTok{)}
+\NormalTok{  x }\OtherTok{\textless{}{-}}\NormalTok{ x }\SpecialCharTok{+} \DecValTok{1}  \CommentTok{\# O contador define em que posição o arquivo lido será adicionado à lista de arquivos}
+\NormalTok{\}}
+
+\NormalTok{data.table}\SpecialCharTok{::}\FunctionTok{rbindlist}\NormalTok{(}\AttributeTok{l =}\NormalTok{ arquivos)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1:          5.8           4          1.2         0.2  setosa
+## 2:          5.7         4.4          1.5         0.4  setosa
+## 3:          5.7         3.8          1.7         0.3  setosa
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
 \hypertarget{rioimport_list}{%
 \subsection{rio::import\_list()}\label{rioimport_list}}
 
@@ -1201,8 +1240,6 @@ Exporta uma lista de data frames. A extensão colocada no nome do arquivo já di
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-,
 
 \hypertarget{cross}{%
 \chapter{Cross-references}\label{cross}}

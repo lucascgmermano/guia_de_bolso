@@ -50,3 +50,11 @@ rio::export_list(x = list(iris1 = iris[1:30,],
                           iris2 = iris[60:80,],
                           iris3 = iris[50:70,]),
                  file = '%s.csv', sep=";")
+getwd()
+setwd('../')
+
+reshape2::dcast(data = dados::pinguins, 
+                formula = ilha ~ sexo, 
+                value.var = 'massa_corporal',
+                fun.aggregate = sum)
+xtabs(formula = massa_corporal ~ sexo + ilha, data = dados::pinguins) 
