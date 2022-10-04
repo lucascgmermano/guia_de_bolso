@@ -18,7 +18,8 @@ library(googlesheets4)
 url <- "https://docs.google.com/spreadsheets/d/18PV-XBQIrzB6Jfdvz5vgDHZPBoqlDxPcGxufOvCk5a0/edit#gid=0"
 
 
-
+as.POSIXlt(Sys.Date(), format='%m/%d/%Y %H:%M')
+as.POSIXct(Sys.Date())
 #################################
 library(dplyr)
 iris

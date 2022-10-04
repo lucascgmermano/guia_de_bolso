@@ -455,6 +455,7 @@ fileEncoding | String. Declara a codificação a ser usada para que possam ser r
 ***
 
 > **Exemplo**  
+
 ```{r write_csv2}
 readr::write_csv2(x = iris, file = 'dados/iris.csv')
 read.csv2(file = 'dados/iris.csv', nrows = 2)
