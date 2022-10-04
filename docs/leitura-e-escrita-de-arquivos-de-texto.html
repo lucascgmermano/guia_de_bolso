@@ -26,7 +26,7 @@ como auxiliar na execução te tarefas diárias básicas.</p>" />
 <meta name="author" content="Lucas C. Germano" />
 
 
-<meta name="date" content="2022-06-14" />
+<meta name="date" content="2022-10-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1247,13 +1247,13 @@ dividido em três partes:<br />
 <blockquote>
 <p><strong>Exemplo 1</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;arquivos/&#39;</span>)              <span class="co"># Define a pasta que contém os arquivos</span></span>
-<span id="cb31-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb31-2" aria-hidden="true" tabindex="-1"></a>lista <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">list.files</span>()     <span class="co"># Captura os arquivos na pasta e atribui à uma lista</span></span>
-<span id="cb31-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb31-3" aria-hidden="true" tabindex="-1"></a>arquivos <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">lapply</span>(<span class="at">X =</span> lista,   <span class="co"># Lista com os arquivos a serem lidos</span></span>
-<span id="cb31-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb31-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">FUN =</span> read.csv2)  <span class="co"># Função escolhida para ler</span></span>
-<span id="cb31-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb31-5" aria-hidden="true" tabindex="-1"></a>unidos <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">Reduce</span>(<span class="at">x =</span> arquivos,       <span class="co"># Lista de dataframes</span></span>
-<span id="cb31-6"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb31-6" aria-hidden="true" tabindex="-1"></a>                       <span class="at">f =</span> base<span class="sc">::</span>rbind.data.frame)  <span class="co"># Função para empilhar</span></span>
-<span id="cb31-7"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;~/Documentos/Estudos R/guia_de_bolso&quot;</span>) <span class="co"># Volta para diretorio inicial</span></span></code></pre></div>
+<pre><code>setwd(&#39;arquivos/&#39;)              # Define a pasta que contém os arquivos
+lista &lt;- base::list.files()     # Captura os arquivos na pasta e atribui à uma lista
+arquivos &lt;- base::lapply(X = lista,   # Lista com os arquivos a serem lidos
+                         FUN = read.csv2)  # Função escolhida para ler
+unidos &lt;- base::Reduce(x = arquivos,       # Lista de dataframes
+                       f = base::rbind.data.frame)  # Função para empilhar
+setwd(&quot;~/Documentos/Estudos R/guia_de_bolso&quot;) # Volta para diretorio inicial</code></pre>
 <p>O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.<br />
 A lista “arquivos” também pode ser aplicada à função data.table::rbindlist(), que terá o mesmo efeito.</p>
 <hr />
@@ -1261,23 +1261,23 @@ A lista “arquivos” também pode ser aplicada à função data.table::rbindli
 <p><strong>Exemplo 2</strong></p>
 </blockquote>
 <p>Aqui a ideia é realizar a leitura, mas filtrando os arquivos somente com os dados de interesse, ao mesmo tempo, para isso, vamos usar a função base::function(). Os parâmetros serão passados para essa função e ela será aplicada ao lapply.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;arquivos2/&#39;</span>)</span>
-<span id="cb32-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-3" aria-hidden="true" tabindex="-1"></a>filtro.fun <span class="ot">&lt;-</span> <span class="cf">function</span>(x){                      <span class="co"># Cria uma função</span></span>
-<span id="cb32-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="at">file =</span> x) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-5" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">&quot;Petal.Length&quot;</span>,               <span class="co"># Manipulações</span></span>
-<span id="cb32-6"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-6" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Petal.Width&quot;</span>, </span>
-<span id="cb32-7"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-7" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Species&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb32-8"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-8" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(Petal.Length <span class="sc">&gt;</span> .<span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb32-9"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">setNames</span>(<span class="at">nm =</span> <span class="fu">c</span>(<span class="st">&quot;compr&quot;</span>,<span class="st">&quot;largura&quot;</span>,<span class="st">&quot;especie&quot;</span>))</span>
-<span id="cb32-10"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-10" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb32-11"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-12"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-12" aria-hidden="true" tabindex="-1"></a>lista <span class="ot">&lt;-</span> <span class="fu">list.files</span>()</span>
-<span id="cb32-13"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-13" aria-hidden="true" tabindex="-1"></a>arquivos <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="at">X =</span> lista, <span class="at">FUN =</span> filtro.fun)</span>
-<span id="cb32-14"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-15"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-15" aria-hidden="true" tabindex="-1"></a>unidos <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">rbindlist</span>(<span class="at">l =</span> arquivos)  <span class="co"># Mesmo efeito do Reduce</span></span>
-<span id="cb32-16"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-17"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;~/Documentos/Estudos R/guia_de_bolso&quot;</span>) <span class="co"># Volta para diretório inicial</span></span></code></pre></div>
+<pre><code>setwd(&#39;arquivos2/&#39;)
+
+filtro.fun &lt;- function(x){                      # Cria uma função
+  data.table::fread(file = x) %&gt;% 
+    dplyr::select(&quot;Petal.Length&quot;,               # Manipulações
+                  &quot;Petal.Width&quot;, 
+                  &quot;Species&quot;) %&gt;%
+    dplyr::filter(Petal.Length &gt; .5) %&gt;%
+    setNames(nm = c(&quot;compr&quot;,&quot;largura&quot;,&quot;especie&quot;))
+}
+
+lista &lt;- list.files()
+arquivos &lt;- lapply(X = lista, FUN = filtro.fun)
+
+unidos &lt;- data.table::rbindlist(l = arquivos)  # Mesmo efeito do Reduce
+
+setwd(&quot;~/Documentos/Estudos R/guia_de_bolso&quot;) # Volta para diretório inicial</code></pre>
 <blockquote>
 <p><a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/function">Documentação</a></p>
 </blockquote>
@@ -1320,12 +1320,12 @@ A lista “arquivos” também pode ser aplicada à função data.table::rbindli
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&#39;arquivos/&#39;</span>)</span>
-<span id="cb35-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb35-2" aria-hidden="true" tabindex="-1"></a>lista <span class="ot">&lt;-</span> <span class="fu">list.files</span>()</span>
-<span id="cb35-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb35-3" aria-hidden="true" tabindex="-1"></a>unidos <span class="ot">&lt;-</span> rio<span class="sc">::</span><span class="fu">import_list</span>(<span class="at">file =</span> lista, <span class="co"># Lista com nomes dos arquivos do diretório</span></span>
-<span id="cb35-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb35-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">rbind =</span> <span class="cn">TRUE</span>,    <span class="co"># Empilhar. Se FALSE retorna uma lista com os data frames</span></span>
-<span id="cb35-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb35-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">header =</span> <span class="cn">TRUE</span>)   <span class="co"># Nomes das colunas</span></span>
-<span id="cb35-6"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;~/Documentos/Estudos R/guia_de_bolso&quot;</span>)</span></code></pre></div>
+<pre><code>setwd(&#39;arquivos/&#39;)
+lista &lt;- list.files()
+unidos &lt;- rio::import_list(file = lista, # Lista com nomes dos arquivos do diretório
+                 rbind = TRUE,    # Empilhar. Se FALSE retorna uma lista com os data frames
+                 header = TRUE)   # Nomes das colunas
+setwd(&quot;~/Documentos/Estudos R/guia_de_bolso&quot;)</code></pre>
 <hr />
 <hr />
 </div>

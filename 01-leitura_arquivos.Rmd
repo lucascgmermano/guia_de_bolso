@@ -622,7 +622,7 @@ dividido em três partes:
 
 > **Exemplo 1**
 
-```{r reduce}
+```
 setwd('arquivos/')              # Define a pasta que contém os arquivos
 lista <- base::list.files()     # Captura os arquivos na pasta e atribui à uma lista
 arquivos <- base::lapply(X = lista,   # Lista com os arquivos a serem lidos
@@ -640,7 +640,7 @@ A lista "arquivos" também pode ser aplicada à função data.table::rbindlist()
 
 Aqui a ideia é realizar a leitura, mas filtrando os arquivos somente com os dados de interesse, ao mesmo tempo, para isso, vamos usar a função base::function(). Os parâmetros serão passados para essa função e ela será aplicada ao lapply.
 
-```{r function}
+```
 setwd('arquivos2/')
 
 filtro.fun <- function(x){                      # Cria uma função
@@ -700,7 +700,7 @@ Importa um alista de data frames de um vetor de nomes ou arquivo multi-objeto (p
 
 > **Exemplo**
 
-```{r import_list}
+```
 setwd('arquivos/')
 lista <- list.files()
 unidos <- rio::import_list(file = lista, # Lista com nomes dos arquivos do diretório

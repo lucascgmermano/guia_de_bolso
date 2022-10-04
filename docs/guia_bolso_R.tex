@@ -33,14 +33,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Comandos básicos do R: Guia de bolso},
-  pdfauthor={Lucas C. Germano},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -114,10 +106,18 @@
 \fi
 \usepackage[]{natbib}
 \bibliographystyle{plainnat}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Comandos básicos do R: Guia de bolso},
+  pdfauthor={Lucas C. Germano},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{2022-06-14}
+\date{2022-10-03}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -164,13 +164,13 @@ Abaixo são transcritos alguns comandos e métodos para se definir e conhecer o 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4444}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5556}}@{}}
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Comando
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 base::setwd() & Define diretório de trabalho. \\
 base::getwd() & Identifica diretório ativo. \\
@@ -187,7 +187,7 @@ base::file.remove() & Deleta um arquivo, ex. file.remove(``csv\_file.csv''). Pod
 base::file.rename() & Renomear um arquivo. \\
 base::list.files() & Lista os arquivos presentes no diretório. \\
 here::here() & Cria um caminho relativo para um arquivo no diretório de trabalho, preferencialmente em um projeto, o que facilita ser reproduzido em diversas máquinas, ex. here(`arquivos',`dados.csv'). É similar ao base::file.path(), cuja sintaxe é a mesma. \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -257,13 +257,13 @@ Faz a leitura de um arquivo em formado de tabela e cria um data frame a partir d
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 file & Nome do arquivo que será lido, contendo o caminho do diretório. \\
 header & Logical. Indica se o arquivo contém os nomes das colunas na primeira linha. \\
@@ -277,7 +277,7 @@ stringsAsFactors & Logical. Se TRUE os vetores character serão convertidos para
 fileEncoding & Character string. Define o encoding que será usado. Ex. fileEnconding = ``UTF-8'' ou ``Latin-1'' ou ``ISO-8859-1''. \\
 skipNull & Logical. Se TRUE os nulos (NA) devem ser ignorados. \\
 colClasses & character. Um vetor de classes referentes as colunas. Valores possíveis são NA (default, quando type.convert é usado), ``NULL'' (quando a coluna é pulada), um vetor atomico de classes(logical, integer, numeric, complex, character, raw), or ``factor'', ``Date'' or ``POSIXct''. \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{itemize}
@@ -359,13 +359,13 @@ O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados ret
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 file & Nome do arquivo que será lido, contendo o caminho do diretório (admite http). Arquivos terminados em .gz, .bz2, .xz, ou .zip serão automaticamente descomprimidos. \\
 col\_names & TRUE ou FALSE ou um vetor tipo caracter com nomes das colunas. Se TRUE, a primeira linha será usada para nomear as colunas. Se FALSE, nomes das colunas serão gerados automaticamente (X1, X2, X3 etc). Se col\_names for um vetor com nomes, os valores serão usados como nomes das colunas, mas a primeira linha será considerada no banco (nomes errados), assim, pode-se usar o argumento renomeando as colunas, mas fazendo a leitura sem considerar a primeira linha, com {[}-1,{]} ou skip = 1. Colunas sem nome (NA) receberão nomes fictícios. \\
@@ -379,7 +379,7 @@ n\_max & Número máximo de linhas a ler. \\
 guess\_max & Número máximo de linhas a serem usadas para adivinhar os tipos de coluna. \\
 show\_col\_types & Se FALSE, não mostre os tipos de coluna adivinhados. Se TRUE sempre mostra os tipos de coluna, mesmo que sejam fornecidos. Se NULL (o padrão) mostrar apenas os tipos de coluna se eles não forem fornecidos explicitamente pelo argumento col\_types. \\
 skip\_empty\_rows & As linhas em branco devem ser ignoradas completamente? ou seja, se esta opção for TRUE, as linhas em branco não serão representadas. Se for FALSE, eles serão representados por valores NA em todas as colunas. \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -430,13 +430,13 @@ Similar ao read.table e read.csv, só que mais rápido e conveniente por ler arq
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 file & Nome do arquivo no diretório de trabalho, caminho para o arquivo ou um URL começando http:, etc. Arquivos compactados `.gz' e `.bz2' são suportados se o pacote R.utils estiver instalado. \\
 sep & O separador entre colunas. \\
@@ -458,7 +458,7 @@ showProgress & TRUE exibe o progresso no console se o ETA for maior que 3 segund
 data.table & TRUE retorna um data.table (default). FALSE retorna um data.frame. O default para este argumento pode ser modificado com opcões(datatable.fread.datatable=FALSE). \\
 nThread & Número de threads a serem usados. Experimente para ver o que funciona melhor para seus dados em seu hardware. \\
 KeepLeadingZeros & Se for TRUE, dados numéricos com zeros à esquerda seão lidos como caracterer, caso contrário, os zeros à esquerda serão removidos e convertidos em numéricos. \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -495,13 +495,13 @@ Função para leitura de arquivos no formato .ods do Libre Office. A leitura é 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 path & Caminho do arquivo ods. \\
 sheet & Planilha que será lida. Default e 1. Pode ser o nome da planilha (ex. ``semana1'') ou um número correspondente a planilha. \\
@@ -511,7 +511,7 @@ formula\_as\_formula & Exibir fórmulas como fórmulas ``SUM(A1:A3)'' ou como va
 range & Seleção de retângulo usando intervalo de células semelhante ao Excel, como intervalo = ``D12:F15'' ou intervalo = ``R1C12:R6C15''. O processamento de intervalo de células é tratado pelo pacote cellranger. \\
 row\_names & Indica se o arquivo contém os nomes das linhas na primeira coluna. \\
 strings\_as\_factors & Logical. Se variáveis tipo character serão convertidas a fatores. \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -552,13 +552,13 @@ Leitura de arquivos com extensão .xls e xlsx.
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 path & Caminho para o arquivo xls/xlsx. \\
 sheet & Planilha a ser lida. Aceita o nome da planilha ou o número correspondente. Default é a primeira planilha. \\
@@ -569,7 +569,7 @@ na & Valores ausentes. Por default o readxl converte celulas em branco para valo
 skip & Número de linhas para pular antes de iniciar a leitura dos dados. \\
 n\_max & Número máximo de linhas a serem lidas. \\
 guess\_max & Máximo de linhas utilizados para adivinhar classes das colunas. \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -639,19 +639,19 @@ O rio é um pacote que vem com a iniciativa de simplificar o procedimento de imp
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 file & Caminho e nome do arquivo. Pode ter extensão .zip ou .tar. \\
 format & Formato do arquivo. A definição é opcional, mas pode ser ``,'', ``;'', '' \\
 setclass & Classe do objeto (opcional). Default é um ``data.frame''. Os valores permitidos incluem ``tbl\_df'', ``tbl'' ou ``tibble'' (se estiver usando dplyr) ou ``data.table'' (se estiver usando data.table). Outros valores são ignorados, de modo que um data.frame é retornado. \\
 which & Controla a importação de arquivos multi-objeto; como regra, import apenas retorna um único quadro de dados (use import\_list para importar vários quadros de dados de um arquivo multi-objeto). Se o arquivo for um diretório compactado, que pode ser uma cadeia de caracteres especificando um nome de arquivo ou um número inteiro especificando qual arquivo (na ordem de classificação de localidade) extrair do diretório compactado. Para planilhas do Excel, isso pode ser usado para especificar um nome ou número de planilha. Para arquivos .Rdata, pode ser um nome de objeto. Para arquivos HTML, identifica qual tabela extrair (da ordem do documento). Ignorado de outra forma. Um valor de cadeia de caracteres será usado como uma expressão regular, de modo que o arquivo extraído seja a primeira correspondência da expressão regular com os nomes de arquivo no arquivo. \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -785,13 +785,13 @@ Função para salvar um arquivo de dados que foi trabalhado no R em diferentes f
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 x & Objeto a ser escrito, prefereincialmente uma matriz ou data.frame. \\
 file & Nome do arquivo criado (pode conter o caminho) utilizando aspas '' ``. \\
@@ -801,7 +801,7 @@ dec & String para definir divisor de decimal, ex. dec = ``.''. \\
 col.names & Logical. Indica se os nomes das colunas de x devem ser escritos junto com x, ou um vetor de caracteres dos nomes das colunas a serem escritos. \\
 row.names & Logical. Cria coluna com nomes para linhas. \\
 fileEncoding & String. Declara a codificação a ser usada para que possam ser recodificados à medida que são gravados. \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -845,19 +845,19 @@ fileEncoding & String. Declara a codificação a ser usada para que possam ser r
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 x & Um data frame ou tibble a ser escrito. \\
 file & Caminho, nome do arquivo e extensão. \\
 append & Se FALSE, irá sobrescrever um arquivo existente, caso exista. Se TRUE, será salvo a partir da última linha de um arquivo existente. \\
 col\_names & Default TRUE. Primeira linha como nomes das colunas. Se FALSE, nomes das colunas não serão incluídos. \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -931,19 +931,19 @@ Grava um dataframe em um arquivo xlsx. Para criar um xlsx com (várias) sheets n
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 x & Data frame ou lista de data frames que serão salvos em planilhas (sheets). \\
 path & Nome do arquuivo criado. \\
 col\_names & Se TRUE, primera linha traz os nomes das colunas. \\
 format\_headers & Inserir nomes das colunas. \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -985,13 +985,13 @@ Função para escrever .csv muito mais rápido (por exemplo, 2 segundos versus 1
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 x & Objeto a salvar. Deve estar como data.frame ou data.table. \\
 file & Nome do arquivo. \\
@@ -1004,7 +1004,7 @@ col.names & Primeira linha como nomes das colunas. \\
 logical01 & Os valores lógicos devem ser escritos como 1 e 0 em vez de ``TRUE'' e ``FALSE''? \\
 showProgress & Exibir um medidor de progresso no console. Ignorado quando file == ``\,``. \\
 compress & Se compress = ``auto'' e se o arquivo termina em .gz, o formato de saída é gzipado csv. Se compress = ``none'', o formato de saída é sempre csv. Se compress = ``gzip'', o formato é csv compactado com gzip. A saída para o console nunca é compactada com gzip mesmo se compress = ``gzip''. Por padrão, compress = ``auto''. \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -1042,18 +1042,18 @@ Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gra
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 x & Matriz ou data frame a ser escrita. Exceções são que x pode ser uma lista de dados se o formato de arquivo de saída for uma pasta de Excel .xlsx. Para exportar uma lista de quadros de dados para vários arquivos, use export\_list em vez disso. \\
 file & Nome do arquivo. Deve especificar file e/ou format. \\
 format & Sequência de caracteres opcional contendo o formato de arquivo, que pode ser usado para substituir o formato inferido a partir de file ou, em vez de especificar file, um arquivo com o nome do símbolo de x e a extensão de arquivo especificada será criado. Os atalhos incluem: ``,'' ou ``;'' ou '' \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
@@ -1087,17 +1087,15 @@ dividido em três partes:\\
 \textbf{Exemplo 1}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{setwd}\NormalTok{(}\StringTok{\textquotesingle{}arquivos/\textquotesingle{}}\NormalTok{)              }\CommentTok{\# Define a pasta que contém os arquivos}
-\NormalTok{lista }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{list.files}\NormalTok{()     }\CommentTok{\# Captura os arquivos na pasta e atribui à uma lista}
-\NormalTok{arquivos }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{lapply}\NormalTok{(}\AttributeTok{X =}\NormalTok{ lista,   }\CommentTok{\# Lista com os arquivos a serem lidos}
-                         \AttributeTok{FUN =}\NormalTok{ read.csv2)  }\CommentTok{\# Função escolhida para ler}
-\NormalTok{unidos }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{Reduce}\NormalTok{(}\AttributeTok{x =}\NormalTok{ arquivos,       }\CommentTok{\# Lista de dataframes}
-                       \AttributeTok{f =}\NormalTok{ base}\SpecialCharTok{::}\NormalTok{rbind.data.frame)  }\CommentTok{\# Função para empilhar}
-\FunctionTok{setwd}\NormalTok{(}\StringTok{"\textasciitilde{}/Documentos/Estudos R/guia\_de\_bolso"}\NormalTok{) }\CommentTok{\# Volta para diretorio inicial}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+setwd('arquivos/')              # Define a pasta que contém os arquivos
+lista <- base::list.files()     # Captura os arquivos na pasta e atribui à uma lista
+arquivos <- base::lapply(X = lista,   # Lista com os arquivos a serem lidos
+                         FUN = read.csv2)  # Função escolhida para ler
+unidos <- base::Reduce(x = arquivos,       # Lista de dataframes
+                       f = base::rbind.data.frame)  # Função para empilhar
+setwd("~/Documentos/Estudos R/guia_de_bolso") # Volta para diretorio inicial
+\end{verbatim}
 
 O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.\\
 A lista ``arquivos'' também pode ser aplicada à função data.table::rbindlist(), que terá o mesmo efeito.
@@ -1110,27 +1108,25 @@ A lista ``arquivos'' também pode ser aplicada à função data.table::rbindlist
 
 Aqui a ideia é realizar a leitura, mas filtrando os arquivos somente com os dados de interesse, ao mesmo tempo, para isso, vamos usar a função base::function(). Os parâmetros serão passados para essa função e ela será aplicada ao lapply.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{setwd}\NormalTok{(}\StringTok{\textquotesingle{}arquivos2/\textquotesingle{}}\NormalTok{)}
+\begin{verbatim}
+setwd('arquivos2/')
 
-\NormalTok{filtro.fun }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x)\{                      }\CommentTok{\# Cria uma função}
-\NormalTok{  data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(}\AttributeTok{file =}\NormalTok{ x) }\SpecialCharTok{\%\textgreater{}\%} 
-\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\StringTok{"Petal.Length"}\NormalTok{,               }\CommentTok{\# Manipulações}
-                  \StringTok{"Petal.Width"}\NormalTok{, }
-                  \StringTok{"Species"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{    dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Petal.Length }\SpecialCharTok{\textgreater{}}\NormalTok{ .}\DecValTok{5}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{setNames}\NormalTok{(}\AttributeTok{nm =} \FunctionTok{c}\NormalTok{(}\StringTok{"compr"}\NormalTok{,}\StringTok{"largura"}\NormalTok{,}\StringTok{"especie"}\NormalTok{))}
-\NormalTok{\}}
+filtro.fun <- function(x){                      # Cria uma função
+  data.table::fread(file = x) %>% 
+    dplyr::select("Petal.Length",               # Manipulações
+                  "Petal.Width", 
+                  "Species") %>%
+    dplyr::filter(Petal.Length > .5) %>%
+    setNames(nm = c("compr","largura","especie"))
+}
 
-\NormalTok{lista }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{()}
-\NormalTok{arquivos }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(}\AttributeTok{X =}\NormalTok{ lista, }\AttributeTok{FUN =}\NormalTok{ filtro.fun)}
+lista <- list.files()
+arquivos <- lapply(X = lista, FUN = filtro.fun)
 
-\NormalTok{unidos }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{rbindlist}\NormalTok{(}\AttributeTok{l =}\NormalTok{ arquivos)  }\CommentTok{\# Mesmo efeito do Reduce}
+unidos <- data.table::rbindlist(l = arquivos)  # Mesmo efeito do Reduce
 
-\FunctionTok{setwd}\NormalTok{(}\StringTok{"\textasciitilde{}/Documentos/Estudos R/guia\_de\_bolso"}\NormalTok{) }\CommentTok{\# Volta para diretório inicial}
-\end{Highlighting}
-\end{Shaded}
+setwd("~/Documentos/Estudos R/guia_de_bolso") # Volta para diretório inicial
+\end{verbatim}
 
 \begin{quote}
 \href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/function}{Documentação}
@@ -1194,16 +1190,14 @@ Importa um alista de data frames de um vetor de nomes ou arquivo multi-objeto (p
 \textbf{Exemplo}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{setwd}\NormalTok{(}\StringTok{\textquotesingle{}arquivos/\textquotesingle{}}\NormalTok{)}
-\NormalTok{lista }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{()}
-\NormalTok{unidos }\OtherTok{\textless{}{-}}\NormalTok{ rio}\SpecialCharTok{::}\FunctionTok{import\_list}\NormalTok{(}\AttributeTok{file =}\NormalTok{ lista, }\CommentTok{\# Lista com nomes dos arquivos do diretório}
-                 \AttributeTok{rbind =} \ConstantTok{TRUE}\NormalTok{,    }\CommentTok{\# Empilhar. Se FALSE retorna uma lista com os data frames}
-                 \AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{)   }\CommentTok{\# Nomes das colunas}
-\FunctionTok{setwd}\NormalTok{(}\StringTok{"\textasciitilde{}/Documentos/Estudos R/guia\_de\_bolso"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+setwd('arquivos/')
+lista <- list.files()
+unidos <- rio::import_list(file = lista, # Lista com nomes dos arquivos do diretório
+                 rbind = TRUE,    # Empilhar. Se FALSE retorna uma lista com os data frames
+                 header = TRUE)   # Nomes das colunas
+setwd("~/Documentos/Estudos R/guia_de_bolso")
+\end{verbatim}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
