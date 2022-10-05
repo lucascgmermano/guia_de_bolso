@@ -26,7 +26,7 @@ como auxiliar na execução te tarefas diárias básicas.</p>" />
 <meta name="author" content="Lucas C. Germano" />
 
 
-<meta name="date" content="2022-10-03" />
+<meta name="date" content="2022-10-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -242,7 +242,6 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="leitura-e-escrita-de-arquivos-de-texto" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">1</span> Leitura e escrita de arquivos de texto<a href="leitura-e-escrita-de-arquivos-de-texto.html#leitura-e-escrita-de-arquivos-de-texto" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<hr />
 <div id="diretório-de-trabalho" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> Diretório de trabalho<a href="leitura-e-escrita-de-arquivos-de-texto.html#diretório-de-trabalho" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Abaixo são transcritos alguns comandos e métodos para se definir e conhecer o diretório de trabalho, bem como manipular criação e exclusão de pastas e arquivos.</p>
@@ -320,7 +319,6 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<hr />
 <p><strong>Exemplo: list.files()</strong></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&#39;dados/&#39;</span>,      <span class="co"># Caminho do arquivo</span></span>
 <span id="cb1-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb1-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">pattern =</span> <span class="st">&#39;.ods&#39;</span>,     <span class="co"># Formato especificado</span></span>
@@ -333,26 +331,20 @@ div.csl-indent {
 </div>
 <div id="leitura-de-arquivos" class="section level2 hasAnchor" number="1.2">
 <h2><span class="header-section-number">1.2</span> Leitura de arquivos<a href="leitura-e-escrita-de-arquivos-de-texto.html#leitura-de-arquivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<hr />
 <div id="utilsread.csv2" class="section level3 hasAnchor" number="1.2.1">
 <h3><span class="header-section-number">1.2.1</span> utils::read.csv2()<a href="leitura-e-escrita-de-arquivos-de-texto.html#utilsread.csv2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Faz a leitura de um arquivo em formado de tabela e cria um data frame a partir dele, com casos como linhas e variáveis como colunas. É uma função nativa do R, em que read.csv trata de arquivos separados por vírgula, enquanto read.csv2 de arquivos separados por ponto e vírgula. Os argumentos das funções são os mesmos, por isso o .csv2 foi escolhido para o exemplo.</p>
 <blockquote>
 <p><a href="https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/read.table">Documentação</a></p>
 </blockquote>
-<hr />
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb3-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>)</span>
 <span id="cb3-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">2</span>)          <span class="co"># Exibir as 2 primeiras linhas dos dados.</span></span></code></pre></div>
-<pre><code>##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana
-## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1
-## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3
-##      pop
-## 1 150713
-## 2 150713</code></pre>
-<hr />
+<pre><code>##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana    pop
+## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1 150713
+## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3 150713</code></pre>
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
 </blockquote>
@@ -430,7 +422,6 @@ div.csl-indent {
 <blockquote>
 <p><a href="https://www.rdocumentation.org/packages/readr/versions/1.3.1">Documentação</a></p>
 </blockquote>
-<hr />
 <blockquote>
 <p><strong>Exemplo 1</strong></p>
 </blockquote>
@@ -444,7 +435,6 @@ div.csl-indent {
 ##   &lt;date&gt;     &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;
 ## 1 2020-01-01 Mogi Guaçu 30 a 39     1      0
 ## 2 2020-01-20 Mogi Guaçu 50 a 59     1      0</code></pre>
-<hr />
 <blockquote>
 <p><strong>Exemplo 2</strong></p>
 </blockquote>
@@ -461,7 +451,6 @@ div.csl-indent {
 ##   &lt;dbl&gt; &lt;date&gt;      &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  
 ## 1     1 2020-01-01 353070 Mogi Guaçu 30 a 39
 ## 2     2 2020-01-20 353070 Mogi Guaçu 50 a 59</code></pre>
-<hr />
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
 </blockquote>
@@ -536,7 +525,6 @@ div.csl-indent {
 <blockquote>
 <p><a href="https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fread">Documentação</a></p>
 </blockquote>
-<hr />
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
@@ -552,7 +540,6 @@ div.csl-indent {
 <pre><code>##    data.in.sin  municipio num_casos
 ## 1:  2020-01-01 Mogi Guaçu         1
 ## 2:  2020-01-20 Mogi Guaçu         1</code></pre>
-<hr />
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
 </blockquote>
@@ -657,7 +644,6 @@ div.csl-indent {
 <h3><span class="header-section-number">1.2.4</span> readODS::read_ods()<a href="leitura-e-escrita-de-arquivos-de-texto.html#readodsread_ods" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Função para leitura de arquivos no formato .ods do Libre Office. A leitura é feita em somente uma planilha e retorna um data.frame.
 &gt; <a href="https://www.rdocumentation.org/packages/readODS/versions/1.7.0/topics/read_ods">Documentação</a></p>
-<hr />
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
@@ -665,7 +651,6 @@ div.csl-indent {
 <span id="cb11-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb11-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">col_names =</span> <span class="cn">FALSE</span>,                <span class="co"># Primeira linha contém nomes das colunas</span></span>
 <span id="cb11-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb11-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">sheet =</span> <span class="dv">1</span>,                        <span class="co"># Seleção da planilha</span></span>
 <span id="cb11-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb11-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">range =</span> <span class="st">&quot;A7:B14&quot;</span>)                 <span class="co"># Intervalo para leitura</span></span></code></pre></div>
-<hr />
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
 </blockquote>
@@ -724,7 +709,6 @@ div.csl-indent {
 <blockquote>
 <p><a href="https://www.rdocumentation.org/packages/readxl/versions/0.1.1/topics/read_excel">Documentação</a></p>
 </blockquote>
-<hr />
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
@@ -733,7 +717,6 @@ div.csl-indent {
 <span id="cb12-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb12-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&#39;vel&#39;</span>,<span class="st">&#39;dist&#39;</span>),</span>
 <span id="cb12-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb12-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">col_types =</span> <span class="fu">c</span>(<span class="st">&quot;numeric&quot;</span>,<span class="st">&quot;numeric&quot;</span>),</span>
 <span id="cb12-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb12-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">range =</span> <span class="st">&quot;A3:B19&quot;</span>)</span></code></pre></div>
-<hr />
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
 </blockquote>
@@ -796,7 +779,6 @@ div.csl-indent {
 <blockquote>
 <p><a href="https://www.rdocumentation.org/packages/foreign/versions/0.8-82/topics/read.dbf">Documentação</a></p>
 </blockquote>
-<hr />
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
@@ -810,7 +792,6 @@ div.csl-indent {
 <blockquote>
 <p><a href="https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import">documentação</a>.</p>
 </blockquote>
-<hr />
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
@@ -820,7 +801,6 @@ div.csl-indent {
 ## 1  222    160
 ## 2  132    164
 ## 3  137    169</code></pre>
-<hr />
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
 </blockquote>
@@ -872,7 +852,6 @@ div.csl-indent {
 <div id="encoding" class="section level3 hasAnchor" number="1.2.9">
 <h3><span class="header-section-number">1.2.9</span> Encoding<a href="leitura-e-escrita-de-arquivos-de-texto.html#encoding" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Se houver distorção de caracteres especiais, considerar como possibilidades para resolver o problema utilizar o argumento correspondente a stringsAsFactors = F. Esse comando faz com que os caracteres permaneçam como caracteres, ao invés de serem convertidos para factor, e encoding = “UTF-8” ou encoding = “ISO-8859-1” para reconhecer os caracteres especiais. O argumento fileEncoding = “UTF-8” também pode ser necessário.</p>
-<hr />
 <blockquote>
 <p><strong>Descobrir o encoding</strong></p>
 </blockquote>
@@ -881,7 +860,6 @@ div.csl-indent {
 <pre><code>## [[1]]
 ##   Encoding Language Confidence
 ## 1    UTF-8                0.15</code></pre>
-<hr />
 <blockquote>
 <p><strong>Converter encoding</strong></p>
 </blockquote>
@@ -892,12 +870,11 @@ div.csl-indent {
 <p>Pode-se também utilizar a função <code>base::enc2utf8</code> para transformar uma codificação em UTF-8, porém, deve ser sempre aplicado a um vetor (ou coluna do banco) de dados do tipo character, se for preciso, transformar antes com a função <code>base::as.character</code></p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb20-1" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.character</span>(iris<span class="sc">$</span>Species)</span>
 <span id="cb20-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb20-2" aria-hidden="true" tabindex="-1"></a>dados <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">enc2utf8</span>(dados)</span></code></pre></div>
-<hr />
 <blockquote>
-<p><strong>Encoding via Import Dataset</strong><br />
-É possível controlar o encoding pelos argumentos da função escolhida para leitura do arquivo, ou então pela leitura realizada pela interface gráfica do RStudio. Entrar no menu “File”, “Import Dataset”, “From text (base)…” , após isso será aberta uma janela, onde o campo encoding permite selecionar uma codificação entre centenas. Veja figura abaixo:
-<img src="ilustracoes/import_dataset.png" alt="import_dataset" /></p>
+<p><strong>Encoding via Import Dataset</strong></p>
 </blockquote>
+<p>É possível controlar o encoding pelos argumentos da função escolhida para leitura do arquivo, ou então pela leitura realizada pela interface gráfica do RStudio. Entrar no menu “File”, “Import Dataset”, “From text (base)…” , após isso será aberta uma janela, onde o campo encoding permite selecionar uma codificação entre centenas. Veja figura abaixo:
+<img src="ilustracoes/import_dataset.png" alt="import_dataset" /></p>
 <hr />
 <hr />
 </div>
@@ -910,7 +887,6 @@ div.csl-indent {
 <blockquote>
 <p><a href="https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/write.table">Documentação</a></p>
 </blockquote>
-<hr />
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
@@ -924,7 +900,6 @@ div.csl-indent {
 ## 2 2          4.9         3.0          1.4         0.2  setosa
 ## 3 3          4.7         3.2          1.3         0.2  setosa
 ## 4 4          4.6         3.1          1.5         0.2  setosa</code></pre>
-<hr />
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
 </blockquote>
@@ -983,7 +958,6 @@ div.csl-indent {
 <blockquote>
 <p><a href="https://www.rdocumentation.org/packages/readr/versions/1.3.1/topics/write_delim">Documentação</a></p>
 </blockquote>
-<hr />
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
@@ -992,7 +966,6 @@ div.csl-indent {
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
 ## 2          4.9         3.0          1.4         0.2  setosa</code></pre>
-<hr />
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
 </blockquote>
@@ -1035,7 +1008,6 @@ div.csl-indent {
 <blockquote>
 <p><a href="https://www.rdocumentation.org/packages/writexl/versions/1.4.0/topics/write_xlsx">Documentação</a></p>
 </blockquote>
-<hr />
 <blockquote>
 <p><strong>Exemplo 1</strong></p>
 </blockquote>
@@ -1049,7 +1021,6 @@ div.csl-indent {
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  
 ## 1          5.1         3.5          1.4         0.2 setosa 
 ## 2          4.9         3            1.4         0.2 setosa</code></pre>
-<hr />
 <blockquote>
 <p><strong>Exemplo 2</strong></p>
 </blockquote>
@@ -1064,7 +1035,6 @@ div.csl-indent {
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1    21     6   160   110   3.9  2.62  16.5     0     1     4     4
 ## 2    21     6   160   110   3.9  2.88  17.0     0     1     4     4</code></pre>
-<hr />
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
 </blockquote>
@@ -1107,7 +1077,6 @@ div.csl-indent {
 <blockquote>
 <p><a href="https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fwrite">Documentação</a></p>
 </blockquote>
-<hr />
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
@@ -1117,7 +1086,6 @@ div.csl-indent {
 <span id="cb29-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">append =</span> <span class="cn">TRUE</span>,                 <span class="co"># Salva na ultima linha do arquivo ja existente</span></span>
 <span id="cb29-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">sep =</span> <span class="st">&#39;;&#39;</span>,                     <span class="co"># Separados de colunas</span></span>
 <span id="cb29-6"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">showProgress =</span> <span class="cn">TRUE</span>)           <span class="co"># Mostrar progresso</span></span></code></pre></div>
-<hr />
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
 </blockquote>
@@ -1188,13 +1156,11 @@ div.csl-indent {
 <blockquote>
 <p><a href="https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/export">Documentação</a>.</p>
 </blockquote>
-<hr />
 <blockquote>
 <p><strong>Exempĺo</strong></p>
 </blockquote>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb30-1" aria-hidden="true" tabindex="-1"></a>rio<span class="sc">::</span><span class="fu">export</span>(<span class="at">x =</span> iris,                  <span class="co"># Objeto que será exportado.</span></span>
 <span id="cb30-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb30-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">file =</span> <span class="st">&#39;dados/iris.xlsx&#39;</span>)  <span class="co"># Caminho, nome e extensão.</span></span></code></pre></div>
-<hr />
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
 </blockquote>
@@ -1231,7 +1197,6 @@ div.csl-indent {
 <div id="leitura-de-múltiplos-arquivos" class="section level2 hasAnchor" number="1.4">
 <h2><span class="header-section-number">1.4</span> Leitura de múltiplos arquivos<a href="leitura-e-escrita-de-arquivos-de-texto.html#leitura-de-múltiplos-arquivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Particularmente tenho maior interesse na possibilidade de ler e agrupar diversos arquivos, assim, o enfoque desse tópico será sobre a leitura com merge.</p>
-<hr />
 <div id="baselapply-e-basereduce" class="section level3 hasAnchor" number="1.4.1">
 <h3><span class="header-section-number">1.4.1</span> base::lapply() e base::Reduce<a href="leitura-e-escrita-de-arquivos-de-texto.html#baselapply-e-basereduce" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A ideia aqui é fazer a leitura dos arquivos de interesse e juntá-los verticalmente compondo um dataframe final, assim, o método é<br />
@@ -1243,7 +1208,6 @@ dividido em três partes:<br />
 <p><a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/lapply">Documentação base::lapply</a><br />
 <a href="https://www.rdocumentation.org/packages/purrr/versions/0.2.5/topics/reduce">Documentação base::reduce()</a></p>
 </blockquote>
-<hr />
 <blockquote>
 <p><strong>Exemplo 1</strong></p>
 </blockquote>
@@ -1256,7 +1220,6 @@ unidos &lt;- base::Reduce(x = arquivos,       # Lista de dataframes
 setwd(&quot;~/Documentos/Estudos R/guia_de_bolso&quot;) # Volta para diretorio inicial</code></pre>
 <p>O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.<br />
 A lista “arquivos” também pode ser aplicada à função data.table::rbindlist(), que terá o mesmo efeito.</p>
-<hr />
 <blockquote>
 <p><strong>Exemplo 2</strong></p>
 </blockquote>
@@ -1288,7 +1251,6 @@ setwd(&quot;~/Documentos/Estudos R/guia_de_bolso&quot;) # Volta para diretório 
 <h3><span class="header-section-number">1.4.2</span> base::for()<a href="leitura-e-escrita-de-arquivos-de-texto.html#basefor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A função <code>for</code> permite criar um loop de execução de determinada ação, no caso, o loop do exemplo realizará a leitura de vários arquivos que serão atribuidos à uma lista. Com a lista é possível empilhar em um único data frame.<br />
 &gt; <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Control">Documentação</a></p>
-<hr />
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
@@ -1316,7 +1278,6 @@ setwd(&quot;~/Documentos/Estudos R/guia_de_bolso&quot;) # Volta para diretório 
 <blockquote>
 <p><a href="https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import_list">Documentação</a></p>
 </blockquote>
-<hr />
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
@@ -1338,7 +1299,6 @@ setwd(&quot;~/Documentos/Estudos R/guia_de_bolso&quot;)</code></pre>
 <blockquote>
 <p><a href="https://www.rdocumentation.org/packages/rio/versions/0.5.26/topics/export_list">Documentação</a></p>
 </blockquote>
-<hr />
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
@@ -1413,20 +1373,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

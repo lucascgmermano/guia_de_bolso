@@ -10,8 +10,6 @@ library(dplyr)
 
 # Leitura e escrita de arquivos de texto
 
-***
-
 ## Diretório de trabalho  
 
 Abaixo são transcritos alguns comandos e métodos para se definir e conhecer o diretório de trabalho, bem como manipular criação e exclusão de pastas e arquivos.  
@@ -34,7 +32,6 @@ base::file.rename() | Renomear um arquivo.
 base::list.files() | Lista os arquivos presentes no diretório.
 here::here() | Cria um caminho relativo para um arquivo no diretório de trabalho, preferencialmente em um projeto, o que facilita ser reproduzido em diversas máquinas, ex. here('arquivos','dados.csv'). É similar ao base::file.path(), cuja sintaxe é a mesma.
 
-***
 
 **Exemplo: list.files()**
 
@@ -55,7 +52,6 @@ list.files(path = 'dados/',      # Caminho do arquivo
 
 ## Leitura de arquivos  
 
-***
 
 ### utils::read.csv2()
 
@@ -63,7 +59,6 @@ Faz a leitura de um arquivo em formado de tabela e cria um data frame a partir d
 
 > [Documentação](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/read.table)
 
-***
 
 > **Exemplo**  
 
@@ -72,7 +67,6 @@ dados <- read.csv2(file = 'dados/dados.csv')
 head(dados, 2)          # Exibir as 2 primeiras linhas dos dados.
 ```
 
-***
 
 > **Argumentos principais**
 
@@ -102,9 +96,8 @@ colClasses | character. Um vetor de classes referentes as colunas. Valores poss�
 ### readr::read_csv2()
 O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados retangulares (como csv, tsv e fwf). Ele foi projetado para analisar de forma flexível muitos tipos de dados encontrados na natureza. Já está integrado no RStudio para o método de importação via interface gráfica, embora necessite de instalação.  
 
-> [Documentação](https://www.rdocumentation.org/packages/readr/versions/1.3.1)
+> [Documentação](https://www.rdocumentation.org/packages/readr/versions/1.3.1)  
 
-***
 
 > **Exemplo 1**
 
@@ -115,8 +108,7 @@ dados <- readr::read_csv2(file = 'dados/dados.csv',  # Caminho e arquivo
                           skip_empty_rows = TRUE)    # Pular linhas vazias
 head(dados, 2)                                       
 ```
-
-***
+  
 
 > **Exemplo 2**
 
@@ -131,7 +123,6 @@ dados <- readr::read_csv2(
 head(dados, 2)
 ```
 
-***
 
 > **Argumentos principais**
 
@@ -161,9 +152,8 @@ skip_empty_rows | As linhas em branco devem ser ignoradas completamente? ou seja
 
 Similar ao read.table e read.csv, só que mais rápido e conveniente por ler arquivos muito grandes. Todos os controles como sep, colClasses, nrows, encoding são detectados atuomaticamente. O resultado padrão é um objeto data.table, mas pode-se mudar para data.frame.  
 
-> [Documentação](https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fread)
+> [Documentação](https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fread)  
 
-***
 
 > **Exemplo**
 
@@ -178,8 +168,7 @@ dados <- data.table::fread(file = 'dados/dados.csv',            # Caminho do arq
                                          "num_casos")) 
 head(dados, 2)
 ```
-
-***
+  
 
 > **Argumentos principais**
 
@@ -216,9 +205,8 @@ KeepLeadingZeros | Se for TRUE, dados numéricos com zeros à esquerda seão lid
 ### readODS::read_ods()
 
 Função para leitura de arquivos no formato .ods do Libre Office. A leitura é feita em somente uma planilha e retorna um data.frame.
-> [Documentação](https://www.rdocumentation.org/packages/readODS/versions/1.7.0/topics/read_ods)
+> [Documentação](https://www.rdocumentation.org/packages/readODS/versions/1.7.0/topics/read_ods)  
 
-***
 
 > **Exemplo**
 ```{r read_ods}
@@ -228,8 +216,7 @@ dados <- readODS::read_ods(path = 'dados/planilha_ods.ods',  # Caminho do arquiv
                            range = "A7:B14")                 # Intervalo para leitura
 ```
 
-***
-
+  
 > **Argumentos principais**
 
 Argumento|Definição 
@@ -254,9 +241,8 @@ strings_as_factors | Logical. Se variáveis tipo character serão  convertidas a
 
 Leitura de arquivos com extensão .xls e xlsx.
 
-> [Documentação](https://www.rdocumentation.org/packages/readxl/versions/0.1.1/topics/read_excel)
+> [Documentação](https://www.rdocumentation.org/packages/readxl/versions/0.1.1/topics/read_excel)  
 
-*** 
 
 > **Exemplo**
 
@@ -268,8 +254,7 @@ Leitura de arquivos com extensão .xls e xlsx.
                    range = "A3:B19")
 ```
 
-***
-      
+        
 > **Argumentos principais**
 
 Argumento|Definição
@@ -295,11 +280,11 @@ guess_max | Máximo de linhas utilizados para adivinhar classes das colunas.
 
 A função le arquivos .dbf como dataframe, convertendo por default campos character em factor. Tem apenas dois argumentos, o file (caminho) e o as.is (se FALSE não converte os campos em factor). Por não ser muito usado, o desenvolvedor já alerta que nem todos os arquivos poderão ser lidos normalmente.
 
-> [Documentação](https://www.rdocumentation.org/packages/foreign/versions/0.8-82/topics/read.dbf)
+> [Documentação](https://www.rdocumentation.org/packages/foreign/versions/0.8-82/topics/read.dbf)  
 
-***
 
 > **Exemplo**
+
 ```{r read.dbf}
 dados <- foreign::read.dbf(file = 'dados/planilha_dbf.dbf')
 ```
@@ -314,9 +299,8 @@ dados <- foreign::read.dbf(file = 'dados/planilha_dbf.dbf')
 ### rio::import()
 O rio é um pacote que vem com a iniciativa de simplificar o procedimento de importação e exportação de arquivos de dados. Na importação, é capaz de ler uma vasta lista de extensões de arquivos, sem a necessidade de especificar o formato.  
 
-> [documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import).
+> [documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import).  
 
-***
 
 > **Exemplo**  
 
@@ -325,8 +309,7 @@ dados <- rio::import(file = 'dados/planilha_dbf.dbf') # Caminho e nome.
 head(dados, 3)
 ```
 
-***
-
+  
 > **Argumentos principais**  
 
 Argumento|Definição
@@ -367,8 +350,7 @@ Ou atribuir o link à um objeto e usa-lo na função.
 
 Se houver distorção de caracteres especiais, considerar como possibilidades para resolver o problema utilizar  o argumento correspondente a stringsAsFactors = F. Esse comando faz com que os caracteres permaneçam como caracteres, ao invés de serem convertidos para factor, e encoding = "UTF-8" ou encoding = "ISO-8859-1" para reconhecer os caracteres especiais. O argumento fileEncoding = "UTF-8" também pode ser necessário.
 
-***
-
+  
 > **Descobrir o encoding**  
 
 Verifica somente de um vetor
@@ -376,9 +358,9 @@ Verifica somente de um vetor
 stringi::stri_enc_detect(str = cars$speed[1])
 ```
 
-***
-
+  
 > **Converter encoding**
+
 ```{r iconv}
 base::iconv(x = cars$speed[1:3], # Dataframe ou vetor
       from = "UTF-8",            # Encoding anterior
@@ -386,14 +368,15 @@ base::iconv(x = cars$speed[1:3], # Dataframe ou vetor
 ```
 
 Pode-se também utilizar a função `base::enc2utf8` para transformar uma codificação em UTF-8, porém, deve ser sempre aplicado a um vetor (ou coluna do banco) de dados do tipo character, se for preciso, transformar antes com a função `base::as.character`
+
 ```{r enc2utf8}
 dados <- base::as.character(iris$Species)
 dados <- base::enc2utf8(dados)
 ```
 
-***
-
+  
 > **Encoding via Import Dataset**  
+
 É possível controlar o encoding pelos argumentos da função escolhida para leitura do arquivo, ou então pela leitura realizada pela interface gráfica do RStudio. Entrar no menu "File", "Import Dataset", "From text (base)..." , após isso será aberta uma janela, onde o campo encoding permite selecionar uma codificação entre centenas. Veja figura abaixo:
 ![import_dataset](ilustracoes/import_dataset.png)
 
@@ -410,9 +393,8 @@ dados <- base::enc2utf8(dados)
 
 Função para salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula. Um ponto negativo é que essa função, ao salvar o arquivo, cria uma coluna com nomes das linhas (em números).
 
-> [Documentação](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/write.table)
+> [Documentação](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/write.table)  
 
-***
 
 > **Exemplo**  
 
@@ -424,8 +406,7 @@ write.csv2(x = iris,                # Dados ativos
 read.csv2('dados/iris.csv', nrows = 4)
 ```
 
-***
-
+  
 > **Argumentos principais**  
 
 Argumento|Definição
@@ -450,9 +431,8 @@ fileEncoding | String. Declara a codificação a ser usada para que possam ser r
 
 É semelhante à função anterior, mas executa a tarefa mais rápido, com a vantagem de não criar uma coluna com nomes das linhas.  
 
-> [Documentação](https://www.rdocumentation.org/packages/readr/versions/1.3.1/topics/write_delim)
+> [Documentação](https://www.rdocumentation.org/packages/readr/versions/1.3.1/topics/write_delim)  
 
-***
 
 > **Exemplo**  
 
@@ -461,8 +441,7 @@ readr::write_csv2(x = iris, file = 'dados/iris.csv')
 read.csv2(file = 'dados/iris.csv', nrows = 2)
 ```
 
-***
-
+  
 > **Argumentos principais**
 
 Argumento|Definição
@@ -482,9 +461,8 @@ col_names	| Default TRUE. Primeira linha como nomes das colunas. Se FALSE, nomes
 ### writexl::write_xlsx()    
 Grava um dataframe em um arquivo xlsx. Para criar um xlsx com (várias) sheets nomeadas, basta definir x para uma lista nomeada de dataframe.  
 
-> [Documentação](https://www.rdocumentation.org/packages/writexl/versions/1.4.0/topics/write_xlsx)
+> [Documentação](https://www.rdocumentation.org/packages/writexl/versions/1.4.0/topics/write_xlsx)  
 
-***
 
 > **Exemplo 1**  
 
@@ -496,8 +474,7 @@ writexl::write_xlsx(x = iris,
 readxl::read_excel('dados/iris.xlsx', n_max = 2)
 ```
 
-***
-
+  
 > **Exemplo 2**  
 
 ```{r write_xlsx2}
@@ -509,8 +486,7 @@ readxl::read_excel(path = 'dados/conjuntodadosnativos.xlsx',
                    n_max = 2)
 ```
 
-***
-
+  
 > **Argumentos principais**  
 
 Argumento|Definição
@@ -534,8 +510,7 @@ Função para escrever .csv muito mais rápido (por exemplo, 2 segundos versus 1
 
 > [Documentação](https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fwrite)
 
-***
-
+  
 > **Exemplo**  
 
 ```{r fwrite}
@@ -547,8 +522,7 @@ data.table::fwrite(x = dados,                     # Objeto a ser escrito
                    showProgress = TRUE)           # Mostrar progresso
 ```
 
-***
-
+  
 > **Argumentos principais**
 
 Argumento|Definição
@@ -577,8 +551,7 @@ Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gra
 
 > [Documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/export).  
 
-***
-
+  
 > **Exempĺo**  
 
 ```{r export}
@@ -586,8 +559,7 @@ rio::export(x = iris,                  # Objeto que será exportado.
             file = 'dados/iris.xlsx')  # Caminho, nome e extensão.
 ```
 
-***
-
+  
 > **Argumentos principais**  
 
 Argumento|Definição
@@ -606,7 +578,6 @@ format | Sequência de caracteres opcional contendo o formato de arquivo, que po
 ## Leitura de múltiplos arquivos  
 Particularmente tenho maior interesse na possibilidade de ler e agrupar diversos arquivos, assim, o enfoque desse tópico será sobre a leitura com merge.
 
-***
 
 ### base::lapply() e base::Reduce  
 A ideia aqui é fazer a leitura dos arquivos de interesse e juntá-los verticalmente compondo um dataframe final, assim, o método é  
@@ -616,9 +587,8 @@ dividido em três partes:
 3. Juntar os dataframes com base::Reduce e base::rbind.dataframe.  
 
 > [Documentação base::lapply](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/lapply)  
-> [Documentação base::reduce()](https://www.rdocumentation.org/packages/purrr/versions/0.2.5/topics/reduce)
+> [Documentação base::reduce()](https://www.rdocumentation.org/packages/purrr/versions/0.2.5/topics/reduce)  
 
-***
 
 > **Exemplo 1**
 
@@ -634,8 +604,7 @@ setwd("~/Documentos/Estudos R/guia_de_bolso") # Volta para diretorio inicial
 O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.  
 A lista "arquivos" também pode ser aplicada à função data.table::rbindlist(), que terá o mesmo efeito.  
 
-***
-
+  
 > **Exemplo 2**  
 
 Aqui a ideia é realizar a leitura, mas filtrando os arquivos somente com os dados de interesse, ao mesmo tempo, para isso, vamos usar a função base::function(). Os parâmetros serão passados para essa função e ela será aplicada ao lapply.
@@ -667,9 +636,8 @@ setwd("~/Documentos/Estudos R/guia_de_bolso") # Volta para diretório inicial
 
 ### base::for()  
 A função `for` permite criar um loop de execução de determinada ação, no caso, o loop do exemplo realizará a leitura de vários arquivos que serão atribuidos à uma lista. Com a lista é possível empilhar em um único data frame.  
-> [Documentação](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Control)  
+> [Documentação](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Control)   
 
-***
 
 > **Exemplo**  
 
@@ -694,9 +662,8 @@ data.table::rbindlist(l = arquivos)[1:3,]
 ### rio::import_list()  
 Importa um alista de data frames de um vetor de nomes ou arquivo multi-objeto (planilha Excel, arquivo .Rdata etc).  
 
-> [Documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import_list)
+> [Documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import_list)  
 
-***
 
 > **Exemplo**
 
@@ -718,9 +685,8 @@ setwd("~/Documentos/Estudos R/guia_de_bolso")
 
 Exporta uma lista de data frames. A extensão colocada no nome do arquivo já direciona o formato, porém, pode-se usar o argumento sep = ";" ou outro para definir o desejado. Os nomes dos arquivos salvos podem ser declarados por um vetor, ex. c("iris1.csv","iris2.csv"), ou usar o recurso `%s`, ex. `%s.csv` é o mesmo que `nome_do_objeto.csv`.  
 
-> [Documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.26/topics/export_list)  
+> [Documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.26/topics/export_list)    
 
-***
 
 > **Exemplo**
 
