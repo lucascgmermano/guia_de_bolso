@@ -117,7 +117,7 @@
 
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{2022-10-03}
+\date{2022-10-04}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -154,8 +154,6 @@ Críticas, sugestões ou contribuições de código e conteúdo podem ser enviad
 \hypertarget{leitura-e-escrita-de-arquivos-de-texto}{%
 \chapter{Leitura e escrita de arquivos de texto}\label{leitura-e-escrita-de-arquivos-de-texto}}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{diretuxf3rio-de-trabalho}{%
 \section{Diretório de trabalho}\label{diretuxf3rio-de-trabalho}}
 
@@ -190,8 +188,6 @@ here::here() & Cria um caminho relativo para um arquivo no diretório de trabalh
 \bottomrule()
 \end{longtable}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \textbf{Exemplo: list.files()}
 
 \begin{Shaded}
@@ -215,8 +211,6 @@ here::here() & Cria um caminho relativo para um arquivo no diretório de trabalh
 \hypertarget{leitura-de-arquivos}{%
 \section{Leitura de arquivos}\label{leitura-de-arquivos}}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{utilsread.csv2}{%
 \subsection{utils::read.csv2()}\label{utilsread.csv2}}
 
@@ -225,8 +219,6 @@ Faz a leitura de um arquivo em formado de tabela e cria um data frame a partir d
 \begin{quote}
 \href{https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/read.table}{Documentação}
 \end{quote}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Exemplo}
@@ -247,8 +239,6 @@ Faz a leitura de um arquivo em formado de tabela e cria um data frame a partir d
 ## 1 150713
 ## 2 150713
 \end{verbatim}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -299,8 +289,6 @@ O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados ret
 \href{https://www.rdocumentation.org/packages/readr/versions/1.3.1}{Documentação}
 \end{quote}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{quote}
 \textbf{Exemplo 1}
 \end{quote}
@@ -322,8 +310,6 @@ O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados ret
 ## 1 2020-01-01 Mogi Guaçu 30 a 39     1      0
 ## 2 2020-01-20 Mogi Guaçu 50 a 59     1      0
 \end{verbatim}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Exemplo 2}
@@ -349,8 +335,6 @@ O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados ret
 ## 1     1 2020-01-01 353070 Mogi Guaçu 30 a 39
 ## 2     2 2020-01-20 353070 Mogi Guaçu 50 a 59
 \end{verbatim}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -395,8 +379,6 @@ Similar ao read.table e read.csv, só que mais rápido e conveniente por ler arq
 \href{https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fread}{Documentação}
 \end{quote}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{quote}
 \textbf{Exemplo}
 \end{quote}
@@ -420,8 +402,6 @@ Similar ao read.table e read.csv, só que mais rápido e conveniente por ler arq
 ## 1:  2020-01-01 Mogi Guaçu         1
 ## 2:  2020-01-20 Mogi Guaçu         1
 \end{verbatim}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -471,8 +451,6 @@ KeepLeadingZeros & Se for TRUE, dados numéricos com zeros à esquerda seão lid
 Função para leitura de arquivos no formato .ods do Libre Office. A leitura é feita em somente uma planilha e retorna um data.frame.
 \textgreater{} \href{https://www.rdocumentation.org/packages/readODS/versions/1.7.0/topics/read_ods}{Documentação}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{quote}
 \textbf{Exemplo}
 \end{quote}
@@ -485,8 +463,6 @@ Função para leitura de arquivos no formato .ods do Libre Office. A leitura é 
                            \AttributeTok{range =} \StringTok{"A7:B14"}\NormalTok{)                 }\CommentTok{\# Intervalo para leitura}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -527,8 +503,6 @@ Leitura de arquivos com extensão .xls e xlsx.
 \href{https://www.rdocumentation.org/packages/readxl/versions/0.1.1/topics/read_excel}{Documentação}
 \end{quote}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{quote}
 \textbf{Exemplo}
 \end{quote}
@@ -542,8 +516,6 @@ Leitura de arquivos com extensão .xls e xlsx.
                    \AttributeTok{range =} \StringTok{"A3:B19"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -585,8 +557,6 @@ A função le arquivos .dbf como dataframe, convertendo por default campos chara
 \href{https://www.rdocumentation.org/packages/foreign/versions/0.8-82/topics/read.dbf}{Documentação}
 \end{quote}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{quote}
 \textbf{Exemplo}
 \end{quote}
@@ -610,8 +580,6 @@ O rio é um pacote que vem com a iniciativa de simplificar o procedimento de imp
 \href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import}{documentação}.
 \end{quote}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{quote}
 \textbf{Exemplo}
 \end{quote}
@@ -629,8 +597,6 @@ O rio é um pacote que vem com a iniciativa de simplificar o procedimento de imp
 ## 2  132    164
 ## 3  137    169
 \end{verbatim}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -681,8 +647,6 @@ Ou atribuir o link à um objeto e usa-lo na função.\\
 
 Se houver distorção de caracteres especiais, considerar como possibilidades para resolver o problema utilizar o argumento correspondente a stringsAsFactors = F. Esse comando faz com que os caracteres permaneçam como caracteres, ao invés de serem convertidos para factor, e encoding = ``UTF-8'' ou encoding = ``ISO-8859-1'' para reconhecer os caracteres especiais. O argumento fileEncoding = ``UTF-8'' também pode ser necessário.
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{quote}
 \textbf{Descobrir o encoding}
 \end{quote}
@@ -700,8 +664,6 @@ Verifica somente de um vetor
 ##   Encoding Language Confidence
 ## 1    UTF-8                0.15
 \end{verbatim}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Converter encoding}
@@ -728,13 +690,12 @@ Pode-se também utilizar a função \texttt{base::enc2utf8} para transformar uma
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{quote}
-\textbf{Encoding via Import Dataset}\\
+\textbf{Encoding via Import Dataset}
+\end{quote}
+
 É possível controlar o encoding pelos argumentos da função escolhida para leitura do arquivo, ou então pela leitura realizada pela interface gráfica do RStudio. Entrar no menu ``File'', ``Import Dataset'', ``From text (base)\ldots{}'' , após isso será aberta uma janela, onde o campo encoding permite selecionar uma codificação entre centenas. Veja figura abaixo:
 \includegraphics{ilustracoes/import_dataset.png}
-\end{quote}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -751,8 +712,6 @@ Função para salvar um arquivo de dados que foi trabalhado no R em diferentes f
 \begin{quote}
 \href{https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/write.table}{Documentação}
 \end{quote}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Exemplo}
@@ -775,8 +734,6 @@ Função para salvar um arquivo de dados que foi trabalhado no R em diferentes f
 ## 3 3          4.7         3.2          1.3         0.2  setosa
 ## 4 4          4.6         3.1          1.5         0.2  setosa
 \end{verbatim}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -817,8 +774,6 @@ fileEncoding & String. Declara a codificação a ser usada para que possam ser r
 \href{https://www.rdocumentation.org/packages/readr/versions/1.3.1/topics/write_delim}{Documentação}
 \end{quote}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{quote}
 \textbf{Exemplo}
 \end{quote}
@@ -835,8 +790,6 @@ fileEncoding & String. Declara a codificação a ser usada para que possam ser r
 ## 1          5.1         3.5          1.4         0.2  setosa
 ## 2          4.9         3.0          1.4         0.2  setosa
 \end{verbatim}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -873,8 +826,6 @@ Grava um dataframe em um arquivo xlsx. Para criar um xlsx com (várias) sheets n
 \href{https://www.rdocumentation.org/packages/writexl/versions/1.4.0/topics/write_xlsx}{Documentação}
 \end{quote}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{quote}
 \textbf{Exemplo 1}
 \end{quote}
@@ -896,8 +847,6 @@ Grava um dataframe em um arquivo xlsx. Para criar um xlsx com (várias) sheets n
 ## 1          5.1         3.5          1.4         0.2 setosa 
 ## 2          4.9         3            1.4         0.2 setosa
 \end{verbatim}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Exemplo 2}
@@ -921,8 +870,6 @@ Grava um dataframe em um arquivo xlsx. Para criar um xlsx com (várias) sheets n
 ## 1    21     6   160   110   3.9  2.62  16.5     0     1     4     4
 ## 2    21     6   160   110   3.9  2.88  17.0     0     1     4     4
 \end{verbatim}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -959,8 +906,6 @@ Função para escrever .csv muito mais rápido (por exemplo, 2 segundos versus 1
 \href{https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fwrite}{Documentação}
 \end{quote}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{quote}
 \textbf{Exemplo}
 \end{quote}
@@ -975,8 +920,6 @@ Função para escrever .csv muito mais rápido (por exemplo, 2 segundos versus 1
                    \AttributeTok{showProgress =} \ConstantTok{TRUE}\NormalTok{)           }\CommentTok{\# Mostrar progresso}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -1020,8 +963,6 @@ Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gra
 \href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/export}{Documentação}.
 \end{quote}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{quote}
 \textbf{Exempĺo}
 \end{quote}
@@ -1032,8 +973,6 @@ Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gra
             \AttributeTok{file =} \StringTok{\textquotesingle{}dados/iris.xlsx\textquotesingle{}}\NormalTok{)  }\CommentTok{\# Caminho, nome e extensão.}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -1065,8 +1004,6 @@ format & Sequência de caracteres opcional contendo o formato de arquivo, que po
 
 Particularmente tenho maior interesse na possibilidade de ler e agrupar diversos arquivos, assim, o enfoque desse tópico será sobre a leitura com merge.
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{baselapply-e-basereduce}{%
 \subsection{base::lapply() e base::Reduce}\label{baselapply-e-basereduce}}
 
@@ -1080,8 +1017,6 @@ dividido em três partes:\\
 \href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/lapply}{Documentação base::lapply}\\
 \href{https://www.rdocumentation.org/packages/purrr/versions/0.2.5/topics/reduce}{Documentação base::reduce()}
 \end{quote}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Exemplo 1}
@@ -1099,8 +1034,6 @@ setwd("~/Documentos/Estudos R/guia_de_bolso") # Volta para diretorio inicial
 
 O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.\\
 A lista ``arquivos'' também pode ser aplicada à função data.table::rbindlist(), que terá o mesmo efeito.
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Exemplo 2}
@@ -1142,8 +1075,6 @@ setwd("~/Documentos/Estudos R/guia_de_bolso") # Volta para diretório inicial
 A função \texttt{for} permite criar um loop de execução de determinada ação, no caso, o loop do exemplo realizará a leitura de vários arquivos que serão atribuidos à uma lista. Com a lista é possível empilhar em um único data frame.\\
 \textgreater{} \href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Control}{Documentação}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{quote}
 \textbf{Exemplo}
 \end{quote}
@@ -1184,8 +1115,6 @@ Importa um alista de data frames de um vetor de nomes ou arquivo multi-objeto (p
 \href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import_list}{Documentação}
 \end{quote}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \begin{quote}
 \textbf{Exemplo}
 \end{quote}
@@ -1214,8 +1143,6 @@ Exporta uma lista de data frames. A extensão colocada no nome do arquivo já di
 \begin{quote}
 \href{https://www.rdocumentation.org/packages/rio/versions/0.5.26/topics/export_list}{Documentação}
 \end{quote}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \begin{quote}
 \textbf{Exemplo}
