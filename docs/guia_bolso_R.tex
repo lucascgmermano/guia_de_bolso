@@ -117,7 +117,7 @@
 
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{2022-10-04}
+\date{2022-10-06}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -148,8 +148,8 @@
 \addcontentsline{toc}{chapter}{Sobre este livro}
 
 Sejam bem-vindos!\\
-O objetivo deste livro é disponibilizar para consulta anotações de códigos R de forma prática e rápida. Não há explicações aprofundadas nem se pretende esgotar as possibilidades do conteúdo apresentado, assim, esta documentação deve ser utilizada somente como um guia rápido, pois não passa de um conjunto de rascunhos apreendidos no dia-a-dia da manipulação de dados e na apresentação de resultados. O conteúdo poderá ser baixado nos formatos \texttt{.pdf} ou \texttt{epub}, mas a proposta é que o conteúdo seja dinâmico, com atualizações semanais. A estrutura de construção está disponível no \href{https://github.com/lucascgmermano/guia_de_bolso.git}{GitHub}.\\
-Críticas, sugestões ou contribuições de código e conteúdo podem ser enviadas para \url{lucascgermano@gmail.com}. Ficarei muito feliz, qualquer que seja o motivo do contato.
+O objetivo deste livro é disponibilizar para consulta anotações de códigos R de forma prática e rápida. Não há explicações aprofundadas nem se pretende esgotar as possibilidades do conteúdo apresentado, assim, esta documentação deve ser utilizada somente como um guia rápido, pois não passa de um conjunto de rascunhos apreendidos no dia-a-dia da manipulação de dados e na apresentação de resultados. O conteúdo poderá ser baixado nos formatos \texttt{.pdf} ou \texttt{epub}, mas a proposta é que o conteúdo seja dinâmico, com atualizações frequentes. Toda estrutura deste e-book encontra-se disponível no \href{https://github.com/lucascgmermano/guia_de_bolso.git}{GitHub}.\\
+Críticas, sugestões ou contribuições de código e conteúdo podem ser enviadas para \url{lucascgermano@gmail.com}, ficarei muito feliz, qualquer que seja o motivo do contato.
 
 \hypertarget{leitura-e-escrita-de-arquivos-de-texto}{%
 \chapter{Leitura e escrita de arquivos de texto}\label{leitura-e-escrita-de-arquivos-de-texto}}
@@ -157,11 +157,20 @@ Críticas, sugestões ou contribuições de código e conteúdo podem ser enviad
 \hypertarget{diretuxf3rio-de-trabalho}{%
 \section{Diretório de trabalho}\label{diretuxf3rio-de-trabalho}}
 
-Abaixo são transcritos alguns comandos e métodos para se definir e conhecer o diretório de trabalho, bem como manipular criação e exclusão de pastas e arquivos.
+Abaixo são transcritos alguns comandos e métodos para se definir e conhecer o diretório de trabalho, criar e excluir pastas e arquivos.
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4444}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5556}}@{}}
+\caption{Comandos de definição e manipulação de diretórios e arquivos.}\tabularnewline
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Comando
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definição
+\end{minipage} \\
+\midrule()
+\endfirsthead
 \toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Comando
@@ -204,21 +213,13 @@ here::here() & Cria um caminho relativo para um arquivo no diretório de trabalh
 ## [1] "planilha_ods.ods"
 \end{verbatim}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{leitura-de-arquivos}{%
 \section{Leitura de arquivos}\label{leitura-de-arquivos}}
 
 \hypertarget{utilsread.csv2}{%
 \subsection{utils::read.csv2()}\label{utilsread.csv2}}
 
-Faz a leitura de um arquivo em formado de tabela e cria um data frame a partir dele, com casos como linhas e variáveis como colunas. É uma função nativa do R, em que read.csv trata de arquivos separados por vírgula, enquanto read.csv2 de arquivos separados por ponto e vírgula. Os argumentos das funções são os mesmos, por isso o .csv2 foi escolhido para o exemplo.
-
-\begin{quote}
-\href{https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/read.table}{Documentação}
-\end{quote}
+Faz a leitura de um arquivo em formado de tabela e cria um data frame a partir dele, com casos como linhas e variáveis como colunas. É uma função nativa do R, em que read.csv trata de arquivos separados por vírgula, enquanto read.csv2 de arquivos separados por ponto e vírgula. Os argumentos das funções são os mesmos, por isso o .csv2 foi escolhido para o exemplo (\href{https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/read.table}{documentação})
 
 \begin{quote}
 \textbf{Exemplo}
@@ -276,18 +277,10 @@ colClasses & character. Um vetor de classes referentes as colunas. Valores poss�
   \emph{Os argumentos são os mesmos da função read.table().}
 \end{itemize}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{readrread_csv2}{%
 \subsection{readr::read\_csv2()}\label{readrread_csv2}}
 
-O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados retangulares (como csv, tsv e fwf). Ele foi projetado para analisar de forma flexível muitos tipos de dados encontrados na natureza. Já está integrado no RStudio para o método de importação via interface gráfica, embora necessite de instalação.
-
-\begin{quote}
-\href{https://www.rdocumentation.org/packages/readr/versions/1.3.1}{Documentação}
-\end{quote}
+O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados retangulares (como csv, tsv e fwf). Ele foi projetado para analisar de forma flexível muitos tipos de dados encontrados. Já está integrado no RStudio no método de importação via interface gráfica, embora necessite de instalação (\href{https://www.rdocumentation.org/packages/readr/versions/1.3.1}{Documentação})
 
 \begin{quote}
 \textbf{Exemplo 1}
@@ -366,18 +359,10 @@ skip\_empty\_rows & As linhas em branco devem ser ignoradas completamente? ou se
 \bottomrule()
 \end{longtable}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{data.tablefread}{%
 \subsection{data.table::fread()}\label{data.tablefread}}
 
-Similar ao read.table e read.csv, só que mais rápido e conveniente por ler arquivos muito grandes. Todos os controles como sep, colClasses, nrows, encoding são detectados atuomaticamente. O resultado padrão é um objeto data.table, mas pode-se mudar para data.frame.
-
-\begin{quote}
-\href{https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fread}{Documentação}
-\end{quote}
+Similar ao read.table e read.csv, só que mais rápido e conveniente por ler arquivos muito grandes. Todos os controles como sep, colClasses, nrows, encoding são detectados atuomaticamente. O resultado padrão é um objeto data.table, mas pode-se mudar para data.frame (\href{https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fread}{documentação}).
 
 \begin{quote}
 \textbf{Exemplo}
@@ -441,15 +426,10 @@ KeepLeadingZeros & Se for TRUE, dados numéricos com zeros à esquerda seão lid
 \bottomrule()
 \end{longtable}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{readodsread_ods}{%
 \subsection{readODS::read\_ods()}\label{readodsread_ods}}
 
-Função para leitura de arquivos no formato .ods do Libre Office. A leitura é feita em somente uma planilha e retorna um data.frame.
-\textgreater{} \href{https://www.rdocumentation.org/packages/readODS/versions/1.7.0/topics/read_ods}{Documentação}
+Função para leitura de arquivos no formato .ods do Libre Office. A leitura é feita em somente uma planilha, retorna um data.frame e costuma ser um pouco mais lenta comparada aos outros formatos (\href{https://www.rdocumentation.org/packages/readODS/versions/1.7.0/topics/read_ods}{documentação}).
 
 \begin{quote}
 \textbf{Exemplo}
@@ -490,18 +470,10 @@ strings\_as\_factors & Logical. Se variáveis tipo character serão convertidas 
 \bottomrule()
 \end{longtable}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{readxlread_excel}{%
 \subsection{readxl::read\_excel()}\label{readxlread_excel}}
 
-Leitura de arquivos com extensão .xls e xlsx.
-
-\begin{quote}
-\href{https://www.rdocumentation.org/packages/readxl/versions/0.1.1/topics/read_excel}{Documentação}
-\end{quote}
+Leitura de arquivos com extensão .xls e xlsx, lidos pelo Excel e Libre Office. Por padrão, a sheet 1 é lida se não houver definição (\href{https://www.rdocumentation.org/packages/readxl/versions/0.1.1/topics/read_excel}{documentação}).
 
 \begin{quote}
 \textbf{Exemplo}
@@ -544,18 +516,10 @@ guess\_max & Máximo de linhas utilizados para adivinhar classes das colunas. \\
 \bottomrule()
 \end{longtable}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{foreignread.dbf}{%
 \subsection{foreign::read.dbf()}\label{foreignread.dbf}}
 
-A função le arquivos .dbf como dataframe, convertendo por default campos character em factor. Tem apenas dois argumentos, o file (caminho) e o as.is (se FALSE não converte os campos em factor). Por não ser muito usado, o desenvolvedor já alerta que nem todos os arquivos poderão ser lidos normalmente.
-
-\begin{quote}
-\href{https://www.rdocumentation.org/packages/foreign/versions/0.8-82/topics/read.dbf}{Documentação}
-\end{quote}
+A função le arquivos .dbf como dataframe, convertendo por default campos character em factor. Tem apenas dois argumentos, o file (caminho) e o as.is (se FALSE não converte os campos em factor). Por não ser muito usado, o desenvolvedor já alerta que nem todos os arquivos poderão ser lidos normalmente (\href{https://www.rdocumentation.org/packages/foreign/versions/0.8-82/topics/read.dbf}{documentação}).
 
 \begin{quote}
 \textbf{Exemplo}
@@ -567,18 +531,10 @@ A função le arquivos .dbf como dataframe, convertendo por default campos chara
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{rioimport}{%
 \subsection{rio::import()}\label{rioimport}}
 
-O rio é um pacote que vem com a iniciativa de simplificar o procedimento de importação e exportação de arquivos de dados. Na importação, é capaz de ler uma vasta lista de extensões de arquivos, sem a necessidade de especificar o formato.
-
-\begin{quote}
-\href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import}{documentação}.
-\end{quote}
+O rio é um pacote que vem com a iniciativa de simplificar o procedimento de importação e exportação de arquivos de dados. Na importação, é capaz de ler uma vasta lista de extensões de arquivos, sem a necessidade de especificar o formato (\href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import}{documentação}).
 
 \begin{quote}
 \textbf{Exemplo}
@@ -587,16 +543,8 @@ O rio é um pacote que vem com a iniciativa de simplificar o procedimento de imp
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ rio}\SpecialCharTok{::}\FunctionTok{import}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/planilha\_dbf.dbf\textquotesingle{}}\NormalTok{) }\CommentTok{\# Caminho e nome.}
-\FunctionTok{head}\NormalTok{(dados, }\DecValTok{3}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-##   peso altura
-## 1  222    160
-## 2  132    164
-## 3  137    169
-\end{verbatim}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -620,10 +568,6 @@ which & Controla a importação de arquivos multi-objeto; como regra, import ape
 \bottomrule()
 \end{longtable}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{arquivos-da-web}{%
 \subsection{Arquivos da web}\label{arquivos-da-web}}
 
@@ -638,10 +582,6 @@ Ou atribuir o link à um objeto e usa-lo na função.\\
 \emph{download.file(url = `\url{https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv}',}
 \emph{destfile = `dados/baixado\_web.csv')}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{encoding}{%
 \subsection{Encoding}\label{encoding}}
 
@@ -651,7 +591,7 @@ Se houver distorção de caracteres especiais, considerar como possibilidades pa
 \textbf{Descobrir o encoding}
 \end{quote}
 
-Verifica somente de um vetor
+Verificar encoding de um vetor
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -697,21 +637,13 @@ Pode-se também utilizar a função \texttt{base::enc2utf8} para transformar uma
 É possível controlar o encoding pelos argumentos da função escolhida para leitura do arquivo, ou então pela leitura realizada pela interface gráfica do RStudio. Entrar no menu ``File'', ``Import Dataset'', ``From text (base)\ldots{}'' , após isso será aberta uma janela, onde o campo encoding permite selecionar uma codificação entre centenas. Veja figura abaixo:
 \includegraphics{ilustracoes/import_dataset.png}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{escrita-de-arquivos}{%
 \section{Escrita de arquivos}\label{escrita-de-arquivos}}
 
 \hypertarget{utilswrite.csv2}{%
 \subsection{utils::write.csv2()}\label{utilswrite.csv2}}
 
-Função para salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula. Um ponto negativo é que essa função, ao salvar o arquivo, cria uma coluna com nomes das linhas (em números).
-
-\begin{quote}
-\href{https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/write.table}{Documentação}
-\end{quote}
+Função para salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula. Um ponto negativo é que essa função, ao salvar o arquivo, cria uma coluna com nomes das linhas (em números) (\href{https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/write.table}{documentação}).
 
 \begin{quote}
 \textbf{Exemplo}
@@ -761,18 +693,10 @@ fileEncoding & String. Declara a codificação a ser usada para que possam ser r
 \bottomrule()
 \end{longtable}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{readrwrite_csv2}{%
 \subsection{readr::write\_csv2()}\label{readrwrite_csv2}}
 
-É semelhante à função anterior, mas executa a tarefa mais rápido, com a vantagem de não criar uma coluna com nomes das linhas.
-
-\begin{quote}
-\href{https://www.rdocumentation.org/packages/readr/versions/1.3.1/topics/write_delim}{Documentação}
-\end{quote}
+É semelhante à função anterior, mas executa a tarefa mais rápido, com a vantagem de não criar uma coluna com nomes das linhas (\href{https://www.rdocumentation.org/packages/readr/versions/1.3.1/topics/write_delim}{documentação}).
 
 \begin{quote}
 \textbf{Exemplo}
@@ -813,18 +737,10 @@ col\_names & Default TRUE. Primeira linha como nomes das colunas. Se FALSE, nome
 \bottomrule()
 \end{longtable}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{writexlwrite_xlsx}{%
 \subsection{writexl::write\_xlsx()}\label{writexlwrite_xlsx}}
 
-Grava um dataframe em um arquivo xlsx. Para criar um xlsx com (várias) sheets nomeadas, basta definir x para uma lista nomeada de dataframe.
-
-\begin{quote}
-\href{https://www.rdocumentation.org/packages/writexl/versions/1.4.0/topics/write_xlsx}{Documentação}
-\end{quote}
+Grava um dataframe em um arquivo xlsx. Para criar um xlsx com (várias) sheets nomeadas, basta definir x para uma lista nomeada de dataframe (\href{https://www.rdocumentation.org/packages/writexl/versions/1.4.0/topics/write_xlsx}{documentação}).
 
 \begin{quote}
 \textbf{Exemplo 1}
@@ -893,18 +809,10 @@ format\_headers & Inserir nomes das colunas. \\
 \bottomrule()
 \end{longtable}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{data.tablefwrite}{%
 \subsection{data.table::fwrite()}\label{data.tablefwrite}}
 
-Função para escrever .csv muito mais rápido (por exemplo, 2 segundos versus 1 minuto) e flexível. Máquinas modernas têm mais de uma CPU, então fwrite as usa; em todos os sistemas operacionais, incluindo Linux, Mac e Windows. Output em csv, csv2, tab, etc.
-
-\begin{quote}
-\href{https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fwrite}{Documentação}
-\end{quote}
+Função para escrever .csv muito mais rápido (por exemplo, 2 segundos versus 1 minuto) e flexível. Máquinas modernas têm mais de uma CPU, então fwrite as usa; em todos os sistemas operacionais, incluindo Linux, Mac e Windows. Output em csv, csv2, tab, etc. (\href{https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fwrite}{documentação}).
 
 \begin{quote}
 \textbf{Exemplo}
@@ -950,18 +858,10 @@ compress & Se compress = ``auto'' e se o arquivo termina em .gz, o formato de sa
 \bottomrule()
 \end{longtable}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{rioexport}{%
 \subsection{rio::export()}\label{rioexport}}
 
-Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gravar um data frame nos formatos habituais de texto. Para exportar uma lista de arquivos, usar o rio::export\_list().
-
-\begin{quote}
-\href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/export}{Documentação}.
-\end{quote}
+Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gravar um data frame nos formatos habituais de texto. Para exportar uma lista de arquivos, usar o rio::export\_list() (\href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/export}{Documentação}).
 
 \begin{quote}
 \textbf{Exempĺo}
@@ -995,10 +895,6 @@ format & Sequência de caracteres opcional contendo o formato de arquivo, que po
 \bottomrule()
 \end{longtable}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{leitura-de-muxfaltiplos-arquivos}{%
 \section{Leitura de múltiplos arquivos}\label{leitura-de-muxfaltiplos-arquivos}}
 
@@ -1007,16 +903,10 @@ Particularmente tenho maior interesse na possibilidade de ler e agrupar diversos
 \hypertarget{baselapply-e-basereduce}{%
 \subsection{base::lapply() e base::Reduce}\label{baselapply-e-basereduce}}
 
-A ideia aqui é fazer a leitura dos arquivos de interesse e juntá-los verticalmente compondo um dataframe final, assim, o método é\\
-dividido em três partes:\\
+A ideia aqui é fazer a leitura dos arquivos de interesse e juntá-los verticalmente compondo um dataframe final, assim, o método é dividido em três partes:\\
 1. Listar os arquivos de interesse presentes no diretório.
-2. Fazer leitura múltipla utilizando a função base::lapply e base::read.csv2 (pode ser outra).
-3. Juntar os dataframes com base::Reduce e base::rbind.dataframe.
-
-\begin{quote}
-\href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/lapply}{Documentação base::lapply}\\
-\href{https://www.rdocumentation.org/packages/purrr/versions/0.2.5/topics/reduce}{Documentação base::reduce()}
-\end{quote}
+2. Fazer leitura múltipla utilizando a função base::lapply e base::read.csv2 (pode ser outra) (\href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/lapply}{documentação base::lapply}).
+3. Juntar os dataframes com base::Reduce e base::rbind.dataframe (\href{https://www.rdocumentation.org/packages/purrr/versions/0.2.5/topics/reduce}{ocumentação base::reduce()})
 
 \begin{quote}
 \textbf{Exemplo 1}
@@ -1032,14 +922,14 @@ unidos <- base::Reduce(x = arquivos,       # Lista de dataframes
 setwd("~/Documentos/Estudos R/guia_de_bolso") # Volta para diretorio inicial
 \end{verbatim}
 
-O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.\\
-A lista ``arquivos'' também pode ser aplicada à função data.table::rbindlist(), que terá o mesmo efeito.
+O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então o \emph{work directory} tem que ser definido antes.\\
+A lista ``arquivos'' também pode ser aplicada à função data.table::rbindlist(), que terá o mesmo efeito da função elaborada no \texttt{reduce}.
 
 \begin{quote}
 \textbf{Exemplo 2}
 \end{quote}
 
-Aqui a ideia é realizar a leitura, mas filtrando os arquivos somente com os dados de interesse, ao mesmo tempo, para isso, vamos usar a função base::function(). Os parâmetros serão passados para essa função e ela será aplicada ao lapply.
+Aqui a ideia é realizar a leitura, mas filtrando os arquivos somente com os dados de interesse, ao mesmo tempo, para isso, vamos usar a função base::function() (\href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/function}{documentação}). Os parâmetros serão passados para essa função e ela será aplicada ao lapply.
 
 \begin{verbatim}
 setwd('arquivos2/')
@@ -1061,19 +951,10 @@ unidos <- data.table::rbindlist(l = arquivos)  # Mesmo efeito do Reduce
 setwd("~/Documentos/Estudos R/guia_de_bolso") # Volta para diretório inicial
 \end{verbatim}
 
-\begin{quote}
-\href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/function}{Documentação}
-\end{quote}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{basefor}{%
 \subsection{base::for()}\label{basefor}}
 
-A função \texttt{for} permite criar um loop de execução de determinada ação, no caso, o loop do exemplo realizará a leitura de vários arquivos que serão atribuidos à uma lista. Com a lista é possível empilhar em um único data frame.\\
-\textgreater{} \href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Control}{Documentação}
+A função \texttt{for} permite criar um loop de execução de determinada ação, no caso, o loop do exemplo realizará a leitura de vários arquivos que serão atribuidos à uma lista. Com a lista é possível empilhar em um único data frame. (\href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Control}{documentação}).
 
 \begin{quote}
 \textbf{Exemplo}
@@ -1102,18 +983,10 @@ A função \texttt{for} permite criar um loop de execução de determinada açã
 ## 3:          5.7         3.8          1.7         0.3  setosa
 \end{verbatim}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{rioimport_list}{%
 \subsection{rio::import\_list()}\label{rioimport_list}}
 
-Importa um alista de data frames de um vetor de nomes ou arquivo multi-objeto (planilha Excel, arquivo .Rdata etc).
-
-\begin{quote}
-\href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import_list}{Documentação}
-\end{quote}
+Importa uma lista de data frames de um vetor de nomes ou arquivo multi-objeto (planilha Excel, arquivo .Rdata etc) (\href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import_list}{documentação}).
 
 \begin{quote}
 \textbf{Exemplo}
@@ -1128,21 +1001,13 @@ unidos <- rio::import_list(file = lista, # Lista com nomes dos arquivos do diret
 setwd("~/Documentos/Estudos R/guia_de_bolso")
 \end{verbatim}
 
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
 \hypertarget{escrita-de-muxfaltiplos-arquivos}{%
 \section{Escrita de múltiplos arquivos}\label{escrita-de-muxfaltiplos-arquivos}}
 
 \hypertarget{rioexport_list}{%
 \subsection{rio::export\_list()}\label{rioexport_list}}
 
-Exporta uma lista de data frames. A extensão colocada no nome do arquivo já direciona o formato, porém, pode-se usar o argumento sep = ``;'' ou outro para definir o desejado. Os nomes dos arquivos salvos podem ser declarados por um vetor, ex. c(``iris1.csv'',``iris2.csv''), ou usar o recurso \texttt{\%s}, ex. \texttt{\%s.csv} é o mesmo que \texttt{nome\_do\_objeto.csv}.
-
-\begin{quote}
-\href{https://www.rdocumentation.org/packages/rio/versions/0.5.26/topics/export_list}{Documentação}
-\end{quote}
+Exporta uma lista de data frames. A extensão colocada no nome do arquivo já direciona o formato, porém, pode-se usar o argumento sep = ``;'' ou outro para definir o desejado. Os nomes dos arquivos salvos podem ser declarados por um ou múltiplos verotes, ex. c(``iris1.csv'',``iris2.csv''), ou usar o recurso \texttt{\%s}, ex. \texttt{\%s.csv} que designa o nome do objeto como nome do arquivo que será criado (\texttt{nome\_do\_objeto.csv}) (\href{https://www.rdocumentation.org/packages/rio/versions/0.5.26/topics/export_list}{documentação})
 
 \begin{quote}
 \textbf{Exemplo}
@@ -1157,10 +1022,6 @@ Exporta uma lista de data frames. A extensão colocada no nome do arquivo já di
                  \AttributeTok{sep=}\StringTok{";"}\NormalTok{)     }\CommentTok{\# Separador}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
-
-\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
 \hypertarget{cross}{%
 \chapter{Cross-references}\label{cross}}

@@ -12,7 +12,12 @@ library(dplyr)
 
 ## Diretório de trabalho  
 
-Abaixo são transcritos alguns comandos e métodos para se definir e conhecer o diretório de trabalho, bem como manipular criação e exclusão de pastas e arquivos.  
+Abaixo são transcritos alguns comandos e métodos para se definir e conhecer o diretório de trabalho, criar e excluir pastas e arquivos.  
+
+<Br>
+
+
+Table: Comandos de definição e manipulação de diretórios e arquivos.
 
 Comando | Definição
 --------|----------
@@ -32,6 +37,7 @@ base::file.rename() | Renomear um arquivo.
 base::list.files() | Lista os arquivos presentes no diretório.
 here::here() | Cria um caminho relativo para um arquivo no diretório de trabalho, preferencialmente em um projeto, o que facilita ser reproduzido em diversas máquinas, ex. here('arquivos','dados.csv'). É similar ao base::file.path(), cuja sintaxe é a mesma.
 
+<Br>
 
 **Exemplo: list.files()**
 
@@ -43,22 +49,18 @@ list.files(path = 'dados/',      # Caminho do arquivo
            ignore.case = FALSE)  # Ignora tamanhos das letras
 ```
 
+<Br>
 
 
-***
-***
-
-
+<Br>
 
 ## Leitura de arquivos  
 
-
 ### utils::read.csv2()
 
-Faz a leitura de um arquivo em formado de tabela e cria um data frame a partir dele, com casos como linhas e variáveis como colunas. É uma função nativa do R, em que read.csv trata de arquivos separados por vírgula, enquanto read.csv2 de arquivos separados por ponto e vírgula. Os argumentos das funções são os mesmos, por isso o .csv2 foi escolhido para o exemplo.  
+Faz a leitura de um arquivo em formado de tabela e cria um data frame a partir dele, com casos como linhas e variáveis como colunas. É uma função nativa do R, em que read.csv trata de arquivos separados por vírgula, enquanto read.csv2 de arquivos separados por ponto e vírgula. Os argumentos das funções são os mesmos, por isso o .csv2 foi escolhido para o exemplo ([documentação](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/read.table))
 
-> [Documentação](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/read.table)
-
+<Br>
 
 > **Exemplo**  
 
@@ -67,6 +69,7 @@ dados <- read.csv2(file = 'dados/dados.csv')
 head(dados, 2)          # Exibir as 2 primeiras linhas dos dados.
 ```
 
+<Br>
 
 > **Argumentos principais**
 
@@ -86,18 +89,16 @@ skipNull | Logical. Se TRUE os nulos (NA) devem ser ignorados.
 colClasses | character. Um vetor de classes referentes as colunas. Valores possíveis são NA (default, quando type.convert é usado), "NULL" (quando a coluna é pulada), um vetor atomico de classes(logical, integer, numeric, complex, character, raw), or "factor", "Date" or "POSIXct".
 * *Os argumentos são os mesmos da função read.table().*
 
+<Br>
 
 
-***
-***
-
+<Br>
 
 
 ### readr::read_csv2()
-O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados retangulares (como csv, tsv e fwf). Ele foi projetado para analisar de forma flexível muitos tipos de dados encontrados na natureza. Já está integrado no RStudio para o método de importação via interface gráfica, embora necessite de instalação.  
+O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados retangulares (como csv, tsv e fwf). Ele foi projetado para analisar de forma flexível muitos tipos de dados encontrados. Já está integrado no RStudio no método de importação via interface gráfica, embora necessite de instalação ([Documentação](https://www.rdocumentation.org/packages/readr/versions/1.3.1))  
 
-> [Documentação](https://www.rdocumentation.org/packages/readr/versions/1.3.1)  
-
+<Br>
 
 > **Exemplo 1**
 
@@ -109,6 +110,7 @@ dados <- readr::read_csv2(file = 'dados/dados.csv',  # Caminho e arquivo
 head(dados, 2)                                       
 ```
   
+<Br>
 
 > **Exemplo 2**
 
@@ -123,6 +125,7 @@ dados <- readr::read_csv2(
 head(dados, 2)
 ```
 
+<Br>
 
 > **Argumentos principais**
 
@@ -142,18 +145,17 @@ show_col_types | Se FALSE, não mostre os tipos de coluna adivinhados. Se TRUE s
 skip_empty_rows | As linhas em branco devem ser ignoradas completamente? ou seja, se esta opção for TRUE, as linhas em branco não serão representadas. Se for FALSE, eles serão representados por valores NA em todas as colunas.
 
 
+<Br>
 
-***
-***
 
+<Br>
 
 
 ### data.table::fread()
 
-Similar ao read.table e read.csv, só que mais rápido e conveniente por ler arquivos muito grandes. Todos os controles como sep, colClasses, nrows, encoding são detectados atuomaticamente. O resultado padrão é um objeto data.table, mas pode-se mudar para data.frame.  
+Similar ao read.table e read.csv, só que mais rápido e conveniente por ler arquivos muito grandes. Todos os controles como sep, colClasses, nrows, encoding são detectados atuomaticamente. O resultado padrão é um objeto data.table, mas pode-se mudar para data.frame ([documentação](https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fread)).  
 
-> [Documentação](https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fread)  
-
+<Br>
 
 > **Exemplo**
 
@@ -169,6 +171,7 @@ dados <- data.table::fread(file = 'dados/dados.csv',            # Caminho do arq
 head(dados, 2)
 ```
   
+<Br>
 
 > **Argumentos principais**
 
@@ -196,19 +199,20 @@ nThread | Número de threads a serem usados. Experimente para ver o que funciona
 KeepLeadingZeros | Se for TRUE, dados numéricos com zeros à esquerda seão lidos como caracterer, caso contrário, os zeros à esquerda serão removidos e convertidos em numéricos.
 
 
+<Br>
 
-***
-***
 
+<Br>
 
 
 ### readODS::read_ods()
 
-Função para leitura de arquivos no formato .ods do Libre Office. A leitura é feita em somente uma planilha e retorna um data.frame.
-> [Documentação](https://www.rdocumentation.org/packages/readODS/versions/1.7.0/topics/read_ods)  
+Função para leitura de arquivos no formato .ods do Libre Office. A leitura é feita em somente uma planilha, retorna um data.frame e costuma ser um pouco mais lenta comparada aos outros formatos ([documentação](https://www.rdocumentation.org/packages/readODS/versions/1.7.0/topics/read_ods)).
 
+<Br>
 
 > **Exemplo**
+
 ```{r read_ods}
 dados <- readODS::read_ods(path = 'dados/planilha_ods.ods',  # Caminho do arquivo
                            col_names = FALSE,                # Primeira linha contém nomes das colunas
@@ -216,7 +220,8 @@ dados <- readODS::read_ods(path = 'dados/planilha_ods.ods',  # Caminho do arquiv
                            range = "A7:B14")                 # Intervalo para leitura
 ```
 
-  
+<Br>
+
 > **Argumentos principais**
 
 Argumento|Definição 
@@ -231,18 +236,17 @@ row_names | Indica se o arquivo contém os nomes das linhas na primeira coluna.
 strings_as_factors | Logical. Se variáveis tipo character serão  convertidas a fatores.
   
 
+<Br>
 
-***
-***
 
+<Br>
 
   
 ### readxl::read_excel()
 
-Leitura de arquivos com extensão .xls e xlsx.
+Leitura de arquivos com extensão .xls e xlsx, lidos pelo Excel e Libre Office. Por padrão, a sheet 1 é lida se não houver definição ([documentação](https://www.rdocumentation.org/packages/readxl/versions/0.1.1/topics/read_excel)).  
 
-> [Documentação](https://www.rdocumentation.org/packages/readxl/versions/0.1.1/topics/read_excel)  
-
+<Br>
 
 > **Exemplo**
 
@@ -254,7 +258,8 @@ Leitura de arquivos com extensão .xls e xlsx.
                    range = "A3:B19")
 ```
 
-        
+<Br>
+
 > **Argumentos principais**
 
 Argumento|Definição
@@ -270,18 +275,17 @@ n_max | Número máximo de linhas a serem lidas.
 guess_max | Máximo de linhas utilizados para adivinhar classes das colunas.
 
 
+<Br>
 
-***
-***
 
+<Br>
 
 
 ### foreign::read.dbf()
 
-A função le arquivos .dbf como dataframe, convertendo por default campos character em factor. Tem apenas dois argumentos, o file (caminho) e o as.is (se FALSE não converte os campos em factor). Por não ser muito usado, o desenvolvedor já alerta que nem todos os arquivos poderão ser lidos normalmente.
+A função le arquivos .dbf como dataframe, convertendo por default campos character em factor. Tem apenas dois argumentos, o file (caminho) e o as.is (se FALSE não converte os campos em factor). Por não ser muito usado, o desenvolvedor já alerta que nem todos os arquivos poderão ser lidos normalmente ([documentação](https://www.rdocumentation.org/packages/foreign/versions/0.8-82/topics/read.dbf)).
 
-> [Documentação](https://www.rdocumentation.org/packages/foreign/versions/0.8-82/topics/read.dbf)  
-
+<Br>
 
 > **Exemplo**
 
@@ -289,27 +293,25 @@ A função le arquivos .dbf como dataframe, convertendo por default campos chara
 dados <- foreign::read.dbf(file = 'dados/planilha_dbf.dbf')
 ```
 
+<Br>
 
 
-***
-***
-
+<Br>
 
 
 ### rio::import()
-O rio é um pacote que vem com a iniciativa de simplificar o procedimento de importação e exportação de arquivos de dados. Na importação, é capaz de ler uma vasta lista de extensões de arquivos, sem a necessidade de especificar o formato.  
+O rio é um pacote que vem com a iniciativa de simplificar o procedimento de importação e exportação de arquivos de dados. Na importação, é capaz de ler uma vasta lista de extensões de arquivos, sem a necessidade de especificar o formato ([documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import)).  
 
-> [documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import).  
-
+<Br>
 
 > **Exemplo**  
 
 ```{r}
 dados <- rio::import(file = 'dados/planilha_dbf.dbf') # Caminho e nome.
-head(dados, 3)
 ```
 
-  
+<Br>
+
 > **Argumentos principais**  
 
 Argumento|Definição
@@ -320,10 +322,10 @@ setclass | Classe do objeto (opcional). Default é um “data.frame”. Os valor
 which | Controla a importação de arquivos multi-objeto; como regra, import apenas retorna um único quadro de dados (use import_list para importar vários quadros de dados de um arquivo multi-objeto). Se o arquivo for um diretório compactado, que pode ser uma cadeia de caracteres especificando um nome de arquivo ou um número inteiro especificando qual arquivo (na ordem de classificação de localidade) extrair do diretório compactado. Para planilhas do Excel, isso pode ser usado para especificar um nome ou número de planilha. Para arquivos .Rdata, pode ser um nome de objeto. Para arquivos HTML, identifica qual tabela extrair (da ordem do documento). Ignorado de outra forma. Um valor de cadeia de caracteres será usado como uma expressão regular, de modo que o arquivo extraído seja a primeira correspondência da expressão regular com os nomes de arquivo no arquivo.  
 
 
+<Br>
 
-***
-***
 
+<Br>
 
 
 ### Arquivos da web
@@ -340,24 +342,26 @@ Ou atribuir o link à um objeto e usa-lo na função.
               *destfile = 'dados/baixado_web.csv')*
 
 
+<Br>
 
-***
-***
 
+<Br>
 
 
 ### Encoding  
 
 Se houver distorção de caracteres especiais, considerar como possibilidades para resolver o problema utilizar  o argumento correspondente a stringsAsFactors = F. Esse comando faz com que os caracteres permaneçam como caracteres, ao invés de serem convertidos para factor, e encoding = "UTF-8" ou encoding = "ISO-8859-1" para reconhecer os caracteres especiais. O argumento fileEncoding = "UTF-8" também pode ser necessário.
 
-  
+<Br>
+
 > **Descobrir o encoding**  
 
-Verifica somente de um vetor
+Verificar encoding de um vetor
 ```{r stri_enc_detect}
 stringi::stri_enc_detect(str = cars$speed[1])
 ```
 
+<Br>
   
 > **Converter encoding**
 
@@ -374,6 +378,7 @@ dados <- base::as.character(iris$Species)
 dados <- base::enc2utf8(dados)
 ```
 
+<Br>
   
 > **Encoding via Import Dataset**  
 
@@ -381,20 +386,19 @@ dados <- base::enc2utf8(dados)
 ![import_dataset](ilustracoes/import_dataset.png)
 
 
+<Br>
 
-***
-***
 
+<Br>
 
 
 ## Escrita de arquivos  
 
 ### utils::write.csv2()  
 
-Função para salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula. Um ponto negativo é que essa função, ao salvar o arquivo, cria uma coluna com nomes das linhas (em números).
+Função para salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula. Um ponto negativo é que essa função, ao salvar o arquivo, cria uma coluna com nomes das linhas (em números) ([documentação](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/write.table)).
 
-> [Documentação](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/write.table)  
-
+<Br>
 
 > **Exemplo**  
 
@@ -406,6 +410,7 @@ write.csv2(x = iris,                # Dados ativos
 read.csv2('dados/iris.csv', nrows = 4)
 ```
 
+<Br>
   
 > **Argumentos principais**  
 
@@ -421,18 +426,17 @@ row.names | Logical. Cria coluna com nomes para linhas.
 fileEncoding | String. Declara a codificação a ser usada para que possam ser recodificados à medida que são gravados.   
 
 
+<Br>
 
-***
-***
 
+<Br>
 
 
 ### readr::write_csv2()  
 
-É semelhante à função anterior, mas executa a tarefa mais rápido, com a vantagem de não criar uma coluna com nomes das linhas.  
+É semelhante à função anterior, mas executa a tarefa mais rápido, com a vantagem de não criar uma coluna com nomes das linhas ([documentação](https://www.rdocumentation.org/packages/readr/versions/1.3.1/topics/write_delim)).  
 
-> [Documentação](https://www.rdocumentation.org/packages/readr/versions/1.3.1/topics/write_delim)  
-
+<Br>
 
 > **Exemplo**  
 
@@ -441,7 +445,8 @@ readr::write_csv2(x = iris, file = 'dados/iris.csv')
 read.csv2(file = 'dados/iris.csv', nrows = 2)
 ```
 
-  
+<Br>
+
 > **Argumentos principais**
 
 Argumento|Definição
@@ -452,17 +457,16 @@ append | Se FALSE, irá sobrescrever um arquivo existente, caso exista. Se TRUE,
 col_names	| Default TRUE. Primeira linha como nomes das colunas. Se FALSE, nomes das colunas não serão incluídos.
 
 
+<Br>
 
-***
-***
 
+<Br>
 
 
 ### writexl::write_xlsx()    
-Grava um dataframe em um arquivo xlsx. Para criar um xlsx com (várias) sheets nomeadas, basta definir x para uma lista nomeada de dataframe.  
+Grava um dataframe em um arquivo xlsx. Para criar um xlsx com (várias) sheets nomeadas, basta definir x para uma lista nomeada de dataframe ([documentação](https://www.rdocumentation.org/packages/writexl/versions/1.4.0/topics/write_xlsx)).
 
-> [Documentação](https://www.rdocumentation.org/packages/writexl/versions/1.4.0/topics/write_xlsx)  
-
+<Br>
 
 > **Exemplo 1**  
 
@@ -474,6 +478,7 @@ writexl::write_xlsx(x = iris,
 readxl::read_excel('dados/iris.xlsx', n_max = 2)
 ```
 
+<Br>
   
 > **Exemplo 2**  
 
@@ -486,6 +491,7 @@ readxl::read_excel(path = 'dados/conjuntodadosnativos.xlsx',
                    n_max = 2)
 ```
 
+<Br>
   
 > **Argumentos principais**  
 
@@ -497,19 +503,18 @@ col_names	| Se TRUE, primera linha traz os nomes das colunas.
 format_headers | Inserir nomes das colunas.
 
 
+<Br>
 
-***
-***
 
+<Br>
 
 
 
 ### data.table::fwrite()  
 
-Função para escrever .csv muito mais rápido (por exemplo, 2 segundos versus 1 minuto) e flexível. Máquinas modernas têm mais de uma CPU, então fwrite as usa; em todos os sistemas operacionais, incluindo Linux, Mac e Windows. Output em csv, csv2, tab, etc.  
+Função para escrever .csv muito mais rápido (por exemplo, 2 segundos versus 1 minuto) e flexível. Máquinas modernas têm mais de uma CPU, então fwrite as usa; em todos os sistemas operacionais, incluindo Linux, Mac e Windows. Output em csv, csv2, tab, etc. ([documentação](https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fwrite)).
 
-> [Documentação](https://www.rdocumentation.org/packages/data.table/versions/1.14.2/topics/fwrite)
-
+<Br>
   
 > **Exemplo**  
 
@@ -522,7 +527,8 @@ data.table::fwrite(x = dados,                     # Objeto a ser escrito
                    showProgress = TRUE)           # Mostrar progresso
 ```
 
-  
+<Br>
+
 > **Argumentos principais**
 
 Argumento|Definição
@@ -540,17 +546,16 @@ showProgress | Exibir um medidor de progresso no console. Ignorado quando file =
 compress | Se compress = "auto" e se o arquivo termina em .gz, o formato de saída é gzipado csv. Se compress = "none", o formato de saída é sempre csv. Se compress = "gzip", o formato é csv compactado com gzip. A saída para o console nunca é compactada com gzip mesmo se compress = "gzip". Por padrão, compress = "auto".
 
 
+<Br>
 
-***
-***
 
+<Br>
 
 
 ### rio::export()  
-Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gravar um data frame nos formatos habituais de texto. Para exportar uma lista de arquivos, usar o rio::export_list().  
+Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gravar um data frame nos formatos habituais de texto. Para exportar uma lista de arquivos, usar o rio::export_list() ([Documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/export)).  
 
-> [Documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/export).  
-
+<Br>
   
 > **Exempĺo**  
 
@@ -559,6 +564,7 @@ rio::export(x = iris,                  # Objeto que será exportado.
             file = 'dados/iris.xlsx')  # Caminho, nome e extensão.
 ```
 
+<Br>
   
 > **Argumentos principais**  
 
@@ -569,10 +575,10 @@ file | Nome do arquivo. Deve especificar file e/ou format.
 format | Sequência de caracteres opcional contendo o formato de arquivo, que pode ser usado para substituir o formato inferido a partir de file ou, em vez de especificar file, um arquivo com o nome do símbolo de x e a extensão de arquivo especificada será criado. Os atalhos incluem: ","  ou ";" ou  "|" .
 
 
+<Br>
 
-***
-***
 
+<Br>
 
 
 ## Leitura de múltiplos arquivos  
@@ -580,15 +586,12 @@ Particularmente tenho maior interesse na possibilidade de ler e agrupar diversos
 
 
 ### base::lapply() e base::Reduce  
-A ideia aqui é fazer a leitura dos arquivos de interesse e juntá-los verticalmente compondo um dataframe final, assim, o método é  
-dividido em três partes:  
+A ideia aqui é fazer a leitura dos arquivos de interesse e juntá-los verticalmente compondo um dataframe final, assim, o método é dividido em três partes:  
 1. Listar os arquivos de interesse presentes no diretório.
-2. Fazer leitura múltipla utilizando a função base::lapply e base::read.csv2 (pode ser outra).
-3. Juntar os dataframes com base::Reduce e base::rbind.dataframe.  
+2. Fazer leitura múltipla utilizando a função base::lapply e base::read.csv2 (pode ser outra) ([documentação base::lapply](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/lapply)).
+3. Juntar os dataframes com base::Reduce e base::rbind.dataframe ([ocumentação base::reduce()](https://www.rdocumentation.org/packages/purrr/versions/0.2.5/topics/reduce))  
 
-> [Documentação base::lapply](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/lapply)  
-> [Documentação base::reduce()](https://www.rdocumentation.org/packages/purrr/versions/0.2.5/topics/reduce)  
-
+<Br>
 
 > **Exemplo 1**
 
@@ -601,13 +604,14 @@ unidos <- base::Reduce(x = arquivos,       # Lista de dataframes
                        f = base::rbind.data.frame)  # Função para empilhar
 setwd("~/Documentos/Estudos R/guia_de_bolso") # Volta para diretorio inicial
 ```
-O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então tem que ser definido antes.  
-A lista "arquivos" também pode ser aplicada à função data.table::rbindlist(), que terá o mesmo efeito.  
+O base::setwd() é mais importante neste caso por conta da atividade do base::lapply, que não tem um argumento path para definir espaço de trabalho, então o *work directory* tem que ser definido antes.  
+A lista "arquivos" também pode ser aplicada à função data.table::rbindlist(), que terá o mesmo efeito da função elaborada no `reduce`.  
 
-  
+<Br>
+
 > **Exemplo 2**  
 
-Aqui a ideia é realizar a leitura, mas filtrando os arquivos somente com os dados de interesse, ao mesmo tempo, para isso, vamos usar a função base::function(). Os parâmetros serão passados para essa função e ela será aplicada ao lapply.
+Aqui a ideia é realizar a leitura, mas filtrando os arquivos somente com os dados de interesse, ao mesmo tempo, para isso, vamos usar a função base::function() ([documentação](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/function)). Os parâmetros serão passados para essa função e ela será aplicada ao lapply.
 
 ```
 setwd('arquivos2/')
@@ -629,15 +633,15 @@ unidos <- data.table::rbindlist(l = arquivos)  # Mesmo efeito do Reduce
 setwd("~/Documentos/Estudos R/guia_de_bolso") # Volta para diretório inicial
 ```
 
-> [Documentação](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/function)
+<Br>
 
-***
-***
+
+<Br>
 
 ### base::for()  
-A função `for` permite criar um loop de execução de determinada ação, no caso, o loop do exemplo realizará a leitura de vários arquivos que serão atribuidos à uma lista. Com a lista é possível empilhar em um único data frame.  
-> [Documentação](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Control)   
+A função `for` permite criar um loop de execução de determinada ação, no caso, o loop do exemplo realizará a leitura de vários arquivos que serão atribuidos à uma lista. Com a lista é possível empilhar em um único data frame. ([documentação](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Control)).   
 
+<Br>
 
 > **Exemplo**  
 
@@ -655,15 +659,15 @@ for (i in lista) {      # Para cada elemento da lista, executar:
 data.table::rbindlist(l = arquivos)[1:3,]
 ```
 
-***
-***
+<Br>
 
+
+<Br>
 
 ### rio::import_list()  
-Importa um alista de data frames de um vetor de nomes ou arquivo multi-objeto (planilha Excel, arquivo .Rdata etc).  
+Importa uma lista de data frames de um vetor de nomes ou arquivo multi-objeto (planilha Excel, arquivo .Rdata etc) ([documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import_list)).  
 
-> [Documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import_list)  
-
+<Br>
 
 > **Exemplo**
 
@@ -676,17 +680,18 @@ unidos <- rio::import_list(file = lista, # Lista com nomes dos arquivos do diret
 setwd("~/Documentos/Estudos R/guia_de_bolso")
 ```
 
-***
-***
+<Br>
+
+
+<Br>
 
 ## Escrita de múltiplos arquivos  
 
 ### rio::export_list()  
 
-Exporta uma lista de data frames. A extensão colocada no nome do arquivo já direciona o formato, porém, pode-se usar o argumento sep = ";" ou outro para definir o desejado. Os nomes dos arquivos salvos podem ser declarados por um vetor, ex. c("iris1.csv","iris2.csv"), ou usar o recurso `%s`, ex. `%s.csv` é o mesmo que `nome_do_objeto.csv`.  
+Exporta uma lista de data frames. A extensão colocada no nome do arquivo já direciona o formato, porém, pode-se usar o argumento sep = ";" ou outro para definir o desejado. Os nomes dos arquivos salvos podem ser declarados por um ou múltiplos verotes, ex. c("iris1.csv","iris2.csv"), ou usar o recurso `%s`, ex. `%s.csv` que designa o nome do objeto como nome do arquivo que será criado (`nome_do_objeto.csv`) ([documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.26/topics/export_list))  
 
-> [Documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.26/topics/export_list)    
-
+<Br>
 
 > **Exemplo**
 
@@ -698,9 +703,10 @@ rio::export_list(x = list(iris1 = iris[1:30,],   # Lista nomeada dos objetos a s
                  sep=";")     # Separador
 ```
 
-***
-***
+<Br>
 
+
+<Br>
 
 
 
