@@ -1,7 +1,7 @@
 ---
 title: "Comandos básicos do R: Guia de bolso"
 author: "Lucas C. Germano"
-date: "`format(Sys.time(), format = "São João da Boa Vista-SP, %d de %B de %Y | %X")`"
+date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
