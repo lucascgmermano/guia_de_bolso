@@ -1,0 +1,58 @@
+# Manipulação dos dados
+
+## Datas e horas  
+
+### Funções básicas
+
+Existem muitas funções para se criar variáveis com datas e horas e/ou que podem converter formatos diversos. O formato padrão reconhecido nativamente pelo R é por exemplo *2019-12-10*, portanto, para evitar manipulações, é importante tentar criar e utilizar bancos de dados neste padrão. Abaixo, seguem algumas das funções mais utilizadas:
+
+| Função | Argumentos | Utilização |
+| ------ | ---------- | ---------- |
+| base::Sys.Date() | Não há. | Fornece a data atual a partir da data do sistema |
+| base::Sys.time() | Não há. | Fornece a hora atual a partir da hora do sistema |
+| base::date() | Não há. | Fornece a data no formato: "Mon Oct 10 17:50:32 2022" |
+| base::as.Date() | Não há. | Converte um elemento de texto em character, ex: as.Date("2020-01-31")|
+| base::strftime() | tz = fuso horário | Converte um horário ajustando o fuso horário conforme valor de Olson name definido em tz|
+|base::OlsonNames() |Não há.|Nomes padronizados de fusos horários|
+
+
+### Formatar data e hora
+
+| Código | Exemplo | Definição | 
+|:-:|:-:|-------|
+|	%a	|"ter"|	Nome abreviado do dia da semana.| 
+|	%A	|"terça-feira"|	Nome completo do dia da semana. | 
+|	%b	|"out" |	Nome do mês abreviado. | 
+|	%B	|"outubro"|	Nome completo do mês. |
+|	%c	|	"ter out 11 00:00:00 2022" | Data e hora. Equivale a "%a %b %e %H:%M:%S %Y".|
+|	%C	|	"20" | Céculo com dois dígitos.|
+|	%d	|	"11" | Dia do mês como número decimal (01–31). |
+|	%D	|	"10/11/22" | Formato de data como %m/%d/%y. |
+|	%e	|	"11" | Dia do mês como número decimal (1–31), com um espaço à esquerda para um número de um dígito. |
+|	%F	|	"2022-10-11" | Equivalente a %Y-%m-%d (o formato de data ISO 8601).|
+|	%g	|	"22" | Os dois últimos dígitos do ano com base na semana (consulte %V). 
+|	%G	|	"2022" | O ano com base na semana (consulte %V) como um número decimal.| 
+|	%h	|	"out" | Equivalente a %b.|
+|	%H	|	"12" | Horas como número decimal (00–23). Como uma exceção especial, strings como ‘⁠24:00:00⁠’ são aceitas para entrada, pois a ISO 8601 permite isso (usado Sys.time() no exemplo).|
+|	%I	|	"12" | Horas como número decimal (01–12).|
+|	%j	|	"284" | Dia do ano como número decimal (001–366): Para entrada, 366 só é válido em um ano bissexto.|
+|	%m	|	"10" | Mês como número decimal (01–12).|
+|	%M	|	"13" | Minuto como número decimal (00–59).|
+|	%n	|	"barra invertina+n" | Nova linha na saída, espaço em branco arbitrário na entrada.|
+|	%p	|	"vazio" | Indicador AM/PM. Usado com %I e não com %H. Uma string vazia em algumas localidades|
+|	%r	|	"12:30:00" | Para saída, o relógio de 12 horas (usando AM ou PM da localidade): definido apenas em algumas localidades. Equivalente a %I:%M:%S %p (usado Sys.time() no exemplo).
+|	%R	|	"12:30" | Equivalente a %H:%M.|
+|	%S	|	"52" | Segundo como inteiro (00–61)(usado Sys.time() no exemplo).|
+|	%t	|	"barra invertida=t" | Tab na saída, espaço em branco arbitrário na entrada.|
+|	%T	|	"12:32:17" | Equivalente a %H:%M:%S (usado Sys.time() no exemplo).|
+|	%u	|	"2" | Dia da semana como um número decimal (1–7, segunda-feira é 1).|
+|	%U	|	"41" | Semana do ano como número decimal (00–53) usando domingo como o primeiro dia 1 da semana (e normalmente com o primeiro domingo do ano como dia 1 da semana 1).|
+|	%V	|	"41" | Semana do ano como número decimal (01–53) conforme definido na ISO 8601. Se a semana (começando na segunda-feira) contendo 1º de janeiro tiver quatro ou mais dias no novo ano, será considerada a semana 1. Caso contrário, será a última semana do ano anterior e a próxima semana é a semana 1.|
+|	%w	|	"2" | Dia da semana como número decimal (0–6, domingo é 0).
+|	%W	|	"41" | Semana do ano como número decimal (00–53) usando segunda-feira como o primeiro dia da semana (e normalmente com a primeira segunda-feira do ano como dia 1 da semana 1). A convenção do Reino Unido.|
+|	%x	|	"11/10/2022" | Identifica o padrão da localidade, "%y/%m/%d" na entrada.|
+|	%X	|	"12:42:09" |Tempo. Específico de localidade na saída, "%H:%M:%S" na entrada (usado Sys.time() no exemplo).|
+|	%y	|	"22" | Ano sem século (00-99).| 
+|	%Y	|	"2022" | Ano com século.| 
+|	%z	|	"-300" |Deslocamento assinado em horas e minutos do UTC, então -0800 está 8 horas atrás do UTC. Valores até +1400 são aceitos.|
+|	%Z	|	"-03" | Abreviação de fuso horário como uma cadeia de caracteres (vazio se não estiver disponível)(usado Sys.time() no exemplo).|

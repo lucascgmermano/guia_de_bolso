@@ -4,12 +4,12 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5 Blocks | Comandos básicos do R: Guia de bolso</title>
+  <title>2 Manipulação dos dados | Comandos básicos do R: Guia de bolso</title>
   <meta name="description" content="<p>Este livro resumo anotações de comandos e argumentos muito úteis no R, com o objetivo de
 como auxiliar na execução te tarefas diárias básicas.</p>" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5 Blocks | Comandos básicos do R: Guia de bolso" />
+  <meta property="og:title" content="2 Manipulação dos dados | Comandos básicos do R: Guia de bolso" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="<p>Este livro resumo anotações de comandos e argumentos muito úteis no R, com o objetivo de
@@ -17,7 +17,7 @@ como auxiliar na execução te tarefas diárias básicas.</p>" />
   <meta name="github-repo" content="https://github.com/lucascgmermano/guia_de_bolso.git" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5 Blocks | Comandos básicos do R: Guia de bolso" />
+  <meta name="twitter:title" content="2 Manipulação dos dados | Comandos básicos do R: Guia de bolso" />
   
   <meta name="twitter:description" content="<p>Este livro resumo anotações de comandos e argumentos muito úteis no R, com o objetivo de
 como auxiliar na execução te tarefas diárias básicas.</p>" />
@@ -32,8 +32,8 @@ como auxiliar na execução te tarefas diárias básicas.</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="footnotes-and-citations.html"/>
-<link rel="next" href="sharing-your-book.html"/>
+<link rel="prev" href="leitura-e-escrita-de-arquivos-de-texto.html"/>
+<link rel="next" href="parts.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -242,31 +242,260 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="blocks" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">5</span> Blocks<a href="blocks.html#blocks" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="equations" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Equations<a href="blocks.html#equations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Here is an equation.</p>
-<p><span class="math display" id="eq:binom">\[\begin{equation}
-  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
-  \tag{5.1}
-\end{equation}\]</span></p>
-<p>You may refer to using <code>\@ref(eq:binom)</code>, like see Equation <a href="blocks.html#eq:binom">(5.1)</a>.</p>
+<div id="manipulação-dos-dados" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">2</span> Manipulação dos dados<a href="manipulação-dos-dados.html#manipulação-dos-dados" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="datas-e-horas" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Datas e horas<a href="manipulação-dos-dados.html#datas-e-horas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="funções-básicas" class="section level3 hasAnchor" number="2.1.1">
+<h3><span class="header-section-number">2.1.1</span> Funções básicas<a href="manipulação-dos-dados.html#funções-básicas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Existem muitas funções para se criar variáveis com datas e horas e/ou que podem converter formatos diversos. O formato padrão reconhecido nativamente pelo R é por exemplo <em>2019-12-10</em>, portanto, para evitar manipulações, é importante tentar criar e utilizar bancos de dados neste padrão. Abaixo, seguem algumas das funções mais utilizadas:</p>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="38%" />
+<col width="38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Função</th>
+<th>Argumentos</th>
+<th>Utilização</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>base::Sys.Date()</td>
+<td>Não há.</td>
+<td>Fornece a data atual a partir da data do sistema</td>
+</tr>
+<tr class="even">
+<td>base::Sys.time()</td>
+<td>Não há.</td>
+<td>Fornece a hora atual a partir da hora do sistema</td>
+</tr>
+<tr class="odd">
+<td>base::date()</td>
+<td>Não há.</td>
+<td>Fornece a data no formato: “Mon Oct 10 17:50:32 2022”</td>
+</tr>
+<tr class="even">
+<td>base::as.Date()</td>
+<td>Não há.</td>
+<td>Converte um elemento de texto em character, ex: as.Date(“2020-01-31”)</td>
+</tr>
+<tr class="odd">
+<td>base::strftime()</td>
+<td>tz = fuso horário</td>
+<td>Converte um horário ajustando o fuso horário conforme valor de Olson name definido em tz</td>
+</tr>
+<tr class="even">
+<td>base::OlsonNames()</td>
+<td>Não há.</td>
+<td>Nomes padronizados de fusos horários</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="theorems-and-proofs" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Theorems and proofs<a href="blocks.html#theorems-and-proofs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Labeled theorems can be referenced in text using <code>\@ref(thm:tri)</code>, for example, check out this smart theorem <a href="blocks.html#thm:tri">5.1</a>.</p>
-<div class="theorem">
-<p><span id="thm:tri" class="theorem"><strong>Theorem 5.1  </strong></span>For a right triangle, if <span class="math inline">\(c\)</span> denotes the <em>length</em> of the hypotenuse
-and <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> denote the lengths of the <strong>other</strong> two sides, we have
-<span class="math display">\[a^2 + b^2 = c^2\]</span></p>
-</div>
-<p>Read more here <a href="https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html" class="uri">https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html</a>.</p>
-</div>
-<div id="callout-blocks" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Callout blocks<a href="blocks.html#callout-blocks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: <a href="https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html</a></p>
+<div id="formatar-data-e-hora" class="section level3 hasAnchor" number="2.1.2">
+<h3><span class="header-section-number">2.1.2</span> Formatar data e hora<a href="manipulação-dos-dados.html#formatar-data-e-hora" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="23%" />
+<col width="23%" />
+<col width="53%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Código</th>
+<th align="center">Exemplo</th>
+<th>Definição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">%a</td>
+<td align="center">“ter”</td>
+<td>Nome abreviado do dia da semana.</td>
+</tr>
+<tr class="even">
+<td align="center">%A</td>
+<td align="center">“terça-feira”</td>
+<td>Nome completo do dia da semana.</td>
+</tr>
+<tr class="odd">
+<td align="center">%b</td>
+<td align="center">“out”</td>
+<td>Nome do mês abreviado.</td>
+</tr>
+<tr class="even">
+<td align="center">%B</td>
+<td align="center">“outubro”</td>
+<td>Nome completo do mês.</td>
+</tr>
+<tr class="odd">
+<td align="center">%c</td>
+<td align="center">“ter out 11 00:00:00 2022”</td>
+<td>Data e hora. Equivale a “%a %b %e %H:%M:%S %Y”.</td>
+</tr>
+<tr class="even">
+<td align="center">%C</td>
+<td align="center">“20”</td>
+<td>Céculo com dois dígitos.</td>
+</tr>
+<tr class="odd">
+<td align="center">%d</td>
+<td align="center">“11”</td>
+<td>Dia do mês como número decimal (01–31).</td>
+</tr>
+<tr class="even">
+<td align="center">%D</td>
+<td align="center">“10/11/22”</td>
+<td>Formato de data como %m/%d/%y.</td>
+</tr>
+<tr class="odd">
+<td align="center">%e</td>
+<td align="center">“11”</td>
+<td>Dia do mês como número decimal (1–31), com um espaço à esquerda para um número de um dígito.</td>
+</tr>
+<tr class="even">
+<td align="center">%F</td>
+<td align="center">“2022-10-11”</td>
+<td>Equivalente a %Y-%m-%d (o formato de data ISO 8601).</td>
+</tr>
+<tr class="odd">
+<td align="center">%g</td>
+<td align="center">“22”</td>
+<td>Os dois últimos dígitos do ano com base na semana (consulte %V).</td>
+</tr>
+<tr class="even">
+<td align="center">%G</td>
+<td align="center">“2022”</td>
+<td>O ano com base na semana (consulte %V) como um número decimal.</td>
+</tr>
+<tr class="odd">
+<td align="center">%h</td>
+<td align="center">“out”</td>
+<td>Equivalente a %b.</td>
+</tr>
+<tr class="even">
+<td align="center">%H</td>
+<td align="center">“12”</td>
+<td>Horas como número decimal (00–23). Como uma exceção especial, strings como ‘⁠24:00:00⁠’ são aceitas para entrada, pois a ISO 8601 permite isso (usado Sys.time() no exemplo).</td>
+</tr>
+<tr class="odd">
+<td align="center">%I</td>
+<td align="center">“12”</td>
+<td>Horas como número decimal (01–12).</td>
+</tr>
+<tr class="even">
+<td align="center">%j</td>
+<td align="center">“284”</td>
+<td>Dia do ano como número decimal (001–366): Para entrada, 366 só é válido em um ano bissexto.</td>
+</tr>
+<tr class="odd">
+<td align="center">%m</td>
+<td align="center">“10”</td>
+<td>Mês como número decimal (01–12).</td>
+</tr>
+<tr class="even">
+<td align="center">%M</td>
+<td align="center">“13”</td>
+<td>Minuto como número decimal (00–59).</td>
+</tr>
+<tr class="odd">
+<td align="center">%n</td>
+<td align="center">“barra invertina+n”</td>
+<td>Nova linha na saída, espaço em branco arbitrário na entrada.</td>
+</tr>
+<tr class="even">
+<td align="center">%p</td>
+<td align="center">“vazio”</td>
+<td>Indicador AM/PM. Usado com %I e não com %H. Uma string vazia em algumas localidades</td>
+</tr>
+<tr class="odd">
+<td align="center">%r</td>
+<td align="center">“12:30:00”</td>
+<td>Para saída, o relógio de 12 horas (usando AM ou PM da localidade): definido apenas em algumas localidades. Equivalente a %I:%M:%S %p (usado Sys.time() no exemplo).</td>
+</tr>
+<tr class="even">
+<td align="center">%R</td>
+<td align="center">“12:30”</td>
+<td>Equivalente a %H:%M.</td>
+</tr>
+<tr class="odd">
+<td align="center">%S</td>
+<td align="center">“52”</td>
+<td>Segundo como inteiro (00–61)(usado Sys.time() no exemplo).</td>
+</tr>
+<tr class="even">
+<td align="center">%t</td>
+<td align="center">“barra invertida=t”</td>
+<td>Tab na saída, espaço em branco arbitrário na entrada.</td>
+</tr>
+<tr class="odd">
+<td align="center">%T</td>
+<td align="center">“12:32:17”</td>
+<td>Equivalente a %H:%M:%S (usado Sys.time() no exemplo).</td>
+</tr>
+<tr class="even">
+<td align="center">%u</td>
+<td align="center">“2”</td>
+<td>Dia da semana como um número decimal (1–7, segunda-feira é 1).</td>
+</tr>
+<tr class="odd">
+<td align="center">%U</td>
+<td align="center">“41”</td>
+<td>Semana do ano como número decimal (00–53) usando domingo como o primeiro dia 1 da semana (e normalmente com o primeiro domingo do ano como dia 1 da semana 1).</td>
+</tr>
+<tr class="even">
+<td align="center">%V</td>
+<td align="center">“41”</td>
+<td>Semana do ano como número decimal (01–53) conforme definido na ISO 8601. Se a semana (começando na segunda-feira) contendo 1º de janeiro tiver quatro ou mais dias no novo ano, será considerada a semana 1. Caso contrário, será a última semana do ano anterior e a próxima semana é a semana 1.</td>
+</tr>
+<tr class="odd">
+<td align="center">%w</td>
+<td align="center">“2”</td>
+<td>Dia da semana como número decimal (0–6, domingo é 0).</td>
+</tr>
+<tr class="even">
+<td align="center">%W</td>
+<td align="center">“41”</td>
+<td>Semana do ano como número decimal (00–53) usando segunda-feira como o primeiro dia da semana (e normalmente com a primeira segunda-feira do ano como dia 1 da semana 1). A convenção do Reino Unido.</td>
+</tr>
+<tr class="odd">
+<td align="center">%x</td>
+<td align="center">“11/10/2022”</td>
+<td>Identifica o padrão da localidade, “%y/%m/%d” na entrada.</td>
+</tr>
+<tr class="even">
+<td align="center">%X</td>
+<td align="center">“12:42:09”</td>
+<td>Tempo. Específico de localidade na saída, “%H:%M:%S” na entrada (usado Sys.time() no exemplo).</td>
+</tr>
+<tr class="odd">
+<td align="center">%y</td>
+<td align="center">“22”</td>
+<td>Ano sem século (00-99).</td>
+</tr>
+<tr class="even">
+<td align="center">%Y</td>
+<td align="center">“2022”</td>
+<td>Ano com século.</td>
+</tr>
+<tr class="odd">
+<td align="center">%z</td>
+<td align="center">“-300”</td>
+<td>Deslocamento assinado em horas e minutos do UTC, então -0800 está 8 horas atrás do UTC. Valores até +1400 são aceitos.</td>
+</tr>
+<tr class="even">
+<td align="center">%Z</td>
+<td align="center">“-03”</td>
+<td>Abreviação de fuso horário como uma cadeia de caracteres (vazio se não estiver disponível)(usado Sys.time() no exemplo).</td>
+</tr>
+</tbody>
+</table>
 
+</div>
 </div>
 </div>
             </section>
@@ -274,8 +503,8 @@ and <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</
           </div>
         </div>
       </div>
-<a href="footnotes-and-citations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="sharing-your-book.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="leitura-e-escrita-de-arquivos-de-texto.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="parts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -306,7 +535,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/05-blocks.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-manipulacao.Rmd",
 "text": "Edit"
 },
 "history": {
