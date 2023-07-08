@@ -72,3 +72,9 @@ usethis::use_git_config(
 credentials::ssh_setup_github()
 
 
+usethis::use_git_config(
+  user.name = "Lucas Coraça Germano",
+  user.email = "lucascgermano@gmail.com"
+)
+usethis::git_sitrep()
+usethis::use_git()
