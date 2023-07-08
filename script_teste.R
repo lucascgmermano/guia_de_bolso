@@ -59,3 +59,12 @@ reshape2::dcast(data = dados::pinguins,
                 value.var = 'massa_corporal',
                 fun.aggregate = sum)
 xtabs(formula = massa_corporal ~ sexo + ilha, data = dados::pinguins) 
+
+
+# colaboracao -------------------------------------------------------------
+install.packages("usethis")
+usethis::use_git()
+usethis::use_git_config(
+  user.name = "Lucas Coraça Germano",
+  user.email = "lucascgermano@gmail.com"
+)
