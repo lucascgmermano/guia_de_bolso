@@ -1,6 +1,6 @@
 # Manipulação dos dados
 
-## Datas e horas  
+## Datas
 
 ### Funções básicas
 
@@ -170,7 +170,7 @@ seq(data_inicio,  # data inicial já deve estar com classe "date"
 
 Novamente, a variável de data aqui já deverá estar no formato "Date".
 
-```{r seq_data}
+```
 data_inicio <- as.Date('2022-01-01')
 seq.Date(from = data_inicio, to = Sys.Date(), by = "3 months")
 ```
