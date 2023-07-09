@@ -7,7 +7,7 @@
   <title>2 Manipulação dos dados | Comandos básicos do R: Guia de bolso</title>
   <meta name="description" content="<p>Este livro resumo anotações de comandos e argumentos muito úteis no R, com o objetivo de
 como auxiliar na execução te tarefas diárias básicas.</p>" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Manipulação dos dados | Comandos básicos do R: Guia de bolso" />
   <meta property="og:type" content="book" />
@@ -94,7 +94,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -107,7 +107,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -121,6 +121,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 <style type="text/css">
 /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
 div.csl-bib-body { }
@@ -201,6 +205,8 @@ div.csl-indent {
 <ul>
 <li class="chapter" data-level="2.1.1" data-path="manipulação-dos-dados.html"><a href="manipulação-dos-dados.html#funções-básicas"><i class="fa fa-check"></i><b>2.1.1</b> Funções básicas</a></li>
 <li class="chapter" data-level="2.1.2" data-path="manipulação-dos-dados.html"><a href="manipulação-dos-dados.html#formatar-data-e-hora"><i class="fa fa-check"></i><b>2.1.2</b> Formatar data e hora</a></li>
+<li class="chapter" data-level="2.1.3" data-path="manipulação-dos-dados.html"><a href="manipulação-dos-dados.html#converter-data"><i class="fa fa-check"></i><b>2.1.3</b> Converter data</a></li>
+<li class="chapter" data-level="2.1.4" data-path="manipulação-dos-dados.html"><a href="manipulação-dos-dados.html#operações-com-datas"><i class="fa fa-check"></i><b>2.1.4</b> Operações com datas</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="parts.html"><a href="parts.html"><i class="fa fa-check"></i><b>3</b> Parts</a></li>
@@ -293,8 +299,24 @@ div.csl-indent {
 <td>Não há.</td>
 <td>Nomes padronizados de fusos horários</td>
 </tr>
+<tr class="odd">
+<td>base::year()</td>
+<td>Extrai o ano de uma data, ex: year(“2020-01-31”), resulta 2020</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>base::month()</td>
+<td>Extrai o mês de uma data, ex: month(“2020-01-31”), resulta 5</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>months(as.Date(“2020-05-01”))</td>
+<td>Extrai o mês no formato string de uma data já formatada, ex: months(as.Date(“2020-05-01”)), resulta “maio”</td>
+<td></td>
+</tr>
 </tbody>
 </table>
+<p><Br><Br></p>
 </div>
 <div id="formatar-data-e-hora" class="section level3 hasAnchor" number="2.1.2">
 <h3><span class="header-section-number">2.1.2</span> Formatar data e hora<a href="manipulação-dos-dados.html#formatar-data-e-hora" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -494,7 +516,108 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
+<p><Br><Br></p>
+</div>
+<div id="converter-data" class="section level3 hasAnchor" number="2.1.3">
+<h3><span class="header-section-number">2.1.3</span> Converter data<a href="manipulação-dos-dados.html#converter-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="baseas.date" class="section level4 hasAnchor" number="2.1.3.1">
+<h4><span class="header-section-number">2.1.3.1</span> base::as.date()<a href="manipulação-dos-dados.html#baseas.date" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>É importante que os códigos de definição (m, B, etc) correspondam ao formato do elemento que será convertido, ex: se “Nov 03 21”, então a conversão precisa de ‘%B %d %y’, porque ‘B’ é o código para mês “escrito”, não poderia ser ‘m’ que é para mês número. O mesmo se aplica a todos os códigos.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="manipulação-dos-dados.html#cb27-1" tabindex="-1"></a><span class="fu">list</span>(base<span class="sc">::</span><span class="fu">as.Date</span>(<span class="st">&#39;03/11/2021&#39;</span>,  <span class="at">format =</span> <span class="st">&#39;%d/%m/%Y&#39;</span>),</span>
+<span id="cb27-2"><a href="manipulação-dos-dados.html#cb27-2" tabindex="-1"></a>     base<span class="sc">::</span><span class="fu">as.Date</span>(<span class="st">&#39;03-Nov-2021&#39;</span>, <span class="at">format =</span> <span class="st">&#39;%d-%B-%Y&#39;</span>),</span>
+<span id="cb27-3"><a href="manipulação-dos-dados.html#cb27-3" tabindex="-1"></a>     base<span class="sc">::</span><span class="fu">as.Date</span>(<span class="st">&#39;Nov 03 21&#39;</span>,   <span class="at">format =</span> <span class="st">&#39;%B %d %y&#39;</span>),</span>
+<span id="cb27-4"><a href="manipulação-dos-dados.html#cb27-4" tabindex="-1"></a>     base<span class="sc">::</span><span class="fu">as.Date</span>(<span class="st">&#39;2021/11/03&#39;</span>,  <span class="at">format =</span> <span class="st">&#39;%Y/%m/%d&#39;</span>))</span></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;2021-11-03&quot;
+## 
+## [[2]]
+## [1] &quot;2021-11-03&quot;
+## 
+## [[3]]
+## [1] &quot;2021-11-03&quot;
+## 
+## [[4]]
+## [1] &quot;2021-11-03&quot;</code></pre>
+<p>O vetor pode estar com classe definida como “character”, logo, se o formato estiver adequado, esta função pode ser utilizada também para converter para data.</p>
+<p><Br></p>
+</div>
+<div id="basestrptime" class="section level4 hasAnchor" number="2.1.3.2">
+<h4><span class="header-section-number">2.1.3.2</span> base::strptime()<a href="manipulação-dos-dados.html#basestrptime" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Converte o vetor para data e define a “time zone”.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="manipulação-dos-dados.html#cb29-1" tabindex="-1"></a>base<span class="sc">::</span><span class="fu">strptime</span>(<span class="st">&#39;03/11/2021&#39;</span>, <span class="at">format =</span> <span class="st">&#39;%d/%m/%Y&#39;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;2021-11-03 -03&quot;</code></pre>
+<p><Br></p>
+</div>
+<div id="baseformat" class="section level4 hasAnchor" number="2.1.3.3">
+<h4><span class="header-section-number">2.1.3.3</span> base::format()<a href="manipulação-dos-dados.html#baseformat" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Converte o formato de um elemento que já definido por classe “date”.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="manipulação-dos-dados.html#cb31-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">&#39;03/11/2021&#39;</span>, <span class="at">format =</span> <span class="st">&#39;%d/%m/%Y&#39;</span>)</span>
+<span id="cb31-2"><a href="manipulação-dos-dados.html#cb31-2" tabindex="-1"></a><span class="fu">print</span>(data)</span></code></pre></div>
+<pre><code>## [1] &quot;2021-11-03&quot;</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="manipulação-dos-dados.html#cb33-1" tabindex="-1"></a><span class="fu">format</span>(data, <span class="st">&#39;%B-%d-%Y&#39;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;novembro-03-2021&quot;</code></pre>
+<p><Br><Br></p>
+</div>
+</div>
+<div id="operações-com-datas" class="section level3 hasAnchor" number="2.1.4">
+<h3><span class="header-section-number">2.1.4</span> Operações com datas<a href="manipulação-dos-dados.html#operações-com-datas" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="somar-à-data" class="section level4 hasAnchor" number="2.1.4.1">
+<h4><span class="header-section-number">2.1.4.1</span> Somar à data<a href="manipulação-dos-dados.html#somar-à-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Operações como soma ou subtração de datas não são recomendadas, mas podem ser feitas. Qualquer valor numérico adicionado à uma data é compreendido como “dia”.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="manipulação-dos-dados.html#cb35-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">&quot;2022-01-01&quot;</span>)</span>
+<span id="cb35-2"><a href="manipulação-dos-dados.html#cb35-2" tabindex="-1"></a>data</span></code></pre></div>
+<pre><code>## [1] &quot;2022-01-01&quot;</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="manipulação-dos-dados.html#cb37-1" tabindex="-1"></a>data <span class="sc">+</span> <span class="dv">365</span></span></code></pre></div>
+<pre><code>## [1] &quot;2023-01-01&quot;</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="manipulação-dos-dados.html#cb39-1" tabindex="-1"></a>data <span class="sc">+</span> <span class="dv">28</span></span></code></pre></div>
+<pre><code>## [1] &quot;2022-01-29&quot;</code></pre>
+</div>
+<div id="diferenças-entre-datas" class="section level4 hasAnchor" number="2.1.4.2">
+<h4><span class="header-section-number">2.1.4.2</span> Diferenças entre datas<a href="manipulação-dos-dados.html#diferenças-entre-datas" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>A função difftime() identifica a diferença entre datas, mas somente nas opções “units = c(”auto”, “secs”, “mins”, “hours”, “days”, “weeks”)“. Para meses ou anos é preciso realizar outros ajustes.</p>
+<p><strong>Dias e semanas:</strong></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="manipulação-dos-dados.html#cb41-1" tabindex="-1"></a>data_inicio <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">&quot;2022-01-01&quot;</span>)</span>
+<span id="cb41-2"><a href="manipulação-dos-dados.html#cb41-2" tabindex="-1"></a>data_fim <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">&quot;2022-07-13&quot;</span>)</span>
+<span id="cb41-3"><a href="manipulação-dos-dados.html#cb41-3" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="manipulação-dos-dados.html#cb41-4" tabindex="-1"></a><span class="fu">difftime</span>(<span class="at">time1 =</span> data_fim, <span class="at">time2 =</span> data_inicio) <span class="co">#por padrão o resultado é em dias</span></span></code></pre></div>
+<pre><code>## Time difference of 193 days</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="manipulação-dos-dados.html#cb43-1" tabindex="-1"></a><span class="fu">difftime</span>(<span class="at">time1 =</span> data_fim, <span class="at">time2 =</span> data_inicio, <span class="at">units =</span> <span class="st">&#39;week&#39;</span>) <span class="co">#em semanas</span></span></code></pre></div>
+<pre><code>## Time difference of 27.57143 weeks</code></pre>
+<p>Para obter o resultado numérico (sem a frase), utilizar a função as.numeric().</p>
+<p><Br></p>
+<p><strong>Meses e anos:</strong></p>
+<pre><code>data_inicio &lt;- as.Date(&#39;2022-01-01&#39;)
+data_fim &lt;- as.Date(&#39;2023-07-01&#39;)
 
+meses_diff &lt;- 12 * (year(data_fim) - year(data_inicio)) + (month(data_fim) - month(data_inicio))
+anos_diff &lt;- meses_diff / 12
+
+meses_diff
+# Resultado: 18
+
+anos_diff
+# Resultado: 1.5
+</code></pre>
+<p><Br></p>
+</div>
+<div id="sequência-de-datas" class="section level4 hasAnchor" number="2.1.4.3">
+<h4><span class="header-section-number">2.1.4.3</span> Sequência de datas<a href="manipulação-dos-dados.html#sequência-de-datas" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p><strong>Método 1: função base::seq()</strong></p>
+<pre><code>data_inicio &lt;- as.Date(&quot;2020-01-01&quot;)
+seq(data_inicio,  # data inicial já deve estar com classe &quot;date&quot;
+    by=&quot;30 days&quot;, # incremento à data inicial
+    length=3)     # comprimento do vetor, ou seja, quantas vezes o incremento deve ser aplicado
+    
+# &quot;by = &quot; pode assumir um valor numérico ou texto, mas no contexto de datas deve ser um número acompanhado de texto (2 days, 1 week, 3 months, 6 years; singular ou plural não faz diferença) </code></pre>
+<p><Br></p>
+<p><strong>Método 2: função base::seq.Date()</strong></p>
+<p>Novamente, a variável de data aqui já deverá estar no formato “Date”.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="manipulação-dos-dados.html#cb47-1" tabindex="-1"></a>data_inicio <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="st">&#39;2022-01-01&#39;</span>)</span>
+<span id="cb47-2"><a href="manipulação-dos-dados.html#cb47-2" tabindex="-1"></a><span class="fu">seq.Date</span>(<span class="at">from =</span> data_inicio, <span class="at">to =</span> <span class="fu">Sys.Date</span>(), <span class="at">by =</span> <span class="st">&quot;3 months&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;2022-01-01&quot; &quot;2022-04-01&quot; &quot;2022-07-01&quot; &quot;2022-10-01&quot; &quot;2023-01-01&quot;
+## [6] &quot;2023-04-01&quot; &quot;2023-07-01&quot;</code></pre>
+
+</div>
 </div>
 </div>
 </div>
@@ -564,7 +687,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

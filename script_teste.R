@@ -75,7 +75,17 @@ library(dplyr)
 library(readr)
 library(data.table)
 
-fread("arquivos/iris1.csv", 
-                  # header = T, 
-                  select = c("Sepal.Width","Petal.Length"))
+format(x = as.date("01/02/2022"), format = "%d-%m-%Y") %>% class()
 
+year("2020-05-01")
+month("2020-05-01")
+
+seq(as.Date("2020-01-01"), by="3 year", length=3)
+
+seq.Date(from = as.Date("2020-01-01"), to = as.Date("2020-12-31"), by = "month")
+
+seq.Date(from = data_inicio, to = Sys.Date(), by = "month")
+
+data_inicio <- as.Date('2022-01-01')
+sequencia_datas <- seq.Date(from = data_inicio, to = Sys.Date(), by = "3 months")
+sequencia_datas

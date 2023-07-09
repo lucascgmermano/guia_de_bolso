@@ -14,7 +14,11 @@ Existem muitas funções para se criar variáveis com datas e horas e/ou que pod
 | base::as.Date() | Não há. | Converte um elemento de texto em character, ex: as.Date("2020-01-31")|
 | base::strftime() | tz = fuso horário | Converte um horário ajustando o fuso horário conforme valor de Olson name definido em tz|
 |base::OlsonNames() |Não há.|Nomes padronizados de fusos horários|
+|base::year() | Extrai o ano de uma data, ex: year("2020-01-31"), resulta 2020|
+|base::month() | Extrai o mês de uma data, ex: month("2020-01-31"), resulta 5|
+|months(as.Date("2020-05-01")) | Extrai o mês no formato string de uma data já formatada, ex: months(as.Date("2020-05-01")), resulta "maio"|
 
+<Br><Br>
 
 ### Formatar data e hora
 
@@ -56,3 +60,120 @@ Existem muitas funções para se criar variáveis com datas e horas e/ou que pod
 |	%Y	|	"2022" | Ano com século.| 
 |	%z	|	"-300" |Deslocamento assinado em horas e minutos do UTC, então -0800 está 8 horas atrás do UTC. Valores até +1400 são aceitos.|
 |	%Z	|	"-03" | Abreviação de fuso horário como uma cadeia de caracteres (vazio se não estiver disponível)(usado Sys.time() no exemplo).|
+
+<Br><Br>
+
+### Converter data
+
+#### base::as.date()
+É importante que os códigos de definição (m, B, etc) correspondam ao formato do elemento que será convertido, ex: se "Nov 03 21", então a conversão precisa de '%B %d %y', porque 'B' é o código para mês "escrito", não poderia ser 'm' que é para mês número. O mesmo se aplica a todos os códigos.
+
+```{r as.date}
+list(base::as.Date('03/11/2021',  format = '%d/%m/%Y'),
+     base::as.Date('03-Nov-2021', format = '%d-%B-%Y'),
+     base::as.Date('Nov 03 21',   format = '%B %d %y'),
+     base::as.Date('2021/11/03',  format = '%Y/%m/%d'))
+```
+
+O vetor pode estar com classe definida como "character", logo, se o formato estiver adequado, esta função pode ser utilizada também para converter para data.
+
+<Br>
+
+#### base::strptime()
+
+Converte o vetor para data e define a "time zone".
+
+```{r strptime}
+base::strptime('03/11/2021', format = '%d/%m/%Y')
+```
+
+<Br>
+
+#### base::format()
+
+Converte o formato de um elemento que já definido por classe "date".
+
+```{r format}
+data <- as.Date('03/11/2021', format = '%d/%m/%Y')
+print(data)
+format(data, '%B-%d-%Y')
+```
+
+<Br><Br>
+
+### Operações com datas
+
+#### Somar à data
+
+Operações como soma ou subtração de datas não são recomendadas, mas podem ser feitas. Qualquer valor numérico adicionado à uma data é compreendido como "dia".
+
+```{r soma_data}
+data <- as.Date("2022-01-01")
+data
+data + 365
+data + 28
+```
+
+#### Diferenças entre datas
+
+A função difftime() identifica a diferença entre datas, mas somente nas opções "units = c("auto", "secs", "mins", "hours", "days", "weeks")". Para meses ou anos é preciso realizar outros ajustes.
+
+**Dias e semanas:**
+
+```{r diff_data1}
+data_inicio <- as.Date("2022-01-01")
+data_fim <- as.Date("2022-07-13")
+
+difftime(time1 = data_fim, time2 = data_inicio) #por padrão o resultado é em dias
+difftime(time1 = data_fim, time2 = data_inicio, units = 'week') #em semanas
+```
+
+Para obter o resultado numérico (sem a frase), utilizar a função as.numeric().  
+
+<Br>
+
+**Meses e anos:**
+
+```
+data_inicio <- as.Date('2022-01-01')
+data_fim <- as.Date('2023-07-01')
+
+meses_diff <- 12 * (year(data_fim) - year(data_inicio)) + (month(data_fim) - month(data_inicio))
+anos_diff <- meses_diff / 12
+
+meses_diff
+# Resultado: 18
+
+anos_diff
+# Resultado: 1.5
+
+```
+
+<Br>
+
+#### Sequência de datas
+
+**Método 1: função base::seq()**
+
+```
+data_inicio <- as.Date("2020-01-01")
+seq(data_inicio,  # data inicial já deve estar com classe "date"
+    by="30 days", # incremento à data inicial
+    length=3)     # comprimento do vetor, ou seja, quantas vezes o incremento deve ser aplicado
+    
+# "by = " pode assumir um valor numérico ou texto, mas no contexto de datas deve ser um número acompanhado de texto (2 days, 1 week, 3 months, 6 years; singular ou plural não faz diferença) 
+```
+
+<Br>
+
+**Método 2: função base::seq.Date()**
+
+Novamente, a variável de data aqui já deverá estar no formato "Date".
+
+```{r seq_data}
+data_inicio <- as.Date('2022-01-01')
+seq.Date(from = data_inicio, to = Sys.Date(), by = "3 months")
+```
+
+
+
