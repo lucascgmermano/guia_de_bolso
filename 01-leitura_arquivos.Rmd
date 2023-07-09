@@ -96,12 +96,11 @@ O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados ret
 
 > **Exemplo 1**
 
-```{r exemplo1_csv2}
+```
 dados <- readr::read_csv2(file = 'dados/dados.csv',  # Caminho e arquivo
                           col_select = c(2,4:7),     # Seleção de colunas
                           guess_max = 1000,          # Máximo de linhas utilizadas para adivinhar classes
                           skip_empty_rows = TRUE)    # Pular linhas vazias
-head(dados, 2)                                       
 ```
   
 <Br>
@@ -235,7 +234,7 @@ Leitura de arquivos com extensão .xls e xlsx, lidos pelo Excel e Libre Office. 
 
 <Br>
 
-> **Exemplo**
+> **Exemplo** 
 
 ```
    dados <- readxl::read_excel(path = "dados/planilha_xlsx.xlsx",
@@ -381,28 +380,25 @@ dados <- base::enc2utf8(dados)
 ![import_dataset](ilustracoes/import_dataset.png)
 
 
-<Br>
-
-
-<Br>
+<Br><Br>
 
 
 ## Escrita de arquivos  
 
 ### utils::write.csv2()  
 
-Função para salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula. Um ponto negativo é que essa função, ao salvar o arquivo, cria uma coluna com nomes das linhas (em números) ([documentação](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/write.table)).
+Função para salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula. Um ponto negativo é que essa função, ao salvar o arquivo, cria uma coluna com nomes das linhas (em números), para que isso não ocorra, deve-se utilizar o argumento row.names = FALSE. ([documentação](https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/write.table)).
 
 <Br>
 
 > **Exemplo**  
 
-```{r write.csv2}
+```
 write.csv2(x = iris,                # Dados ativos
            file = 'dados/iris.csv', # Caminho e nome do arquivo
-           fileEncoding = "UTF-8")  # Encoding
+           fileEncoding = "UTF-8", 
+           row.names = FALSE)       # Encoding
 
-read.csv2('dados/iris.csv', nrows = 4)
 ```
 
 <Br>
@@ -421,10 +417,7 @@ row.names | Logical. Cria coluna com nomes para linhas.
 fileEncoding | String. Declara a codificação a ser usada para que possam ser recodificados à medida que são gravados.   
 
 
-<Br>
-
-
-<Br>
+<Br><Br>
 
 
 ### readr::write_csv2()  
@@ -435,9 +428,8 @@ fileEncoding | String. Declara a codificação a ser usada para que possam ser r
 
 > **Exemplo**  
 
-```{r write_csv2}
+```
 readr::write_csv2(x = iris, file = 'dados/iris.csv')
-read.csv2(file = 'dados/iris.csv', nrows = 2)
 ```
 
 <Br>
@@ -452,10 +444,7 @@ append | Se FALSE, irá sobrescrever um arquivo existente, caso exista. Se TRUE,
 col_names	| Default TRUE. Primeira linha como nomes das colunas. Se FALSE, nomes das colunas não serão incluídos.
 
 
-<Br>
-
-
-<Br>
+<Br><Br>
 
 
 ### writexl::write_xlsx()    
@@ -465,11 +454,11 @@ Grava um dataframe em um arquivo xlsx. Para criar um xlsx com (várias) sheets n
 
 > **Exemplo 1**  
 
-```{r write_xlsx1} 
+```
 writexl::write_xlsx(x = iris,
                     path = 'dados/iris.xlsx',
-                    col_names = TRUE,
-                    format_headers = TRUE)
+                    col_names = TRUE,      # Primeira linha como nome das colunas
+                    format_headers = TRUE) # Inserir nome das colunas
 readxl::read_excel('dados/iris.xlsx', n_max = 2)
 ```
 
@@ -477,7 +466,7 @@ readxl::read_excel('dados/iris.xlsx', n_max = 2)
   
 > **Exemplo 2**  
 
-```{r write_xlsx2}
+```
 writexl::write_xlsx(path = "dados/conjuntodadosnativos.xlsx",
            x = list(sheet1=iris, sheet2=cars, sheet3=mtcars))
 
@@ -498,11 +487,7 @@ col_names	| Se TRUE, primera linha traz os nomes das colunas.
 format_headers | Inserir nomes das colunas.
 
 
-<Br>
-
-
-<Br>
-
+<Br><Br>
 
 
 ### data.table::fwrite()  
@@ -513,7 +498,7 @@ Função para escrever .csv muito mais rápido (por exemplo, 2 segundos versus 1
   
 > **Exemplo**  
 
-```{r fwrite}
+```
 dados <- data.table::fread(file = 'dados/dados.csv', nrows = 20)
 data.table::fwrite(x = dados,                     # Objeto a ser escrito
                    file = 'dados/dados20max.csv', # Nome e caminho (arquivo ja exite)
@@ -540,12 +525,7 @@ logical01	| Os valores lógicos devem ser escritos como 1 e 0 em vez de "TRUE" e
 showProgress | Exibir um medidor de progresso no console. Ignorado quando file == "".
 compress | Se compress = "auto" e se o arquivo termina em .gz, o formato de saída é gzipado csv. Se compress = "none", o formato de saída é sempre csv. Se compress = "gzip", o formato é csv compactado com gzip. A saída para o console nunca é compactada com gzip mesmo se compress = "gzip". Por padrão, compress = "auto".
 
-
-<Br>
-
-
-<Br>
-
+<Br><Br>
 
 ### rio::export()  
 Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gravar um data frame nos formatos habituais de texto. Para exportar uma lista de arquivos, usar o rio::export_list() ([Documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/export)).  
@@ -554,7 +534,7 @@ Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gra
   
 > **Exempĺo**  
 
-```{r export}
+```
 rio::export(x = iris,                  # Objeto que será exportado.
             file = 'dados/iris.xlsx')  # Caminho, nome e extensão.
 ```
@@ -569,12 +549,7 @@ x | Matriz ou data frame a ser escrita. Exceções são que x pode ser uma lista
 file | Nome do arquivo. Deve especificar file e/ou format.
 format | Sequência de caracteres opcional contendo o formato de arquivo, que pode ser usado para substituir o formato inferido a partir de file ou, em vez de especificar file, um arquivo com o nome do símbolo de x e a extensão de arquivo especificada será criado. Os atalhos incluem: ","  ou ";" ou  "|" .
 
-
-<Br>
-
-
-<Br>
-
+<Br><Br>
 
 ## Leitura de múltiplos arquivos  
 Particularmente tenho maior interesse na possibilidade de ler e agrupar diversos arquivos, assim, o enfoque desse tópico será sobre a leitura com merge.
@@ -591,9 +566,9 @@ A ideia aqui é fazer a leitura dos arquivos de interesse e juntá-los verticalm
 > **Exemplo 1**
 
 ```
-setwd('arquivos/')              # Define a pasta que contém os arquivos
-lista <- base::list.files()     # Captura os arquivos na pasta e atribui à uma lista
-arquivos <- base::lapply(X = lista,   # Lista com os arquivos a serem lidos
+setwd('arquivos/')                         # Define a pasta que contém os arquivos
+lista <- base::list.files()                # Captura os arquivos na pasta e atribui à uma lista
+arquivos <- base::lapply(X = lista,        # Lista com os arquivos a serem lidos
                          FUN = read.csv2)  # Função escolhida para ler
 unidos <- base::Reduce(x = arquivos,       # Lista de dataframes
                        f = base::rbind.data.frame)  # Função para empilhar
@@ -628,10 +603,7 @@ unidos <- data.table::rbindlist(l = arquivos)  # Mesmo efeito do Reduce
 setwd("~/Documentos/Estudos R/guia_de_bolso") # Volta para diretório inicial
 ```
 
-<Br>
-
-
-<Br>
+<Br><Br>
 
 ### base::for()  
 A função `for` permite criar um loop de execução de determinada ação, no caso, o loop do exemplo realizará a leitura de vários arquivos que serão atribuidos à uma lista. Com a lista é possível empilhar em um único data frame. ([documentação](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/Control)).   
@@ -640,27 +612,24 @@ A função `for` permite criar um loop de execução de determinada ação, no c
 
 > **Exemplo**  
 
-```{r for}
-x <- 1         # Objeto contador
-arquivos <- list(rep(NA, 3)) # O objeto que vai receber a leitura individual dos arquivos, deve ser uma lista vazia
+```
+x <- 1                            # Objeto contador
+arquivos <- list(rep(NA, 3))      # O objeto que vai receber a leitura individual dos arquivos, deve ser uma lista vazia
 lista <- list.files('arquivos2/') # Lista com os arquivos a serem lidos
 
-for (i in lista) {      # Para cada elemento da lista, executar:
+for (i in lista) {                # Para cada elemento da lista, executar:
   arquivos[[x]] <- read.csv2(file = file.path('arquivos2',i)) %>%  # Cada elemento lido é adicionado a um espaço vazio da lista de arquivos
     filter(Sepal.Length > 5.5)
-  x <- x + 1  # O contador define em que posição o arquivo lido será adicionado à lista de arquivos
+  x <- x + 1                      # O contador define em que posição o arquivo lido será adicionado à lista de arquivos
 }
 
-data.table::rbindlist(l = arquivos)[1:3,]
+dados <- data.table::rbindlist(l = arquivos)[1:3,] # os arquivos filtrados foram alocados na lista "arquivos". Agora eles serão empilhados com esta função para definir um banco de dados final com todos os elementos.
 ```
 
-<Br>
-
-
-<Br>
+<Br><Br>
 
 ### rio::import_list()  
-Importa uma lista de data frames de um vetor de nomes ou arquivo multi-objeto (planilha Excel, arquivo .Rdata etc) ([documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import_list)).  
+Importa uma lista de data frames de um vetor de nomes ou arquivo multi-objeto (planilha Excel, arquivo .Rdata etc). Realiza a mesma função de lapply() e for(), mas com menos etapas ([documentação](https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import_list)).  
 
 <Br>
 
@@ -669,16 +638,13 @@ Importa uma lista de data frames de um vetor de nomes ou arquivo multi-objeto (p
 ```
 setwd('arquivos/')
 lista <- list.files()
-unidos <- rio::import_list(file = lista, # Lista com nomes dos arquivos do diretório
-                 rbind = TRUE,    # Empilhar. Se FALSE retorna uma lista com os data frames
-                 header = TRUE)   # Nomes das colunas
+unidos <- rio::import_list(file = lista,  # Lista com nomes dos arquivos do diretório
+                 rbind = TRUE,            # Empilhar linhas 
+                 header = TRUE)           # Nomes das colunas
 setwd("~/Documentos/Estudos R/guia_de_bolso")
 ```
 
-<Br>
-
-
-<Br>
+<Br><Br>
 
 ## Escrita de múltiplos arquivos  
 
@@ -690,18 +656,15 @@ Exporta uma lista de data frames. A extensão colocada no nome do arquivo já di
 
 > **Exemplo**
 
-```{r export_list}
-rio::export_list(x = list(iris1 = iris[1:30,],   # Lista nomeada dos objetos a serem salvos
+```
+rio::export_list(x = list(iris1 = iris[1:30,],   # Lista nomeada (iris 1 ...) dos objetos
                           iris2 = iris[60:80,],
                           iris3 = iris[50:70,]),
-                 file = 'arquivos2/%s.csv',      # Caminho. Nome do arquivo contido em %s automaticamente
+                 file = 'arquivos2/%s.csv',      # Nome do arquivo contido em %s automaticamente
                  sep=";")     # Separador
 ```
 
-<Br>
-
-
-<Br>
+<Br><Br>
 
 
 
