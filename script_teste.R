@@ -69,12 +69,13 @@ usethis::use_git_config(
   user.email = "lucascgermano@gmail.com"
 )
 
-credentials::ssh_setup_github()
+git remote set-url origin https://github.com/lucascgmermano/guia_de_bolso.git
 
+library(dplyr)
+library(readr)
+library(data.table)
 
-usethis::use_git_config(
-  user.name = "Lucas Coraça Germano",
-  user.email = "lucascgermano@gmail.com"
-)
-usethis::git_sitrep()
-usethis::use_git()
+fread("arquivos/iris1.csv", 
+                  # header = T, 
+                  select = c("Sepal.Width","Petal.Length"))
+

@@ -329,14 +329,12 @@ div.csl-indent {
 </table>
 <p><Br></p>
 <p><strong>Exemplo: list.files()</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb1-1" tabindex="-1"></a><span class="fu">list.files</span>(<span class="at">path =</span> <span class="st">&#39;dados/&#39;</span>,      <span class="co"># Caminho do arquivo</span></span>
-<span id="cb1-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb1-2" tabindex="-1"></a>           <span class="at">pattern =</span> <span class="st">&#39;.ods&#39;</span>,     <span class="co"># Formato especificado</span></span>
-<span id="cb1-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb1-3" tabindex="-1"></a>           <span class="at">full.names =</span> <span class="cn">FALSE</span>,   <span class="co"># Somente nome</span></span>
-<span id="cb1-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb1-4" tabindex="-1"></a>           <span class="at">recursive =</span> <span class="cn">TRUE</span>,     <span class="co"># Pesquisa em subpastas</span></span>
-<span id="cb1-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb1-5" tabindex="-1"></a>           <span class="at">ignore.case =</span> <span class="cn">FALSE</span>)  <span class="co"># Ignora tamanhos das letras</span></span></code></pre></div>
-<pre><code>## [1] &quot;planilha_ods.ods&quot;</code></pre>
-<p><Br></p>
-<p><Br></p>
+<pre><code>list.files(path = &#39;dados/&#39;,      # Caminho do arquivo
+           pattern = &#39;.ods&#39;,     # Formato especificado
+           full.names = FALSE,   # Somente nome
+           recursive = TRUE,     # Pesquisa em subpastas
+           ignore.case = FALSE)  # Ignora tamanhos das letras</code></pre>
+<p><Br><Br></p>
 </div>
 <div id="leitura-de-arquivos" class="section level2 hasAnchor" number="1.2">
 <h2><span class="header-section-number">1.2</span> Leitura de arquivos<a href="leitura-e-escrita-de-arquivos-de-texto.html#leitura-de-arquivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -347,14 +345,8 @@ div.csl-indent {
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb3-1" tabindex="-1"></a>dados <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>)</span>
-<span id="cb3-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb3-2" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">2</span>)          <span class="co"># Exibir as 2 primeiras linhas dos dados.</span></span></code></pre></div>
-<pre><code>##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana
-## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1
-## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3
-##      pop
-## 1 150713
-## 2 150713</code></pre>
+<pre><code>dados &lt;- read.csv2(file = &#39;dados/dados.csv&#39;)
+head(dados, 2)          # Exibir as 2 primeiras linhas dos dados.</code></pre>
 <p><Br></p>
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
@@ -424,8 +416,7 @@ div.csl-indent {
 <ul>
 <li><em>Os argumentos são os mesmos da função read.table().</em></li>
 </ul>
-<p><Br></p>
-<p><Br></p>
+<p><Br><Br></p>
 </div>
 <div id="readrread_csv2" class="section level3 hasAnchor" number="1.2.2">
 <h3><span class="header-section-number">1.2.2</span> readr::read_csv2()<a href="leitura-e-escrita-de-arquivos-de-texto.html#readrread_csv2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -434,11 +425,11 @@ div.csl-indent {
 <blockquote>
 <p><strong>Exemplo 1</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb5-1" tabindex="-1"></a>dados <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>,  <span class="co"># Caminho e arquivo</span></span>
-<span id="cb5-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb5-2" tabindex="-1"></a>                          <span class="at">col_select =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">7</span>),     <span class="co"># Seleção de colunas</span></span>
-<span id="cb5-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb5-3" tabindex="-1"></a>                          <span class="at">guess_max =</span> <span class="dv">1000</span>,          <span class="co"># Máximo de linhas utilizadas para adivinhar classes</span></span>
-<span id="cb5-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb5-4" tabindex="-1"></a>                          <span class="at">skip_empty_rows =</span> <span class="cn">TRUE</span>)    <span class="co"># Pular linhas vazias</span></span>
-<span id="cb5-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb5-5" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">2</span>)                                       </span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb3-1" tabindex="-1"></a>dados <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>,  <span class="co"># Caminho e arquivo</span></span>
+<span id="cb3-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb3-2" tabindex="-1"></a>                          <span class="at">col_select =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span><span class="sc">:</span><span class="dv">7</span>),     <span class="co"># Seleção de colunas</span></span>
+<span id="cb3-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb3-3" tabindex="-1"></a>                          <span class="at">guess_max =</span> <span class="dv">1000</span>,          <span class="co"># Máximo de linhas utilizadas para adivinhar classes</span></span>
+<span id="cb3-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb3-4" tabindex="-1"></a>                          <span class="at">skip_empty_rows =</span> <span class="cn">TRUE</span>)    <span class="co"># Pular linhas vazias</span></span>
+<span id="cb3-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb3-5" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">2</span>)                                       </span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   data       muni       faixa   casos obitos
 ##   &lt;date&gt;     &lt;chr&gt;      &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt;
@@ -448,19 +439,14 @@ div.csl-indent {
 <blockquote>
 <p><strong>Exemplo 2</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb7-1" tabindex="-1"></a>dados <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_csv2</span>(</span>
-<span id="cb7-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb7-2" tabindex="-1"></a>              <span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>,   <span class="co"># Caminho e arquivo</span></span>
-<span id="cb7-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb7-3" tabindex="-1"></a>              <span class="at">guess_max =</span> <span class="dv">1000</span>,           <span class="co"># Linhas utilizadas para classes</span></span>
-<span id="cb7-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb7-4" tabindex="-1"></a>              <span class="at">skip_empty_rows =</span> <span class="cn">TRUE</span>,     <span class="co"># Pular linhas vazias</span></span>
-<span id="cb7-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb7-5" tabindex="-1"></a>              <span class="at">skip =</span> <span class="dv">1</span>,                   <span class="co"># Pular primeira linha</span></span>
-<span id="cb7-6"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb7-6" tabindex="-1"></a>              <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>,<span class="st">&#39;e&#39;</span>),   <span class="co"># Definir nomes das colunas</span></span>
-<span id="cb7-7"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb7-7" tabindex="-1"></a>              <span class="at">col_select =</span> <span class="fu">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>,<span class="st">&#39;e&#39;</span>))  <span class="co"># Selecionar colunas</span></span>
-<span id="cb7-8"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb7-8" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 2 × 5
-##       a b               c d          e      
-##   &lt;dbl&gt; &lt;date&gt;      &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;  
-## 1     1 2020-01-01 353070 Mogi Guaçu 30 a 39
-## 2     2 2020-01-20 353070 Mogi Guaçu 50 a 59</code></pre>
+<pre><code>dados &lt;- readr::read_csv2(
+              file = &#39;dados/dados.csv&#39;,    # Caminho e arquivo
+              guess_max = 1000,            # Linhas utilizadas para classes
+              col_types = c(X = &quot;double&quot;), # A primeira coluna será double. Um vetor com tipos de classes.
+              skip_empty_rows = TRUE,      # Pular linhas vazias
+              skip = 1,                    # Pular primeira linha
+              col_names = c(&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;),   # Definir nomes das colunas
+              col_select = c(&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;))  # Selecionar colunas</code></pre>
 <p><Br></p>
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
@@ -537,18 +523,14 @@ div.csl-indent {
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb9-1" tabindex="-1"></a>dados <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>,            <span class="co"># Caminho do arquivo</span></span>
-<span id="cb9-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb9-2" tabindex="-1"></a>                           <span class="at">select =</span> <span class="fu">c</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;muni&quot;</span>,<span class="st">&quot;casos&quot;</span>),   <span class="co"># Seleciona colunas</span></span>
-<span id="cb9-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb9-3" tabindex="-1"></a>                           <span class="at">colClasses =</span> <span class="fu">c</span>(<span class="at">data =</span> <span class="st">&quot;Date&quot;</span>,        <span class="co"># Define classes</span></span>
-<span id="cb9-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb9-4" tabindex="-1"></a>                                          <span class="at">muni =</span> <span class="st">&quot;character&quot;</span>,</span>
-<span id="cb9-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb9-5" tabindex="-1"></a>                                          <span class="at">casos =</span> <span class="st">&quot;integer&quot;</span>),</span>
-<span id="cb9-6"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb9-6" tabindex="-1"></a>                           <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;data.in.sin&quot;</span>,         <span class="co"># Renomeia colunas</span></span>
-<span id="cb9-7"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb9-7" tabindex="-1"></a>                                         <span class="st">&quot;municipio&quot;</span>, </span>
-<span id="cb9-8"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb9-8" tabindex="-1"></a>                                         <span class="st">&quot;num_casos&quot;</span>)) </span>
-<span id="cb9-9"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb9-9" tabindex="-1"></a><span class="fu">head</span>(dados, <span class="dv">2</span>)</span></code></pre></div>
-<pre><code>##    data.in.sin  municipio num_casos
-## 1:  2020-01-01 Mogi Guaçu         1
-## 2:  2020-01-20 Mogi Guaçu         1</code></pre>
+<pre><code>dados &lt;- data.table::fread(file = &#39;dados/dados.csv&#39;,            # Caminho do arquivo
+                           select = c(&quot;data&quot;,&quot;muni&quot;,&quot;casos&quot;),   # Seleciona colunas
+                           colClasses = c(data = &quot;Date&quot;,        # Define classes
+                                          muni = &quot;character&quot;,
+                                          casos = &quot;integer&quot;),
+                           col.names = c(&quot;data.in.sin&quot;,         # Renomeia colunas
+                                         &quot;municipio&quot;, 
+                                         &quot;num_casos&quot;)) </code></pre>
 <p><Br></p>
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
@@ -647,8 +629,7 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p><Br></p>
-<p><Br></p>
+<p><Br><Br></p>
 </div>
 <div id="readodsread_ods" class="section level3 hasAnchor" number="1.2.4">
 <h3><span class="header-section-number">1.2.4</span> readODS::read_ods()<a href="leitura-e-escrita-de-arquivos-de-texto.html#readodsread_ods" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -657,10 +638,10 @@ div.csl-indent {
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb11-1" tabindex="-1"></a>dados <span class="ot">&lt;-</span> readODS<span class="sc">::</span><span class="fu">read_ods</span>(<span class="at">path =</span> <span class="st">&#39;dados/planilha_ods.ods&#39;</span>,  <span class="co"># Caminho do arquivo</span></span>
-<span id="cb11-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb11-2" tabindex="-1"></a>                           <span class="at">col_names =</span> <span class="cn">FALSE</span>,                <span class="co"># Primeira linha contém nomes das colunas</span></span>
-<span id="cb11-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb11-3" tabindex="-1"></a>                           <span class="at">sheet =</span> <span class="dv">1</span>,                        <span class="co"># Seleção da planilha</span></span>
-<span id="cb11-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb11-4" tabindex="-1"></a>                           <span class="at">range =</span> <span class="st">&quot;A7:B14&quot;</span>)                 <span class="co"># Intervalo para leitura</span></span></code></pre></div>
+<pre><code>dados &lt;- readODS::read_ods(path = &#39;dados/planilha_ods.ods&#39;,  # Caminho do arquivo
+                           col_names = FALSE,                # Primeira linha contém nomes das colunas
+                           sheet = 1,                        # Seleção da planilha
+                           range = &quot;A7:B14&quot;)                 # Intervalo para leitura</code></pre>
 <p><Br></p>
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
@@ -711,8 +692,7 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p><Br></p>
-<p><Br></p>
+<p><Br><Br></p>
 </div>
 <div id="readxlread_excel" class="section level3 hasAnchor" number="1.2.5">
 <h3><span class="header-section-number">1.2.5</span> readxl::read_excel()<a href="leitura-e-escrita-de-arquivos-de-texto.html#readxlread_excel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -721,11 +701,11 @@ div.csl-indent {
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb12-1" tabindex="-1"></a>   dados <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">&quot;dados/planilha_xlsx.xlsx&quot;</span>,</span>
-<span id="cb12-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb12-2" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="dv">1</span>,</span>
-<span id="cb12-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb12-3" tabindex="-1"></a>                   <span class="at">col_names =</span> <span class="fu">c</span>(<span class="st">&#39;vel&#39;</span>,<span class="st">&#39;dist&#39;</span>),</span>
-<span id="cb12-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb12-4" tabindex="-1"></a>                   <span class="at">col_types =</span> <span class="fu">c</span>(<span class="st">&quot;numeric&quot;</span>,<span class="st">&quot;numeric&quot;</span>),</span>
-<span id="cb12-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb12-5" tabindex="-1"></a>                   <span class="at">range =</span> <span class="st">&quot;A3:B19&quot;</span>)</span></code></pre></div>
+<pre><code>   dados &lt;- readxl::read_excel(path = &quot;dados/planilha_xlsx.xlsx&quot;,
+                   sheet = 1,                          # seleciona a planilha 1
+                   col_names = c(&#39;vel&#39;,&#39;dist&#39;),        # seleciona colunas (não renomeia)
+                   col_types = c(&quot;numeric&quot;,&quot;numeric&quot;), # define a classe
+                   range = &quot;A3:B19&quot;)                   # define intervalo de leitura da planilha</code></pre>
 <p><Br></p>
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
@@ -790,9 +770,62 @@ div.csl-indent {
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb13-1" tabindex="-1"></a>dados <span class="ot">&lt;-</span> foreign<span class="sc">::</span><span class="fu">read.dbf</span>(<span class="at">file =</span> <span class="st">&#39;dados/planilha_dbf.dbf&#39;</span>)</span></code></pre></div>
+<pre><code>dados &lt;- foreign::read.dbf(file = &#39;dados/planilha_dbf.dbf&#39;)</code></pre>
 <p><Br></p>
-<p><Br></p>
+<blockquote>
+<p><strong>Argumentos principais</strong></p>
+</blockquote>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Argumento</th>
+<th>Definição</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>file</td>
+<td>O caminho para o arquivo DBF que você deseja ler.</td>
+</tr>
+<tr class="even">
+<td>as.is</td>
+<td>Um valor lógico indicando se as strings devem ser retornadas como estão (sem conversão para fatores ou caracteres).</td>
+</tr>
+<tr class="odd">
+<td>as.data.frame</td>
+<td>Um valor lógico indicando se o resultado deve ser convertido em um objeto de classe data.frame.</td>
+</tr>
+<tr class="even">
+<td>NA</td>
+<td>Um valor para representar valores ausentes no arquivo DBF.</td>
+</tr>
+<tr class="odd">
+<td>encoding</td>
+<td>A codificação dos caracteres no arquivo DBF.</td>
+</tr>
+<tr class="even">
+<td>convert.factors</td>
+<td>Um valor lógico indicando se as colunas de fatores devem ser convertidas para caracteres.</td>
+</tr>
+<tr class="odd">
+<td>row.names</td>
+<td>Especifica se os nomes das linhas devem ser incluídos no resultado.</td>
+</tr>
+<tr class="even">
+<td>blank.lines.skip</td>
+<td>Um valor lógico indicando se linhas em branco devem ser ignoradas.</td>
+</tr>
+<tr class="odd">
+<td>trim.blanks</td>
+<td>Um valor lógico indicando se espaços em branco devem ser removidos das strings.</td>
+</tr>
+</tbody>
+</table>
+<p><Br><Br></p>
 </div>
 <div id="rioimport" class="section level3 hasAnchor" number="1.2.7">
 <h3><span class="header-section-number">1.2.7</span> rio::import()<a href="leitura-e-escrita-de-arquivos-de-texto.html#rioimport" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -801,7 +834,7 @@ div.csl-indent {
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb14-1" tabindex="-1"></a>dados <span class="ot">&lt;-</span> rio<span class="sc">::</span><span class="fu">import</span>(<span class="at">file =</span> <span class="st">&#39;dados/planilha_dbf.dbf&#39;</span>) <span class="co"># Caminho e nome.</span></span></code></pre></div>
+<pre><code>dados &lt;- rio::import(file = &#39;dados/planilha_dbf.dbf&#39;) # Caminho e nome.</code></pre>
 <p><Br></p>
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
@@ -836,20 +869,20 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p><Br></p>
-<p><Br></p>
+<p><Br><Br></p>
 </div>
 <div id="arquivos-da-web" class="section level3 hasAnchor" number="1.2.8">
 <h3><span class="header-section-number">1.2.8</span> Arquivos da web<a href="leitura-e-escrita-de-arquivos-de-texto.html#arquivos-da-web" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Pode-se usar o endereço do apresentado no navegador ou contido nas propriedades (clicar com botão direito). O endereço deverá ser inserido entre aspas nos argumentos <code>file</code> ou <code>path</code> da maioria das funções de leitura, como no exemplo abaixo:</p>
-<p><em>read.csv2(file = ‘<a href="https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv" class="uri">https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv</a>’)</em></p>
-<p>Ou atribuir o link à um objeto e usa-lo na função.<br />
-<em>link &lt;- ‘<a href="https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv" class="uri">https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv</a>’</em></p>
-<p>É possível também baixar o arquivo (inclusive imagens) por meio da seguinte função:<br />
-<em>download.file(url = ‘<a href="https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv" class="uri">https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv</a>’,</em>
-<em>destfile = ‘dados/baixado_web.csv’)</em></p>
-<p><Br></p>
-<p><Br></p>
+<pre><code>read.csv2(file = &#39;https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv&#39;)  
+
+# Ou atribuir o link à um objeto e usa-lo na função.  
+link &lt;- &#39;https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv&#39;
+
+# É possível também baixar o arquivo (inclusive imagens) por meio da seguinte função:  
+download.file(url = &#39;https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv&#39;, 
+              destfile = &#39;dados/baixado_web.csv&#39;)</code></pre>
+<p><Br><Br></p>
 </div>
 <div id="encoding" class="section level3 hasAnchor" number="1.2.9">
 <h3><span class="header-section-number">1.2.9</span> Encoding<a href="leitura-e-escrita-de-arquivos-de-texto.html#encoding" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -859,7 +892,7 @@ div.csl-indent {
 <p><strong>Descobrir o encoding</strong></p>
 </blockquote>
 <p>Verificar encoding de um vetor</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb15-1" tabindex="-1"></a>stringi<span class="sc">::</span><span class="fu">stri_enc_detect</span>(<span class="at">str =</span> cars<span class="sc">$</span>speed[<span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb12-1" tabindex="-1"></a>stringi<span class="sc">::</span><span class="fu">stri_enc_detect</span>(<span class="at">str =</span> cars<span class="sc">$</span>speed[<span class="dv">1</span>])</span></code></pre></div>
 <pre><code>## [[1]]
 ##   Encoding Language Confidence
 ## 1    UTF-8                0.15</code></pre>
@@ -867,13 +900,13 @@ div.csl-indent {
 <blockquote>
 <p><strong>Converter encoding</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb17-1" tabindex="-1"></a>base<span class="sc">::</span><span class="fu">iconv</span>(<span class="at">x =</span> cars<span class="sc">$</span>speed[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="co"># Dataframe ou vetor</span></span>
-<span id="cb17-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb17-2" tabindex="-1"></a>      <span class="at">from =</span> <span class="st">&quot;UTF-8&quot;</span>,            <span class="co"># Encoding anterior</span></span>
-<span id="cb17-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb17-3" tabindex="-1"></a>      <span class="at">to =</span> <span class="st">&quot;ISO-8859-1&quot;</span>)         <span class="co"># Novo encoding</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb14-1" tabindex="-1"></a>base<span class="sc">::</span><span class="fu">iconv</span>(<span class="at">x =</span> cars<span class="sc">$</span>speed[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="co"># Dataframe ou vetor</span></span>
+<span id="cb14-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb14-2" tabindex="-1"></a>      <span class="at">from =</span> <span class="st">&quot;UTF-8&quot;</span>,            <span class="co"># Encoding anterior</span></span>
+<span id="cb14-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb14-3" tabindex="-1"></a>      <span class="at">to =</span> <span class="st">&quot;ISO-8859-1&quot;</span>)         <span class="co"># Novo encoding</span></span></code></pre></div>
 <pre><code>## [1] &quot;4&quot; &quot;4&quot; &quot;7&quot;</code></pre>
 <p>Pode-se também utilizar a função <code>base::enc2utf8</code> para transformar uma codificação em UTF-8, porém, deve ser sempre aplicado a um vetor (ou coluna do banco) de dados do tipo character, se for preciso, transformar antes com a função <code>base::as.character</code></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb19-1" tabindex="-1"></a>dados <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.character</span>(iris<span class="sc">$</span>Species)</span>
-<span id="cb19-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb19-2" tabindex="-1"></a>dados <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">enc2utf8</span>(dados)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb16-1" tabindex="-1"></a>dados <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.character</span>(iris<span class="sc">$</span>Species)</span>
+<span id="cb16-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb16-2" tabindex="-1"></a>dados <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">enc2utf8</span>(dados)</span></code></pre></div>
 <p><Br></p>
 <blockquote>
 <p><strong>Encoding via Import Dataset</strong></p>
@@ -893,11 +926,11 @@ div.csl-indent {
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb20-1" tabindex="-1"></a><span class="fu">write.csv2</span>(<span class="at">x =</span> iris,                <span class="co"># Dados ativos</span></span>
-<span id="cb20-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb20-2" tabindex="-1"></a>           <span class="at">file =</span> <span class="st">&#39;dados/iris.csv&#39;</span>, <span class="co"># Caminho e nome do arquivo</span></span>
-<span id="cb20-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb20-3" tabindex="-1"></a>           <span class="at">fileEncoding =</span> <span class="st">&quot;UTF-8&quot;</span>)  <span class="co"># Encoding</span></span>
-<span id="cb20-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb20-4" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb20-5" tabindex="-1"></a><span class="fu">read.csv2</span>(<span class="st">&#39;dados/iris.csv&#39;</span>, <span class="at">nrows =</span> <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb17-1" tabindex="-1"></a><span class="fu">write.csv2</span>(<span class="at">x =</span> iris,                <span class="co"># Dados ativos</span></span>
+<span id="cb17-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb17-2" tabindex="-1"></a>           <span class="at">file =</span> <span class="st">&#39;dados/iris.csv&#39;</span>, <span class="co"># Caminho e nome do arquivo</span></span>
+<span id="cb17-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb17-3" tabindex="-1"></a>           <span class="at">fileEncoding =</span> <span class="st">&quot;UTF-8&quot;</span>)  <span class="co"># Encoding</span></span>
+<span id="cb17-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb17-4" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb17-5" tabindex="-1"></a><span class="fu">read.csv2</span>(<span class="st">&#39;dados/iris.csv&#39;</span>, <span class="at">nrows =</span> <span class="dv">4</span>)</span></code></pre></div>
 <pre><code>##   X Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1 1          5.1         3.5          1.4         0.2  setosa
 ## 2 2          4.9         3.0          1.4         0.2  setosa
@@ -963,8 +996,8 @@ div.csl-indent {
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb22-1" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv2</span>(<span class="at">x =</span> iris, <span class="at">file =</span> <span class="st">&#39;dados/iris.csv&#39;</span>)</span>
-<span id="cb22-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb22-2" tabindex="-1"></a><span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/iris.csv&#39;</span>, <span class="at">nrows =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb19-1" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_csv2</span>(<span class="at">x =</span> iris, <span class="at">file =</span> <span class="st">&#39;dados/iris.csv&#39;</span>)</span>
+<span id="cb19-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb19-2" tabindex="-1"></a><span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="st">&#39;dados/iris.csv&#39;</span>, <span class="at">nrows =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
 ## 2          4.9         3.0          1.4         0.2  setosa</code></pre>
@@ -1012,11 +1045,11 @@ div.csl-indent {
 <blockquote>
 <p><strong>Exemplo 1</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb24-1" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(<span class="at">x =</span> iris,</span>
-<span id="cb24-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb24-2" tabindex="-1"></a>                    <span class="at">path =</span> <span class="st">&#39;dados/iris.xlsx&#39;</span>,</span>
-<span id="cb24-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb24-3" tabindex="-1"></a>                    <span class="at">col_names =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb24-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb24-4" tabindex="-1"></a>                    <span class="at">format_headers =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb24-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb24-5" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&#39;dados/iris.xlsx&#39;</span>, <span class="at">n_max =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb21-1" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(<span class="at">x =</span> iris,</span>
+<span id="cb21-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb21-2" tabindex="-1"></a>                    <span class="at">path =</span> <span class="st">&#39;dados/iris.xlsx&#39;</span>,</span>
+<span id="cb21-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb21-3" tabindex="-1"></a>                    <span class="at">col_names =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb21-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb21-4" tabindex="-1"></a>                    <span class="at">format_headers =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb21-5" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="st">&#39;dados/iris.xlsx&#39;</span>, <span class="at">n_max =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ##          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  
@@ -1026,12 +1059,12 @@ div.csl-indent {
 <blockquote>
 <p><strong>Exemplo 2</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb26-1" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(<span class="at">path =</span> <span class="st">&quot;dados/conjuntodadosnativos.xlsx&quot;</span>,</span>
-<span id="cb26-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb26-2" tabindex="-1"></a>           <span class="at">x =</span> <span class="fu">list</span>(<span class="at">sheet1=</span>iris, <span class="at">sheet2=</span>cars, <span class="at">sheet3=</span>mtcars))</span>
-<span id="cb26-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb26-3" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb26-4" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">&#39;dados/conjuntodadosnativos.xlsx&#39;</span>,</span>
-<span id="cb26-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb26-5" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="dv">3</span>, </span>
-<span id="cb26-6"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb26-6" tabindex="-1"></a>                   <span class="at">n_max =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb23-1" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(<span class="at">path =</span> <span class="st">&quot;dados/conjuntodadosnativos.xlsx&quot;</span>,</span>
+<span id="cb23-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb23-2" tabindex="-1"></a>           <span class="at">x =</span> <span class="fu">list</span>(<span class="at">sheet1=</span>iris, <span class="at">sheet2=</span>cars, <span class="at">sheet3=</span>mtcars))</span>
+<span id="cb23-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb23-3" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb23-4" tabindex="-1"></a>readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">&#39;dados/conjuntodadosnativos.xlsx&#39;</span>,</span>
+<span id="cb23-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb23-5" tabindex="-1"></a>                   <span class="at">sheet =</span> <span class="dv">3</span>, </span>
+<span id="cb23-6"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb23-6" tabindex="-1"></a>                   <span class="at">n_max =</span> <span class="dv">2</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 11
 ##     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -1081,12 +1114,12 @@ div.csl-indent {
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb28-1" tabindex="-1"></a>dados <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>, <span class="at">nrows =</span> <span class="dv">20</span>)</span>
-<span id="cb28-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb28-2" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fwrite</span>(<span class="at">x =</span> dados,                     <span class="co"># Objeto a ser escrito</span></span>
-<span id="cb28-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb28-3" tabindex="-1"></a>                   <span class="at">file =</span> <span class="st">&#39;dados/dados20max.csv&#39;</span>, <span class="co"># Nome e caminho (arquivo ja exite)</span></span>
-<span id="cb28-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb28-4" tabindex="-1"></a>                   <span class="at">append =</span> <span class="cn">TRUE</span>,                 <span class="co"># Salva na ultima linha do arquivo ja existente</span></span>
-<span id="cb28-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb28-5" tabindex="-1"></a>                   <span class="at">sep =</span> <span class="st">&#39;;&#39;</span>,                     <span class="co"># Separados de colunas</span></span>
-<span id="cb28-6"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb28-6" tabindex="-1"></a>                   <span class="at">showProgress =</span> <span class="cn">TRUE</span>)           <span class="co"># Mostrar progresso</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb25-1" tabindex="-1"></a>dados <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">fread</span>(<span class="at">file =</span> <span class="st">&#39;dados/dados.csv&#39;</span>, <span class="at">nrows =</span> <span class="dv">20</span>)</span>
+<span id="cb25-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb25-2" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">fwrite</span>(<span class="at">x =</span> dados,                     <span class="co"># Objeto a ser escrito</span></span>
+<span id="cb25-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb25-3" tabindex="-1"></a>                   <span class="at">file =</span> <span class="st">&#39;dados/dados20max.csv&#39;</span>, <span class="co"># Nome e caminho (arquivo ja exite)</span></span>
+<span id="cb25-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb25-4" tabindex="-1"></a>                   <span class="at">append =</span> <span class="cn">TRUE</span>,                 <span class="co"># Salva na ultima linha do arquivo ja existente</span></span>
+<span id="cb25-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb25-5" tabindex="-1"></a>                   <span class="at">sep =</span> <span class="st">&#39;;&#39;</span>,                     <span class="co"># Separados de colunas</span></span>
+<span id="cb25-6"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb25-6" tabindex="-1"></a>                   <span class="at">showProgress =</span> <span class="cn">TRUE</span>)           <span class="co"># Mostrar progresso</span></span></code></pre></div>
 <p><Br></p>
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
@@ -1159,8 +1192,8 @@ div.csl-indent {
 <blockquote>
 <p><strong>Exempĺo</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-1" tabindex="-1"></a>rio<span class="sc">::</span><span class="fu">export</span>(<span class="at">x =</span> iris,                  <span class="co"># Objeto que será exportado.</span></span>
-<span id="cb29-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-2" tabindex="-1"></a>            <span class="at">file =</span> <span class="st">&#39;dados/iris.xlsx&#39;</span>)  <span class="co"># Caminho, nome e extensão.</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb26-1" tabindex="-1"></a>rio<span class="sc">::</span><span class="fu">export</span>(<span class="at">x =</span> iris,                  <span class="co"># Objeto que será exportado.</span></span>
+<span id="cb26-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb26-2" tabindex="-1"></a>            <span class="at">file =</span> <span class="st">&#39;dados/iris.xlsx&#39;</span>)  <span class="co"># Caminho, nome e extensão.</span></span></code></pre></div>
 <p><Br></p>
 <blockquote>
 <p><strong>Argumentos principais</strong></p>
@@ -1249,17 +1282,17 @@ setwd(&quot;~/Documentos/Estudos R/guia_de_bolso&quot;) # Volta para diretório 
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span>         <span class="co"># Objeto contador</span></span>
-<span id="cb32-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-2" tabindex="-1"></a>arquivos <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">3</span>)) <span class="co"># O objeto que vai receber a leitura individual dos arquivos, deve ser uma lista vazia</span></span>
-<span id="cb32-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-3" tabindex="-1"></a>lista <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&#39;arquivos2/&#39;</span>) <span class="co"># Lista com os arquivos a serem lidos</span></span>
-<span id="cb32-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-4" tabindex="-1"></a></span>
-<span id="cb32-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> lista) {      <span class="co"># Para cada elemento da lista, executar:</span></span>
-<span id="cb32-6"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-6" tabindex="-1"></a>  arquivos[[x]] <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">&#39;arquivos2&#39;</span>,i)) <span class="sc">%&gt;%</span>  <span class="co"># Cada elemento lido é adicionado a um espaço vazio da lista de arquivos</span></span>
-<span id="cb32-7"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-7" tabindex="-1"></a>    <span class="fu">filter</span>(Sepal.Length <span class="sc">&gt;</span> <span class="fl">5.5</span>)</span>
-<span id="cb32-8"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-8" tabindex="-1"></a>  x <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="dv">1</span>  <span class="co"># O contador define em que posição o arquivo lido será adicionado à lista de arquivos</span></span>
-<span id="cb32-9"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-9" tabindex="-1"></a>}</span>
-<span id="cb32-10"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-10" tabindex="-1"></a></span>
-<span id="cb32-11"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-11" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">rbindlist</span>(<span class="at">l =</span> arquivos)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span>         <span class="co"># Objeto contador</span></span>
+<span id="cb29-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-2" tabindex="-1"></a>arquivos <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">3</span>)) <span class="co"># O objeto que vai receber a leitura individual dos arquivos, deve ser uma lista vazia</span></span>
+<span id="cb29-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-3" tabindex="-1"></a>lista <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&#39;arquivos2/&#39;</span>) <span class="co"># Lista com os arquivos a serem lidos</span></span>
+<span id="cb29-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-4" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> lista) {      <span class="co"># Para cada elemento da lista, executar:</span></span>
+<span id="cb29-6"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-6" tabindex="-1"></a>  arquivos[[x]] <span class="ot">&lt;-</span> <span class="fu">read.csv2</span>(<span class="at">file =</span> <span class="fu">file.path</span>(<span class="st">&#39;arquivos2&#39;</span>,i)) <span class="sc">%&gt;%</span>  <span class="co"># Cada elemento lido é adicionado a um espaço vazio da lista de arquivos</span></span>
+<span id="cb29-7"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-7" tabindex="-1"></a>    <span class="fu">filter</span>(Sepal.Length <span class="sc">&gt;</span> <span class="fl">5.5</span>)</span>
+<span id="cb29-8"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-8" tabindex="-1"></a>  x <span class="ot">&lt;-</span> x <span class="sc">+</span> <span class="dv">1</span>  <span class="co"># O contador define em que posição o arquivo lido será adicionado à lista de arquivos</span></span>
+<span id="cb29-9"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-9" tabindex="-1"></a>}</span>
+<span id="cb29-10"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-10" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb29-11" tabindex="-1"></a>data.table<span class="sc">::</span><span class="fu">rbindlist</span>(<span class="at">l =</span> arquivos)[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,]</span></code></pre></div>
 <pre><code>##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1:          5.8           4          1.2         0.2  setosa
 ## 2:          5.7         4.4          1.5         0.4  setosa
@@ -1293,11 +1326,11 @@ setwd(&quot;~/Documentos/Estudos R/guia_de_bolso&quot;)</code></pre>
 <blockquote>
 <p><strong>Exemplo</strong></p>
 </blockquote>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb35-1" tabindex="-1"></a>rio<span class="sc">::</span><span class="fu">export_list</span>(<span class="at">x =</span> <span class="fu">list</span>(<span class="at">iris1 =</span> iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>,],   <span class="co"># Lista nomeada dos objetos a serem salvos</span></span>
-<span id="cb35-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb35-2" tabindex="-1"></a>                          <span class="at">iris2 =</span> iris[<span class="dv">60</span><span class="sc">:</span><span class="dv">80</span>,],</span>
-<span id="cb35-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb35-3" tabindex="-1"></a>                          <span class="at">iris3 =</span> iris[<span class="dv">50</span><span class="sc">:</span><span class="dv">70</span>,]),</span>
-<span id="cb35-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb35-4" tabindex="-1"></a>                 <span class="at">file =</span> <span class="st">&#39;arquivos2/%s.csv&#39;</span>,      <span class="co"># Caminho. Nome do arquivo contido em %s automaticamente</span></span>
-<span id="cb35-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb35-5" tabindex="-1"></a>                 <span class="at">sep=</span><span class="st">&quot;;&quot;</span>)     <span class="co"># Separador</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-1" tabindex="-1"></a>rio<span class="sc">::</span><span class="fu">export_list</span>(<span class="at">x =</span> <span class="fu">list</span>(<span class="at">iris1 =</span> iris[<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>,],   <span class="co"># Lista nomeada dos objetos a serem salvos</span></span>
+<span id="cb32-2"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-2" tabindex="-1"></a>                          <span class="at">iris2 =</span> iris[<span class="dv">60</span><span class="sc">:</span><span class="dv">80</span>,],</span>
+<span id="cb32-3"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-3" tabindex="-1"></a>                          <span class="at">iris3 =</span> iris[<span class="dv">50</span><span class="sc">:</span><span class="dv">70</span>,]),</span>
+<span id="cb32-4"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-4" tabindex="-1"></a>                 <span class="at">file =</span> <span class="st">&#39;arquivos2/%s.csv&#39;</span>,      <span class="co"># Caminho. Nome do arquivo contido em %s automaticamente</span></span>
+<span id="cb32-5"><a href="leitura-e-escrita-de-arquivos-de-texto.html#cb32-5" tabindex="-1"></a>                 <span class="at">sep=</span><span class="st">&quot;;&quot;</span>)     <span class="co"># Separador</span></span></code></pre></div>
 <p><Br></p>
 <p><Br></p>
 

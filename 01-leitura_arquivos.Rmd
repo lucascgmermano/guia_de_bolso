@@ -41,7 +41,7 @@ here::here() | Cria um caminho relativo para um arquivo no diretório de trabalh
 
 **Exemplo: list.files()**
 
-```{r list.files}
+```
 list.files(path = 'dados/',      # Caminho do arquivo
            pattern = '.ods',     # Formato especificado
            full.names = FALSE,   # Somente nome
@@ -49,10 +49,7 @@ list.files(path = 'dados/',      # Caminho do arquivo
            ignore.case = FALSE)  # Ignora tamanhos das letras
 ```
 
-<Br>
-
-
-<Br>
+<Br><Br>
 
 ## Leitura de arquivos  
 
@@ -64,7 +61,7 @@ Faz a leitura de um arquivo em formado de tabela e cria um data frame a partir d
 
 > **Exemplo**  
 
-```{r .csv2}
+```
 dados <- read.csv2(file = 'dados/dados.csv')
 head(dados, 2)          # Exibir as 2 primeiras linhas dos dados.
 ```
@@ -89,10 +86,7 @@ skipNull | Logical. Se TRUE os nulos (NA) devem ser ignorados.
 colClasses | character. Um vetor de classes referentes as colunas. Valores possíveis são NA (default, quando type.convert é usado), "NULL" (quando a coluna é pulada), um vetor atomico de classes(logical, integer, numeric, complex, character, raw), or "factor", "Date" or "POSIXct".
 * *Os argumentos são os mesmos da função read.table().*
 
-<Br>
-
-
-<Br>
+<Br><Br>
 
 
 ### readr::read_csv2()
@@ -114,15 +108,15 @@ head(dados, 2)
 
 > **Exemplo 2**
 
-```{r exemplo2_csv2}
+```
 dados <- readr::read_csv2(
-              file = 'dados/dados.csv',   # Caminho e arquivo
-              guess_max = 1000,           # Linhas utilizadas para classes
-              skip_empty_rows = TRUE,     # Pular linhas vazias
-              skip = 1,                   # Pular primeira linha
+              file = 'dados/dados.csv',    # Caminho e arquivo
+              guess_max = 1000,            # Linhas utilizadas para classes
+              col_types = c(X = "double"), # A primeira coluna será double. Um vetor com tipos de classes.
+              skip_empty_rows = TRUE,      # Pular linhas vazias
+              skip = 1,                    # Pular primeira linha
               col_names = c('a','b','c','d','e'),   # Definir nomes das colunas
               col_select = c('a','b','c','d','e'))  # Selecionar colunas
-head(dados, 2)
 ```
 
 <Br>
@@ -159,7 +153,7 @@ Similar ao read.table e read.csv, só que mais rápido e conveniente por ler arq
 
 > **Exemplo**
 
-```{r fread}
+```
 dados <- data.table::fread(file = 'dados/dados.csv',            # Caminho do arquivo
                            select = c("data","muni","casos"),   # Seleciona colunas
                            colClasses = c(data = "Date",        # Define classes
@@ -168,7 +162,6 @@ dados <- data.table::fread(file = 'dados/dados.csv',            # Caminho do arq
                            col.names = c("data.in.sin",         # Renomeia colunas
                                          "municipio", 
                                          "num_casos")) 
-head(dados, 2)
 ```
   
 <Br>
@@ -199,10 +192,7 @@ nThread | Número de threads a serem usados. Experimente para ver o que funciona
 KeepLeadingZeros | Se for TRUE, dados numéricos com zeros à esquerda seão lidos como caracterer, caso contrário, os zeros à esquerda serão removidos e convertidos em numéricos.
 
 
-<Br>
-
-
-<Br>
+<Br><Br>
 
 
 ### readODS::read_ods()
@@ -213,7 +203,7 @@ Função para leitura de arquivos no formato .ods do Libre Office. A leitura é 
 
 > **Exemplo**
 
-```{r read_ods}
+```
 dados <- readODS::read_ods(path = 'dados/planilha_ods.ods',  # Caminho do arquivo
                            col_names = FALSE,                # Primeira linha contém nomes das colunas
                            sheet = 1,                        # Seleção da planilha
@@ -236,10 +226,7 @@ row_names | Indica se o arquivo contém os nomes das linhas na primeira coluna.
 strings_as_factors | Logical. Se variáveis tipo character serão  convertidas a fatores.
   
 
-<Br>
-
-
-<Br>
+<Br><Br>
 
   
 ### readxl::read_excel()
@@ -250,12 +237,12 @@ Leitura de arquivos com extensão .xls e xlsx, lidos pelo Excel e Libre Office. 
 
 > **Exemplo**
 
-```{r read_excel}
+```
    dados <- readxl::read_excel(path = "dados/planilha_xlsx.xlsx",
-                   sheet = 1,
-                   col_names = c('vel','dist'),
-                   col_types = c("numeric","numeric"),
-                   range = "A3:B19")
+                   sheet = 1,                          # seleciona a planilha 1
+                   col_names = c('vel','dist'),        # seleciona colunas (não renomeia)
+                   col_types = c("numeric","numeric"), # define a classe
+                   range = "A3:B19")                   # define intervalo de leitura da planilha
 ```
 
 <Br>
@@ -289,14 +276,27 @@ A função le arquivos .dbf como dataframe, convertendo por default campos chara
 
 > **Exemplo**
 
-```{r read.dbf}
+```
 dados <- foreign::read.dbf(file = 'dados/planilha_dbf.dbf')
 ```
 
 <Br>
 
+> **Argumentos principais**  
 
-<Br>
+Argumento|Definição
+---------|---------
+file| O caminho para o arquivo DBF que você deseja ler.
+as.is| Um valor lógico indicando se as strings devem ser retornadas como estão (sem conversão para fatores ou caracteres).
+as.data.frame | Um valor lógico indicando se o resultado deve ser convertido em um objeto de classe data.frame.
+NA | Um valor para representar valores ausentes no arquivo DBF.
+encoding | A codificação dos caracteres no arquivo DBF.
+convert.factors | Um valor lógico indicando se as colunas de fatores devem ser convertidas para caracteres.
+row.names | Especifica se os nomes das linhas devem ser incluídos no resultado.
+blank.lines.skip | Um valor lógico indicando se linhas em branco devem ser ignoradas.
+trim.blanks | Um valor lógico indicando se espaços em branco devem ser removidos das strings.
+
+<Br><Br>
 
 
 ### rio::import()
@@ -306,7 +306,7 @@ O rio é um pacote que vem com a iniciativa de simplificar o procedimento de imp
 
 > **Exemplo**  
 
-```{r}
+```
 dados <- rio::import(file = 'dados/planilha_dbf.dbf') # Caminho e nome.
 ```
 
@@ -322,30 +322,25 @@ setclass | Classe do objeto (opcional). Default é um “data.frame”. Os valor
 which | Controla a importação de arquivos multi-objeto; como regra, import apenas retorna um único quadro de dados (use import_list para importar vários quadros de dados de um arquivo multi-objeto). Se o arquivo for um diretório compactado, que pode ser uma cadeia de caracteres especificando um nome de arquivo ou um número inteiro especificando qual arquivo (na ordem de classificação de localidade) extrair do diretório compactado. Para planilhas do Excel, isso pode ser usado para especificar um nome ou número de planilha. Para arquivos .Rdata, pode ser um nome de objeto. Para arquivos HTML, identifica qual tabela extrair (da ordem do documento). Ignorado de outra forma. Um valor de cadeia de caracteres será usado como uma expressão regular, de modo que o arquivo extraído seja a primeira correspondência da expressão regular com os nomes de arquivo no arquivo.  
 
 
-<Br>
-
-
-<Br>
+<Br><Br>
 
 
 ### Arquivos da web
 
 Pode-se usar o endereço do apresentado no navegador ou contido nas propriedades (clicar com botão direito). O endereço deverá ser inserido entre aspas nos argumentos `file` ou `path` da maioria das funções de leitura, como no exemplo abaixo:
 
-*read.csv2(file = 'https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv')*  
+```
+read.csv2(file = 'https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv')  
 
-Ou atribuir o link à um objeto e usa-lo na função.  
-*link <- 'https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv'*
+# Ou atribuir o link à um objeto e usa-lo na função.  
+link <- 'https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv'
 
-É possível também baixar o arquivo (inclusive imagens) por meio da seguinte função:  
-*download.file(url = 'https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv',* 
-              *destfile = 'dados/baixado_web.csv')*
+# É possível também baixar o arquivo (inclusive imagens) por meio da seguinte função:  
+download.file(url = 'https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv', 
+              destfile = 'dados/baixado_web.csv')
+```
 
-
-<Br>
-
-
-<Br>
+<Br><Br>
 
 
 ### Encoding  
@@ -373,7 +368,7 @@ base::iconv(x = cars$speed[1:3], # Dataframe ou vetor
 
 Pode-se também utilizar a função `base::enc2utf8` para transformar uma codificação em UTF-8, porém, deve ser sempre aplicado a um vetor (ou coluna do banco) de dados do tipo character, se for preciso, transformar antes com a função `base::as.character`
 
-```{r enc2utf8}
+```
 dados <- base::as.character(iris$Species)
 dados <- base::enc2utf8(dados)
 ```
