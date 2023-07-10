@@ -1,26 +1,33 @@
-# Manipulação dos dados
+# Datas
 
-## Datas
-
-### Funções básicas
+## Funções básicas
 
 Existem muitas funções para se criar variáveis com datas e horas e/ou que podem converter formatos diversos. O formato padrão reconhecido nativamente pelo R é por exemplo *2019-12-10*, portanto, para evitar manipulações, é importante tentar criar e utilizar bancos de dados neste padrão. Abaixo, seguem algumas das funções mais utilizadas:
 
-| Função | Argumentos | Utilização |
-| ------ | ---------- | ---------- |
-| base::Sys.Date() | Não há. | Fornece a data atual a partir da data do sistema |
-| base::Sys.time() | Não há. | Fornece a hora atual a partir da hora do sistema |
-| base::date() | Não há. | Fornece a data no formato: "Mon Oct 10 17:50:32 2022" |
-| base::as.Date() | Não há. | Converte um elemento de texto em character, ex: as.Date("2020-01-31")|
+| Função | Utilização |
+| ------ | ---------- |
+| base::Sys.Date() | Fornece a data atual a partir da data do sistema |
+| base::Sys.time() | Fornece a hora atual a partir da hora do sistema |
+| base::date() | Fornece a data no formato: "Mon Oct 10 17:50:32 2022" |
+| base::as.Date() |Converte um elemento de texto em character, ex: as.Date("2020-01-31")|
 | base::strftime() | tz = fuso horário | Converte um horário ajustando o fuso horário conforme valor de Olson name definido em tz|
-|base::OlsonNames() |Não há.|Nomes padronizados de fusos horários|
-|base::year() | Extrai o ano de uma data, ex: year("2020-01-31"), resulta 2020|
-|base::month() | Extrai o mês de uma data, ex: month("2020-01-31"), resulta 5|
-|months(as.Date("2020-05-01")) | Extrai o mês no formato string de uma data já formatada, ex: months(as.Date("2020-05-01")), resulta "maio"|
+|base::OlsonNames() |Nomes padronizados de fusos horários|
+|base::months() | Extrai o mês no formato string de uma data já formatada, ex: months(as.Date("2020-05-01")), resulta "maio"|
+|base::weekdays() | Retorna o dia da semana que corresponde à data, ex: base::weekdays(as.Date("2020-05-01")), resulta "sexta-feira"|
+| lubridate::ymd() | Converte o texto em data, mantendo o formato|
+| lubridate::dmy() | Converte o formato de data brasileiro para o formato padrão do sistema|
+| lubridate::dmy_h() | Retorna a data e horário|
+| lubridate::as_date() | Retorna a data independente do formato de entrada, ex: as_date("19/05/2022", format = "%d/%m/%Y"), mas se estiver na ordem correta (ex:20200225) ele identifica automaticamente e coloca no formato padrão, ex: as_date("20200226") resulta "2020-02-26". Se estiver fora da ordem esperada, ex: as_date("01031998", format = "%d%m%Y")|
+|lubridate::year(), month(), day() | Extraem o ano, o mês e o dia de uma data, respectivamente|
+|lubridate::wday() | Retorna o dia da semana para uma ou mais datas|
+|floor_date(), ceiling_date() | Arredondam uma data para o intervalo de tempo especificado (por exemplo, semana, mês, ano)|
+|data.table::year() | Extrai o ano de uma data, ex: year("2020-01-31"), resulta 2020|
+|data.table::month() | Extrai o mês de uma data, ex: month("2020-01-31"), resulta 5|
+
 
 <Br><Br>
 
-### Formatar data e hora
+## Formatar data e hora
 
 | Código | Exemplo | Definição | 
 |:-:|:-:|-------|
@@ -63,10 +70,12 @@ Existem muitas funções para se criar variáveis com datas e horas e/ou que pod
 
 <Br><Br>
 
-### Converter data
+## Converter data
 
-#### base::as.date()
+### base::as.date()
 É importante que os códigos de definição (m, B, etc) correspondam ao formato do elemento que será convertido, ex: se "Nov 03 21", então a conversão precisa de '%B %d %y', porque 'B' é o código para mês "escrito", não poderia ser 'm' que é para mês número. O mesmo se aplica a todos os códigos.
+
+> Exemplo
 
 ```{r as.date}
 list(base::as.Date('03/11/2021',  format = '%d/%m/%Y'),
@@ -79,9 +88,11 @@ O vetor pode estar com classe definida como "character", logo, se o formato esti
 
 <Br>
 
-#### base::strptime()
+### base::strptime()
 
 Converte o vetor para data e define a "time zone".
+
+> Exemplo
 
 ```{r strptime}
 base::strptime('03/11/2021', format = '%d/%m/%Y')
@@ -89,43 +100,47 @@ base::strptime('03/11/2021', format = '%d/%m/%Y')
 
 <Br>
 
-#### base::format()
+### base::format()
 
 Converte o formato de um elemento que já definido por classe "date".
 
+> Exemplo
+
 ```{r format}
-data <- as.Date('03/11/2021', format = '%d/%m/%Y')
+data <- base::as.Date('03/11/2021', format = '%d/%m/%Y')
 print(data)
 format(data, '%B-%d-%Y')
 ```
 
 <Br><Br>
 
-### Operações com datas
+## Operações com datas
 
-#### Somar à data
+### Somar à data
 
 Operações como soma ou subtração de datas não são recomendadas, mas podem ser feitas. Qualquer valor numérico adicionado à uma data é compreendido como "dia".
 
+> Exemplo
+
 ```{r soma_data}
-data <- as.Date("2022-01-01")
+data <- base::as.Date("2022-01-01")
 data
 data + 365
 data + 28
 ```
 
-#### Diferenças entre datas
+### Diferenças entre datas
 
 A função difftime() identifica a diferença entre datas, mas somente nas opções "units = c("auto", "secs", "mins", "hours", "days", "weeks")". Para meses ou anos é preciso realizar outros ajustes.
 
 **Dias e semanas:**
 
 ```{r diff_data1}
-data_inicio <- as.Date("2022-01-01")
-data_fim <- as.Date("2022-07-13")
+data_inicio <- base::as.Date("2022-01-01")
+data_fim <- base::as.Date("2022-07-13")
 
-difftime(time1 = data_fim, time2 = data_inicio) #por padrão o resultado é em dias
-difftime(time1 = data_fim, time2 = data_inicio, units = 'week') #em semanas
+base::difftime(time1 = data_fim, time2 = data_inicio) #por padrão o resultado é em dias
+base::difftime(time1 = data_fim, time2 = data_inicio, units = 'week') #em semanas
 ```
 
 Para obter o resultado numérico (sem a frase), utilizar a função as.numeric().  
@@ -135,10 +150,10 @@ Para obter o resultado numérico (sem a frase), utilizar a função as.numeric()
 **Meses e anos:**
 
 ```
-data_inicio <- as.Date('2022-01-01')
-data_fim <- as.Date('2023-07-01')
+data_inicio <- base::as.Date('2022-01-01')
+data_fim <- base::as.Date('2023-07-01')
 
-meses_diff <- 12 * (year(data_fim) - year(data_inicio)) + (month(data_fim) - month(data_inicio))
+meses_diff <- 12 * (lubridate::year(data_fim) - lubridate::year(data_inicio)) + (lubridate::month(data_fim) - lubridate::month(data_inicio))
 anos_diff <- meses_diff / 12
 
 meses_diff
@@ -151,13 +166,26 @@ anos_diff
 
 <Br>
 
-#### Sequência de datas
+**Idade**
+
+```
+base::as.integer(Sys.Date() - data_nasc)
+base::floor(idade_dias / 365.25)
+```
+
+A função base::floor() arredonda um número para baixo, para o inteiro mais próximo. Por exemplo, floor(3.7) resulta em 3 e floor(4.2) resulta em 4. É utilizado para arredondar para o valor inferior mais próximo, que é ideal para se verificar somente os anos de idade completa.
+
+<Br>
+
+### Sequência de datas
+
+Realiza uma sequência de datas a partir de uma data inicial até alcançar uma data final, que pode ser definida como uma data específicia ou como a data atual ou do sistema.
 
 **Método 1: função base::seq()**
 
 ```
 data_inicio <- as.Date("2020-01-01")
-seq(data_inicio,  # data inicial já deve estar com classe "date"
+base::seq(data_inicio,  # data inicial já deve estar com classe "date"
     by="30 days", # incremento à data inicial
     length=3)     # comprimento do vetor, ou seja, quantas vezes o incremento deve ser aplicado
     
@@ -171,9 +199,23 @@ seq(data_inicio,  # data inicial já deve estar com classe "date"
 Novamente, a variável de data aqui já deverá estar no formato "Date".
 
 ```
-data_inicio <- as.Date('2022-01-01')
-seq.Date(from = data_inicio, to = Sys.Date(), by = "3 months")
+data_inicio <- base::as.Date('2022-01-01')
+base::seq.Date(from = data_inicio, to = Sys.Date(), by = "3 months")
 ```
 
+<Br>
+
+### Semana epidemiológica
+
+Método mais fácil hoje para obter essa informação é utilizando a função lubridate::epiweek().
+
+> Exemplo
+
+```
+data <- base::seq.Date(from = as.Date("2020-01-01"),
+                 to = as.Date("2020-04-30"), by = "day")
+
+lubridate::epiweek(data)
+```
 
 

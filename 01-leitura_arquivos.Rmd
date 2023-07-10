@@ -556,7 +556,7 @@ Particularmente tenho maior interesse na possibilidade de ler e agrupar diversos
 A ideia aqui é fazer a leitura dos arquivos de interesse e juntá-los verticalmente compondo um dataframe final, assim, o método é dividido em três partes:  
 1. Listar os arquivos de interesse presentes no diretório.
 2. Fazer leitura múltipla utilizando a função base::lapply e base::read.csv2 (pode ser outra) ([documentação base::lapply](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/lapply)).
-3. Juntar os dataframes com base::Reduce e base::rbind.dataframe ([ocumentação base::reduce()](https://www.rdocumentation.org/packages/purrr/versions/0.2.5/topics/reduce))  
+3. Juntar os dataframes com base::Reduce e base::rbind.dataframe ([documentação base::reduce](https://www.rdocumentation.org/packages/purrr/versions/0.2.5/topics/reduce))  
 
 <Br>
 

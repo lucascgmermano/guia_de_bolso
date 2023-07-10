@@ -5,16 +5,19 @@
 \documentclass[
 ]{book}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -44,13 +47,13 @@
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
 \newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
 \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\BuiltInTok}[1]{#1}
 \newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
@@ -58,7 +61,7 @@
 \newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
 \newcommand{\ExtensionTok}[1]{#1}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\ImportTok}[1]{#1}
 \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
@@ -67,7 +70,7 @@
 \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
 \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
 \newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
 \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
@@ -108,7 +111,7 @@
 \bibliographystyle{plainnat}
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={Comandos básicos do R: Guia de bolso},
   pdfauthor={Lucas C. Germano},
@@ -117,7 +120,7 @@
 
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{Fri Oct 28 10:59:33 2022}
+\date{Mon Jul 10 15:00:18 2023}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -163,22 +166,24 @@ Abaixo são transcritos alguns comandos e métodos para se definir e conhecer o 
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4444}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5556}}@{}}
 \caption{Comandos de definição e manipulação de diretórios e arquivos.}\tabularnewline
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Comando
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endfirsthead
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Comando
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 base::setwd() & Define diretório de trabalho. \\
 base::getwd() & Identifica diretório ativo. \\
 base::dir() & Retorna todo o conteúdo do diretório ativo. \\
@@ -194,23 +199,16 @@ base::file.remove() & Deleta um arquivo, ex. file.remove(``csv\_file.csv''). Pod
 base::file.rename() & Renomear um arquivo. \\
 base::list.files() & Lista os arquivos presentes no diretório. \\
 here::here() & Cria um caminho relativo para um arquivo no diretório de trabalho, preferencialmente em um projeto, o que facilita ser reproduzido em diversas máquinas, ex. here(`arquivos',`dados.csv'). É similar ao base::file.path(), cuja sintaxe é a mesma. \\
-\bottomrule()
 \end{longtable}
 
 \textbf{Exemplo: list.files()}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{list.files}\NormalTok{(}\AttributeTok{path =} \StringTok{\textquotesingle{}dados/\textquotesingle{}}\NormalTok{,      }\CommentTok{\# Caminho do arquivo}
-           \AttributeTok{pattern =} \StringTok{\textquotesingle{}.ods\textquotesingle{}}\NormalTok{,     }\CommentTok{\# Formato especificado}
-           \AttributeTok{full.names =} \ConstantTok{FALSE}\NormalTok{,   }\CommentTok{\# Somente nome}
-           \AttributeTok{recursive =} \ConstantTok{TRUE}\NormalTok{,     }\CommentTok{\# Pesquisa em subpastas}
-           \AttributeTok{ignore.case =} \ConstantTok{FALSE}\NormalTok{)  }\CommentTok{\# Ignora tamanhos das letras}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-## [1] "planilha_ods.ods"
+list.files(path = 'dados/',      # Caminho do arquivo
+           pattern = '.ods',     # Formato especificado
+           full.names = FALSE,   # Somente nome
+           recursive = TRUE,     # Pesquisa em subpastas
+           ignore.case = FALSE)  # Ignora tamanhos das letras
 \end{verbatim}
 
 \hypertarget{leitura-de-arquivos}{%
@@ -225,20 +223,9 @@ Faz a leitura de um arquivo em formado de tabela e cria um data frame a partir d
 \textbf{Exemplo}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dados }\OtherTok{\textless{}{-}} \FunctionTok{read.csv2}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/dados.csv\textquotesingle{}}\NormalTok{)}
-\FunctionTok{head}\NormalTok{(dados, }\DecValTok{2}\NormalTok{)          }\CommentTok{\# Exibir as 2 primeiras linhas dos dados.}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-##   X       data code_mn       muni   faixa casos obitos masc fem  ano mes semana
-## 1 1 2020-01-01  353070 Mogi Guaçu 30 a 39     1      0    0   1 2020   1      1
-## 2 2 2020-01-20  353070 Mogi Guaçu 50 a 59     1      0    1   0 2020   1      3
-##      pop
-## 1 150713
-## 2 150713
+dados <- read.csv2(file = 'dados/dados.csv')
+head(dados, 2)          # Exibir as 2 primeiras linhas dos dados.
 \end{verbatim}
 
 \begin{quote}
@@ -248,14 +235,16 @@ Faz a leitura de um arquivo em formado de tabela e cria um data frame a partir d
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 file & Nome do arquivo que será lido, contendo o caminho do diretório. \\
 header & Logical. Indica se o arquivo contém os nomes das colunas na primeira linha. \\
 sep & Tipo de separador de campo. Default é = ``;''. \\
@@ -268,7 +257,6 @@ stringsAsFactors & Logical. Se TRUE os vetores character serão convertidos para
 fileEncoding & Character string. Define o encoding que será usado. Ex. fileEnconding = ``UTF-8'' ou ``Latin-1'' ou ``ISO-8859-1''. \\
 skipNull & Logical. Se TRUE os nulos (NA) devem ser ignorados. \\
 colClasses & character. Um vetor de classes referentes as colunas. Valores possíveis são NA (default, quando type.convert é usado), ``NULL'' (quando a coluna é pulada), um vetor atomico de classes(logical, integer, numeric, complex, character, raw), or ``factor'', ``Date'' or ``POSIXct''. \\
-\bottomrule()
 \end{longtable}
 
 \begin{itemize}
@@ -286,47 +274,26 @@ O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados ret
 \textbf{Exemplo 1}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_csv2}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/dados.csv\textquotesingle{}}\NormalTok{,  }\CommentTok{\# Caminho e arquivo}
-                          \AttributeTok{col\_select =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{4}\SpecialCharTok{:}\DecValTok{7}\NormalTok{),     }\CommentTok{\# Seleção de colunas}
-                          \AttributeTok{guess\_max =} \DecValTok{1000}\NormalTok{,          }\CommentTok{\# Máximo de linhas utilizadas para adivinhar classes}
-                          \AttributeTok{skip\_empty\_rows =} \ConstantTok{TRUE}\NormalTok{)    }\CommentTok{\# Pular linhas vazias}
-\FunctionTok{head}\NormalTok{(dados, }\DecValTok{2}\NormalTok{)                                       }
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-## # A tibble: 2 x 5
-##   data       muni       faixa   casos obitos
-##   <date>     <chr>      <chr>   <dbl>  <dbl>
-## 1 2020-01-01 Mogi Guaçu 30 a 39     1      0
-## 2 2020-01-20 Mogi Guaçu 50 a 59     1      0
+dados <- readr::read_csv2(file = 'dados/dados.csv',  # Caminho e arquivo
+                          col_select = c(2,4:7),     # Seleção de colunas
+                          guess_max = 1000,          # Máximo de linhas utilizadas para adivinhar classes
+                          skip_empty_rows = TRUE)    # Pular linhas vazias
 \end{verbatim}
 
 \begin{quote}
 \textbf{Exemplo 2}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ readr}\SpecialCharTok{::}\FunctionTok{read\_csv2}\NormalTok{(}
-              \AttributeTok{file =} \StringTok{\textquotesingle{}dados/dados.csv\textquotesingle{}}\NormalTok{,   }\CommentTok{\# Caminho e arquivo}
-              \AttributeTok{guess\_max =} \DecValTok{1000}\NormalTok{,           }\CommentTok{\# Linhas utilizadas para classes}
-              \AttributeTok{skip\_empty\_rows =} \ConstantTok{TRUE}\NormalTok{,     }\CommentTok{\# Pular linhas vazias}
-              \AttributeTok{skip =} \DecValTok{1}\NormalTok{,                   }\CommentTok{\# Pular primeira linha}
-              \AttributeTok{col\_names =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}e\textquotesingle{}}\NormalTok{),   }\CommentTok{\# Definir nomes das colunas}
-              \AttributeTok{col\_select =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}a\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}c\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}d\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}e\textquotesingle{}}\NormalTok{))  }\CommentTok{\# Selecionar colunas}
-\FunctionTok{head}\NormalTok{(dados, }\DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-## # A tibble: 2 x 5
-##       a b               c d          e      
-##   <dbl> <date>      <dbl> <chr>      <chr>  
-## 1     1 2020-01-01 353070 Mogi Guaçu 30 a 39
-## 2     2 2020-01-20 353070 Mogi Guaçu 50 a 59
+dados <- readr::read_csv2(
+              file = 'dados/dados.csv',    # Caminho e arquivo
+              guess_max = 1000,            # Linhas utilizadas para classes
+              col_types = c(X = "double"), # A primeira coluna será double. Um vetor com tipos de classes.
+              skip_empty_rows = TRUE,      # Pular linhas vazias
+              skip = 1,                    # Pular primeira linha
+              col_names = c('a','b','c','d','e'),   # Definir nomes das colunas
+              col_select = c('a','b','c','d','e'))  # Selecionar colunas
 \end{verbatim}
 
 \begin{quote}
@@ -336,14 +303,16 @@ O objetivo do readr é fornecer uma maneira rápida e amigável de ler dados ret
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 file & Nome do arquivo que será lido, contendo o caminho do diretório (admite http). Arquivos terminados em .gz, .bz2, .xz, ou .zip serão automaticamente descomprimidos. \\
 col\_names & TRUE ou FALSE ou um vetor tipo caracter com nomes das colunas. Se TRUE, a primeira linha será usada para nomear as colunas. Se FALSE, nomes das colunas serão gerados automaticamente (X1, X2, X3 etc). Se col\_names for um vetor com nomes, os valores serão usados como nomes das colunas, mas a primeira linha será considerada no banco (nomes errados), assim, pode-se usar o argumento renomeando as colunas, mas fazendo a leitura sem considerar a primeira linha, com {[}-1,{]} ou skip = 1. Colunas sem nome (NA) receberão nomes fictícios. \\
 col\_types & Se for NULL, todos as classes de coluna serão imputadas a partir do máximo de linhas lidas (guess\_max) intercaladas por todo o arquivo. Se a imputação falhar, você precisará aumentar o guess\_max ou fornecer os tipos corretos você mesmo. As especificações de coluna criadas por list() ou cols() devem conter uma especificação de coluna para cada coluna. Se você quiser ler apenas um subconjunto das colunas, use cols\_only(). Para compactar um vetor com as classes, usar as letras c = character, i = integer, n = number, d = double, l = logical, f = factor, D = date, T = date time, t = time, ? = guess. Por padrão, a definição de classe é automática. \\
@@ -356,7 +325,6 @@ n\_max & Número máximo de linhas a ler. \\
 guess\_max & Número máximo de linhas a serem usadas para adivinhar os tipos de coluna. \\
 show\_col\_types & Se FALSE, não mostre os tipos de coluna adivinhados. Se TRUE sempre mostra os tipos de coluna, mesmo que sejam fornecidos. Se NULL (o padrão) mostrar apenas os tipos de coluna se eles não forem fornecidos explicitamente pelo argumento col\_types. \\
 skip\_empty\_rows & As linhas em branco devem ser ignoradas completamente? ou seja, se esta opção for TRUE, as linhas em branco não serão representadas. Se for FALSE, eles serão representados por valores NA em todas as colunas. \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{data.tablefread}{%
@@ -368,24 +336,15 @@ Similar ao read.table e read.csv, só que mais rápido e conveniente por ler arq
 \textbf{Exemplo}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/dados.csv\textquotesingle{}}\NormalTok{,            }\CommentTok{\# Caminho do arquivo}
-                           \AttributeTok{select =} \FunctionTok{c}\NormalTok{(}\StringTok{"data"}\NormalTok{,}\StringTok{"muni"}\NormalTok{,}\StringTok{"casos"}\NormalTok{),   }\CommentTok{\# Seleciona colunas}
-                           \AttributeTok{colClasses =} \FunctionTok{c}\NormalTok{(}\AttributeTok{data =} \StringTok{"Date"}\NormalTok{,        }\CommentTok{\# Define classes}
-                                          \AttributeTok{muni =} \StringTok{"character"}\NormalTok{,}
-                                          \AttributeTok{casos =} \StringTok{"integer"}\NormalTok{),}
-                           \AttributeTok{col.names =} \FunctionTok{c}\NormalTok{(}\StringTok{"data.in.sin"}\NormalTok{,         }\CommentTok{\# Renomeia colunas}
-                                         \StringTok{"municipio"}\NormalTok{, }
-                                         \StringTok{"num\_casos"}\NormalTok{)) }
-\FunctionTok{head}\NormalTok{(dados, }\DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-##    data.in.sin  municipio num_casos
-## 1:  2020-01-01 Mogi Guaçu         1
-## 2:  2020-01-20 Mogi Guaçu         1
+dados <- data.table::fread(file = 'dados/dados.csv',            # Caminho do arquivo
+                           select = c("data","muni","casos"),   # Seleciona colunas
+                           colClasses = c(data = "Date",        # Define classes
+                                          muni = "character",
+                                          casos = "integer"),
+                           col.names = c("data.in.sin",         # Renomeia colunas
+                                         "municipio", 
+                                         "num_casos")) 
 \end{verbatim}
 
 \begin{quote}
@@ -395,14 +354,16 @@ Similar ao read.table e read.csv, só que mais rápido e conveniente por ler arq
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 file & Nome do arquivo no diretório de trabalho, caminho para o arquivo ou um URL começando http:, etc. Arquivos compactados `.gz' e `.bz2' são suportados se o pacote R.utils estiver instalado. \\
 sep & O separador entre colunas. \\
 nrows & Número máximo de linhas a serem lidas. \\
@@ -423,7 +384,6 @@ showProgress & TRUE exibe o progresso no console se o ETA for maior que 3 segund
 data.table & TRUE retorna um data.table (default). FALSE retorna um data.frame. O default para este argumento pode ser modificado com opcões(datatable.fread.datatable=FALSE). \\
 nThread & Número de threads a serem usados. Experimente para ver o que funciona melhor para seus dados em seu hardware. \\
 KeepLeadingZeros & Se for TRUE, dados numéricos com zeros à esquerda seão lidos como caracterer, caso contrário, os zeros à esquerda serão removidos e convertidos em numéricos. \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{readodsread_ods}{%
@@ -435,14 +395,12 @@ Função para leitura de arquivos no formato .ods do Libre Office. A leitura é 
 \textbf{Exemplo}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ readODS}\SpecialCharTok{::}\FunctionTok{read\_ods}\NormalTok{(}\AttributeTok{path =} \StringTok{\textquotesingle{}dados/planilha\_ods.ods\textquotesingle{}}\NormalTok{,  }\CommentTok{\# Caminho do arquivo}
-                           \AttributeTok{col\_names =} \ConstantTok{FALSE}\NormalTok{,                }\CommentTok{\# Primeira linha contém nomes das colunas}
-                           \AttributeTok{sheet =} \DecValTok{1}\NormalTok{,                        }\CommentTok{\# Seleção da planilha}
-                           \AttributeTok{range =} \StringTok{"A7:B14"}\NormalTok{)                 }\CommentTok{\# Intervalo para leitura}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+dados <- readODS::read_ods(path = 'dados/planilha_ods.ods',  # Caminho do arquivo
+                           col_names = FALSE,                # Primeira linha contém nomes das colunas
+                           sheet = 1,                        # Seleção da planilha
+                           range = "A7:B14")                 # Intervalo para leitura
+\end{verbatim}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -451,14 +409,16 @@ Função para leitura de arquivos no formato .ods do Libre Office. A leitura é 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 path & Caminho do arquivo ods. \\
 sheet & Planilha que será lida. Default e 1. Pode ser o nome da planilha (ex. ``semana1'') ou um número correspondente a planilha. \\
 col\_names & Indica se a primeira linha contem os nomes das colunas. \\
@@ -467,7 +427,6 @@ formula\_as\_formula & Exibir fórmulas como fórmulas ``SUM(A1:A3)'' ou como va
 range & Seleção de retângulo usando intervalo de células semelhante ao Excel, como intervalo = ``D12:F15'' ou intervalo = ``R1C12:R6C15''. O processamento de intervalo de células é tratado pelo pacote cellranger. \\
 row\_names & Indica se o arquivo contém os nomes das linhas na primeira coluna. \\
 strings\_as\_factors & Logical. Se variáveis tipo character serão convertidas a fatores. \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{readxlread_excel}{%
@@ -479,15 +438,13 @@ Leitura de arquivos com extensão .xls e xlsx, lidos pelo Excel e Libre Office. 
 \textbf{Exemplo}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{   dados }\OtherTok{\textless{}{-}}\NormalTok{ readxl}\SpecialCharTok{::}\FunctionTok{read\_excel}\NormalTok{(}\AttributeTok{path =} \StringTok{"dados/planilha\_xlsx.xlsx"}\NormalTok{,}
-                   \AttributeTok{sheet =} \DecValTok{1}\NormalTok{,}
-                   \AttributeTok{col\_names =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}vel\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}dist\textquotesingle{}}\NormalTok{),}
-                   \AttributeTok{col\_types =} \FunctionTok{c}\NormalTok{(}\StringTok{"numeric"}\NormalTok{,}\StringTok{"numeric"}\NormalTok{),}
-                   \AttributeTok{range =} \StringTok{"A3:B19"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+   dados <- readxl::read_excel(path = "dados/planilha_xlsx.xlsx",
+                   sheet = 1,                          # seleciona a planilha 1
+                   col_names = c('vel','dist'),        # seleciona colunas (não renomeia)
+                   col_types = c("numeric","numeric"), # define a classe
+                   range = "A3:B19")                   # define intervalo de leitura da planilha
+\end{verbatim}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -496,14 +453,16 @@ Leitura de arquivos com extensão .xls e xlsx, lidos pelo Excel e Libre Office. 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 path & Caminho para o arquivo xls/xlsx. \\
 sheet & Planilha a ser lida. Aceita o nome da planilha ou o número correspondente. Default é a primeira planilha. \\
 reange & Intervalo de células para leitura, ex. ``B3:D87'' ou ``Orçamento!B2:G14''. \\
@@ -513,7 +472,6 @@ na & Valores ausentes. Por default o readxl converte celulas em branco para valo
 skip & Número de linhas para pular antes de iniciar a leitura dos dados. \\
 n\_max & Número máximo de linhas a serem lidas. \\
 guess\_max & Máximo de linhas utilizados para adivinhar classes das colunas. \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{foreignread.dbf}{%
@@ -525,11 +483,37 @@ A função le arquivos .dbf como dataframe, convertendo por default campos chara
 \textbf{Exemplo}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ foreign}\SpecialCharTok{::}\FunctionTok{read.dbf}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/planilha\_dbf.dbf\textquotesingle{}}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+dados <- foreign::read.dbf(file = 'dados/planilha_dbf.dbf')
+\end{verbatim}
+
+\begin{quote}
+\textbf{Argumentos principais}
+\end{quote}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Argumento
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Definição
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+file & O caminho para o arquivo DBF que você deseja ler. \\
+as.is & Um valor lógico indicando se as strings devem ser retornadas como estão (sem conversão para fatores ou caracteres). \\
+as.data.frame & Um valor lógico indicando se o resultado deve ser convertido em um objeto de classe data.frame. \\
+NA & Um valor para representar valores ausentes no arquivo DBF. \\
+encoding & A codificação dos caracteres no arquivo DBF. \\
+convert.factors & Um valor lógico indicando se as colunas de fatores devem ser convertidas para caracteres. \\
+row.names & Especifica se os nomes das linhas devem ser incluídos no resultado. \\
+blank.lines.skip & Um valor lógico indicando se linhas em branco devem ser ignoradas. \\
+trim.blanks & Um valor lógico indicando se espaços em branco devem ser removidos das strings. \\
+\end{longtable}
 
 \hypertarget{rioimport}{%
 \subsection{rio::import()}\label{rioimport}}
@@ -540,11 +524,9 @@ O rio é um pacote que vem com a iniciativa de simplificar o procedimento de imp
 \textbf{Exemplo}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ rio}\SpecialCharTok{::}\FunctionTok{import}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/planilha\_dbf.dbf\textquotesingle{}}\NormalTok{) }\CommentTok{\# Caminho e nome.}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+dados <- rio::import(file = 'dados/planilha_dbf.dbf') # Caminho e nome.
+\end{verbatim}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -553,19 +535,20 @@ O rio é um pacote que vem com a iniciativa de simplificar o procedimento de imp
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 file & Caminho e nome do arquivo. Pode ter extensão .zip ou .tar. \\
 format & Formato do arquivo. A definição é opcional, mas pode ser ``,'', ``;'', '' \\
 setclass & Classe do objeto (opcional). Default é um ``data.frame''. Os valores permitidos incluem ``tbl\_df'', ``tbl'' ou ``tibble'' (se estiver usando dplyr) ou ``data.table'' (se estiver usando data.table). Outros valores são ignorados, de modo que um data.frame é retornado. \\
 which & Controla a importação de arquivos multi-objeto; como regra, import apenas retorna um único quadro de dados (use import\_list para importar vários quadros de dados de um arquivo multi-objeto). Se o arquivo for um diretório compactado, que pode ser uma cadeia de caracteres especificando um nome de arquivo ou um número inteiro especificando qual arquivo (na ordem de classificação de localidade) extrair do diretório compactado. Para planilhas do Excel, isso pode ser usado para especificar um nome ou número de planilha. Para arquivos .Rdata, pode ser um nome de objeto. Para arquivos HTML, identifica qual tabela extrair (da ordem do documento). Ignorado de outra forma. Um valor de cadeia de caracteres será usado como uma expressão regular, de modo que o arquivo extraído seja a primeira correspondência da expressão regular com os nomes de arquivo no arquivo. \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{arquivos-da-web}{%
@@ -573,14 +556,16 @@ which & Controla a importação de arquivos multi-objeto; como regra, import ape
 
 Pode-se usar o endereço do apresentado no navegador ou contido nas propriedades (clicar com botão direito). O endereço deverá ser inserido entre aspas nos argumentos \texttt{file} ou \texttt{path} da maioria das funções de leitura, como no exemplo abaixo:
 
-\emph{read.csv2(file = `\url{https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv}')}
+\begin{verbatim}
+read.csv2(file = 'https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv')  
 
-Ou atribuir o link à um objeto e usa-lo na função.\\
-\emph{link \textless- `\url{https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv}'}
+# Ou atribuir o link à um objeto e usa-lo na função.  
+link <- 'https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv'
 
-É possível também baixar o arquivo (inclusive imagens) por meio da seguinte função:\\
-\emph{download.file(url = `\url{https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv}',}
-\emph{destfile = `dados/baixado\_web.csv')}
+# É possível também baixar o arquivo (inclusive imagens) por meio da seguinte função:  
+download.file(url = 'https://raw.githubusercontent.com/seade-R/dados-covid-sp/master/data/dados_covid_sp.csv', 
+              destfile = 'dados/baixado_web.csv')
+\end{verbatim}
 
 \hypertarget{encoding}{%
 \subsection{Encoding}\label{encoding}}
@@ -623,12 +608,10 @@ Verificar encoding de um vetor
 
 Pode-se também utilizar a função \texttt{base::enc2utf8} para transformar uma codificação em UTF-8, porém, deve ser sempre aplicado a um vetor (ou coluna do banco) de dados do tipo character, se for preciso, transformar antes com a função \texttt{base::as.character}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{as.character}\NormalTok{(iris}\SpecialCharTok{$}\NormalTok{Species)}
-\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{enc2utf8}\NormalTok{(dados)}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+dados <- base::as.character(iris$Species)
+dados <- base::enc2utf8(dados)
+\end{verbatim}
 
 \begin{quote}
 \textbf{Encoding via Import Dataset}
@@ -643,28 +626,17 @@ Pode-se também utilizar a função \texttt{base::enc2utf8} para transformar uma
 \hypertarget{utilswrite.csv2}{%
 \subsection{utils::write.csv2()}\label{utilswrite.csv2}}
 
-Função para salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula. Um ponto negativo é que essa função, ao salvar o arquivo, cria uma coluna com nomes das linhas (em números) (\href{https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/write.table}{documentação}).
+Função para salvar um arquivo de dados que foi trabalhado no R em diferentes formatos, no caso, separado por ponto e vírgula. Um ponto negativo é que essa função, ao salvar o arquivo, cria uma coluna com nomes das linhas (em números), para que isso não ocorra, deve-se utilizar o argumento row.names = FALSE. (\href{https://www.rdocumentation.org/packages/utils/versions/3.6.2/topics/write.table}{documentação}).
 
 \begin{quote}
 \textbf{Exemplo}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{write.csv2}\NormalTok{(}\AttributeTok{x =}\NormalTok{ iris,                }\CommentTok{\# Dados ativos}
-           \AttributeTok{file =} \StringTok{\textquotesingle{}dados/iris.csv\textquotesingle{}}\NormalTok{, }\CommentTok{\# Caminho e nome do arquivo}
-           \AttributeTok{fileEncoding =} \StringTok{"UTF{-}8"}\NormalTok{)  }\CommentTok{\# Encoding}
-
-\FunctionTok{read.csv2}\NormalTok{(}\StringTok{\textquotesingle{}dados/iris.csv\textquotesingle{}}\NormalTok{, }\AttributeTok{nrows =} \DecValTok{4}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-##   X Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1 1          5.1         3.5          1.4         0.2  setosa
-## 2 2          4.9         3.0          1.4         0.2  setosa
-## 3 3          4.7         3.2          1.3         0.2  setosa
-## 4 4          4.6         3.1          1.5         0.2  setosa
+write.csv2(x = iris,                # Dados ativos
+           file = 'dados/iris.csv', # Caminho e nome do arquivo
+           fileEncoding = "UTF-8", 
+           row.names = FALSE)       # Encoding
 \end{verbatim}
 
 \begin{quote}
@@ -674,14 +646,16 @@ Função para salvar um arquivo de dados que foi trabalhado no R em diferentes f
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 x & Objeto a ser escrito, prefereincialmente uma matriz ou data.frame. \\
 file & Nome do arquivo criado (pode conter o caminho) utilizando aspas '' ``. \\
 append & Logical. Se TRUE os dados serão adicionados à última linha de um arquivo já existente, que deve ter o nome descrito em file, se FALSE qualquer arquivo com o nome descrito será sobrescrito. \\
@@ -690,7 +664,6 @@ dec & String para definir divisor de decimal, ex. dec = ``.''. \\
 col.names & Logical. Indica se os nomes das colunas de x devem ser escritos junto com x, ou um vetor de caracteres dos nomes das colunas a serem escritos. \\
 row.names & Logical. Cria coluna com nomes para linhas. \\
 fileEncoding & String. Declara a codificação a ser usada para que possam ser recodificados à medida que são gravados. \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{readrwrite_csv2}{%
@@ -702,17 +675,8 @@ fileEncoding & String. Declara a codificação a ser usada para que possam ser r
 \textbf{Exemplo}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{readr}\SpecialCharTok{::}\FunctionTok{write\_csv2}\NormalTok{(}\AttributeTok{x =}\NormalTok{ iris, }\AttributeTok{file =} \StringTok{\textquotesingle{}dados/iris.csv\textquotesingle{}}\NormalTok{)}
-\FunctionTok{read.csv2}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/iris.csv\textquotesingle{}}\NormalTok{, }\AttributeTok{nrows =} \DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1          5.1         3.5          1.4         0.2  setosa
-## 2          4.9         3.0          1.4         0.2  setosa
+readr::write_csv2(x = iris, file = 'dados/iris.csv')
 \end{verbatim}
 
 \begin{quote}
@@ -722,19 +686,20 @@ fileEncoding & String. Declara a codificação a ser usada para que possam ser r
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 x & Um data frame ou tibble a ser escrito. \\
 file & Caminho, nome do arquivo e extensão. \\
 append & Se FALSE, irá sobrescrever um arquivo existente, caso exista. Se TRUE, será salvo a partir da última linha de um arquivo existente. \\
 col\_names & Default TRUE. Primeira linha como nomes das colunas. Se FALSE, nomes das colunas não serão incluídos. \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{writexlwrite_xlsx}{%
@@ -746,45 +711,25 @@ Grava um dataframe em um arquivo xlsx. Para criar um xlsx com (várias) sheets n
 \textbf{Exemplo 1}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{writexl}\SpecialCharTok{::}\FunctionTok{write\_xlsx}\NormalTok{(}\AttributeTok{x =}\NormalTok{ iris,}
-                    \AttributeTok{path =} \StringTok{\textquotesingle{}dados/iris.xlsx\textquotesingle{}}\NormalTok{,}
-                    \AttributeTok{col\_names =} \ConstantTok{TRUE}\NormalTok{,}
-                    \AttributeTok{format\_headers =} \ConstantTok{TRUE}\NormalTok{)}
-\NormalTok{readxl}\SpecialCharTok{::}\FunctionTok{read\_excel}\NormalTok{(}\StringTok{\textquotesingle{}dados/iris.xlsx\textquotesingle{}}\NormalTok{, }\AttributeTok{n\_max =} \DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-## # A tibble: 2 x 5
-##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-##          <dbl>       <dbl>        <dbl>       <dbl> <chr>  
-## 1          5.1         3.5          1.4         0.2 setosa 
-## 2          4.9         3            1.4         0.2 setosa
+writexl::write_xlsx(x = iris,
+                    path = 'dados/iris.xlsx',
+                    col_names = TRUE,      # Primeira linha como nome das colunas
+                    format_headers = TRUE) # Inserir nome das colunas
+readxl::read_excel('dados/iris.xlsx', n_max = 2)
 \end{verbatim}
 
 \begin{quote}
 \textbf{Exemplo 2}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{writexl}\SpecialCharTok{::}\FunctionTok{write\_xlsx}\NormalTok{(}\AttributeTok{path =} \StringTok{"dados/conjuntodadosnativos.xlsx"}\NormalTok{,}
-           \AttributeTok{x =} \FunctionTok{list}\NormalTok{(}\AttributeTok{sheet1=}\NormalTok{iris, }\AttributeTok{sheet2=}\NormalTok{cars, }\AttributeTok{sheet3=}\NormalTok{mtcars))}
-
-\NormalTok{readxl}\SpecialCharTok{::}\FunctionTok{read\_excel}\NormalTok{(}\AttributeTok{path =} \StringTok{\textquotesingle{}dados/conjuntodadosnativos.xlsx\textquotesingle{}}\NormalTok{,}
-                   \AttributeTok{sheet =} \DecValTok{3}\NormalTok{, }
-                   \AttributeTok{n\_max =} \DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-## # A tibble: 2 x 11
-##     mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
-##   <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-## 1    21     6   160   110   3.9  2.62  16.5     0     1     4     4
-## 2    21     6   160   110   3.9  2.88  17.0     0     1     4     4
+writexl::write_xlsx(path = "dados/conjuntodadosnativos.xlsx",
+           x = list(sheet1=iris, sheet2=cars, sheet3=mtcars))
+
+readxl::read_excel(path = 'dados/conjuntodadosnativos.xlsx',
+                   sheet = 3, 
+                   n_max = 2)
 \end{verbatim}
 
 \begin{quote}
@@ -794,19 +739,20 @@ Grava um dataframe em um arquivo xlsx. Para criar um xlsx com (várias) sheets n
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 x & Data frame ou lista de data frames que serão salvos em planilhas (sheets). \\
 path & Nome do arquuivo criado. \\
 col\_names & Se TRUE, primera linha traz os nomes das colunas. \\
 format\_headers & Inserir nomes das colunas. \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{data.tablefwrite}{%
@@ -818,16 +764,14 @@ Função para escrever .csv muito mais rápido (por exemplo, 2 segundos versus 1
 \textbf{Exemplo}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dados }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(}\AttributeTok{file =} \StringTok{\textquotesingle{}dados/dados.csv\textquotesingle{}}\NormalTok{, }\AttributeTok{nrows =} \DecValTok{20}\NormalTok{)}
-\NormalTok{data.table}\SpecialCharTok{::}\FunctionTok{fwrite}\NormalTok{(}\AttributeTok{x =}\NormalTok{ dados,                     }\CommentTok{\# Objeto a ser escrito}
-                   \AttributeTok{file =} \StringTok{\textquotesingle{}dados/dados20max.csv\textquotesingle{}}\NormalTok{, }\CommentTok{\# Nome e caminho (arquivo ja exite)}
-                   \AttributeTok{append =} \ConstantTok{TRUE}\NormalTok{,                 }\CommentTok{\# Salva na ultima linha do arquivo ja existente}
-                   \AttributeTok{sep =} \StringTok{\textquotesingle{};\textquotesingle{}}\NormalTok{,                     }\CommentTok{\# Separados de colunas}
-                   \AttributeTok{showProgress =} \ConstantTok{TRUE}\NormalTok{)           }\CommentTok{\# Mostrar progresso}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+dados <- data.table::fread(file = 'dados/dados.csv', nrows = 20)
+data.table::fwrite(x = dados,                     # Objeto a ser escrito
+                   file = 'dados/dados20max.csv', # Nome e caminho (arquivo ja exite)
+                   append = TRUE,                 # Salva na ultima linha do arquivo ja existente
+                   sep = ';',                     # Separados de colunas
+                   showProgress = TRUE)           # Mostrar progresso
+\end{verbatim}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -836,14 +780,16 @@ Função para escrever .csv muito mais rápido (por exemplo, 2 segundos versus 1
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 x & Objeto a salvar. Deve estar como data.frame ou data.table. \\
 file & Nome do arquivo. \\
 append & Se TRUE , o arquivo é salvo em acrescimo à última linha de um arquivo existente, sem incluir os nomes das colunas. \\
@@ -855,7 +801,6 @@ col.names & Primeira linha como nomes das colunas. \\
 logical01 & Os valores lógicos devem ser escritos como 1 e 0 em vez de ``TRUE'' e ``FALSE''? \\
 showProgress & Exibir um medidor de progresso no console. Ignorado quando file == ``\,``. \\
 compress & Se compress = ``auto'' e se o arquivo termina em .gz, o formato de saída é gzipado csv. Se compress = ``none'', o formato de saída é sempre csv. Se compress = ``gzip'', o formato é csv compactado com gzip. A saída para o console nunca é compactada com gzip mesmo se compress = ``gzip''. Por padrão, compress = ``auto''. \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{rioexport}{%
@@ -867,12 +812,10 @@ Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gra
 \textbf{Exempĺo}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{rio}\SpecialCharTok{::}\FunctionTok{export}\NormalTok{(}\AttributeTok{x =}\NormalTok{ iris,                  }\CommentTok{\# Objeto que será exportado.}
-            \AttributeTok{file =} \StringTok{\textquotesingle{}dados/iris.xlsx\textquotesingle{}}\NormalTok{)  }\CommentTok{\# Caminho, nome e extensão.}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+rio::export(x = iris,                  # Objeto que será exportado.
+            file = 'dados/iris.xlsx')  # Caminho, nome e extensão.
+\end{verbatim}
 
 \begin{quote}
 \textbf{Argumentos principais}
@@ -881,18 +824,19 @@ Semelhante a outros comandos de escrita de arquivos, o rio::export() permite gra
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5000}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Argumento
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 x & Matriz ou data frame a ser escrita. Exceções são que x pode ser uma lista de dados se o formato de arquivo de saída for uma pasta de Excel .xlsx. Para exportar uma lista de quadros de dados para vários arquivos, use export\_list em vez disso. \\
 file & Nome do arquivo. Deve especificar file e/ou format. \\
 format & Sequência de caracteres opcional contendo o formato de arquivo, que pode ser usado para substituir o formato inferido a partir de file ou, em vez de especificar file, um arquivo com o nome do símbolo de x e a extensão de arquivo especificada será criado. Os atalhos incluem: ``,'' ou ``;'' ou '' \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{leitura-de-muxfaltiplos-arquivos}{%
@@ -906,16 +850,16 @@ Particularmente tenho maior interesse na possibilidade de ler e agrupar diversos
 A ideia aqui é fazer a leitura dos arquivos de interesse e juntá-los verticalmente compondo um dataframe final, assim, o método é dividido em três partes:\\
 1. Listar os arquivos de interesse presentes no diretório.
 2. Fazer leitura múltipla utilizando a função base::lapply e base::read.csv2 (pode ser outra) (\href{https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/lapply}{documentação base::lapply}).
-3. Juntar os dataframes com base::Reduce e base::rbind.dataframe (\href{https://www.rdocumentation.org/packages/purrr/versions/0.2.5/topics/reduce}{ocumentação base::reduce()})
+3. Juntar os dataframes com base::Reduce e base::rbind.dataframe (\href{https://www.rdocumentation.org/packages/purrr/versions/0.2.5/topics/reduce}{documentação base::reduce})
 
 \begin{quote}
 \textbf{Exemplo 1}
 \end{quote}
 
 \begin{verbatim}
-setwd('arquivos/')              # Define a pasta que contém os arquivos
-lista <- base::list.files()     # Captura os arquivos na pasta e atribui à uma lista
-arquivos <- base::lapply(X = lista,   # Lista com os arquivos a serem lidos
+setwd('arquivos/')                         # Define a pasta que contém os arquivos
+lista <- base::list.files()                # Captura os arquivos na pasta e atribui à uma lista
+arquivos <- base::lapply(X = lista,        # Lista com os arquivos a serem lidos
                          FUN = read.csv2)  # Função escolhida para ler
 unidos <- base::Reduce(x = arquivos,       # Lista de dataframes
                        f = base::rbind.data.frame)  # Função para empilhar
@@ -960,33 +904,24 @@ A função \texttt{for} permite criar um loop de execução de determinada açã
 \textbf{Exemplo}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{1}         \CommentTok{\# Objeto contador}
-\NormalTok{arquivos }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\ConstantTok{NA}\NormalTok{, }\DecValTok{3}\NormalTok{)) }\CommentTok{\# O objeto que vai receber a leitura individual dos arquivos, deve ser uma lista vazia}
-\NormalTok{lista }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\StringTok{\textquotesingle{}arquivos2/\textquotesingle{}}\NormalTok{) }\CommentTok{\# Lista com os arquivos a serem lidos}
-
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in}\NormalTok{ lista) \{      }\CommentTok{\# Para cada elemento da lista, executar:}
-\NormalTok{  arquivos[[x]] }\OtherTok{\textless{}{-}} \FunctionTok{read.csv2}\NormalTok{(}\AttributeTok{file =} \FunctionTok{file.path}\NormalTok{(}\StringTok{\textquotesingle{}arquivos2\textquotesingle{}}\NormalTok{,i)) }\SpecialCharTok{\%\textgreater{}\%}  \CommentTok{\# Cada elemento lido é adicionado a um espaço vazio da lista de arquivos}
-    \FunctionTok{filter}\NormalTok{(Sepal.Length }\SpecialCharTok{\textgreater{}} \FloatTok{5.5}\NormalTok{)}
-\NormalTok{  x }\OtherTok{\textless{}{-}}\NormalTok{ x }\SpecialCharTok{+} \DecValTok{1}  \CommentTok{\# O contador define em que posição o arquivo lido será adicionado à lista de arquivos}
-\NormalTok{\}}
-
-\NormalTok{data.table}\SpecialCharTok{::}\FunctionTok{rbindlist}\NormalTok{(}\AttributeTok{l =}\NormalTok{ arquivos)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{,]}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-## 1:          5.8           4          1.2         0.2  setosa
-## 2:          5.7         4.4          1.5         0.4  setosa
-## 3:          5.7         3.8          1.7         0.3  setosa
+x <- 1                            # Objeto contador
+arquivos <- list(rep(NA, 3))      # O objeto que vai receber a leitura individual dos arquivos, deve ser uma lista vazia
+lista <- list.files('arquivos2/') # Lista com os arquivos a serem lidos
+
+for (i in lista) {                # Para cada elemento da lista, executar:
+  arquivos[[x]] <- read.csv2(file = file.path('arquivos2',i)) %>%  # Cada elemento lido é adicionado a um espaço vazio da lista de arquivos
+    filter(Sepal.Length > 5.5)
+  x <- x + 1                      # O contador define em que posição o arquivo lido será adicionado à lista de arquivos
+}
+
+dados <- data.table::rbindlist(l = arquivos)[1:3,] # os arquivos filtrados foram alocados na lista "arquivos". Agora eles serão empilhados com esta função para definir um banco de dados final com todos os elementos.
 \end{verbatim}
 
 \hypertarget{rioimport_list}{%
 \subsection{rio::import\_list()}\label{rioimport_list}}
 
-Importa uma lista de data frames de um vetor de nomes ou arquivo multi-objeto (planilha Excel, arquivo .Rdata etc) (\href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import_list}{documentação}).
+Importa uma lista de data frames de um vetor de nomes ou arquivo multi-objeto (planilha Excel, arquivo .Rdata etc). Realiza a mesma função de lapply() e for(), mas com menos etapas (\href{https://www.rdocumentation.org/packages/rio/versions/0.5.29/topics/import_list}{documentação}).
 
 \begin{quote}
 \textbf{Exemplo}
@@ -995,9 +930,9 @@ Importa uma lista de data frames de um vetor de nomes ou arquivo multi-objeto (p
 \begin{verbatim}
 setwd('arquivos/')
 lista <- list.files()
-unidos <- rio::import_list(file = lista, # Lista com nomes dos arquivos do diretório
-                 rbind = TRUE,    # Empilhar. Se FALSE retorna uma lista com os data frames
-                 header = TRUE)   # Nomes das colunas
+unidos <- rio::import_list(file = lista,  # Lista com nomes dos arquivos do diretório
+                 rbind = TRUE,            # Empilhar linhas 
+                 header = TRUE)           # Nomes das colunas
 setwd("~/Documentos/Estudos R/guia_de_bolso")
 \end{verbatim}
 
@@ -1013,58 +948,62 @@ Exporta uma lista de data frames. A extensão colocada no nome do arquivo já di
 \textbf{Exemplo}
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{rio}\SpecialCharTok{::}\FunctionTok{export\_list}\NormalTok{(}\AttributeTok{x =} \FunctionTok{list}\NormalTok{(}\AttributeTok{iris1 =}\NormalTok{ iris[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{30}\NormalTok{,],   }\CommentTok{\# Lista nomeada dos objetos a serem salvos}
-                          \AttributeTok{iris2 =}\NormalTok{ iris[}\DecValTok{60}\SpecialCharTok{:}\DecValTok{80}\NormalTok{,],}
-                          \AttributeTok{iris3 =}\NormalTok{ iris[}\DecValTok{50}\SpecialCharTok{:}\DecValTok{70}\NormalTok{,]),}
-                 \AttributeTok{file =} \StringTok{\textquotesingle{}arquivos2/\%s.csv\textquotesingle{}}\NormalTok{,      }\CommentTok{\# Caminho. Nome do arquivo contido em \%s automaticamente}
-                 \AttributeTok{sep=}\StringTok{";"}\NormalTok{)     }\CommentTok{\# Separador}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+rio::export_list(x = list(iris1 = iris[1:30,],   # Lista nomeada (iris 1 ...) dos objetos
+                          iris2 = iris[60:80,],
+                          iris3 = iris[50:70,]),
+                 file = 'arquivos2/%s.csv',      # Nome do arquivo contido em %s automaticamente
+                 sep=";")     # Separador
+\end{verbatim}
 
-\hypertarget{manipulauxe7uxe3o-dos-dados}{%
-\chapter{Manipulação dos dados}\label{manipulauxe7uxe3o-dos-dados}}
-
-\hypertarget{datas-e-horas}{%
-\section{Datas e horas}\label{datas-e-horas}}
+\hypertarget{datas}{%
+\chapter{Datas}\label{datas}}
 
 \hypertarget{funuxe7uxf5es-buxe1sicas}{%
-\subsection{Funções básicas}\label{funuxe7uxf5es-buxe1sicas}}
+\section{Funções básicas}\label{funuxe7uxf5es-buxe1sicas}}
 
 Existem muitas funções para se criar variáveis com datas e horas e/ou que podem converter formatos diversos. O formato padrão reconhecido nativamente pelo R é por exemplo \emph{2019-12-10}, portanto, para evitar manipulações, é importante tentar criar e utilizar bancos de dados neste padrão. Abaixo, seguem algumas das funções mais utilizadas:
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2308}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3846}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.3846}}@{}}
-\toprule()
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.3750}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.6250}}@{}}
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Função
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Argumentos
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Utilização
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
-base::Sys.Date() & Não há. & Fornece a data atual a partir da data do sistema \\
-base::Sys.time() & Não há. & Fornece a hora atual a partir da hora do sistema \\
-base::date() & Não há. & Fornece a data no formato: ``Mon Oct 10 17:50:32 2022'' \\
-base::as.Date() & Não há. & Converte um elemento de texto em character, ex: as.Date(``2020-01-31'') \\
-base::strftime() & tz = fuso horário & Converte um horário ajustando o fuso horário conforme valor de Olson name definido em tz \\
-base::OlsonNames() & Não há. & Nomes padronizados de fusos horários \\
-\bottomrule()
+\bottomrule\noalign{}
+\endlastfoot
+base::Sys.Date() & Fornece a data atual a partir da data do sistema \\
+base::Sys.time() & Fornece a hora atual a partir da hora do sistema \\
+base::date() & Fornece a data no formato: ``Mon Oct 10 17:50:32 2022'' \\
+base::as.Date() & Converte um elemento de texto em character, ex: as.Date(``2020-01-31'') \\
+base::strftime() & tz = fuso horário \\
+base::OlsonNames() & Nomes padronizados de fusos horários \\
+base::months() & Extrai o mês no formato string de uma data já formatada, ex: months(as.Date(``2020-05-01'')), resulta ``maio'' \\
+base::weekdays() & Retorna o dia da semana que corresponde à data, ex: base::weekdays(as.Date(``2020-05-01'')), resulta ``sexta-feira'' \\
+lubridate::ymd() & Converte o texto em data, mantendo o formato \\
+lubridate::dmy() & Converte o formato de data brasileiro para o formato padrão do sistema \\
+lubridate::dmy\_h() & Retorna a data e horário \\
+lubridate::as\_date() & Retorna a data independente do formato de entrada, ex: as\_date(``19/05/2022'', format = ``\%d/\%m/\%Y''), mas se estiver na ordem correta (ex:20200225) ele identifica automaticamente e coloca no formato padrão, ex: as\_date(``20200226'') resulta ``2020-02-26''. Se estiver fora da ordem esperada, ex: as\_date(``01031998'', format = ``\%d\%m\%Y'') \\
+lubridate::year(), month(), day() & Extraem o ano, o mês e o dia de uma data, respectivamente \\
+lubridate::wday() & Retorna o dia da semana para uma ou mais datas \\
+floor\_date(), ceiling\_date() & Arredondam uma data para o intervalo de tempo especificado (por exemplo, semana, mês, ano) \\
+data.table::year() & Extrai o ano de uma data, ex: year(``2020-01-31''), resulta 2020 \\
+data.table::month() & Extrai o mês de uma data, ex: month(``2020-01-31''), resulta 5 \\
 \end{longtable}
 
 \hypertarget{formatar-data-e-hora}{%
-\subsection{Formatar data e hora}\label{formatar-data-e-hora}}
+\section{Formatar data e hora}\label{formatar-data-e-hora}}
 
 \begin{longtable}[]{@{}
   >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2308}}
   >{\centering\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2308}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.5385}}@{}}
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Código
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
@@ -1072,8 +1011,10 @@ Exemplo
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Definição
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 \%a & ``ter'' & Nome abreviado do dia da semana. \\
 \%A & ``terça-feira'' & Nome completo do dia da semana. \\
 \%b & ``out'' & Nome do mês abreviado. \\
@@ -1110,8 +1051,234 @@ Definição
 \%Y & ``2022'' & Ano com século. \\
 \%z & ``-300'' & Deslocamento assinado em horas e minutos do UTC, então -0800 está 8 horas atrás do UTC. Valores até +1400 são aceitos. \\
 \%Z & ``-03'' & Abreviação de fuso horário como uma cadeia de caracteres (vazio se não estiver disponível)(usado Sys.time() no exemplo). \\
-\bottomrule()
 \end{longtable}
+
+\hypertarget{converter-data}{%
+\section{Converter data}\label{converter-data}}
+
+\hypertarget{baseas.date}{%
+\subsection{base::as.date()}\label{baseas.date}}
+
+É importante que os códigos de definição (m, B, etc) correspondam ao formato do elemento que será convertido, ex: se ``Nov 03 21'', então a conversão precisa de `\%B \%d \%y', porque `B' é o código para mês ``escrito'', não poderia ser `m' que é para mês número. O mesmo se aplica a todos os códigos.
+
+\begin{quote}
+Exemplo
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{list}\NormalTok{(base}\SpecialCharTok{::}\FunctionTok{as.Date}\NormalTok{(}\StringTok{\textquotesingle{}03/11/2021\textquotesingle{}}\NormalTok{,  }\AttributeTok{format =} \StringTok{\textquotesingle{}\%d/\%m/\%Y\textquotesingle{}}\NormalTok{),}
+\NormalTok{     base}\SpecialCharTok{::}\FunctionTok{as.Date}\NormalTok{(}\StringTok{\textquotesingle{}03{-}Nov{-}2021\textquotesingle{}}\NormalTok{, }\AttributeTok{format =} \StringTok{\textquotesingle{}\%d{-}\%B{-}\%Y\textquotesingle{}}\NormalTok{),}
+\NormalTok{     base}\SpecialCharTok{::}\FunctionTok{as.Date}\NormalTok{(}\StringTok{\textquotesingle{}Nov 03 21\textquotesingle{}}\NormalTok{,   }\AttributeTok{format =} \StringTok{\textquotesingle{}\%B \%d \%y\textquotesingle{}}\NormalTok{),}
+\NormalTok{     base}\SpecialCharTok{::}\FunctionTok{as.Date}\NormalTok{(}\StringTok{\textquotesingle{}2021/11/03\textquotesingle{}}\NormalTok{,  }\AttributeTok{format =} \StringTok{\textquotesingle{}\%Y/\%m/\%d\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [[1]]
+## [1] "2021-11-03"
+## 
+## [[2]]
+## [1] "2021-11-03"
+## 
+## [[3]]
+## [1] "2021-11-03"
+## 
+## [[4]]
+## [1] "2021-11-03"
+\end{verbatim}
+
+O vetor pode estar com classe definida como ``character'', logo, se o formato estiver adequado, esta função pode ser utilizada também para converter para data.
+
+\hypertarget{basestrptime}{%
+\subsection{base::strptime()}\label{basestrptime}}
+
+Converte o vetor para data e define a ``time zone''.
+
+\begin{quote}
+Exemplo
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{base}\SpecialCharTok{::}\FunctionTok{strptime}\NormalTok{(}\StringTok{\textquotesingle{}03/11/2021\textquotesingle{}}\NormalTok{, }\AttributeTok{format =} \StringTok{\textquotesingle{}\%d/\%m/\%Y\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2021-11-03 -03"
+\end{verbatim}
+
+\hypertarget{baseformat}{%
+\subsection{base::format()}\label{baseformat}}
+
+Converte o formato de um elemento que já definido por classe ``date''.
+
+\begin{quote}
+Exemplo
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{as.Date}\NormalTok{(}\StringTok{\textquotesingle{}03/11/2021\textquotesingle{}}\NormalTok{, }\AttributeTok{format =} \StringTok{\textquotesingle{}\%d/\%m/\%Y\textquotesingle{}}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2021-11-03"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{format}\NormalTok{(data, }\StringTok{\textquotesingle{}\%B{-}\%d{-}\%Y\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "novembro-03-2021"
+\end{verbatim}
+
+\hypertarget{operauxe7uxf5es-com-datas}{%
+\section{Operações com datas}\label{operauxe7uxf5es-com-datas}}
+
+\hypertarget{somar-uxe0-data}{%
+\subsection{Somar à data}\label{somar-uxe0-data}}
+
+Operações como soma ou subtração de datas não são recomendadas, mas podem ser feitas. Qualquer valor numérico adicionado à uma data é compreendido como ``dia''.
+
+\begin{quote}
+Exemplo
+\end{quote}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{as.Date}\NormalTok{(}\StringTok{"2022{-}01{-}01"}\NormalTok{)}
+\NormalTok{data}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2022-01-01"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\SpecialCharTok{+} \DecValTok{365}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2023-01-01"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data }\SpecialCharTok{+} \DecValTok{28}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "2022-01-29"
+\end{verbatim}
+
+\hypertarget{diferenuxe7as-entre-datas}{%
+\subsection{Diferenças entre datas}\label{diferenuxe7as-entre-datas}}
+
+A função difftime() identifica a diferença entre datas, mas somente nas opções ``units = c(''auto'', ``secs'', ``mins'', ``hours'', ``days'', ``weeks'')``. Para meses ou anos é preciso realizar outros ajustes.
+
+\textbf{Dias e semanas:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data\_inicio }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{as.Date}\NormalTok{(}\StringTok{"2022{-}01{-}01"}\NormalTok{)}
+\NormalTok{data\_fim }\OtherTok{\textless{}{-}}\NormalTok{ base}\SpecialCharTok{::}\FunctionTok{as.Date}\NormalTok{(}\StringTok{"2022{-}07{-}13"}\NormalTok{)}
+
+\NormalTok{base}\SpecialCharTok{::}\FunctionTok{difftime}\NormalTok{(}\AttributeTok{time1 =}\NormalTok{ data\_fim, }\AttributeTok{time2 =}\NormalTok{ data\_inicio) }\CommentTok{\#por padrão o resultado é em dias}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Time difference of 193 days
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{base}\SpecialCharTok{::}\FunctionTok{difftime}\NormalTok{(}\AttributeTok{time1 =}\NormalTok{ data\_fim, }\AttributeTok{time2 =}\NormalTok{ data\_inicio, }\AttributeTok{units =} \StringTok{\textquotesingle{}week\textquotesingle{}}\NormalTok{) }\CommentTok{\#em semanas}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Time difference of 27.57143 weeks
+\end{verbatim}
+
+Para obter o resultado numérico (sem a frase), utilizar a função as.numeric().
+
+\textbf{Meses e anos:}
+
+\begin{verbatim}
+data_inicio <- base::as.Date('2022-01-01')
+data_fim <- base::as.Date('2023-07-01')
+
+meses_diff <- 12 * (lubridate::year(data_fim) - lubridate::year(data_inicio)) + (lubridate::month(data_fim) - lubridate::month(data_inicio))
+anos_diff <- meses_diff / 12
+
+meses_diff
+# Resultado: 18
+
+anos_diff
+# Resultado: 1.5
+\end{verbatim}
+
+\textbf{Idade}
+
+\begin{verbatim}
+base::as.integer(Sys.Date() - data_nasc)
+base::floor(idade_dias / 365.25)
+\end{verbatim}
+
+A função base::floor() arredonda um número para baixo, para o inteiro mais próximo. Por exemplo, floor(3.7) resulta em 3 e floor(4.2) resulta em 4. É utilizado para arredondar para o valor inferior mais próximo, que é ideal para se verificar somente os anos de idade completa.
+
+\hypertarget{sequuxeancia-de-datas}{%
+\subsection{Sequência de datas}\label{sequuxeancia-de-datas}}
+
+Realiza uma sequência de datas a partir de uma data inicial até alcançar uma data final, que pode ser definida como uma data específicia ou como a data atual ou do sistema.
+
+\textbf{Método 1: função base::seq()}
+
+\begin{verbatim}
+data_inicio <- as.Date("2020-01-01")
+base::seq(data_inicio,  # data inicial já deve estar com classe "date"
+    by="30 days", # incremento à data inicial
+    length=3)     # comprimento do vetor, ou seja, quantas vezes o incremento deve ser aplicado
+    
+# "by = " pode assumir um valor numérico ou texto, mas no contexto de datas deve ser um número acompanhado de texto (2 days, 1 week, 3 months, 6 years; singular ou plural não faz diferença) 
+\end{verbatim}
+
+\textbf{Método 2: função base::seq.Date()}
+
+Novamente, a variável de data aqui já deverá estar no formato ``Date''.
+
+\begin{verbatim}
+data_inicio <- base::as.Date('2022-01-01')
+base::seq.Date(from = data_inicio, to = Sys.Date(), by = "3 months")
+\end{verbatim}
+
+\hypertarget{semana-epidemioluxf3gica}{%
+\subsection{Semana epidemiológica}\label{semana-epidemioluxf3gica}}
+
+Método mais fácil hoje para obter essa informação é utilizando a função lubridate::epiweek().
+
+\begin{quote}
+Exemplo
+\end{quote}
+
+\begin{verbatim}
+data <- base::seq.Date(from = as.Date("2020-01-01"),
+                 to = as.Date("2020-04-30"), by = "day")
+
+lubridate::epiweek(data)
+\end{verbatim}
 
 \hypertarget{parts}{%
 \chapter{Parts}\label{parts}}

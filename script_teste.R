@@ -18,49 +18,6 @@ library(googlesheets4)
 url <- "https://docs.google.com/spreadsheets/d/18PV-XBQIrzB6Jfdvz5vgDHZPBoqlDxPcGxufOvCk5a0/edit#gid=0"
 
 
-as.POSIXlt(Sys.Date(), format='%m/%d/%Y %H:%M')
-as.POSIXct(Sys.Date())
-#################################
-library(dplyr)
-iris
-filtro.fun(x = 'iris.csv')
-setwd('arquivos2/')
-
-filtro.fun <- function(x){
-  data.table::fread(file = x) %>% 
-    dplyr::select("Petal.Length", "Petal.Width", "Species") %>%
-    dplyr::filter(Petal.Length > .5) %>%
-    setNames(nm = c("compr","largura","especie"))
-}
-
-lista <- list.files()
-arquivos <- lapply(X = lista, FUN = filtro.fun)
-
-
-data.table::rbindlist(l = arquivos)
-base::Reduce(x = arquivos, f = rbind.data.frame)
-
-setwd("~/Documentos/Estudos R/guia_de_bolso") # Volta para diretório inicial
-getwd()
-
-
-rio::export_list(x = list(iris1 = iris[1:30,], iris2 = iris[60:80,]),
-                 file = c("iris1.csv","iris2.csv"), sep=";")
-
-rio::export_list(x = list(iris1 = iris[1:30,], 
-                          iris2 = iris[60:80,],
-                          iris3 = iris[50:70,]),
-                 file = '%s.csv', sep=";")
-getwd()
-setwd('../')
-
-reshape2::dcast(data = dados::pinguins, 
-                formula = ilha ~ sexo, 
-                value.var = 'massa_corporal',
-                fun.aggregate = sum)
-xtabs(formula = massa_corporal ~ sexo + ilha, data = dados::pinguins) 
-
-
 # colaboracao -------------------------------------------------------------
 install.packages("usethis")
 usethis::use_git()
@@ -71,14 +28,21 @@ usethis::use_git_config(
 
 git remote set-url origin https://github.com/lucascgmermano/guia_de_bolso.git
 
+
+# Testes ------------------------------------------------------------------
+
 library(dplyr)
 library(readr)
 library(data.table)
 
 format(x = as.date("01/02/2022"), format = "%d-%m-%Y") %>% class()
 
-year("2020-05-01")
-month("2020-05-01")
+data.table::year("2020-05-01")
+data.table::month(as.Date("2020-05-01"))
+base::weekdays(as.Date("2020-05-01"))
+base::as.Date("2020-05-01")
+data.table::wday(as.Date("2020-05-01"))
+data.table::week(as.Date("2020-05-01"))
 
 seq(as.Date("2020-01-01"), by="3 year", length=3)
 
@@ -86,6 +50,15 @@ seq.Date(from = as.Date("2020-01-01"), to = as.Date("2020-12-31"), by = "month")
 
 seq.Date(from = data_inicio, to = Sys.Date(), by = "month")
 
+
+lubridate::month("2020-01-01")
+
 data_inicio <- as.Date('2022-01-01')
 sequencia_datas <- seq.Date(from = data_inicio, to = Sys.Date(), by = "3 months")
 sequencia_datas
+
+data_nasc <- as.Date("1985-01-27")
+
+idade_dias <- as.integer(Sys.Date() - data_nasc)
+floor(idade_dias / 365.25)
+

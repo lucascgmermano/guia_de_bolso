@@ -1,3 +1,4 @@
+eq:binom
 leitura-e-escrita-de-arquivos-de-texto
 diretório-de-trabalho
 leitura-de-arquivos
@@ -22,7 +23,6 @@ basefor
 rioimport_list
 escrita-de-múltiplos-arquivos
 rioexport_list
-manipulação-dos-dados
 datas
 funções-básicas
 formatar-data-e-hora
@@ -34,6 +34,7 @@ operações-com-datas
 somar-à-data
 diferenças-entre-datas
 sequência-de-datas
+semana-epidemiológica
 parts
 footnotes-and-citations
 footnotes
