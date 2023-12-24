@@ -120,7 +120,7 @@
 
 \title{Comandos básicos do R: Guia de bolso}
 \author{Lucas C. Germano}
-\date{Tue Jul 11 08:20:32 2023}
+\date{Sun Dec 24 16:56:12 2023}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -991,7 +991,7 @@ lubridate::dmy\_h() & Retorna a data e horário \\
 lubridate::as\_date() & Retorna a data independente do formato de entrada, ex: as\_date(``19/05/2022'', format = ``\%d/\%m/\%Y''), mas se estiver na ordem correta (ex:20200225) ele identifica automaticamente e coloca no formato padrão, ex: as\_date(``20200226'') resulta ``2020-02-26''. Se estiver fora da ordem esperada, ex: as\_date(``01031998'', format = ``\%d\%m\%Y'') \\
 lubridate::year(), month(), day() & Extraem o ano, o mês e o dia de uma data, respectivamente \\
 lubridate::wday() & Retorna o dia da semana para uma ou mais datas \\
-floor\_date(), ceiling\_date() & Arredondam uma data para o intervalo de tempo especificado (por exemplo, semana, mês, ano) \\
+lubridate::floor\_date(), ceiling\_date(), round\_date() & Arredondam uma data para o intervalo de tempo especificado (por exemplo, semana, mês, ano) \\
 data.table::year() & Extrai o ano de uma data, ex: year(``2020-01-31''), resulta 2020 \\
 data.table::month() & Extrai o mês de uma data, ex: month(``2020-01-31''), resulta 5 \\
 \end{longtable}
