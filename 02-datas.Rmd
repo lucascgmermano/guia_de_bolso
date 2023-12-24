@@ -20,7 +20,7 @@ Existem muitas funções para se criar variáveis com datas e horas e/ou que pod
 | lubridate::as_date() | Retorna a data independente do formato de entrada, ex: as_date("19/05/2022", format = "%d/%m/%Y"), mas se estiver na ordem correta (ex:20200225) ele identifica automaticamente e coloca no formato padrão, ex: as_date("20200226") resulta "2020-02-26". Se estiver fora da ordem esperada, ex: as_date("01031998", format = "%d%m%Y")|
 |lubridate::year(), month(), day() | Extraem o ano, o mês e o dia de uma data, respectivamente|
 |lubridate::wday() | Retorna o dia da semana para uma ou mais datas|
-|floor_date(), ceiling_date() | Arredondam uma data para o intervalo de tempo especificado (por exemplo, semana, mês, ano)|
+|lubridate::floor_date(), ceiling_date(), round_date() | Arredondam uma data para o intervalo de tempo especificado (por exemplo, semana, mês, ano)|
 |data.table::year() | Extrai o ano de uma data, ex: year("2020-01-31"), resulta 2020|
 |data.table::month() | Extrai o mês de uma data, ex: month("2020-01-31"), resulta 5|
 
